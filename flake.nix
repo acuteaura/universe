@@ -7,7 +7,7 @@
   outputs = { self, nixpkgs }: {
     nixosModules = {
       default = ./configuration.nix;
-      tranquility = ./systems/tranquility.nix
+      tranquility = ./systems/tranquility.nix;
     };
   };
 }
