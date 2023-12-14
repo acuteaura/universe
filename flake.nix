@@ -5,8 +5,6 @@
   };
 
   outputs = { self, nixpkgs }: {
-    nixosModules = [
-      import <configuration.nix>
-    ];
+    nixosModules.default = ./configuration.nix;
   };
 }
