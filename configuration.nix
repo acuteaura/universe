@@ -101,6 +101,7 @@
     btop
     chezmoi
     direnv
+    dig
     gh
     git
     htop
