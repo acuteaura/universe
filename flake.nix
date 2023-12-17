@@ -7,8 +7,9 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable }: {
     nixosModules = {
-      default = ./configuration.nix;
       tranquility = ./systems/tranquility;
+      desktop = ./desktop.nix;
+      base = ./base.nix;
     };
   };
 }
