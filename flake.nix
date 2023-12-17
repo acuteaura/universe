@@ -9,6 +9,7 @@
     nixosModules = {
       tranquility = ./systems/tranquility;
       desktop = ./desktop.nix;
+      codium = ./codium.nix;
       base = ./base.nix;
     };
   };
