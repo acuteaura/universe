@@ -64,6 +64,8 @@
     seafile-client
     tailscale
     telegram-desktop
+    signal-desktop
+    slack
     xfce.thunar
     unstable.ungoogled-chromium
     unstable.vscode-fhs
