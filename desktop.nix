@@ -71,6 +71,10 @@
     unstable.vscode-fhs
     virt-manager
 
+    # cursed
+    wineWowPackages.stable
+    winetricks
+
     # gnome
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
