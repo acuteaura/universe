@@ -65,7 +65,7 @@
     tailscale
     telegram-desktop
     xfce.thunar
-    ungoogled-chromium
+    unstable.ungoogled-chromium
     unstable.vscode-fhs
     virt-manager
 

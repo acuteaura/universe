@@ -3,6 +3,6 @@
     imports = [
         ./tranquility.nix
         ./tlp.nix
-        ./nvidia.nix
+        ./gpu.nix
     ];
 }

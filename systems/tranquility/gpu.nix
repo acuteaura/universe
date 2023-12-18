@@ -7,6 +7,13 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      # the T500 doesn't have NVENC/NVDEC blocks :/
+      intel-media-driver
+      vaapiIntel
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
   };
 
   services.xserver.videoDrivers = ["nvidia"];
