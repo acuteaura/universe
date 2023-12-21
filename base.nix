@@ -36,6 +36,8 @@
     neovim
     rclone
     starship
+    s-tui
+    stress
     toolbox
     wget
     yq-go
