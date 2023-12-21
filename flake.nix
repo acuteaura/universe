@@ -12,5 +12,8 @@
       codium = ./codium.nix;
       base = ./base.nix;
     };
+    packages.x86_64-linux = {
+      apisix-ingress-controller = nixpkgs.callPackage ./packages/apisix-ingress-controller.nix { };
+    };
   };
 }

@@ -11,9 +11,6 @@
   services.openssh.enable = true;
   services.tailscale.enable = true;
 
-  # Time, Dr. Freeman?
-  time.timeZone = "Europe/Berlin";
-
   # Useful!
   virtualisation.podman = {
     enable = true;

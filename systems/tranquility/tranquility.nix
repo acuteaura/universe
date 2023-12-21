@@ -1,5 +1,8 @@
 { config, pkgs, hashedPassword, ... }:
 {
+  # Time, Dr. Freeman?
+  time.timeZone = "Europe/Berlin";
+  
   # Booting
   boot.loader.systemd-boot = {
     enable = true;
@@ -16,11 +19,7 @@
     isNormalUser = true;
     hashedPassword = hashedPassword;
     extraGroups = [ "wheel" "qemu-libvirtd" ];
-    packages = with pkgs; [
-      firefox
-      mpv
-      haruna
-    ];
+    packages = with pkgs; [];
     openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q"];
     shell = pkgs.fish;
   };
