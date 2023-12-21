@@ -19,4 +19,13 @@
   ]);
 
   services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+
+  environment.systemPackages = with pkgs; [
+    adw-gtk3
+    gnome.adwaita-icon-theme
+    gnomeExtensions.appindicator
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.dash-to-dock
+    unstable.gradience
+  ]
 }

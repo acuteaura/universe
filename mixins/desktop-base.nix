@@ -55,14 +55,6 @@
     wineWowPackages.stable
     winetricks
 
-    # gnome
-    adw-gtk3
-    gnome.adwaita-icon-theme
-    gnomeExtensions.appindicator
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.dash-to-dock
-    unstable.gradience
-
     # fonts
     inter
     victor-mono

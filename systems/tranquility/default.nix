@@ -7,7 +7,7 @@
     ./gpu.nix
     ../../mixins/codium.nix
     ../../mixins/desktop-base.nix
-    ../../mixins/desktop-gnome.nix
+    ../../mixins/desktop-plasma.nix
     ../../mixins/work.nix
   ];
 }
