@@ -1,6 +1,7 @@
 { config, pkgs, hashedPassword, ... }:
 {
   imports = [
+    ../../base.nix
     ./tranquility.nix
     ./tlp.nix
     ./gpu.nix
