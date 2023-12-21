@@ -10,7 +10,10 @@
       tranquility = ./systems/tranquility;
     };
     packages.x86_64-linux = {
-      apisix-ingress-controller = nixpkgs.callPackage ./packages/apisix-ingress-controller.nix { };
+      apisix-ingress-controller = let
+        pkgs = import nixpkgs { system = "x86_64-linux"; };
+      in
+        pkgs.callPackage ./packages/apisix-ingress-controller.nix {};
     };
   };
 }

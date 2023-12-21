@@ -2,13 +2,11 @@
 , buildGoModule
 , fetchFromGitHub
 }:
-let
-  version = "1.7.1"
-  gitCommit = "ceefeb1e2547100679556a1763d9820ec04f6381"
-in
+
   buildGoModule rec {
     pname = "apisix-ingress-controller";
-    version = "${version}";
+    version = "1.7.1";
+    rev = "ceefeb1e2547100679556a1763d9820ec04f6381"
 
     src = fetchFromGitHub {
       owner = "apache";
@@ -21,7 +19,7 @@ in
 
     ldflags = [
       "-X github.com/apache/apisix-ingress-controller/pkg/version._buildVersion=${version}"
-      "-X github.com/apache/apisix-ingress-controller/pkg/version._buildGitRevision=${gitCommit}"
+      "-X github.com/apache/apisix-ingress-controller/pkg/version._buildGitRevision=${rev}"
       "-X github.com/apache/apisix-ingress-controller/pkg/version._buildOS=unknown"
     ];
 
