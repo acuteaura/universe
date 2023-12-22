@@ -11,4 +11,7 @@
     plasma-browser-integration
     print-manager
   ];
+  environment.systemPackages = with pkgs; [
+    kio-fuse
+  ];
 }
