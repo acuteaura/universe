@@ -6,7 +6,7 @@
   buildGoModule rec {
     pname = "apisix-ingress-controller";
     version = "1.7.1";
-    rev = "ceefeb1e2547100679556a1763d9820ec04f6381"
+    rev = "ceefeb1e2547100679556a1763d9820ec04f6381";
 
     src = fetchFromGitHub {
       owner = "apache";
