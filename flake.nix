@@ -15,6 +15,6 @@
       in
         pkgs.callPackage ./packages/apisix-ingress-controller.nix {};
     };
-    templates.default = ./template/
+    templates.default = ./template
   };
 }
