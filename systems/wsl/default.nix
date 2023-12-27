@@ -5,4 +5,5 @@
   ];
 
   wsl.enable = true;
+  wsl.wslConf.network.generateResolvConf = false;
 }
