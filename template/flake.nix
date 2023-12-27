@@ -6,7 +6,7 @@
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
 
-    #nixos-wsl = "github:nix-community/NixOS-WSL"
+    #nixos-wsl = "github:nix-community/NixOS-WSL";
 
     universe = {
       type = "github";
@@ -14,7 +14,7 @@
       repo = "universe";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-unstable.follows = "nixpkgs-unstable";
-      inputs.flake-utils.follows = "flake-utils"
+      inputs.flake-utils.follows = "flake-utils";
     };
   };
   
@@ -29,7 +29,7 @@
         system = system;
         specialArgs = { inherit unstable; inherit hashedPassword; };
         modules = [
-          #nixosModules.wsl
+          #nixos-wsl.nixosModules.wsl
           universe.nixosModules.wsl
 
           # nixos-generate-config --show-hardware-config > hardware-configuration.nix

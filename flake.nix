@@ -8,6 +8,7 @@
   outputs = { self, nixpkgs, nixpkgs-unstable }: {
     nixosModules = {
       tranquility = ./systems/tranquility;
+      wsl = ./systems/wsl;
     };
     packages.x86_64-linux = {
       apisix-ingress-controller = let
