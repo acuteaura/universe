@@ -28,11 +28,9 @@
   services.xserver.displayManager.defaultSession = "plasmawayland";
   services.xserver.displayManager.sddm.enableHidpi = true;
 
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs.requestEncryptionCredentials = true;
-
   boot.initrd.availableKernelModules = [ "ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
+  
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
