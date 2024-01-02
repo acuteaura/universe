@@ -34,6 +34,8 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  boot.zfs.devNodes = "/dev/disk/by-label/";
+
   fileSystems."/" =
     {
       device = "rpool/root/nixos";
