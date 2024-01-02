@@ -1,8 +1,8 @@
 { config, pkgs, unstable, ... }:
 {
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with unstable; [
     (vscode-with-extensions.override {
-      vscode = vscodium;
+      vscode = vscode;
       vscodeExtensions = with vscode-extensions; [
         golang.go
         mvllow.rose-pine

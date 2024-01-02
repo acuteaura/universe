@@ -40,6 +40,7 @@
     # gui apps
     firefox
     haruna
+    lutris
     mpv
     seafile-client
     signal-desktop
@@ -47,7 +48,6 @@
     tailscale
     telegram-desktop
     unstable.ungoogled-chromium
-    unstable.vscode-fhs
     virt-manager
     xfce.thunar
 
