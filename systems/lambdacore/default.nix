@@ -5,7 +5,7 @@
     ../../mixins/desktop-base.nix
     ../../mixins/desktop-plasma.nix
     ../../mixins/vmware-guest.nix
-    ../../work.nix
+    ../../mixins/work.nix
     ./lambdacore.nix
   ];
 }
