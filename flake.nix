@@ -10,6 +10,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        unstable = import nixpkgs-unstable { config.allowUnfree = true; system = system; };
       in
       {
         nixosModules = {
@@ -25,6 +26,14 @@
         };
         templates.default.path = ./template;
         formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+
+        nixosConfigurations.lambdacore = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit unstable; };
+          modules = [
+            ./systems/lambdacore
+          ];
+        };
       }
     );
 }
