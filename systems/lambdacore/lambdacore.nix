@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   # Time, Dr. Freeman?
   time.timeZone = "Europe/Berlin";
