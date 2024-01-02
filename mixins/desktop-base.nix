@@ -23,7 +23,7 @@
   services.pcscd.enable = true;
   services.gvfs.enable = true;
   services.tumbler.enable = true;
-  
+
 
   programs._1password.enable = true;
   programs._1password-gui = {

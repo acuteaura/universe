@@ -17,14 +17,15 @@
       inputs.flake-utils.follows = "flake-utils";
     };
   };
-  
+
   outputs = { self, nixpkgs, nixpkgs-unstable, nixos-wsl, universe }: {
-    nixosConfigurations.localhost = let
-      system = "x86_64-linux";
-      unstable = import nixpkgs-unstable { config.allowUnfree = true; system = system; };
-      # "weaknesspays" - change this!
-      hashedPassword = "$y$j9T$QBVVTbTT6gI9rUd/IkuaS1$onrwomnNgETdZ.r5urhLELlUBb7JSL9pQy2efAUCWh3";
-    in
+    nixosConfigurations.localhost =
+      let
+        system = "x86_64-linux";
+        unstable = import nixpkgs-unstable { config.allowUnfree = true; system = system; };
+        # "weaknesspays" - change this!
+        hashedPassword = "$y$j9T$QBVVTbTT6gI9rUd/IkuaS1$onrwomnNgETdZ.r5urhLELlUBb7JSL9pQy2efAUCWh3";
+      in
       nixpkgs.lib.nixosSystem {
         system = system;
         specialArgs = { inherit unstable; inherit hashedPassword; };
