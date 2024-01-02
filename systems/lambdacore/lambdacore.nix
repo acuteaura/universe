@@ -27,4 +27,30 @@
 
   services.xserver.displayManager.defaultSession = "plasmawayland";
   services.xserver.displayManager.sddm.enableHidpi = true;
+
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.requestEncryptionCredentials = true;
+
+  boot.initrd.availableKernelModules = [ "ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "sd_mod" "sr_mod" ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
+
+  fileSystems."/" =
+    { device = "rpool/root/nixos";
+      fsType = "zfs";
+    };
+
+  fileSystems."/home" =
+    { device = "rpool/home";
+      fsType = "zfs";
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/44C1-6052";
+      fsType = "vfat";
+    };
+
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
