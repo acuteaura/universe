@@ -4,15 +4,21 @@
   time.timeZone = "Europe/Berlin";
 
   # Booting
-  boot.loader.systemd-boot = {
-    enable = true;
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.loader = {
+    grub = {
+      enable = true;
+      efiSupport = true;
+    };
+    efi.canTouchEfiVariables = true;
+    plymouth.enable = false;
   };
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.plymouth.enable = false;
 
   # Network
-  networking.hostId = "f1bd90e2";
-  networking.hostName = "lambdacore";
+  networking = {
+    hostId = "cab93498";
+    hostName = "lambdacore";
+  };
 
   # Who are you?
   users.users.aurelia = {
@@ -25,14 +31,23 @@
 
   programs._1password-gui.polkitPolicyOwners = [ "aurelia" ];
 
-  services.xserver.displayManager.defaultSession = "plasmawayland";
-  services.xserver.displayManager.sddm.enableHidpi = true;
+  services.xserver.displayManager = {
+    defaultSession = "plasmawayland";
+    sddm.enableHidpi = true;
+  };
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "sd_mod" "sr_mod" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  
+  hardware.opengl = {
+    driSupport = true; # This is already enabled by default
+    driSupport32Bit = true; # For 32 bit applications
+  };
+
+  /* boot.initrd.availableKernelModules = [ "ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
 
   boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = [ ]; */
 
   boot.zfs.devNodes = "/dev/disk/by-label/";
 
