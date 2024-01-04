@@ -4,12 +4,12 @@
   time.timeZone = "Europe/Berlin";
 
   # Booting
-  boot.initrd.kernelModules = [ "amdgpu" "amd_iommu" ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.loader = {
     grub = {
       enable = true;
       efiSupport = true;
-      devices = [ "/dev/nvme0n1p1" ];
+      device = "nodev";
     };
     efi.canTouchEfiVariables = true;
   };
