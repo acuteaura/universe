@@ -11,8 +11,8 @@
       efiSupport = true;
     };
     efi.canTouchEfiVariables = true;
-    plymouth.enable = false;
   };
+  boot.plymouth.enable = false;
 
   # Network
   networking = {
