@@ -16,7 +16,11 @@
     enable = true;
     dockerCompat = true;
   };
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    onShutdown = "shutdown";
+    onBoot = "ignore";
+  };
 
   environment.systemPackages = with pkgs; [
     # how much is it?

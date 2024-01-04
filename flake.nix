@@ -19,7 +19,7 @@
           unstable = import nixpkgs-unstable { config.allowUnfree = true; system = "x86_64-linux"; };
           pkgs = unstable;
         in
-        nixpkgs.lib.nixosSystem {
+        nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit pkgs; inherit unstable; };
           modules = [
@@ -32,9 +32,9 @@
           unstable = import nixpkgs-unstable { config.allowUnfree = true; system = "x86_64-linux"; };
           pkgs = unstable;
         in
-        nixpkgs.lib.nixosSystem {
+        nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit pkgs; inherit unstable; };
+          specialArgs = { inherit unstable; };
           modules = [
             ./systems/tranquility
           ];
