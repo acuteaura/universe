@@ -28,7 +28,7 @@
           "amd_iommu=on"
 
           # isolate the GPU
-          ("vfio-pci.ids=" + lib.concatStringsSep "," cfg.gpuIDs);
+          ("vfio-pci.ids=" + lib.concatStringsSep "," cfg.gpuIDs)
         ]
           };
 
