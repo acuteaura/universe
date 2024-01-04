@@ -7,5 +7,6 @@
     ../../mixins/work.nix
     ../../mixins/vfio_nvidia.nix
     ./lambdacore.nix
+    ./gpu.nix
   ];
 }
