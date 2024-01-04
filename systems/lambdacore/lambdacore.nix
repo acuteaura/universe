@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, modulesPath, ... }:
 {
   # Time, Dr. Freeman?
   time.timeZone = "Europe/Berlin";
@@ -14,6 +14,10 @@
     efi.canTouchEfiVariables = true;
   };
   boot.plymouth.enable = false;
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
+
 
   # Network
   networking = {
@@ -44,32 +48,26 @@
     driSupport32Bit = true; # For 32 bit applications
   };
 
-  /* boot.initrd.availableKernelModules = [ "ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "sd_mod" "sr_mod" ];
-    boot.initrd.kernelModules = [ ];
-
-    boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ]; */
-
   boot.zfs.devNodes = "/dev/disk/by-label/";
 
   fileSystems."/" =
-    {
-      device = "rpool/root/nixos";
+    { device = "rpool/root/nixos";
       fsType = "zfs";
     };
 
   fileSystems."/home" =
-    {
-      device = "rpool/home";
+    { device = "rpool/home";
       fsType = "zfs";
     };
 
   fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/D439-4C78";
+    { device = "/dev/disk/by-uuid/D439-4C78";
       fsType = "vfat";
     };
 
+  swapDevices = [ ];
 
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  nixpkgs.hostPlatform = "x86_64-linux";
+  hardware.enableRedistributableFirmware = true;
+  hardware.cpu.amd.updateMicrocode = true;
 }
