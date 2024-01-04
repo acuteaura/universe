@@ -2,6 +2,7 @@
   description = "aurelia's universe flake";
 
   inputs = {
+    nixpkgs.url = "nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
@@ -13,22 +14,29 @@
         wsl = ./systems/wsl;
       };
       templates.default.path = ./template;
-      packages.x86_64-linux = {
-        apisix-ingress-controller =
-          let
-            pkgs = import nixpkgs { system = "x86_64-linux"; };
-          in
-          pkgs.callPackage ./packages/apisix-ingress-controller.nix { };
-      };
       nixosConfigurations.lambdacore =
         let
           unstable = import nixpkgs-unstable { config.allowUnfree = true; system = "x86_64-linux"; };
+          pkgs = unstable;
         in
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit unstable; };
+          specialArgs = { inherit pkgs; inherit unstable; };
           modules = [
             ./systems/lambdacore
+          ];
+        };
+
+      nixosConfigurations.tranquility =
+        let
+          unstable = import nixpkgs-unstable { config.allowUnfree = true; system = "x86_64-linux"; };
+          pkgs = unstable;
+        in
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit pkgs; inherit unstable; };
+          modules = [
+            ./systems/tranquility
           ];
         };
     } // flake-utils.lib.eachDefaultSystem (system:
@@ -37,6 +45,7 @@
       in
       {
         formatter = pkgs.nixpkgs-fmt;
+        packages.apisix-ingress-controller = pkgs.callPackage ./packages/apisix-ingress-controller.nix { };
       }
     );
 }
