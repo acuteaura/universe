@@ -34,4 +34,5 @@
         hardware.opengl.enable = true;
         virtualisation.spiceUSBRedirection.enable = true;
       };
-    }
+    };
+}
