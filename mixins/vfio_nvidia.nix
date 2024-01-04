@@ -29,8 +29,7 @@
 
           # isolate the GPU
           ("vfio-pci.ids=" + lib.concatStringsSep "," cfg.gpuIDs)
-        ]
-          };
+        ];
 
         hardware.opengl.enable = true;
         virtualisation.spiceUSBRedirection.enable = true;
