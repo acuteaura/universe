@@ -4,7 +4,7 @@
   time.timeZone = "Europe/Berlin";
 
   # Booting
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [ "amdgpu" "amd_iommu" ];
   boot.loader = {
     grub = {
       enable = true;
@@ -16,7 +16,7 @@
 
   # Network
   networking = {
-    hostId = "cab93498";
+    hostId = "4fd290e9";
     hostName = "lambdacore";
   };
 
@@ -37,16 +37,16 @@
   };
 
   services.xserver.videoDrivers = [ "amdgpu" ];
-  
+
   hardware.opengl = {
     driSupport = true; # This is already enabled by default
     driSupport32Bit = true; # For 32 bit applications
   };
 
   /* boot.initrd.availableKernelModules = [ "ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
+    boot.initrd.kernelModules = [ ];
 
-  boot.kernelModules = [ "kvm-amd" ];
+    boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ]; */
 
   boot.zfs.devNodes = "/dev/disk/by-label/";
@@ -65,7 +65,7 @@
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/24D7-DDBE";
+      device = "/dev/disk/by-uuid/D439-4C78";
       fsType = "vfat";
     };
 
