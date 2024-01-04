@@ -9,6 +9,7 @@
     grub = {
       enable = true;
       efiSupport = true;
+      devices = [ "/dev/nvme0n1p1" ];
     };
     efi.canTouchEfiVariables = true;
   };
