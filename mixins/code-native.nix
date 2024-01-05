@@ -2,7 +2,7 @@
 {
   environment.systemPackages = with unstable; [
     (vscode-with-extensions.override {
-      vscode = vscode;
+      inherit vscode;
       vscodeExtensions = with vscode-extensions; [
         golang.go
         mvllow.rose-pine

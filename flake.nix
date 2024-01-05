@@ -13,7 +13,6 @@
         tranquility = ./systems/tranquility;
         wsl = ./systems/wsl;
       };
-      templates.default.path = ./template;
       nixosConfigurations.lambdacore =
         let
           unstable = import nixpkgs-unstable { config.allowUnfree = true; system = "x86_64-linux"; };

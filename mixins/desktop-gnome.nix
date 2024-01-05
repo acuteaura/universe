@@ -28,4 +28,4 @@
     gnomeExtensions.dash-to-dock
     unstable.gradience
   ]
-    }
+}

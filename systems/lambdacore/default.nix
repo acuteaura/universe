@@ -19,5 +19,6 @@
     vlc
     p7zip
     protontricks
+    element
   ];
 }
