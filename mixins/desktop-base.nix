@@ -43,6 +43,7 @@
   environment.systemPackages = with pkgs; [
     # gui apps
     firefox
+    thunderbird
     haruna
     lutris
     mpv

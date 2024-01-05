@@ -18,6 +18,7 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  boot.zfs.extraPools = [ "tank" ];
 
   # Network
   networking = {

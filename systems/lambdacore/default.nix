@@ -5,7 +5,7 @@
     ../../mixins/desktop-base.nix
     ../../mixins/desktop-plasma.nix
     ../../mixins/work.nix
-    ./vfio_nvidia.nix
+    ./vfio.nix
     ./gpu.nix
     ./lambdacore.nix
   ];
@@ -14,5 +14,10 @@
 
   environment.systemPackages = with pkgs; [
     vscode-fhs
+    ffmpeg
+    radeontop
+    vlc
+    p7zip
+    protontricks
   ];
 }
