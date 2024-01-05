@@ -16,11 +16,22 @@
     enable = true;
     dockerCompat = true;
   };
-  virtualisation.libvirtd = {
-    enable = true;
-    onShutdown = "shutdown";
-    onBoot = "ignore";
+
+  environment.etc = {
+    "ovmf/edk2-x86_64-secure-code.fd" = {
+      source = config.virtualisation.libvirtd.qemu.package + "/share/qemu/edk2-x86_64-secure-code.fd";
+    };
+
+    "ovmf/edk2-i386-vars.fd" = {
+      source = config.virtualisation.libvirtd.qemu.package + "/share/qemu/edk2-i386-vars.fd";
+    };
   };
+
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+  programs.command-not-found.enable = false;
 
   environment.systemPackages = with pkgs; [
     # how much is it?
@@ -31,6 +42,7 @@
     btop
     chezmoi
     direnv
+    dmidecode
     dig
     gh
     git
@@ -39,10 +51,13 @@
     ncdu
     neovim
     rclone
+    pciutils
+    powertop
     starship
     s-tui
     stress
     toolbox
+    usbutils
     wget
     yq-go
     zstd

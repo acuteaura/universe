@@ -30,6 +30,10 @@
     enable = true;
   };
 
+  programs.steam = {
+    enable = true;
+  };
+
   programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [
     thunar-archive-plugin

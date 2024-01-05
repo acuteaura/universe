@@ -5,8 +5,14 @@
     ../../mixins/desktop-base.nix
     ../../mixins/desktop-plasma.nix
     ../../mixins/work.nix
-    ../../mixins/vfio_nvidia.nix
-    ./lambdacore.nix
+    ./vfio_nvidia.nix
     ./gpu.nix
+    ./lambdacore.nix
+  ];
+
+  programs.steam.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    vscode-fhs
   ];
 }

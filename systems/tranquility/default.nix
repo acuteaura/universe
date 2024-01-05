@@ -2,7 +2,7 @@
 {
   imports = [
     ../../mixins/base.nix
-    ../../mixins/codium.nix
+    ../../mixins/code-native.nix
     ../../mixins/desktop-base.nix
     ../../mixins/desktop-plasma.nix
     ../../mixins/work.nix
