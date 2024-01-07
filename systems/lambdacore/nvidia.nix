@@ -1,16 +1,5 @@
 { config, lib, pkgs, modulesPath, ... }:
 {
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-    extraPackages = with pkgs; [
-      libvdpau-va-gl
-    ];
-  };
-
-  services.xserver.videoDrivers = [ "nvidia" "modeset" ];
-
   hardware.nvidia = {
     modesetting.enable = true;
 

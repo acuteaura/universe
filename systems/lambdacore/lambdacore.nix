@@ -26,6 +26,28 @@
     hostName = "lambdacore";
   };
 
+  boot.zfs.devNodes = "/dev/disk/by-label/";
+
+  fileSystems."/" =
+    {
+      device = "rpool/root/nixos";
+      fsType = "zfs";
+    };
+
+  fileSystems."/home" =
+    {
+      device = "rpool/home";
+      fsType = "zfs";
+    };
+
+  fileSystems."/boot" =
+    {
+      device = "/dev/disk/by-uuid/D439-4C78";
+      fsType = "vfat";
+    };
+
+  swapDevices = [ ];
+
   # Who are you?
   users.users.aurelia = {
     isNormalUser = true;
@@ -41,32 +63,6 @@
     defaultSession = "plasmawayland";
     sddm.enableHidpi = true;
   };
-
-  services.xserver.videoDrivers = [ "amdgpu" ];
-
-  hardware.opengl = {
-    driSupport = true; # This is already enabled by default
-    driSupport32Bit = true; # For 32 bit applications
-  };
-
-  boot.zfs.devNodes = "/dev/disk/by-label/";
-
-  fileSystems."/" =
-    { device = "rpool/root/nixos";
-      fsType = "zfs";
-    };
-
-  fileSystems."/home" =
-    { device = "rpool/home";
-      fsType = "zfs";
-    };
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/D439-4C78";
-      fsType = "vfat";
-    };
-
-  swapDevices = [ ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
   hardware.enableRedistributableFirmware = true;

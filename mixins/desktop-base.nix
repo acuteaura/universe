@@ -24,7 +24,6 @@
   services.gvfs.enable = true;
   services.tumbler.enable = true;
 
-
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
@@ -43,24 +42,21 @@
   environment.systemPackages = with pkgs; [
     # gui apps
     firefox
-    thunderbird
     haruna
-    lutris
     mpv
     seafile-client
     signal-desktop
     slack
     tailscale
     telegram-desktop
-    unstable.ungoogled-chromium
+    ungoogled-chromium
     virt-manager
-    xfce.thunar
-
-    # cursed
-    wineWowPackages.stable
-    winetricks
+    vlc
+    vscode-fhs
+    xfce.thunarg
 
     # fonts
+    ibm-plex
     inter
     victor-mono
   ];
