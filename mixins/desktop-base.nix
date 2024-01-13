@@ -53,7 +53,7 @@
     virt-manager
     vlc
     vscode-fhs
-    xfce.thunarg
+    xfce.thunar
 
     # fonts
     ibm-plex

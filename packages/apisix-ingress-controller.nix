@@ -1,6 +1,5 @@
 { lib
 , buildGoModule
-, fetchFromGitHub
 }:
 
 buildGoModule rec {
@@ -8,11 +7,10 @@ buildGoModule rec {
   version = "1.7.1";
   rev = "ceefeb1e2547100679556a1763d9820ec04f6381";
 
-  src = fetchFromGitHub {
-    owner = "apache";
-    repo = "apisix-ingress-controller";
-    rev = "${version}";
-    hash = "sha256-C77ps1rVVGGRLnQdfNdyWISL5iWtLPKAiTfY2EYMmjM=";
+  src = builtins.fetchGit {
+    url = "git@github.com:apache/apisix-ingress-controller.git";
+    ref = "refs/tags/${version}";
+    rev = "${rev}";
   };
 
   subPackages = [ "." ];

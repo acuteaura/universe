@@ -22,5 +22,14 @@
     kitty
     simh
     thunderbird
+    virt-viewer
+    blender
+    whois
+    protonup-qt
+    mangohud
+    gamemode
   ];
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  hardware.xpadneo.enable = true;
 }

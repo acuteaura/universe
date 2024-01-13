@@ -1,4 +1,4 @@
-{ _ }:
+{ pkgs, config, ... }:
 {
   virtualisation.libvirtd = {
     enable = true;
@@ -36,6 +36,7 @@
   # looking glass
   environment.systemPackages = with pkgs; [
     looking-glass-client
+    virtiofsd
   ];
   systemd.tmpfiles.rules = [
     "f /dev/shm/looking-glass 0660 aurelia qemu-libvirtd -"

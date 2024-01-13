@@ -1,6 +1,7 @@
 # based upon work by astrid yu
 # https://astrid.tech/2022/09/22/0/nixos-gpu-vfio/
-{ pkgs, lib, config, ... }: {
+{ pkgs, lib, config, ... }: 
+{
   options.vfio.enable = with lib;
     mkEnableOption "Configure the machine for VFIO";
 
@@ -17,7 +18,8 @@
         "vfio_pci"
         "vfio"
         "vfio_iommu_type1"
-        "vfio_virqfd"
+        # merged in linux 6.2
+        #"vfio_virqfd"
 
         "nvidia"
         "nvidia_modeset"
