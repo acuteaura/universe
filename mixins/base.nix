@@ -2,7 +2,6 @@
 {
   # Configure Nix itself
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfree = true;
 
   networking.networkmanager = {
     enable = true;
@@ -38,13 +37,14 @@
     ffmpeg
     gh
     git
+    go
     htop
     jq
     ncdu
     neovim
+    p7zip
     pciutils
     powertop
-    p7zip
     rclone
     s-tui
     starship
@@ -52,6 +52,7 @@
     toolbox
     usbutils
     wget
+    whois
     yq-go
     zstd
 

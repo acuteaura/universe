@@ -17,9 +17,21 @@
         tranquility = ./systems/tranquility;
         wsl = ./systems/wsl;
       };
-      nixosConfigurations.lambdacore =
+      nixosConfigurations.lambdacomplex =
         let
-          unstable = import nixpkgs-unstable { config.allowUnfree = true; system = "x86_64-linux"; };
+          unstable = import nixpkgs-unstable {  
+            system = "x86_64-linux";
+            config = {
+              allowUnfree = true;
+              permittedInsecurePackages = [
+                "electron-25.9.0"
+              ];
+            };
+          };
+          #pkgs = import nixpkgs { 
+          #  config.allowUnfree = true;
+          #  system = "x86_64-linux";
+          #}
           pkgs = unstable;
         in
         nixpkgs-unstable.lib.nixosSystem {
@@ -48,7 +60,7 @@
       in
       {
         formatter = pkgs.nixpkgs-fmt;
-        
+
         packages.apisix-ingress-controller = pkgs.callPackage ./packages/apisix-ingress-controller.nix { };
         packages.hmgctl = pkgs.callPackage ./packages/hmgctl.nix { };
 

@@ -1,7 +1,8 @@
 { config, pkgs, unstable, ... }:
 {
   environment.systemPackages = with unstable; [
-    (vscode-with-extensions.override {
+    vscode
+    /* (vscode-with-extensions.override {
       inherit vscode;
       vscodeExtensions = with vscode-extensions; [
         golang.go
@@ -18,6 +19,6 @@
         yzhang.markdown-all-in-one
         vscode-icons-team.vscode-icons
       ];
-    })
+    }) */
   ];
 }

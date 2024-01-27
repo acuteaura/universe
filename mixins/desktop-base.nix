@@ -42,6 +42,7 @@
   environment.systemPackages = with pkgs; [
     # gui apps
     firefox
+    gnome.zenity
     haruna
     mpv
     seafile-client
@@ -50,15 +51,15 @@
     tailscale
     telegram-desktop
     ungoogled-chromium
-    virt-manager
+    unstable.virt-manager
     vlc
-    vscode-fhs
     xfce.thunar
+  ];
 
+  fonts.packages = with pkgs; [
     # fonts
     ibm-plex
     inter
     victor-mono
   ];
-
 }

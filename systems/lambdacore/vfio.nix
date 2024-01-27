@@ -1,6 +1,6 @@
 # based upon work by astrid yu
 # https://astrid.tech/2022/09/22/0/nixos-gpu-vfio/
-{ pkgs, lib, config, ... }: 
+{ pkgs, lib, config, ... }:
 {
   options.vfio.enable = with lib;
     mkEnableOption "Configure the machine for VFIO";

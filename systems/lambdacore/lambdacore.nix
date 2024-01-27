@@ -23,7 +23,7 @@
   # Network
   networking = {
     hostId = "4fd290e9";
-    hostName = "lambdacore";
+    hostName = "lambdacomplex";
   };
 
   boot.zfs.devNodes = "/dev/disk/by-label/";
@@ -61,12 +61,20 @@
 
   services.xserver.displayManager = {
     defaultSession = "plasmawayland";
-    sddm.enableHidpi = true;
+    gdm = {
+      enable = false;
+    };
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+      enableHidpi = true;
+    };
   };
 
   nixpkgs.hostPlatform = "x86_64-linux";
   hardware.enableRedistributableFirmware = true;
   hardware.cpu.amd.updateMicrocode = true;
+  services.fwupd.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
