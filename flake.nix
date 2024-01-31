@@ -5,18 +5,16 @@
     nixpkgs.url = "nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+    
+    quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
+    quadlet-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, nixos-generators }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, nixos-generators, quadlet-nix }:
     {
-      nixosModules = {
-        tranquility = ./systems/tranquility;
-        wsl = ./systems/wsl;
-      };
       nixosConfigurations.lambdacomplex =
         let
           unstable = import nixpkgs-unstable {  
@@ -38,6 +36,7 @@
           system = "x86_64-linux";
           specialArgs = { inherit pkgs; inherit unstable; };
           modules = [
+            quadlet-nix.nixosModules.quadlet
             ./systems/lambdacore
           ];
         };

@@ -30,7 +30,21 @@
     virt-viewer
   ];
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  #environment.sessionVariables.NIXOS_OZONE_WL = "1";
   hardware.xpadneo.enable = true;
   programs.nix-ld.enable = true;
+
+  virtualisation.quadlet = {
+    containers = {
+      nginx.containerConfig = {
+        image = "docker.io/library/nginx:latest";
+        networks = [ "internal.network" ];
+        ip = "10.0.123.12";
+      };
+      nginx.serviceConfig.TimeoutStartSec = "60";
+    };
+    networks = {
+      internal.networkConfig.subnets = [ "10.0.123.0/24" ];
+    };
+  };
 }

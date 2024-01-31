@@ -15,6 +15,7 @@
   };
   hardware.pulseaudio.enable = false;
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.settings.Policy.ReconnectAttempts = 0;
 
   # Flatpak wants these
   services.flatpak.enable = true;
