@@ -10,6 +10,7 @@ buildGoModule rec {
   src = builtins.fetchGit {
     url = "https://handelsblattgroup@dev.azure.com/handelsblattgroup/Shared/_git/hmgctl";
     rev = "${rev}";
+    shallow = true;
   };
 
   subPackages = [ "cmd/hmgctl" ];

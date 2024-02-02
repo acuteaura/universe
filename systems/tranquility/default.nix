@@ -6,8 +6,16 @@
     ../../mixins/desktop-base.nix
     ../../mixins/desktop-plasma.nix
     ../../mixins/work.nix
-    ./tranquility.nix
+    ./hardware.nix
     ./tlp.nix
     ./gpu.nix
   ];
+
+  # locally installed packages
+  environment.systemPackages = with pkgs; [
+  
+  ];
+
+  services.xserver.displayManager.defaultSession = "plasmawayland";
+  services.xserver.displayManager.sddm.enableHidpi = true;
 }

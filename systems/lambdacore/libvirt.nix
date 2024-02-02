@@ -1,15 +1,15 @@
-{ pkgs, config, unstable, ... }:
+{ pkgs, config, ... }:
 {
   virtualisation.libvirtd = {
     enable = true;
-    package = unstable.libvirt;
+    package = pkgs.libvirt;
     onShutdown = "shutdown";
     onBoot = "ignore";
     qemu = {
       swtpm.enable = true;
       ovmf.enable = true;
-      ovmf.packages = [ unstable.OVMFFull.fd ];
-      package = unstable.qemu;
+      ovmf.packages = [ pkgs.OVMFFull.fd ];
+      package = pkgs.qemu;
     };
   };
   virtualisation.spiceUSBRedirection.enable = true;

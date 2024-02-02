@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, ... }:
 {
   services.xserver.desktopManager.gnome.enable = true;
   environment.gnome.excludePackages = (with pkgs; [
@@ -25,6 +25,6 @@
     gnomeExtensions.appindicator
     gnomeExtensions.blur-my-shell
     gnomeExtensions.dash-to-dock
-    unstable.gradience
+    gradience
   ];
  }

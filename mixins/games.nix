@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, ... }:
 {
   programs.steam.enable = true;
   environment.systemPackages = with pkgs; [
@@ -6,8 +6,9 @@
     lutris
     mangohud
     protonup-qt
-    unstable.protontricks
+    protontricks
     winetricks
     wineWowPackages.stable
   ];
+  hardware.xpadneo.enable = true;
 }

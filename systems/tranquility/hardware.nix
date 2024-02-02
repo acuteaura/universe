@@ -27,9 +27,6 @@
 
   programs._1password-gui.polkitPolicyOwners = [ "aurelia" ];
 
-  services.xserver.displayManager.defaultSession = "plasmawayland";
-  services.xserver.displayManager.sddm.enableHidpi = true;
-
   services.fprintd.enable = true;
   services.fprintd.tod.enable = true;
   services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;

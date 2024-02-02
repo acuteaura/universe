@@ -11,9 +11,12 @@
     
     quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
     quadlet-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, nixos-generators, quadlet-nix }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, nixos-generators, quadlet-nix, agenix }:
     {
       nixosConfigurations.lambdacomplex =
         let
@@ -34,10 +37,11 @@
         in
         nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit pkgs; inherit unstable; };
+          specialArgs = { inherit pkgs; inherit unstable; inherit agenix; hmgctl = self.packages.x86_64-linux.hmgctl; };
           modules = [
-            quadlet-nix.nixosModules.quadlet
             ./systems/lambdacore
+            agenix.nixosModules.default
+            quadlet-nix.nixosModules.quadlet
           ];
         };
 
@@ -55,7 +59,7 @@
         };
     } // flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs-unstable { config.allowUnfree = true; system = "${system}"; };
       in
       {
         formatter = pkgs.nixpkgs-fmt;

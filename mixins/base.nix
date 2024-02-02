@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, ... }:
 {
   # Configure Nix itself
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -7,21 +7,23 @@
     enable = true;
   };
   services.resolved.enable = true;
-  services.openssh.enable = true;
   services.tailscale.enable = true;
-
-  # Useful!
-  virtualisation.containers.enable = true;
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-  };
 
   programs.nix-index = {
     enable = true;
     enableFishIntegration = true;
   };
   programs.command-not-found.enable = false;
+
+  services.openssh = {
+    enable = true;
+    # require public key authentication for better security
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "yes";
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     # how much is it?
@@ -55,6 +57,7 @@
     whois
     yq-go
     zstd
+    gnome.zenity
 
     # dev crap
     efm-langserver
