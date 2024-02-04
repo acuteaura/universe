@@ -34,7 +34,6 @@
     sddm = {
       enable = true;
       wayland.enable = true;
-      enableHidpi = true;
     };
   };
 
@@ -50,29 +49,29 @@
       };
     });
   in [
+    azure-cli
     blender
+    cloudflared
     cool-retro-term
     docker-machine-kvm2
     easyeffects
     element
+    flyctl
+    jetbrains-toolbox
+    kind
     kitty
+    kubectl
+    kubectx
     minikube
     obsidian
+    openssl
+    restic
     simh
     thunderbird
     ventoy-full
     virt-viewer
     vscode
-
-    cloudflared
-
-    azure-cli
-    hmgctl
-    kubectl
-    kubectx
     whois
-
-    agenix.packages.x86_64-linux.default
   ];
 
   # broken until everything upgrades electron

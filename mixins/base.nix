@@ -51,6 +51,7 @@
     s-tui
     starship
     stress
+    tmux
     toolbox
     usbutils
     wget

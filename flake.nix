@@ -11,12 +11,9 @@
     
     quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
     quadlet-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, nixos-generators, quadlet-nix, agenix }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, nixos-generators, quadlet-nix }:
     {
       nixosConfigurations.lambdacomplex =
         let
@@ -37,10 +34,9 @@
         in
         nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit pkgs; inherit unstable; inherit agenix; hmgctl = self.packages.x86_64-linux.hmgctl; };
+          specialArgs = { inherit pkgs; inherit unstable; };
           modules = [
             ./systems/lambdacore
-            agenix.nixosModules.default
             quadlet-nix.nixosModules.quadlet
           ];
         };

@@ -1,11 +1,17 @@
 { config, lib, pkgs, modulesPath, ... }:
 {
   options.nvidia-sync.enable = lib.mkEnableOption "Enable NVIDIA prime sync mode";
+  options.nvidia-offload.enable = lib.mkEnableOption "Enable NVIDIA prime sync mode";
 
   config = {
     specialisation."NVIDIA-SYNC".configuration = {
       system.nixos.tags = [ "with-nvidia-sync" ];
       nvidia-sync.enable = true;
+    };
+
+    specialisation."NVIDIA-OFFLOAD".configuration = {
+      system.nixos.tags = [ "with-nvidia-offload" ];
+      nvidia-offload.enable = true;
     };
 
     services.xserver.videoDrivers = [ "nvidia" "modeset" ];
@@ -14,10 +20,10 @@
       modesetting.enable = true;
 
       # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-      powerManagement.enable = ! config.nvidia-sync.enable;
+      powerManagement.enable = config.nvidia-offload.enable;
       # Fine-grained power management. Turns off GPU when not in use.
       # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-      powerManagement.finegrained = ! config.nvidia-sync.enable;
+      powerManagement.finegrained = config.nvidia-offload.enable;
 
       # Use the NVidia open source kernel module (not to be confused with the
       # independent third-party "nouveau" open source driver).
@@ -33,14 +39,14 @@
       nvidiaSettings = true;
 
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
 
       prime = {
         amdgpuBusId = "PCI:6:0:0";
         nvidiaBusId = "PCI:1:0:0";
       } // lib.optionalAttrs config.nvidia-sync.enable {
         sync.enable = true;
-      } // lib.optionalAttrs (!config.nvidia-sync.enable) {
+      } // lib.optionalAttrs (config.nvidia-offload.enable) {
         offload = {
           enable = true;
           enableOffloadCmd = true;
