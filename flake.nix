@@ -40,6 +40,26 @@
             quadlet-nix.nixosModules.quadlet
           ];
         };
+      
+      nixosConfigurations.framework =
+        let
+          unstable = import nixpkgs {  
+            config.allowUnfree = true;
+            system = "x86_64-linux";
+          };
+          pkgs = import nixpkgs { 
+            config.allowUnfree = true;
+            system = "x86_64-linux";
+          }
+        in
+        pkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit pkgs; inherit unstable; };
+          modules = [
+            ./systems/framework
+            quadlet-nix.nixosModules.quadlet
+          ];
+        };
 
       nixosConfigurations.tranquility =
         let
