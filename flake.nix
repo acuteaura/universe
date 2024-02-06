@@ -50,7 +50,7 @@
           pkgs = import nixpkgs { 
             config.allowUnfree = true;
             system = "x86_64-linux";
-          }
+          };
         in
         pkgs.lib.nixosSystem {
           system = "x86_64-linux";
