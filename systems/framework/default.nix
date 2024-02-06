@@ -12,6 +12,12 @@
     ./libvirt.nix
   ];
 
+  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+
+  services.power-profiles-daemon.enable = true;
+  services.fprintd.enable = true;
+  hardware.sensor.iio.enable = true;
+
   time.timeZone = "Europe/Berlin";
 
   users.users.aurelia = {
