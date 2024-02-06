@@ -43,16 +43,16 @@
       
       nixosConfigurations.framework =
         let
-          unstable = import nixpkgs {  
+          pkgs = import nixpkgs {  
             config.allowUnfree = true;
             system = "x86_64-linux";
           };
-          pkgs = import nixpkgs { 
+          unstable = import nixpkgs-unstable { 
             config.allowUnfree = true;
             system = "x86_64-linux";
           };
         in
-        pkgs.lib.nixosSystem {
+        nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit pkgs; inherit unstable; };
           modules = [
