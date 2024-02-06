@@ -15,8 +15,6 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  boot.zfs.extraPools = [ "tank" ];
-
   # Network
   networking = {
     hostId = "758fce08";
