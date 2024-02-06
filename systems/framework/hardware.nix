@@ -27,7 +27,7 @@
 
   fileSystems."/" =
     {
-      device = "framework/nixos";
+      device = "framework/root";
       fsType = "zfs";
     };
 
