@@ -50,6 +50,7 @@
           unstable = import nixpkgs-unstable { 
             config.allowUnfree = true;
             system = "x86_64-linux";
+            config.permittedInsecurePackages = [ "electron-25.9.0" ];
           };
         in
         nixpkgs.lib.nixosSystem {
