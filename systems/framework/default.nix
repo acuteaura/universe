@@ -1,12 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 {
   imports = [
-    ../../mixins/base.nix
-    ../../mixins/desktop-base.nix
-    ../../mixins/desktop-plasma.nix
-    ../../mixins/games.nix
-    ../../mixins/podman.nix
-    ../../mixins/work.nix
+    ../mixins/base.nix
+    ../mixins/desktop-base.nix
+    ../mixins/desktop-plasma.nix
+    ../mixins/games.nix
+    ../mixins/podman.nix
+    ../mixins/work.nix
     ./amdgpu.nix
     ./hardware.nix
     ./libvirt.nix
@@ -51,6 +51,7 @@
     easyeffects
     element
     flyctl
+    gnumake
     jetbrains-toolbox
     kind
     kitty
@@ -60,30 +61,62 @@
     obsidian
     openssl
     restic
+    shotwell
     simh
     thunderbird
     ventoy-full
     virt-viewer
     vscode
     whois
+
+    unstable.retroarchFull
+    unstable.emulationstation-de
   ];
 
   # broken until everything upgrades electron
-  # environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  #environment.sessionVariables.NIXOS_OZONE_WL = "1";
   programs.nix-ld.enable = true;
+  services.mullvad-vpn.enable = true;
 
-  virtualisation.quadlet = {
-    containers = {
-      nginx.containerConfig = {
-        image = "docker.io/library/nginx:latest";
-        networks = [ "internal.network" ];
-        ip = "10.0.123.12";
-      };
-      nginx.serviceConfig.TimeoutStartSec = "60";
+  environment.sessionVariables.PLASMA_USE_QT_SCALING = "0";
+  /* virtualisation.quadlet.containers.rustdeskHbbs = {
+    unitConfig = {
+      After = [ "magpie.target" ];
+      Wants = [ "magpie.target" ];
+      RequiresMountsFor = [
+        "/magpie/apps/unifi"
+      ];
     };
-    networks = {
-      internal.networkConfig.subnets = [ "10.0.123.0/24" ];
+    containerConfig = {
+      image = "docker.io/rustdesk/rustdesk-server:latest";
+      exec = "hbbs";
+      volumes = [ "/magpie/apps/rustdesk:/data:U" ];
+      publishPorts = [
+        "21115:21115/tcp"
+        "21116:21116/tcp"
+        "21116:21116/udp"
+        "21118:21118/tcp"
+      ];
     };
-  };
+    };
+      
+    virtualisation.quadlet.containers.rustdeskHbbr = {
+    unitConfig = {
+      After = [ "magpie.target" ];
+      Wants = [ "magpie.target" ];
+      RequiresMountsFor = [
+        "/magpie/apps/unifi"
+      ];
+    };
+    containerConfig = {
+      image = "docker.io/rustdesk/rustdesk-server:latest";
+      exec = "hbbr";
+      volumes = [ "/magpie/apps/rustdesk:/data:U" ];
+      publishPorts = [
+        "21117:21117/tcp"
+        "21119:21119/tcp"
+      ];
+    };
+  }; */
 
 }

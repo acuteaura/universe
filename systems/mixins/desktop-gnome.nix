@@ -27,4 +27,4 @@
     gnomeExtensions.dash-to-dock
     gradience
   ];
- }
+}

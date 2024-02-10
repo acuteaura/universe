@@ -8,52 +8,29 @@
 
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
-    
+
     quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
     quadlet-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, flake-utils, nixos-generators, quadlet-nix }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, nixos-generators, quadlet-nix }:
+    let
+      pkgs = import nixpkgs {
+        config.allowUnfree = true;
+        system = "x86_64-linux";
+        config.permittedInsecurePackages = [ "electron-25.9.0" ];
+      };
+      unstable = import nixpkgs-unstable {
+        config.allowUnfree = true;
+        system = "x86_64-linux";
+        config.permittedInsecurePackages = [ "electron-25.9.0" ];
+      };
+    in
     {
-      nixosConfigurations.lambdacomplex =
-        let
-          unstable = import nixpkgs-unstable {  
-            system = "x86_64-linux";
-            config = {
-              allowUnfree = true;
-              permittedInsecurePackages = [
-                "electron-25.9.0"
-              ];
-            };
-          };
-          #pkgs = import nixpkgs { 
-          #  config.allowUnfree = true;
-          #  system = "x86_64-linux";
-          #}
-          pkgs = unstable;
-        in
-        nixpkgs-unstable.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit pkgs; inherit unstable; };
-          modules = [
-            ./systems/lambdacore
-            quadlet-nix.nixosModules.quadlet
-          ];
-        };
-      
       nixosConfigurations.framework =
-        let
-          pkgs = import nixpkgs {  
-            config.allowUnfree = true;
-            system = "x86_64-linux";
-            config.permittedInsecurePackages = [ "electron-25.9.0" ];
-          };
-          unstable = import nixpkgs-unstable { 
-            config.allowUnfree = true;
-            system = "x86_64-linux";
-            config.permittedInsecurePackages = [ "electron-25.9.0" ];
-          };
-        in
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit pkgs; inherit unstable; };
@@ -62,28 +39,20 @@
             quadlet-nix.nixosModules.quadlet
           ];
         };
-
-      nixosConfigurations.tranquility =
-        let
-          unstable = import nixpkgs-unstable { config.allowUnfree = true; system = "x86_64-linux"; };
-          pkgs = unstable;
-        in
-        nixpkgs-unstable.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit unstable; };
-          modules = [
-            ./systems/tranquility
-          ];
-        };
+      homeConfigurations."aurelia" = home-manager.lib.homeManagerConfiguration {
+        pkgs = unstable;
+        modules = [
+          ./homes/lambdacore
+        ];
+      };
     } // flake-utils.lib.eachDefaultSystem (system:
       let
-          pkgs = import nixpkgs-unstable { config.allowUnfree = true; system = "${system}"; };
+        pkgs = import nixpkgs-unstable { config.allowUnfree = true; system = "${system}"; };
       in
       {
         formatter = pkgs.nixpkgs-fmt;
 
         packages.apisix-ingress-controller = pkgs.callPackage ./packages/apisix-ingress-controller.nix { };
-        packages.hmgctl = pkgs.callPackage ./packages/hmgctl.nix { };
 
         packages.vm-image =
           let

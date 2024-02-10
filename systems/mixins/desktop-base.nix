@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 {
   # Yep, it's a desktop!
   # Enable the X11 windowing system.
@@ -15,6 +15,8 @@
   };
   hardware.pulseaudio.enable = false;
   hardware.bluetooth.enable = true;
+
+  # prevents AirPods being stolen back by bluez when requesting connection elsewhere
   hardware.bluetooth.settings.Policy.ReconnectAttempts = 0;
 
   # Flatpak wants these
@@ -40,6 +42,8 @@
     thunar-volman
   ];
 
+  programs.dconf.enable = true;
+
   environment.systemPackages = with pkgs; [
     # gui apps
     firefox
@@ -52,7 +56,7 @@
     tailscale
     telegram-desktop
     ungoogled-chromium
-    virt-manager
+    unstable.virt-manager
     vlc
     xfce.thunar
   ];

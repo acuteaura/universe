@@ -10,10 +10,13 @@
     };
     efi.canTouchEfiVariables = true;
   };
-  boot.plymouth.enable = false;
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.systemd.enable = true;
+  boot.plymouth.enable = true;
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "thunderbolt" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  boot.kernelParams = [ "amdgpu.sg_display=0" ];
+  security.pam.services.login.fprintAuth = false;
 
   # Network
   networking = {

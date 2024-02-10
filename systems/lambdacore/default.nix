@@ -1,12 +1,12 @@
 { config, pkgs, agenix, hmgctl, ... }:
 {
   imports = [
-    ../../mixins/base.nix
-    ../../mixins/desktop-base.nix
-    ../../mixins/desktop-plasma.nix
-    ../../mixins/games.nix
-    ../../mixins/podman.nix
-    ../../mixins/work.nix
+    ../mixins/base.nix
+    ../mixins/desktop-base.nix
+    ../mixins/desktop-plasma.nix
+    ../mixins/games.nix
+    ../mixins/podman.nix
+    ../mixins/work.nix
     ./amdgpu.nix
     ./hardware.nix
     ./libvirt.nix
@@ -48,7 +48,8 @@
         hash = "sha256-T+hxNvsckL8PAVb4GjXhnkVi3rXMErTjRgGxCUypwVA=";
       };
     });
-  in [
+  in
+  [
     azure-cli
     blender
     cloudflared

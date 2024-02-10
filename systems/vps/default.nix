@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../../mixins/base.nix
+    ../mixins/base.nix
   ];
 
   users.users.aurelia = {

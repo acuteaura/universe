@@ -30,39 +30,14 @@
     fish
 
     # cli tools
-    age
     btop
-    chezmoi
-    dig
-    direnv
     dmidecode
-    ffmpeg
-    gh
-    git
-    go
     htop
-    jq
-    ncdu
-    neovim
-    p7zip
     pciutils
-    powertop
-    rclone
     s-tui
-    starship
-    stress
     tmux
-    toolbox
-    usbutils
     wget
-    whois
-    yq-go
-    zstd
     gnome.zenity
-
-    # dev crap
-    efm-langserver
-    nixpkgs-fmt
 
     # kde would like to know
     clinfo

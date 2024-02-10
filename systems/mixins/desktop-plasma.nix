@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   services.xserver.desktopManager.plasma5.enable = true;
-  services.xserver.desktopManager.plasma5.useQtScaling = true;
+  services.xserver.desktopManager.plasma5.useQtScaling = false;
 
   environment.plasma5.excludePackages = with pkgs.libsForQt5; [
     khelpcenter
