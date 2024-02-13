@@ -13,5 +13,10 @@
     libsForQt5.kdenlive
     libsForQt5.filelight
     libsForQt5.yakuake
+
+    # required for system info
+    clinfo
+    glxinfo
+    vulkan-tools
   ];
 }

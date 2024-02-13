@@ -3,6 +3,7 @@
   programs.steam.enable = true;
   environment.systemPackages = with pkgs; [
     gamemode
+    gamescope
     lutris
     mangohud
     protonup-qt

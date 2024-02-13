@@ -1,0 +1,29 @@
+{ config, pkgs, ... }:
+{
+  home.packages = with pkgs; [
+    azure-cli
+    btop
+    distrobox
+    dmidecode
+    ffmpeg
+    flyctl
+    gnumake
+    hyfetch
+    internetarchive
+    kind
+    kubectl
+    kubectx
+    minikube
+    nmap
+    pciutils
+    powertop
+    restic
+    s-tui
+    simh
+    tcpdump
+    tshark
+    usbutils
+    ventoy-full
+    whois
+  ];
+}

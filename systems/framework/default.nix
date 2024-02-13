@@ -33,43 +33,26 @@
   services.xserver.displayManager = {
     defaultSession = "plasmawayland";
     gdm = {
-      enable = false;
+      enable = true;
     };
     sddm = {
-      enable = true;
+      enable = false;
       wayland.enable = true;
     };
   };
 
   # locally installed packages
   environment.systemPackages = with pkgs; [
-    azure-cli
     blender
-    cloudflared
     cool-retro-term
-    docker-machine-kvm2
     easyeffects
-    element
-    flyctl
-    gnumake
     jetbrains-toolbox
-    kind
     kitty
-    kubectl
-    kubectx
-    minikube
-    obsidian
     openssl
-    restic
-    shotwell
-    simh
-    thunderbird
-    ventoy-full
-    virt-viewer
-    vscode
-    whois
 
-    unstable.retroarchFull
+    # do NOT set to unstable
+    # there's a lot of compiling involved if you do
+    retroarchFull
     unstable.emulationstation-de
   ];
 

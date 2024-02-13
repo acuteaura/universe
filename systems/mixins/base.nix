@@ -26,20 +26,12 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # how much is it?
     fish
 
-    # cli tools
-    btop
-    dmidecode
     htop
-    pciutils
-    s-tui
-    tmux
     wget
     gnome.zenity
 
-    # kde would like to know
     clinfo
     glxinfo
     vulkan-tools
