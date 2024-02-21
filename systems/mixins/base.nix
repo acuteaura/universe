@@ -7,7 +7,8 @@
     enable = true;
   };
   services.resolved.enable = true;
-  services.tailscale.enable = true;
+  # begone, eater of wor-- dns packets
+  #services.tailscale.enable = true;
 
   programs.nix-index = {
     enable = true;
@@ -26,23 +27,15 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # how much is it?
     fish
 
-    # cli tools
-    btop
-    dmidecode
     htop
-    pciutils
-    s-tui
-    tmux
     wget
-    gnome.zenity
-
-    # kde would like to know
-    clinfo
-    glxinfo
-    vulkan-tools
+    pv
+    dig
+    git
+    neovim
+    tmux
   ];
 
   programs.fish.enable = true;

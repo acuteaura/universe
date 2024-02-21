@@ -1,9 +1,14 @@
-{ ... }:
+{ pkgs, unstable, ... }:
 {
-  # Useful!
   virtualisation.containers.enable = true;
   virtualisation.podman = {
     enable = true;
-    dockerCompat = true;
+
+    package = unstable.podman;
+    dockerSocket.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    docker-client
+  ];
 }

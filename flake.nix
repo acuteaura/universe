@@ -42,7 +42,7 @@
       homeConfigurations."aurelia" = home-manager.lib.homeManagerConfiguration {
         pkgs = unstable;
         modules = [
-          ./homes/lambdacore
+          ./homes/framework
         ];
       };
     } // flake-utils.lib.eachDefaultSystem (system:

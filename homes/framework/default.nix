@@ -2,6 +2,8 @@
 {
   imports = [
     ../mixins/base
+    ../mixins/extended
+    ../mixins/graphical
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -19,34 +21,10 @@
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    age
-    chezmoi
-    dig
-    direnv
-    efm-langserver
-    ffmpeg
-    gh
-    git
-    go
-    internetarchive
-    jq
-    ncdu
-    neovim
-    nixpkgs-fmt
-    p7zip
-    powertop
-    rclone
-    rustdesk-flutter
-    starship
-    stress
-    toolbox
-    usbutils
-    whois
-    yq-go
-    zstd
-
-    retroarchFull
-
+    libreoffice-qt
+    jetbrains.goland
+    blender
+    cool-retro-term
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of

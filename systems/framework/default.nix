@@ -1,22 +1,19 @@
-{ config, pkgs, unstable, ... }:
+{ lib, config, pkgs, unstable, ... }:
 {
   imports = [
     ../mixins/base.nix
     ../mixins/desktop-base.nix
+    ../mixins/desktop-gnome.nix
     ../mixins/desktop-plasma.nix
     ../mixins/games.nix
+    ../mixins/libvirt.nix
     ../mixins/podman.nix
     ../mixins/work.nix
     ./amdgpu.nix
     ./hardware.nix
-    ./libvirt.nix
   ];
 
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-
-  services.power-profiles-daemon.enable = true;
-  services.fprintd.enable = true;
-  hardware.sensor.iio.enable = true;
 
   time.timeZone = "Europe/Berlin";
 
@@ -33,90 +30,35 @@
   services.xserver.displayManager = {
     defaultSession = "plasmawayland";
     gdm = {
-      enable = false;
+      enable = true;
     };
     sddm = {
-      enable = true;
+      # broken with fish
+      # https://github.com/NixOS/nixpkgs/issues/287646
+      enable = false;
       wayland.enable = true;
     };
   };
 
+  # tiebreaking required if you have gnome+kde
+  programs.ssh.askPassword = lib.mkForce "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
+
   # locally installed packages
   environment.systemPackages = with pkgs; [
-    azure-cli
-    blender
-    cloudflared
-    cool-retro-term
-    docker-machine-kvm2
-    easyeffects
-    element
-    flyctl
-    gnumake
-    jetbrains-toolbox
-    kind
-    kitty
-    kubectl
-    kubectx
-    minikube
-    obsidian
-    openssl
-    restic
-    shotwell
-    simh
-    thunderbird
-    ventoy-full
-    virt-viewer
-    vscode
-    whois
-
-    unstable.retroarchFull
+    # do NOT set to unstable
+    # there's a lot of compiling involved if you do
+    # TODO: move to home-manager once someone merges nix-profile core support
+    # https://github.com/NixOS/nixpkgs/pull/287583
+    retroarchFull
     unstable.emulationstation-de
   ];
 
   # broken until everything upgrades electron
   #environment.sessionVariables.NIXOS_OZONE_WL = "1";
   programs.nix-ld.enable = true;
-  services.mullvad-vpn.enable = true;
-
   environment.sessionVariables.PLASMA_USE_QT_SCALING = "0";
-  /* virtualisation.quadlet.containers.rustdeskHbbs = {
-    unitConfig = {
-      After = [ "magpie.target" ];
-      Wants = [ "magpie.target" ];
-      RequiresMountsFor = [
-        "/magpie/apps/unifi"
-      ];
-    };
-    containerConfig = {
-      image = "docker.io/rustdesk/rustdesk-server:latest";
-      exec = "hbbs";
-      volumes = [ "/magpie/apps/rustdesk:/data:U" ];
-      publishPorts = [
-        "21115:21115/tcp"
-        "21116:21116/tcp"
-        "21116:21116/udp"
-        "21118:21118/tcp"
-      ];
-    };
-    };
-      
-    virtualisation.quadlet.containers.rustdeskHbbr = {
-    unitConfig = {
-      After = [ "magpie.target" ];
-      Wants = [ "magpie.target" ];
-      RequiresMountsFor = [
-        "/magpie/apps/unifi"
-      ];
-    };
-    containerConfig = {
-      image = "docker.io/rustdesk/rustdesk-server:latest";
-      exec = "hbbr";
-      volumes = [ "/magpie/apps/rustdesk:/data:U" ];
-      publishPorts = [
-        "21117:21117/tcp"
-        "21119:21119/tcp"
-      ];
-    };
-  }; */
 
+  # random tools
+  services.mullvad-vpn.enable = true;
+  virtualisation.waydroid.enable = true;
 }

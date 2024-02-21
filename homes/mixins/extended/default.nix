@@ -1,0 +1,34 @@
+{ config, pkgs, ... }:
+{
+  home.packages = with pkgs; [
+    age-plugin-yubikey
+    azure-cli
+    btop
+    distrobox
+    dmidecode
+    docker-compose
+    ffmpeg
+    flyctl
+    gnumake
+    hyfetch
+    internetarchive
+    kind
+    kubectl
+    kubectx
+    minikube
+    nmap
+    pciutils
+    powertop
+    restic
+    s-tui
+    simh
+    sqlite
+    tcpdump
+    tshark
+    usbutils
+    ventoy-full
+    whois
+    yubikey-manager
+    openssl
+  ];
+}

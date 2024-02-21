@@ -16,7 +16,17 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
   boot.kernelParams = [ "amdgpu.sg_display=0" ];
+
+  services.power-profiles-daemon.enable = true;
+
+  services.fprintd.enable = true;
   security.pam.services.login.fprintAuth = false;
+
+  # supposedly needed for brightness
+  # https://github.com/NixOS/nixos-hardware/blob/106d3fec43bcea19cb2e061ca02531d54b542ce3/framework/13-inch/common/default.nix
+  hardware.sensor.iio.enable = true;
+
+  services.hardware.bolt.enable = true;
 
   # Network
   networking = {
