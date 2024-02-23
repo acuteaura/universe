@@ -8,6 +8,7 @@
     driSupport32Bit = true; # For 32 bit applications
     extraPackages = with pkgs; [
       libvdpau-va-gl
+      rocmPackages.clr.icd
     ];
   };
 

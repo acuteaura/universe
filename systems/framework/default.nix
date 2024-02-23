@@ -51,6 +51,7 @@
     # https://github.com/NixOS/nixpkgs/pull/287583
     retroarchFull
     unstable.emulationstation-de
+    davinci-resolve
   ];
 
   # broken until everything upgrades electron
