@@ -20,7 +20,7 @@ jobs:
       id: branch
       run: |
         if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-          BRANCH_NAME="update-flake-deps-$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)"
+          BRANCH_NAME="update-flake-deps-$(openssl rand -hex 3)"
         else
           BRANCH_NAME="update-flake-deps-$(date +'%Y%m%d')"
         fi
