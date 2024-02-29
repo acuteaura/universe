@@ -12,7 +12,6 @@
     krita
     libsForQt5.kdenlive
     libsForQt5.filelight
-    libsForQt5.yakuake
     libsForQt5.plasma-thunderbolt
 
 

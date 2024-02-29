@@ -61,21 +61,6 @@
   programs.dconf.enable = true;
 
   environment.systemPackages = with pkgs; [
-    # gui apps
-    firefox
-    gnome.zenity
-    haruna
-    mpv
-    seafile-client
-    signal-desktop
-    slack
-    tailscale
-    telegram-desktop
-    ungoogled-chromium
-    unstable.virt-manager
-    vlc
-    xfce.thunar
-
     # common dependency
     gnome.zenity
   ];

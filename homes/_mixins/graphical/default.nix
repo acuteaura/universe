@@ -1,0 +1,34 @@
+{ config, pkgs, unstable, ... }:
+{
+  home.packages = with pkgs; [
+    appimage-run
+    blender
+    bottles
+    cool-retro-term
+    docker-machine-kvm2
+    easyeffects
+    firefox
+    haruna
+    jetbrains.goland
+    kodi
+    libreoffice-qt
+    obsidian
+    peazip
+    remmina
+    retroarchFull
+    seafile-client
+    shotwell
+    signal-desktop
+    slack
+    strawberry
+    telegram-desktop
+    thunderbird
+    ungoogled-chromium
+    unstable.rustdesk-flutter
+    unstable.vscode
+    virt-manager
+    virt-manager
+    virt-viewer
+    vlc
+  ];
+}

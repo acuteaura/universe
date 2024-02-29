@@ -12,8 +12,8 @@
     quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
     quadlet-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, nixos-generators, quadlet-nix }:
@@ -33,17 +33,18 @@
       nixosConfigurations.framework =
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit pkgs; inherit unstable; };
+          specialArgs = { inherit unstable; inherit pkgs; };
           modules = [
             ./systems/framework
             quadlet-nix.nixosModules.quadlet
           ];
         };
-      homeConfigurations."aurelia" = home-manager.lib.homeManagerConfiguration {
-        pkgs = unstable;
+      homeConfigurations.framework = home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgs;
         modules = [
           ./homes/framework
         ];
+        extraSpecialArgs = { inherit unstable; };
       };
     } // flake-utils.lib.eachDefaultSystem (system:
       let

@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 {
   home.packages = with pkgs; [
+    act
     age-plugin-yubikey
     azure-cli
     btop
@@ -8,7 +9,7 @@
     dmidecode
     docker-compose
     ffmpeg
-    flyctl
+    unstable.flyctl
     gnumake
     hyfetch
     internetarchive

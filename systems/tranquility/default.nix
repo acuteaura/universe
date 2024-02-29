@@ -1,11 +1,11 @@
 { config, pkgs, hashedPassword, ... }:
 {
   imports = [
-    ../mixins/base.nix
-    ../mixins/code-native.nix
-    ../mixins/desktop-base.nix
-    ../mixins/desktop-plasma.nix
-    ../mixins/work.nix
+    ../_mixins/base.nix
+    ../_mixins/code-native.nix
+    ../_mixins/desktop-base.nix
+    ../_mixins/desktop-plasma.nix
+    ../_mixins/work.nix
     ./hardware.nix
     ./tlp.nix
     ./gpu.nix

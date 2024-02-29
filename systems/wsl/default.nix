@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../mixins/base.nix
+    ../_mixins/base.nix
   ];
 
   wsl.enable = true;

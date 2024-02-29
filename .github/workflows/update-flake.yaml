@@ -1,0 +1,62 @@
+name: Update Nix Flake Dependencies and Build NixOS System
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Nix
+      uses: cachix/install-nix-action@v14
+
+    - name: Create new branch
+      id: branch
+      run: |
+        if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+          BRANCH_NAME="update-flake-deps-$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)"
+        else
+          BRANCH_NAME="update-flake-deps-$(date +'%Y%m%d')"
+        fi
+        echo "::set-output name=branch::$BRANCH_NAME"
+        git checkout -b $BRANCH_NAME
+
+    - name: Update flake dependencies
+      id: update
+      run: |
+        nix flake update
+        if git diff --quiet; then
+          echo "::set-output name=changed::false"
+        else
+          echo "::set-output name=changed::true"
+        fi
+
+    - name: Attempt to build NixOS system
+      if: steps.update.outputs.changed == 'true'
+      run: |
+        nix build .#nixosConfigurations.framework.config.system.build.toplevel
+        nix build .#homeConfigurations.framework.activationPackage
+
+    - name: Push changes
+      if: steps.update.outputs.changed == 'true'
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ steps.branch.outputs.branch }}
+        force: true
+
+    - name: Create Pull Request
+      if: steps.update.outputs.changed == 'true'
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ steps.branch.outputs.branch }}
+        title: 'Update Nix Flake Dependencies'
+        body: 'This PR updates the Nix flake dependencies and attempts to build the NixOS system.'
+        reviewers: 'acuteaura'

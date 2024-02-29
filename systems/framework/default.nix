@@ -1,14 +1,14 @@
 { lib, config, pkgs, unstable, ... }:
 {
   imports = [
-    ../mixins/base.nix
-    ../mixins/desktop-base.nix
-    ../mixins/desktop-gnome.nix
-    ../mixins/desktop-plasma.nix
-    ../mixins/games.nix
-    ../mixins/libvirt.nix
-    ../mixins/podman.nix
-    ../mixins/work.nix
+    ../_mixins/base.nix
+    ../_mixins/desktop-base.nix
+    #../_mixins/desktop-gnome.nix
+    ../_mixins/desktop-plasma.nix
+    ../_mixins/games.nix
+    ../_mixins/libvirt.nix
+    ../_mixins/podman.nix
+    ../_mixins/work.nix
     ./amdgpu.nix
     ./hardware.nix
   ];
@@ -50,7 +50,6 @@
     # TODO: move to home-manager once someone merges nix-profile core support
     # https://github.com/NixOS/nixpkgs/pull/287583
     retroarchFull
-    unstable.emulationstation-de
     davinci-resolve
   ];
 
