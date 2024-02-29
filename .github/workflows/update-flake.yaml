@@ -37,11 +37,11 @@ jobs:
           echo "::set-output name=changed::true"
         fi
 
-    - name: Attempt to build NixOS system
+    - name: Attempt to build NixOS system (dry-run)
       if: steps.update.outputs.changed == 'true'
       run: |
-        nix build .#nixosConfigurations.framework.config.system.build.toplevel
-        nix build .#homeConfigurations.framework.activationPackage
+        nix build .#nixosConfigurations.framework.config.system.build.toplevel --dry-run
+        nix build .#homeConfigurations.framework.activationPackage --dry-run
 
     - name: Push changes
       if: steps.update.outputs.changed == 'true'
