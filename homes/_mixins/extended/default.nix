@@ -23,6 +23,7 @@
     restic
     s-tui
     simh
+    socat
     sqlite
     tcpdump
     tshark
