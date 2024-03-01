@@ -46,6 +46,13 @@
         ];
         extraSpecialArgs = { inherit unstable; };
       };
+      homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgs;
+        modules = [
+          ./homes/wsl
+        ];
+        extraSpecialArgs = { inherit unstable; };
+      };
     } // flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs-unstable { config.allowUnfree = true; system = "${system}"; };
