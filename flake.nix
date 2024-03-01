@@ -12,7 +12,7 @@
     quadlet-nix.url = "github:SEIAROTg/quadlet-nix";
     quadlet-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -31,16 +31,16 @@
     in
     {
       nixosConfigurations.framework =
-        nixpkgs.lib.nixosSystem {
+        nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit unstable; inherit pkgs; };
+          specialArgs = { inherit unstable; pkgs = unstable; };
           modules = [
             ./systems/framework
             quadlet-nix.nixosModules.quadlet
           ];
         };
       homeConfigurations.framework = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs;
+        pkgs = unstable;
         modules = [
           ./homes/framework
         ];

@@ -28,7 +28,7 @@
   programs._1password-gui.polkitPolicyOwners = [ "aurelia" ];
 
   services.xserver.displayManager = {
-    defaultSession = "plasmawayland";
+    defaultSession = "plasma";
     gdm = {
       enable = true;
     };
@@ -45,20 +45,27 @@
 
   # locally installed packages
   environment.systemPackages = with pkgs; [
-    # do NOT set to unstable
-    # there's a lot of compiling involved if you do
-    # TODO: move to home-manager once someone merges nix-profile core support
-    # https://github.com/NixOS/nixpkgs/pull/287583
-    retroarchFull
-    davinci-resolve
+
   ];
 
   # broken until everything upgrades electron
   #environment.sessionVariables.NIXOS_OZONE_WL = "1";
   programs.nix-ld.enable = true;
-  environment.sessionVariables.PLASMA_USE_QT_SCALING = "0";
 
   # random tools
   services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
+  services.tailscale.enable = true;
   virtualisation.waydroid.enable = true;
+  
+  services.xrdp.enable = true;
+  services.xrdp.defaultWindowManager = "plasma";
+  services.xrdp.openFirewall = true;
+
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    openFirewall = true;
+  };
 }

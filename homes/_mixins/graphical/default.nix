@@ -11,11 +11,10 @@
     haruna
     jetbrains.goland
     kodi
-    libreoffice-qt
+    onlyoffice-bin
     obsidian
     peazip
     remmina
-    retroarchFull
     seafile-client
     shotwell
     signal-desktop
@@ -24,7 +23,6 @@
     telegram-desktop
     thunderbird
     ungoogled-chromium
-    unstable.rustdesk-flutter
     unstable.vscode
     virt-manager
     virt-manager
