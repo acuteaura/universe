@@ -53,19 +53,18 @@
   programs.nix-ld.enable = true;
 
   # random tools
-  services.mullvad-vpn.enable = true;
-  services.mullvad-vpn.package = pkgs.mullvad-vpn;
-  services.tailscale.enable = true;
-  virtualisation.waydroid.enable = true;
-  
-  services.xrdp.enable = true;
-  services.xrdp.defaultWindowManager = "plasma";
-  services.xrdp.openFirewall = true;
-
-  services.printing.enable = true;
   services.avahi = {
     enable = true;
     nssmdns4 = true;
     openFirewall = true;
   };
+  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
+  services.printing.enable = true;
+  services.tailscale.enable = true;
+  services.xrdp.defaultWindowManager = "plasma";
+  services.xrdp.enable = true;
+  services.xrdp.openFirewall = true;
+  virtualisation.waydroid.enable = true;
+
 }
