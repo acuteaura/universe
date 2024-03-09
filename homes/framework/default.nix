@@ -38,6 +38,10 @@
     insomnia
     floorp
     cryptomator
+    inkscape
+    ryujinx
+    hcloud
+    gparted
   ];
 
 

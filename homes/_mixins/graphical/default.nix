@@ -5,20 +5,23 @@
     blender
     bottles
     cool-retro-term
+    cryptomator
     docker-machine-kvm2
     easyeffects
     firefox
+    floorp
     haruna
+    inkscape
+    insomnia
     jetbrains.goland
     kodi
-    onlyoffice-bin
     obsidian
+    onlyoffice-bin
     peazip
     remmina
     seafile-client
     shotwell
     signal-desktop
-    slack
     strawberry
     telegram-desktop
     thunderbird
@@ -29,4 +32,16 @@
     virt-viewer
     vlc
   ];
+
+  programs.librewolf = {
+    enable = true;
+    # Enable WebGL, cookies and history
+    settings = {
+      "webgl.disabled" = false;
+      "privacy.resistFingerprinting" = false;
+      "privacy.clearOnShutdown.history" = false;
+      "privacy.clearOnShutdown.cookies" = false;
+      "network.cookie.lifetimePolicy" = 0;
+    };
+  };
 }

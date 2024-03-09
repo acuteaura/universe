@@ -8,6 +8,7 @@
     ../_mixins/games.nix
     ../_mixins/libvirt.nix
     ../_mixins/podman.nix
+    ../_mixins/smb-nas.nix
     ../_mixins/work.nix
     ./amdgpu.nix
     ./hardware.nix
@@ -17,8 +18,14 @@
 
   time.timeZone = "Europe/Berlin";
 
+  users.groups.aurelia = {
+    name = "aurelia";
+    gid = 1000;
+  };
+
   users.users.aurelia = {
     isNormalUser = true;
+    group = "aurelia";
     extraGroups = [ "wheel" "libvirtd" ];
     packages = with pkgs; [ ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q" ];
@@ -26,6 +33,13 @@
   };
 
   programs._1password-gui.polkitPolicyOwners = [ "aurelia" ];
+  environment.etc."1password/custom_allowed_browsers" = {
+    text = ''
+      librewolf
+      floorp
+    '';
+    mode = "644";
+  };
 
   services.xserver.displayManager = {
     defaultSession = "plasma";
@@ -45,7 +59,7 @@
 
   # locally installed packages
   environment.systemPackages = with pkgs; [
-
+    qt6.qtimageformats
   ];
 
   # broken until everything upgrades electron
@@ -66,5 +80,4 @@
   services.xrdp.enable = true;
   services.xrdp.openFirewall = true;
   virtualisation.waydroid.enable = true;
-
 }
