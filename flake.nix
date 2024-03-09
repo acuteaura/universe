@@ -2,8 +2,7 @@
   description = "aurelia's universe flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11";
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -11,7 +10,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, flake-utils }:
+  outputs = { self, nixpkgs, home-manager, flake-utils }:
     let
       system = "x86_64-linux";
       config = {
@@ -31,16 +30,13 @@
         inherit system;
         inherit config;
       };
-      unstable = import nixpkgs-unstable {
-        inherit system;
-        inherit config;
-      };
+      unstable = pkgs;
     in
     {
       nixosConfigurations.framework =
-        nixpkgs-unstable.lib.nixosSystem {
+        nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit unstable; pkgs = unstable; };
+          specialArgs = { inherit pkgs; inherit unstable; };
           modules = [
             ./systems/framework
           ];
@@ -61,7 +57,7 @@
       };
     } // flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs-unstable { config.allowUnfree = true; system = "${system}"; };
+        pkgs = import nixpkgs { config.allowUnfree = true; system = "${system}"; };
       in
       {
         formatter = pkgs.nixpkgs-fmt;
