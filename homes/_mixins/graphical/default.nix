@@ -9,15 +9,12 @@
     docker-machine-kvm2
     easyeffects
     firefox
-    floorp
     haruna
     inkscape
     insomnia
-    jetbrains.goland
     kodi
     obsidian
-    onlyoffice-bin
-    peazip
+    libreoffice
     remmina
     seafile-client
     shotwell

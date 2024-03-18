@@ -1,14 +1,11 @@
 { config, pkgs, ... }:
 {
-  services.xserver.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   environment.systemPackages = with pkgs; [
     kio-fuse
-    krita
-    kdePackages.kdenlive
-    kdePackages.filelight
     kdePackages.plasma-thunderbolt
-
+    kdePackages.kio
 
     # required for system info
     clinfo

@@ -35,13 +35,20 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    insomnia
-    floorp
     cryptomator
-    inkscape
-    ryujinx
-    hcloud
     gparted
+    guestfs-tools
+    hcloud
+    inkscape
+    insomnia
+    kdePackages.filelight
+    kdePackages.kdeconnect-kde
+    kdePackages.kdenlive
+    kdePackages.koko
+    krita
+    quassel
+    ryujinx
+    mkvtoolnix
   ];
 
 

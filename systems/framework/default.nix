@@ -55,7 +55,7 @@
   };
 
   # tiebreaking required if you have gnome+kde
-  programs.ssh.askPassword = lib.mkForce "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
+  #programs.ssh.askPassword = lib.mkForce "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
 
   # locally installed packages
   environment.systemPackages = with pkgs; [

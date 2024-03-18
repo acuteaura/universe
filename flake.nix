@@ -21,7 +21,6 @@
           "steam"
           "steam-original"
           "steam-run"
-          "goland"
           "obsidian"
           "vscode"
         ];
