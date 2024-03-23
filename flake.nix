@@ -14,16 +14,7 @@
     let
       system = "x86_64-linux";
       config = {
-        allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
-          "1password"
-          "1password-gui"
-          "1password-cli"
-          "steam"
-          "steam-original"
-          "steam-run"
-          "obsidian"
-          "vscode"
-        ];
+        allowUnfree = true;
       };
       pkgs = import nixpkgs {
         inherit system;

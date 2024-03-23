@@ -9,8 +9,9 @@
     dmidecode
     docker-compose
     ffmpeg
-    unstable.flyctl
     gnumake
+    guestfs-tools
+    hcloud
     hyfetch
     internetarchive
     kind
@@ -18,6 +19,7 @@
     kubectx
     minikube
     nmap
+    openssl
     pciutils
     powertop
     restic
@@ -27,10 +29,10 @@
     sqlite
     tcpdump
     tshark
+    unstable.flyctl
     usbutils
     ventoy-full
     whois
     yubikey-manager
-    openssl
   ];
 }

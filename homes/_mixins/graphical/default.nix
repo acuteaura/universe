@@ -28,6 +28,14 @@
     virt-manager
     virt-viewer
     vlc
+
+    jetbrains.goland
+    jetbrains.idea-community
+    jetbrains.idea-ultimate
+    jetbrains.mps
+    jetbrains.pycharm-professional
+    jetbrains.rust-rover
+    jetbrains.webstorm
   ];
 
   programs.librewolf = {

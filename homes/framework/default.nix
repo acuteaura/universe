@@ -37,8 +37,6 @@
 
     cryptomator
     gparted
-    guestfs-tools
-    hcloud
     inkscape
     insomnia
     kdePackages.filelight
@@ -46,9 +44,9 @@
     kdePackages.kdenlive
     kdePackages.koko
     krita
+    mkvtoolnix
     quassel
     ryujinx
-    mkvtoolnix
   ];
 
 
