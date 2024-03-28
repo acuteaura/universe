@@ -30,7 +30,7 @@
       nixosConfigurations.framework =
         nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit pkgs; inherit unstable; };
+          specialArgs = { pkgs = unstable; inherit unstable; };
           modules = [
             ./systems/framework
           ];
