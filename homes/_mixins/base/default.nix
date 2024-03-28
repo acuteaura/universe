@@ -11,7 +11,6 @@
     hyfetch
     jq
     ncdu
-    neovim
     openssh
     openssl
     p7zip
@@ -24,7 +23,7 @@
     yq-go
     zstd
 
-    nvim
+    neovim
     efm-langserver
   ];
 }
