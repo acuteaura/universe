@@ -2,7 +2,11 @@
 {
   imports = [
     ../_mixins/base
-    ../_mixins/extended
+    ../_mixins/containers
+    ../_mixins/devops
+    ../_mixins/hwtools
+    ../_mixins/kube
+    ../_mixins/security
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

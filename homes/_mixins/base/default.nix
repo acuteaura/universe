@@ -2,25 +2,29 @@
 {
   home.packages = with pkgs; [
     age
+    btop
     chezmoi
     dig
     direnv
-    efm-langserver
     fish
-    gh
     git
-    go
+    hyfetch
     jq
     ncdu
     neovim
-    nixpkgs-fmt
+    openssh
+    openssl
     p7zip
     rclone
+    restic
+    socat
     starship
-    stress
     tmux
     whois
     yq-go
     zstd
+
+    nvim
+    efm-langserver
   ];
 }

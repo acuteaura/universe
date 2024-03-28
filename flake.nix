@@ -2,15 +2,16 @@
   description = "aurelia's universe flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager-unstable.url = "github:nix-community/home-manager";
+    home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager-unstable, flake-utils }:
     let
       system = "x86_64-linux";
       config = {
@@ -20,28 +21,31 @@
         inherit system;
         inherit config;
       };
-      unstable = pkgs;
+      unstable = import nixpkgs-unstable {
+        inherit system;
+        inherit config;
+      };
     in
     {
       nixosConfigurations.framework =
-        nixpkgs.lib.nixosSystem {
+        nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit pkgs; inherit unstable; };
           modules = [
             ./systems/framework
           ];
         };
-      homeConfigurations.framework = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.framework = home-manager-unstable.lib.homeManagerConfiguration {
         pkgs = unstable;
         modules = [
           ./homes/framework
         ];
         extraSpecialArgs = { inherit unstable; };
       };
-      homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.full-shell = home-manager-unstable.lib.homeManagerConfiguration {
         pkgs = pkgs;
         modules = [
-          ./homes/wsl
+          ./homes/full-shell
         ];
         extraSpecialArgs = { inherit unstable; };
       };

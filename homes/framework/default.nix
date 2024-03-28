@@ -2,7 +2,12 @@
 {
   imports = [
     ../_mixins/base
-    ../_mixins/extended
+    ../_mixins/containers
+    ../_mixins/devops
+    ../_mixins/hwtools
+    ../_mixins/kube
+    ../_mixins/security
+    
     ../_mixins/graphical
   ];
 
@@ -36,9 +41,12 @@
     # '')
 
     cryptomator
+    ffmpeg
     gparted
+    guestfs-tools
     inkscape
     insomnia
+    internetarchive
     kdePackages.filelight
     kdePackages.kdeconnect-kde
     kdePackages.kdenlive
@@ -47,6 +55,8 @@
     mkvtoolnix
     quassel
     ryujinx
+    simh
+    ventoy-full
   ];
 
 
