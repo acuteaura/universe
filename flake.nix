@@ -16,6 +16,9 @@
       system = "x86_64-linux";
       config = {
         allowUnfree = true;
+        permittedInsecurePackages = [
+          "python3.11-django-3.1.14"
+        ];
       };
       pkgs = import nixpkgs {
         inherit system;

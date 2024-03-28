@@ -13,8 +13,9 @@
     inkscape
     insomnia
     kodi
-    obsidian
     libreoffice
+    localsend
+    obsidian
     remmina
     seafile-client
     shotwell

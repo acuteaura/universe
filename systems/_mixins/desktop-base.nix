@@ -63,6 +63,7 @@
   environment.systemPackages = with pkgs; [
     # common dependency
     gnome.zenity
+    gparted
   ];
 
   fonts.packages = with pkgs; [

@@ -40,13 +40,22 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
+    archivebox
     cryptomator
+<<<<<<< Updated upstream
     ffmpeg
+=======
+    foliate
+>>>>>>> Stashed changes
     gparted
     guestfs-tools
     inkscape
     insomnia
+<<<<<<< Updated upstream
     internetarchive
+=======
+    kdePackages.arianna
+>>>>>>> Stashed changes
     kdePackages.filelight
     kdePackages.kdeconnect-kde
     kdePackages.kdenlive
@@ -54,6 +63,7 @@
     krita
     mkvtoolnix
     quassel
+    ripgrep
     ryujinx
     simh
     ventoy-full
