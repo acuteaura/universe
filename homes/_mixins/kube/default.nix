@@ -5,5 +5,7 @@
     kubectl
     kubectx
     minikube
+    kubernetes-helm
+    helm-docs
   ];
 }

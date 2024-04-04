@@ -42,20 +42,14 @@
 
     archivebox
     cryptomator
-<<<<<<< Updated upstream
     ffmpeg
-=======
     foliate
->>>>>>> Stashed changes
     gparted
     guestfs-tools
     inkscape
     insomnia
-<<<<<<< Updated upstream
     internetarchive
-=======
     kdePackages.arianna
->>>>>>> Stashed changes
     kdePackages.filelight
     kdePackages.kdeconnect-kde
     kdePackages.kdenlive
@@ -66,6 +60,7 @@
     ripgrep
     ryujinx
     simh
+    sqlitebrowser
     ventoy-full
   ];
 
