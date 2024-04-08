@@ -49,7 +49,6 @@
     inkscape
     insomnia
     internetarchive
-    kdePackages.arianna
     kdePackages.filelight
     kdePackages.kdeconnect-kde
     kdePackages.kdenlive
@@ -57,7 +56,6 @@
     krita
     mkvtoolnix
     quassel
-    ripgrep
     ryujinx
     simh
     sqlitebrowser

@@ -1,11 +1,12 @@
 { config, pkgs, unstable, ... }:
 {
   home.packages = with pkgs; [
+    helm-docs
     kind
     kubectl
     kubectx
-    minikube
+    kubelogin
     kubernetes-helm
-    helm-docs
+    minikube
   ];
 }

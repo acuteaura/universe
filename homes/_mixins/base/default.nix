@@ -16,6 +16,7 @@
     p7zip
     rclone
     restic
+    ripgrep
     socat
     starship
     tmux

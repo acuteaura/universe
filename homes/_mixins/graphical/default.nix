@@ -3,12 +3,11 @@
   home.packages = with pkgs; [
     appimage-run
     blender
-    bottles
     cool-retro-term
     cryptomator
-    docker-machine-kvm2
     easyeffects
     firefox
+    handbrake
     haruna
     inkscape
     insomnia
@@ -25,7 +24,6 @@
     thunderbird
     ungoogled-chromium
     unstable.vscode
-    virt-manager
     virt-manager
     virt-viewer
     vlc
