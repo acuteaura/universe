@@ -6,10 +6,15 @@
     ./hardware-config.nix
   ];
 
+  boot.loader.grub.enable = true;
+  boot.loader.grub.devices = ["/dev/sda1"];
+  boot.initrd.systemd.enable = true;
+
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
   networking.hostName = "thassa";
   networking.domain = "";
+  networking.hostId = "05c670f9";
   users.users.root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q'' ];
 
   users.users.aurelia = {
