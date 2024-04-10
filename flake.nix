@@ -14,7 +14,7 @@
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager-unstable, flake-utils }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, flake-utils }:
     let
       system = "x86_64-linux";
       config = {
