@@ -38,6 +38,14 @@
             ./systems/framework
           ];
         };
+      nixosConfigurations.thassa =
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit pkgs; inherit unstable; };
+          modules = [
+            ./systems/thassa
+          ];
+        };
       homeConfigurations.framework = home-manager-unstable.lib.homeManagerConfiguration {
         pkgs = unstable;
         modules = [

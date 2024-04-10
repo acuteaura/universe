@@ -2,15 +2,13 @@
 {
   imports = [
     ../_mixins/base.nix
-    ../_mixins/podman.nix
     
     ./hardware-config.nix
   ];
 
-  # migrated from infect
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
-  networking.hostName = "iroas";
+  networking.hostName = "thassa";
   networking.domain = "";
   users.users.root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q'' ];
 
