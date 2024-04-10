@@ -7,7 +7,7 @@
   ];
 
   boot.loader.grub.enable = true;
-  boot.loader.grub.devices = ["/dev/sda1"];
+  boot.loader.grub.devices = ["/dev/sda"];
   boot.initrd.systemd.enable = true;
 
   boot.tmp.cleanOnBoot = true;
