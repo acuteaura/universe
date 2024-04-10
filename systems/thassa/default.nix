@@ -6,10 +6,6 @@
     ./hardware-config.nix
   ];
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.devices = ["/dev/sda"];
-  boot.initrd.systemd.enable = true;
-
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
   networking.hostName = "thassa";
