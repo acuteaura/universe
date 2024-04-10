@@ -53,7 +53,7 @@
         ];
         extraSpecialArgs = { inherit unstable; };
       };
-      homeConfigurations.full-shell = home-manager-unstable.lib.homeManagerConfiguration {
+      homeConfigurations.full-shell = home-manager.lib.homeManagerConfiguration {
         pkgs = pkgs;
         modules = [
           ./homes/full-shell
