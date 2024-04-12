@@ -17,6 +17,7 @@
     rclone
     restic
     ripgrep
+    semgrep
     socat
     starship
     tmux
