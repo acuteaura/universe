@@ -2,7 +2,8 @@
 
 {
   imports =
-    [ (modulesPath + "/profiles/qemu-guest.nix")
+    [
+      (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
   boot.loader = {
@@ -20,22 +21,26 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "thassa/root";
+    {
+      device = "thassa/root";
       fsType = "zfs";
     };
 
   fileSystems."/nix" =
-    { device = "thassa/nix";
+    {
+      device = "thassa/nix";
       fsType = "zfs";
     };
 
   fileSystems."/home" =
-    { device = "thassa/home";
+    {
+      device = "thassa/home";
       fsType = "zfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/E313-504D";
+    {
+      device = "/dev/disk/by-uuid/E313-504D";
       fsType = "vfat";
     };
 

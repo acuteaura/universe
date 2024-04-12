@@ -2,7 +2,7 @@
 {
   imports = [
     ../_mixins/base.nix
-    
+
     ./hardware-config.nix
   ];
 
@@ -11,7 +11,7 @@
   networking.hostName = "thassa";
   networking.domain = "";
   networking.hostId = "05c670f9";
-  users.users.root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q'' ];
+  users.users.root.openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q'' ];
 
   users.users.aurelia = {
     isNormalUser = true;
