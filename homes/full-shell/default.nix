@@ -1,12 +1,12 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ../_mixins/base
-    ../_mixins/containers
-    ../_mixins/devops
-    ../_mixins/hwtools
-    ../_mixins/kube
-    ../_mixins/security
+    ../_modules/base.nix
+    ../_modules/containers.nix
+    ../_modules/devops.nix
+    ../_modules/hwtools.nix
+    ../_modules/kube.nix
+    ../_modules/security.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -24,7 +24,6 @@
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    openssh
   ];
 
   # Let Home Manager install and manage itself.

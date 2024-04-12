@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../_mixins/base.nix
+    ../_modules/base.nix
 
     ./hardware-config.nix
   ];

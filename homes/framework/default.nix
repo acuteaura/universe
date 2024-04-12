@@ -1,14 +1,14 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ../_mixins/base
-    ../_mixins/containers
-    ../_mixins/devops
-    ../_mixins/hwtools
-    ../_mixins/kube
-    ../_mixins/security
+    ../_modules/base.nix
+    ../_modules/containers.nix
+    ../_modules/devops.nix
+    ../_modules/hwtools.nix
+    ../_modules/kube.nix
+    ../_modules/security.nix
 
-    ../_mixins/graphical
+    ../_modules/graphical.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

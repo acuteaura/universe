@@ -1,15 +1,15 @@
 { lib, config, pkgs, unstable, ... }:
 {
   imports = [
-    ../_mixins/base.nix
-    ../_mixins/desktop-base.nix
-    #../_mixins/desktop-gnome.nix
-    ../_mixins/desktop-plasma.nix
-    ../_mixins/games.nix
-    ../_mixins/libvirt.nix
-    ../_mixins/podman.nix
-    ../_mixins/smb-nas.nix
-    ../_mixins/work.nix
+    ../_modules/base.nix
+    ../_modules/desktop-base.nix
+    #../_modules/desktop-gnome.nix
+    ../_modules/desktop-plasma.nix
+    ../_modules/games.nix
+    ../_modules/libvirt.nix
+    ../_modules/podman.nix
+    ../_modules/smb-nas.nix
+    ../_modules/work.nix
     ./amdgpu.nix
     ./hardware.nix
   ];
