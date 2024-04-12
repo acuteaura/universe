@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, ... }:
 {
   home.packages = with pkgs; [
     appimage-run
@@ -23,7 +23,7 @@
     telegram-desktop
     thunderbird
     ungoogled-chromium
-    unstable.vscode
+    vscode
     virt-manager
     virt-viewer
     vlc

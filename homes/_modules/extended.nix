@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, ... }:
 {
   home.packages = with pkgs; [
     act
@@ -30,7 +30,7 @@
     sqlite
     tcpdump
     tshark
-    unstable.flyctl
+    flyctl
     usbutils
     ventoy-full
     whois

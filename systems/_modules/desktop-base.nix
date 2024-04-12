@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, ... }:
 {
   # Yep, it's a desktop!
   # Enable the X11 windowing system.

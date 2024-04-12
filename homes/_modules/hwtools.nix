@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, ... }:
 {
   home.packages = with pkgs; [
     age-plugin-yubikey

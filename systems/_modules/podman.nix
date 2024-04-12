@@ -1,10 +1,10 @@
-{ pkgs, unstable, ... }:
+{ pkgs, ... }:
 {
   virtualisation.containers.enable = true;
   virtualisation.podman = {
     enable = true;
 
-    package = unstable.podman;
+    package = pkgs.podman;
     dockerSocket.enable = true;
   };
 

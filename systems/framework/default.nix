@@ -1,4 +1,4 @@
-{ lib, config, pkgs, unstable, ... }:
+{ lib, config, pkgs, ... }:
 {
   imports = [
     ../_modules/base.nix
