@@ -26,7 +26,7 @@
   users.users.aurelia = {
     isNormalUser = true;
     group = "aurelia";
-    extraGroups = [ "wheel" "libvirtd" ];
+    extraGroups = [ "wheel" "libvirtd" "docker" ];
     packages = with pkgs; [ ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q" ];
     shell = pkgs.fish;
@@ -41,11 +41,9 @@
     mode = "644";
   };
 
-  services.xserver.displayManager = {
+  services.xserver.displayManager.gdm.enable = true;
+  services.displayManager = {
     defaultSession = "plasma";
-    gdm = {
-      enable = true;
-    };
     sddm = {
       # broken with fish
       # https://github.com/NixOS/nixpkgs/issues/287646
