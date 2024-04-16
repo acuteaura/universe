@@ -55,6 +55,7 @@
     kdePackages.koko
     krita
     mkvtoolnix
+    qmk
     quassel
     ryujinx
     simh

@@ -7,7 +7,7 @@
     ../_modules/desktop-plasma.nix
     ../_modules/games.nix
     ../_modules/libvirt.nix
-    ../_modules/podman.nix
+    ../_modules/containers.nix
     ../_modules/smb-nas.nix
     ../_modules/work.nix
     ./amdgpu.nix

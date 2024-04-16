@@ -2,10 +2,12 @@
 {
   home.packages = with pkgs; [
     age
+    binwalk
     btop
     chezmoi
     dig
     direnv
+    file
     fish
     git
     hyfetch
