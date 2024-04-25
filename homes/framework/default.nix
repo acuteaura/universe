@@ -61,6 +61,7 @@
     simh
     sqlitebrowser
     ventoy-full
+    headsetcontrol
   ];
 
 
