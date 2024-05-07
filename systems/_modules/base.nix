@@ -29,13 +29,18 @@
   environment.systemPackages = with pkgs; [
     fish
 
-    htop
-    wget
-    pv
+    curl
     dig
     git
+    htop
+    ncdu
     neovim
+    pv
+    restic
+    socat
     tmux
+    wget
+    zstd
   ];
 
   programs.fish.enable = true;

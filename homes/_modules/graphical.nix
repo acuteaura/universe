@@ -16,18 +16,11 @@
     handbrake
     haruna
     inkscape
-    inkscape
-    insomnia
     insomnia
     kdePackages.filelight
     kdePackages.kdeconnect-kde
     kdePackages.kdenlive
     kdePackages.koko
-    kodi
-    krita
-    libreoffice
-    localsend
-    mkvtoolnix
     obsidian
     quassel
     remmina

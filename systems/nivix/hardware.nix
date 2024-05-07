@@ -15,7 +15,7 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "thunderbolt" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = [ "amdgpu.sg_display=0" ];
+  boot.kernelParams = [ "amdgpu.sg_display=0" "transparent_hugepage=never" ];
 
   services.power-profiles-daemon.enable = true;
 
@@ -31,26 +31,26 @@
   # Network
   networking = {
     hostId = "758fce08";
-    hostName = "framework";
+    hostName = "nivix";
   };
 
   boot.zfs.devNodes = "/dev/disk/by-label/";
 
   fileSystems."/" =
     {
-      device = "framework/root";
+      device = "nivix/root";
       fsType = "zfs";
     };
 
   fileSystems."/home" =
     {
-      device = "framework/home";
+      device = "nivix/home";
       fsType = "zfs";
     };
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/90A3-C2DE";
+      device = "/dev/disk/by-label/boot";
       fsType = "vfat";
     };
 

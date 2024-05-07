@@ -18,7 +18,6 @@
     opentofu
     pciutils
     powertop
-    restic
     s-tui
     socat
     sqlite

@@ -37,8 +37,8 @@ jobs:
     - name: Attempt to build NixOS system (dry-run)
       if: steps.update.outputs.changed == 'true'
       run: |
-        nix build .#nixosConfigurations.framework.config.system.build.toplevel --dry-run
-        nix build .#homeConfigurations.framework.activationPackage --dry-run
+        nix build .#nixosConfigurations.nivix.config.system.build.toplevel --dry-run
+        nix build .#homeConfigurations.nivix.activationPackage --dry-run
 
     - name: Push changes
       if: steps.update.outputs.changed == 'true'

@@ -41,7 +41,7 @@
 
     in
     {
-      nixosConfigurations.framework =
+      nixosConfigurations.nivix =
         nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
@@ -49,7 +49,7 @@
             unstable = unstable-x86_64-linux;
           };
           modules = [
-            ./systems/framework
+            ./systems/nivix
           ];
         };
       nixosConfigurations.thassa =
@@ -63,10 +63,10 @@
             ./systems/thassa
           ];
         };
-      homeConfigurations.framework = home-manager-unstable.lib.homeManagerConfiguration {
+      homeConfigurations.nivix = home-manager-unstable.lib.homeManagerConfiguration {
         pkgs = unstable-x86_64-linux;
         modules = [
-          ./homes/framework
+          ./homes/nivix
         ];
         extraSpecialArgs = { unstable = unstable-x86_64-linux; };
       };

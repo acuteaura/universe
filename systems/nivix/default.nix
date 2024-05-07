@@ -36,7 +36,6 @@
   environment.etc."1password/custom_allowed_browsers" = {
     text = ''
       librewolf
-      floorp
     '';
     mode = "644";
   };
@@ -187,10 +186,13 @@
   };
   services.mullvad-vpn.enable = true;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
-  services.printing.enable = true;
-  services.tailscale.enable = true;
+
+  
   services.xrdp.defaultWindowManager = "plasma";
   services.xrdp.enable = true;
   services.xrdp.openFirewall = true;
-  virtualisation.waydroid.enable = true;
+
+  services.printing.enable = true;
+  services.tailscale.enable = true;
+  virtualisation.vmware.host.enable = true;
 }
