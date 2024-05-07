@@ -194,5 +194,5 @@
 
   services.printing.enable = true;
   services.tailscale.enable = true;
-  virtualisation.vmware.host.enable = true;
+  #virtualisation.vmware.host.enable = true;
 }
