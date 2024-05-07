@@ -26,7 +26,7 @@
   users.users.aurelia = {
     isNormalUser = true;
     group = "aurelia";
-    extraGroups = [ "wheel" "libvirtd" "docker" ];
+    extraGroups = [ "wheel" "libvirtd" "docker" "incus-admin" ];
     packages = with pkgs; [ ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q" ];
     shell = pkgs.fish;
@@ -194,5 +194,6 @@
 
   services.printing.enable = true;
   services.tailscale.enable = true;
+  virtualisation.incus.enable = true;
   #virtualisation.vmware.host.enable = true;
 }
