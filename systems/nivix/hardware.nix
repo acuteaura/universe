@@ -32,6 +32,7 @@
   networking = {
     hostId = "758fce08";
     hostName = "nivix";
+    nftables.enable = true;
   };
 
   boot.zfs.devNodes = "/dev/disk/by-label/";
