@@ -2,7 +2,6 @@
 {
   home.packages = with pkgs; [
     act
-    age-plugin-yubikey
     azure-cli
     btop
     distrobox
@@ -14,10 +13,6 @@
     hcloud
     hyfetch
     internetarchive
-    kind
-    kubectl
-    kubectx
-    minikube
     nmap
     openssl
     opentofu
@@ -25,15 +20,11 @@
     powertop
     restic
     s-tui
-    simh
     socat
     sqlite
     tcpdump
     tshark
     flyctl
-    usbutils
-    ventoy-full
     whois
-    yubikey-manager
   ];
 }

@@ -13,9 +13,6 @@
     hyfetch
     jq
     ncdu
-    openssh
-    openssl
-    p7zip
     rclone
     restic
     ripgrep

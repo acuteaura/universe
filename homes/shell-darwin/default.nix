@@ -6,20 +6,12 @@
     ../_modules/base.nix
     ../_modules/containers.nix
     ../_modules/devops.nix
-    ../_modules/hwtools.nix
     ../_modules/kube.nix
     ../_modules/security.nix
-    ../_modules/graphical.nix
   ];
 
+  # Home Manager needs a bit of information about you and the paths it should
+  # manage.
   home.username = "aurelia";
-  home.homeDirectory = "/home/aurelia";
-
-  home.packages = with pkgs; [
-    archivebox
-    guestfs-tools
-    qmk
-    simh
-    ventoy-full
-  ];
+  home.homeDirectory = "/Users/aurelia";
 }

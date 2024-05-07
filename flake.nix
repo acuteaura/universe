@@ -16,27 +16,38 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, flake-utils }:
     let
-      system = "x86_64-linux";
       config = {
         allowUnfree = true;
         permittedInsecurePackages = [
           "python3.11-django-3.1.14"
         ];
       };
-      pkgs = import nixpkgs {
-        inherit system;
+      pkgs-x86_64-linux = import nixpkgs {
+        system = "x86_64-linux";
         inherit config;
       };
-      unstable = import nixpkgs-unstable {
-        inherit system;
+      unstable-x86_64-linux = import nixpkgs-unstable {
+        system = "x86_64-linux";
         inherit config;
       };
+      pkgs-aarch64-darwin = import nixpkgs {
+        system = "aarch64-darwin";
+        inherit config;
+      };
+      unstable-aarch64-darwin = import nixpkgs-unstable {
+        system = "aarch64-darwin";
+        inherit config;
+      };
+
     in
     {
       nixosConfigurations.framework =
         nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { pkgs = unstable; inherit unstable; };
+          specialArgs = {
+            pkgs = unstable-x86_64-linux;
+            unstable = unstable-x86_64-linux;
+          };
           modules = [
             ./systems/framework
           ];
@@ -44,24 +55,34 @@
       nixosConfigurations.thassa =
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit pkgs; inherit unstable; };
+          specialArgs = {
+            pkgs = pkgs-x86_64-linux;
+            unstable = unstable-x86_64-linux;
+          };
           modules = [
             ./systems/thassa
           ];
         };
       homeConfigurations.framework = home-manager-unstable.lib.homeManagerConfiguration {
-        pkgs = unstable;
+        pkgs = unstable-x86_64-linux;
         modules = [
           ./homes/framework
         ];
-        extraSpecialArgs = { inherit unstable; };
+        extraSpecialArgs = { unstable = unstable-x86_64-linux; };
       };
-      homeConfigurations.full-shell = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs;
+      homeConfigurations.shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgs-x86_64-linux;
         modules = [
-          ./homes/full-shell
+          ./homes/shell-linux
         ];
-        extraSpecialArgs = { inherit unstable; };
+        extraSpecialArgs = { unstable = unstable-x86_64-linux; };
+      };
+      homeConfigurations.shell-aarch64-darwin = home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgs-aarch64-darwin;
+        modules = [
+          ./homes/shell-darwin
+        ];
+        extraSpecialArgs = { unstable = unstable-x86_64-linux; };
       };
     } // flake-utils.lib.eachDefaultSystem (system:
       let
@@ -69,7 +90,6 @@
       in
       {
         formatter = pkgs.nixpkgs-fmt;
-
         packages.apisix-ingress-controller = pkgs.callPackage ./packages/apisix-ingress-controller.nix { };
       }
     );

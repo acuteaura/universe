@@ -1,3 +1,6 @@
+# Only use this set of packages on NixOS with a matching branch!
+# Mesa has become very reliant on matching versions...
+
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
@@ -5,28 +8,42 @@
     blender
     cool-retro-term
     cryptomator
+    cryptomator
     easyeffects
     firefox
+    foliate
+    gparted
     handbrake
     haruna
     inkscape
+    inkscape
     insomnia
+    insomnia
+    kdePackages.filelight
+    kdePackages.kdeconnect-kde
+    kdePackages.kdenlive
+    kdePackages.koko
     kodi
+    krita
     libreoffice
     localsend
+    mkvtoolnix
     obsidian
+    quassel
     remmina
+    ryujinx
     seafile-client
     shotwell
     signal-desktop
+    sqlitebrowser
     strawberry
     telegram-desktop
     thunderbird
     ungoogled-chromium
-    vscode
     virt-manager
     virt-viewer
     vlc
+    vscode
 
     jetbrains.goland
     jetbrains.idea-community
