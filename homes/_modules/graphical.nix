@@ -17,8 +17,6 @@
     haruna
     inkscape
     insomnia
-    kdePackages.filelight
-    kdePackages.kdeconnect-kde
     kdePackages.kdenlive
     kdePackages.koko
     obsidian
@@ -32,7 +30,7 @@
     strawberry
     telegram-desktop
     thunderbird
-    ungoogled-chromium
+    chromium
     virt-manager
     virt-viewer
     vlc

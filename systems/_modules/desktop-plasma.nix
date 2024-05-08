@@ -6,6 +6,7 @@
     kio-fuse
     kdePackages.plasma-thunderbolt
     kdePackages.kio
+    kdePackages.plasma-vault
 
     # required for system info
     clinfo
