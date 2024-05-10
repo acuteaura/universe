@@ -4,12 +4,12 @@
 
 buildGoModule rec {
   pname = "apisix-ingress-controller";
-  version = "1.7.1";
-  rev = "ceefeb1e2547100679556a1763d9820ec04f6381";
+  version = "1.8.2";
+  rev = "57b5aee6e7b9d386337ffe439d2e59f2d4ea0fe5";
 
   src = builtins.fetchGit {
     url = "git@github.com:apache/apisix-ingress-controller.git";
-    ref = "refs/tags/${version}";
+    ref = "refs/tags/v${version}";
     rev = "${rev}";
   };
 
@@ -18,10 +18,10 @@ buildGoModule rec {
   ldflags = [
     "-X github.com/apache/apisix-ingress-controller/pkg/version._buildVersion=${version}"
     "-X github.com/apache/apisix-ingress-controller/pkg/version._buildGitRevision=${rev}"
-    "-X github.com/apache/apisix-ingress-controller/pkg/version._buildOS=unknown"
+    "-X github.com/apache/apisix-ingress-controller/pkg/version._buildOS=nixDerivationStrict"
   ];
 
-  vendorHash = "sha256-kyU8izqI9kweiXsDxlEfZTiWKODnaccq1xC5nV06+/c=";
+  vendorHash = "sha256-A3Yh4KybsveKxW7RXHHTZJHqql2QYClNlQam8tpYXb0=";
 
   CGO_ENABLED = 0;
 
