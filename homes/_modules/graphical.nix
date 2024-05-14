@@ -19,6 +19,8 @@
     insomnia
     kdePackages.kdenlive
     kdePackages.koko
+    kdePackages.krecorder
+    kdePackages.neochat
     obsidian
     quassel
     remmina

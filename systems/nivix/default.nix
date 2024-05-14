@@ -187,7 +187,7 @@
   services.mullvad-vpn.enable = true;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
-  
+
   services.xrdp.defaultWindowManager = "plasma";
   services.xrdp.enable = true;
   services.xrdp.openFirewall = true;

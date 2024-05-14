@@ -4,8 +4,11 @@
 
   environment.systemPackages = with pkgs; [
     kio-fuse
-    kdePackages.plasma-thunderbolt
+    kdePackages.filelight
+    kdePackages.kdeconnect-kde
     kdePackages.kio
+    kdePackages.partitionmanager
+    kdePackages.plasma-thunderbolt
     kdePackages.plasma-vault
 
     # required for system info

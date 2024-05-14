@@ -12,79 +12,72 @@
 
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    lix.url = "git+https://git@git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1";
+    lix.flake = false;
+
+    lix-module.url = "git+https://git.lix.systems/lix-project/nixos-module";
+    lix-module.inputs.lix.follows = "lix";
+    lix-module.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, flake-utils }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, ... }:
     let
-      config = {
-        allowUnfree = true;
-        permittedInsecurePackages = [
-          "python3.11-django-3.1.14"
-        ];
+      nixpkgsConfig = {
+        nixpkgs.config = {
+          allowUnfree = true;
+          permittedInsecurePackages = [
+            "python3.11-django-3.1.14"
+          ];
+        };
       };
-      pkgs-x86_64-linux = import nixpkgs {
-        system = "x86_64-linux";
-        inherit config;
-      };
-      unstable-x86_64-linux = import nixpkgs-unstable {
-        system = "x86_64-linux";
-        inherit config;
-      };
-      pkgs-aarch64-darwin = import nixpkgs {
-        system = "aarch64-darwin";
-        inherit config;
-      };
-      unstable-aarch64-darwin = import nixpkgs-unstable {
-        system = "aarch64-darwin";
-        inherit config;
-      };
-
     in
     {
       nixosConfigurations.nivix =
         nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {
-            pkgs = unstable-x86_64-linux;
-            unstable = unstable-x86_64-linux;
-          };
+          specialArgs = { };
           modules = [
             ./systems/nivix
+            inputs.lix-module.nixosModules.default
+            nixpkgsConfig
+            home-manager-unstable.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.aurelia = import ./homes/nivix;
+            }
           ];
         };
       nixosConfigurations.thassa =
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {
-            pkgs = pkgs-x86_64-linux;
-            unstable = unstable-x86_64-linux;
-          };
+          specialArgs = { };
           modules = [
             ./systems/thassa
+            nixpkgsConfig
           ];
         };
       homeConfigurations.nivix = home-manager-unstable.lib.homeManagerConfiguration {
-        pkgs = unstable-x86_64-linux;
+        pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
         modules = [
           ./homes/nivix
+          nixpkgsConfig
         ];
-        extraSpecialArgs = { unstable = unstable-x86_64-linux; };
       };
       homeConfigurations.shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs-x86_64-linux;
         modules = [
           ./homes/shell-linux
+          nixpkgsConfig
         ];
-        extraSpecialArgs = { unstable = unstable-x86_64-linux; };
       };
       homeConfigurations.shell-aarch64-darwin = home-manager.lib.homeManagerConfiguration {
-        pkgs = pkgs-aarch64-darwin;
         modules = [
           ./homes/shell-darwin
+          nixpkgsConfig
         ];
-        extraSpecialArgs = { unstable = unstable-x86_64-linux; };
       };
-    } // flake-utils.lib.eachDefaultSystem (system:
+    } // inputs.flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { config.allowUnfree = true; system = "${system}"; };
       in
