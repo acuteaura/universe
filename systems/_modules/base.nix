@@ -29,8 +29,10 @@
   environment.systemPackages = with pkgs; [
     fish
 
+    btrfs-progs
     curl
     dig
+    e2fsprogs
     git
     htop
     ncdu

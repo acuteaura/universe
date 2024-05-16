@@ -7,8 +7,10 @@
       enable = true;
       efiSupport = true;
       device = "nodev";
+      configurationLimit = 16;
     };
     efi.canTouchEfiVariables = true;
+
   };
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;

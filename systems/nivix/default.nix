@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, age-plugin-op, ... }:
 {
   imports = [
     ../_modules/base.nix
@@ -57,6 +57,7 @@
   # locally installed packages
   environment.systemPackages = with pkgs; [
     qt6.qtimageformats
+    age-plugin-op
   ];
 
   # broken until everything upgrades electron
@@ -195,5 +196,5 @@
   services.printing.enable = true;
   services.tailscale.enable = true;
   virtualisation.incus.enable = true;
-  #virtualisation.vmware.host.enable = true;
+  virtualisation.vmware.host.enable = true;
 }

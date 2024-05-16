@@ -30,21 +30,12 @@
     signal-desktop
     sqlitebrowser
     strawberry
-    telegram-desktop
     thunderbird
     chromium
     virt-manager
     virt-viewer
     vlc
     vscode
-
-    jetbrains.goland
-    jetbrains.idea-community
-    jetbrains.idea-ultimate
-    jetbrains.mps
-    jetbrains.pycharm-professional
-    jetbrains.rust-rover
-    jetbrains.webstorm
   ];
 
   programs.librewolf = {

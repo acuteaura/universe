@@ -36,7 +36,7 @@
       nixosConfigurations.nivix =
         nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { };
+          specialArgs = { age-plugin-op = self.packages.x86_64-linux.age-plugin-op; };
           modules = [
             ./systems/nivix
             inputs.lix-module.nixosModules.default
@@ -84,6 +84,7 @@
       {
         formatter = pkgs.nixpkgs-fmt;
         packages.apisix-ingress-controller = pkgs.callPackage ./packages/apisix-ingress-controller.nix { };
+        packages.age-plugin-op = pkgs.callPackage ./packages/age-plugin-op.nix { };
       }
     );
 }
