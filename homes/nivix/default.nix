@@ -10,6 +10,7 @@
     ../_modules/kube.nix
     ../_modules/security.nix
     ../_modules/graphical.nix
+    ../_modules/jetbrains.nix
   ];
 
   home.username = "aurelia";
