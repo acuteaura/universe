@@ -66,14 +66,16 @@
         ];
       };
       homeConfigurations.shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
         modules = [
           ./homes/shell-linux
           nixpkgsConfig
         ];
       };
-      homeConfigurations.shell-aarch64-darwin = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.shell-aarch64-darwin = home-manager-unstable.lib.homeManagerConfiguration {
+        pkgs = nixpkgs-unstable.legacyPackages.aarch64-darwin;
         modules = [
-          ./homes/shell-darwin
+          ./homes/shell-darwins
           nixpkgsConfig
         ];
       };
