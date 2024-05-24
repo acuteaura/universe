@@ -75,7 +75,7 @@
       homeConfigurations.shell-aarch64-darwin = home-manager-unstable.lib.homeManagerConfiguration {
         pkgs = nixpkgs-unstable.legacyPackages.aarch64-darwin;
         modules = [
-          ./homes/shell-darwins
+          ./homes/shell-darwin
           nixpkgsConfig
         ];
       };
