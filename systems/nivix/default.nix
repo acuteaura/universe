@@ -196,5 +196,11 @@
   services.printing.enable = true;
   services.tailscale.enable = true;
   virtualisation.incus.enable = true;
+
   virtualisation.vmware.host.enable = true;
+  virtualisation.vmware.host.extraConfig = ''
+    # Allow unsupported device's OpenGL and Vulkan acceleration for guest vGPU
+    mks.gl.allowUnsupportedDrivers = "TRUE"
+    mks.vk.allowUnsupportedDevices = "TRUE"
+  '';
 }

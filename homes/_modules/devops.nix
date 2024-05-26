@@ -1,15 +1,16 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
+    act
     azure-cli
     flyctl
     gh
-    hcloud
-    opentofu
-    act
-    nixpkgs-fmt
     gnumake
     go
+    hcloud
+    litestream
+    nixpkgs-fmt
+    opentofu
     sqlite
   ];
 }
