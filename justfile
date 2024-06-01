@@ -17,3 +17,6 @@ push:
 update:
     cd {{universe_repo}}; nix flake update
     @just push
+
+darwin-hm:
+    nix run home-manager/master -- switch --flake {{universe_repo}}#shell-aarch64-darwin

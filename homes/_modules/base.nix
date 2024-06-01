@@ -5,6 +5,7 @@
     binwalk
     btop
     chezmoi
+    coreutils
     dig
     direnv
     file
