@@ -71,5 +71,6 @@
     ibm-plex
     inter
     victor-mono
+    nerdfonts
   ];
 }

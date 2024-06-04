@@ -60,6 +60,8 @@
     age-plugin-op
   ];
 
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
+
   # broken until everything upgrades electron
   #environment.sessionVariables.NIXOS_OZONE_WL = "1";
   programs.nix-ld.enable = true;

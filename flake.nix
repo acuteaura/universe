@@ -2,12 +2,12 @@
   description = "aurelia's universe flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager-unstable.url = "github:nix-community/home-manager";
@@ -18,7 +18,7 @@
 
     lix-module.url = "git+https://git.lix.systems/lix-project/nixos-module";
     lix-module.inputs.lix.follows = "lix";
-    lix-module.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    lix-module.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, ... }:
@@ -34,14 +34,14 @@
     in
     {
       nixosConfigurations.nivix =
-        nixpkgs-unstable.lib.nixosSystem {
+        nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { age-plugin-op = self.packages.x86_64-linux.age-plugin-op; };
           modules = [
             ./systems/nivix
             inputs.lix-module.nixosModules.default
             nixpkgsConfig
-            home-manager-unstable.nixosModules.home-manager
+            home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -59,7 +59,7 @@
           ];
         };
       homeConfigurations.nivix = home-manager-unstable.lib.homeManagerConfiguration {
-        pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
         modules = [
           ./homes/nivix
           nixpkgsConfig

@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
     appimage-run
     blender
+    brave
     cool-retro-term
     cryptomator
     cryptomator
@@ -36,6 +37,7 @@
     virt-viewer
     vlc
     vscode
+    wezterm
   ];
 
   programs.librewolf = {
