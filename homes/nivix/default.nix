@@ -11,6 +11,7 @@
     ../_modules/security.nix
     ../_modules/graphical.nix
     ../_modules/jetbrains.nix
+    ../_modules/linux.nix
   ];
 
   home.username = "aurelia";

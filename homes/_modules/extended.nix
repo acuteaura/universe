@@ -4,7 +4,6 @@
     act
     azure-cli
     btop
-    distrobox
     dmidecode
     docker-compose
     ffmpeg

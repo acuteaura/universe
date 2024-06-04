@@ -9,6 +9,7 @@
     ../_modules/hwtools.nix
     ../_modules/kube.nix
     ../_modules/security.nix
+    ../_modules/linux.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
