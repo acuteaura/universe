@@ -10,7 +10,7 @@
     grub = {
       enable = true;
       efiSupport = false;
-      device = "/dev/sda";
+      device = "/dev/vda";
     };
   };
   boot.initrd.systemd.enable = true;
