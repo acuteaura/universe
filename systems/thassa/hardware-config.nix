@@ -10,6 +10,7 @@
     grub = {
       enable = true;
       efiSupport = true;
+      device = "nodev";
     };
   };
   boot.initrd.systemd.enable = true;
