@@ -9,8 +9,7 @@
   boot.loader = {
     grub = {
       enable = true;
-      efiSupport = false;
-      device = "/dev/vda";
+      efiSupport = true;
     };
   };
   boot.initrd.systemd.enable = true;
