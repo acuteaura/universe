@@ -18,10 +18,6 @@
   home.homeDirectory = "/home/aurelia";
 
   home.packages = with pkgs; [
-    archivebox
-    guestfs-tools
-    qmk
-    simh
-    ventoy-full
+
   ];
 }
