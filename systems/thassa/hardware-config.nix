@@ -9,8 +9,8 @@
   boot.loader = {
     grub = {
       enable = true;
-      efiSupport = false;
-      device = "/dev/sda";
+      efiSupport = true;
+      device = "nodev";
     };
   };
   boot.initrd.systemd.enable = true;
