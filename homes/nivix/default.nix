@@ -9,7 +9,7 @@
     ../_modules/hwtools.nix
     ../_modules/kube.nix
     ../_modules/security.nix
-    ../_modules/graphical.nix
+    ../_modules/graphical-base.nix
     ../_modules/jetbrains.nix
     ../_modules/linux.nix
   ];
