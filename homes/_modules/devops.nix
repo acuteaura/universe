@@ -11,6 +11,7 @@
     litestream
     nixpkgs-fmt
     opentofu
+    pulumi-bin
     sqlite
   ];
 }
