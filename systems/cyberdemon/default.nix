@@ -25,10 +25,11 @@
 
   users.groups.aurelia = {
     name = "aurelia";
-    gid = 1000;
+    gid = 1069;
   };
 
   users.users.aurelia = {
+    uid = 1069;
     isNormalUser = true;
     group = "aurelia";
     extraGroups = [ "wheel" "networkmanager" "input" "lp" "scanner" "dialout" "docker"];
