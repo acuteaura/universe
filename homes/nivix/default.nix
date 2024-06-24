@@ -10,6 +10,7 @@
     ../_modules/kube.nix
     ../_modules/security.nix
     ../_modules/graphical-base.nix
+    ../_modules/graphical-personal.nix
     ../_modules/jetbrains.nix
     ../_modules/linux.nix
   ];

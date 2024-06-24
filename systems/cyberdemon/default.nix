@@ -3,11 +3,11 @@
   imports = [
     ../_modules/base.nix
     ../_modules/desktop-base.nix
-    ../_modules/desktop-plasma.nix
+    ../_modules/desktop-gnome.nix
+    ../_modules/games.nix
     ../_modules/containers.nix
     ../_modules/smb-nas.nix
     ../_modules/work.nix
-    ../_modules/vmware-guest.nix
     ./amdgpu.nix
     ./hardware.nix
   ];
@@ -15,6 +15,13 @@
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
   time.timeZone = "Europe/Berlin";
+
+  # Network
+  networking = {
+    hostId = "93515df2";
+    hostName = "cyberdemon";
+    nftables.enable = true;
+  };
 
   users.groups.aurelia = {
     name = "aurelia";
@@ -24,23 +31,25 @@
   users.users.aurelia = {
     isNormalUser = true;
     group = "aurelia";
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "input" "lp" "scanner" "dialout" "docker"];
     packages = with pkgs; [ ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q" ];
-    shell = pkgs.fish;
+    shell = pkgs.bash;
   };
 
-  programs._1password-gui.polkitPolicyOwners = [ "aurelia" ];
-  environment.etc."1password/custom_allowed_browsers" = {
-    text = ''
-      librewolf
-    '';
-    mode = "644";
+  users.users.sapphiccode = {
+    isNormalUser = true;
+    description = "Cassandra";
+    extraGroups = [ "wheel" "networkmanager" "input" "lp" "scanner" "dialout" "docker" ];
+    shell = pkgs.bash;
   };
+
+  programs.fish.enable = true;
+  programs._1password-gui.polkitPolicyOwners = [ "sapphiccode" "aurelia" ];
 
   services.xserver.displayManager.gdm.enable = true;
   services.displayManager = {
-    defaultSession = "plasma";
+    defaultSession = "gnome";
     sddm = {
       # broken with fish
       # https://github.com/NixOS/nixpkgs/issues/287646
@@ -67,9 +76,6 @@
   };
   services.mullvad-vpn.enable = true;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
-
-  services.printing.enable = true;
-  services.tailscale.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

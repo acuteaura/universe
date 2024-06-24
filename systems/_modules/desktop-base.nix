@@ -26,6 +26,7 @@
   services.pcscd.enable = true;
   services.gvfs.enable = true;
   services.tumbler.enable = true;
+  services.tailscale.enable = true;
 
   programs._1password.enable = true;
   programs._1password-gui = {
@@ -53,4 +54,31 @@
     victor-mono
     nerdfonts
   ];
+
+  hardware.sane.enable = true;
+  hardware.sane.extraBackends = with pkgs; [
+    epsonscan2
+  ];
+  
+  services.printing.enable = true;
+  services.printing.drivers = with pkgs; [
+    epson-escpr
+    epson-escpr2
+  ];
+  
+  security.pam.services.sudo.nodelay = true;
+  security.pam.services.sudo.failDelay = {
+    enable = true;
+    delay = 200000;
+  };
+
+  environment.etc."1password/custom_allowed_browsers" = {
+    text = ''
+      librewolf
+      vivaldi-bin
+    '';
+    mode = "644";
+  };
+
+  services.hardware.bolt.enable = true;
 }

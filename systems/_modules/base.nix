@@ -31,6 +31,7 @@
 
     btrfs-progs
     curl
+    cryptsetup
     dig
     e2fsprogs
     git

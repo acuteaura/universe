@@ -18,6 +18,7 @@
     signal-desktop
     sqlitebrowser
     strawberry
+    syncthingtray
     thunderbird
     chromium
     virt-manager

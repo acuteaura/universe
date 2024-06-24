@@ -49,6 +49,22 @@
             }
           ];
         };
+      nixosConfigurations.cyberdemon =
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { age-plugin-op = self.packages.x86_64-linux.age-plugin-op; };
+          modules = [
+            ./systems/cyberdemon
+            inputs.lix-module.nixosModules.default
+            nixpkgsConfig
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.aurelia = import ./homes/nivix;
+            }
+          ];
+        };
       nixosConfigurations.thassa =
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";

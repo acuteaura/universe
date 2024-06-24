@@ -21,6 +21,7 @@
     semgrep
     socat
     starship
+    syncthing
     tmux
     whois
     yq-go

@@ -7,6 +7,7 @@
     archivebox
     blender
     cool-retro-term
+    discord
     foliate
     guestfs-tools
     handbrake
