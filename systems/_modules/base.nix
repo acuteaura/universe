@@ -7,8 +7,7 @@
     enable = true;
   };
   services.resolved.enable = true;
-  # begone, eater of wor-- dns packets
-  #services.tailscale.enable = true;
+  services.tailscale.enable = true;
 
   programs.nix-index = {
     enable = true;
