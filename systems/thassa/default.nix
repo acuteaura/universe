@@ -21,6 +21,20 @@
     shell = pkgs.fish;
   };
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    openssl
+    libcap
+  ];
+
+  networking.firewall = {
+    enable = true;
+    allowedUDPPorts = [ 2302 27016 ];
+  };
+
+  programs._1password.enable = true;
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It's perfectly fine and recommended to leave
