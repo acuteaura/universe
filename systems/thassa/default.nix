@@ -2,6 +2,7 @@
 {
   imports = [
     ../_modules/base.nix
+    ../_modules/jetbrains.nix
 
     ./hardware-config.nix
   ];
