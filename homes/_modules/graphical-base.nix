@@ -11,7 +11,7 @@
     firefox
     haruna
     inkscape
-    insomnia    
+    insomnia
     kdePackages.koko
     kdePackages.krecorder
     obsidian

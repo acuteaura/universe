@@ -4,7 +4,7 @@
 
   environment.systemPackages = with pkgs; [
     qt6.qtimageformats
-    
+
     kio-fuse
     kdePackages.filelight
     kdePackages.kdeconnect-kde

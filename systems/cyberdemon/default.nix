@@ -32,7 +32,7 @@
     uid = 1069;
     isNormalUser = true;
     group = "aurelia";
-    extraGroups = [ "wheel" "networkmanager" "input" "lp" "scanner" "dialout" "docker"];
+    extraGroups = [ "wheel" "networkmanager" "input" "lp" "scanner" "dialout" "docker" ];
     packages = with pkgs; [ ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q" ];
     shell = pkgs.bash;

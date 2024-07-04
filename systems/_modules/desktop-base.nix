@@ -58,13 +58,13 @@
   hardware.sane.extraBackends = with pkgs; [
     epsonscan2
   ];
-  
+
   services.printing.enable = true;
   services.printing.drivers = with pkgs; [
     epson-escpr
     epson-escpr2
   ];
-  
+
   security.pam.services.sudo.nodelay = true;
   security.pam.services.sudo.failDelay = {
     enable = true;
