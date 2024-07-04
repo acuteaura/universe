@@ -34,6 +34,8 @@
     allowedUDPPorts = [ 2302 27016 ];
   };
 
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
+
   programs._1password.enable = true;
 
   # This value determines the NixOS release from which the default
