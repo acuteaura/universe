@@ -61,7 +61,7 @@
           modules = [
             ./systems/thassa
             nixpkgsConfig
-            quadlet.nixosModules.quadlet
+            inputs.quadlet.nixosModules.quadlet
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
