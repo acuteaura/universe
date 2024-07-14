@@ -10,6 +10,8 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
+  boot.loader.grub.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_49594015";
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/e8b1686b-5fc5-4e23-acfb-593631588b23";
       fsType = "ext4";
