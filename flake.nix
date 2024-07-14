@@ -20,7 +20,7 @@
     lix-module.inputs.lix.follows = "lix";
     lix-module.inputs.nixpkgs.follows = "nixpkgs";
 
-    inputs.quadlet = {
+    quadlet = {
       url = "github:SEIAROTg/quadlet-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
