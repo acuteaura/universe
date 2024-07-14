@@ -9,7 +9,6 @@
     cool-retro-term
     discord
     foliate
-    guestfs-tools
     handbrake
     kdePackages.kdenlive
     qmk

@@ -8,7 +8,6 @@
     docker-compose
     ffmpeg
     gnumake
-    guestfs-tools
     hcloud
     hyfetch
     internetarchive
