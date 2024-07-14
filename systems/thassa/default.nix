@@ -1,8 +1,9 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
+    ./containers/keycloak.nix
+
     ../_modules/base.nix
-    ../_modules/jetbrains.nix
 
     ./hardware-config.nix
   ];
@@ -10,8 +11,6 @@
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
   networking.hostName = "thassa";
-  networking.domain = "";
-  networking.hostId = "05c670f9";
   users.users.root.openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q'' ];
 
   users.users.aurelia = {
@@ -20,18 +19,6 @@
     packages = with pkgs; [ ];
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q" ];
     shell = pkgs.fish;
-  };
-
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc
-    openssl
-    libcap
-  ];
-
-  networking.firewall = {
-    enable = true;
-    allowedUDPPorts = [ 2302 27016 ];
   };
 
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;

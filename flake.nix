@@ -19,6 +19,11 @@
     lix-module.url = "git+https://git.lix.systems/lix-project/nixos-module";
     lix-module.inputs.lix.follows = "lix";
     lix-module.inputs.nixpkgs.follows = "nixpkgs";
+
+    inputs.quadlet = {
+      url = "github:SEIAROTg/quadlet-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, ... }:
@@ -49,22 +54,6 @@
             }
           ];
         };
-      nixosConfigurations.cyberdemon =
-        nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { age-plugin-op = self.packages.x86_64-linux.age-plugin-op; };
-          modules = [
-            ./systems/cyberdemon
-            inputs.lix-module.nixosModules.default
-            nixpkgsConfig
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.aurelia = import ./homes/nivix;
-            }
-          ];
-        };
       nixosConfigurations.thassa =
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -72,6 +61,13 @@
           modules = [
             ./systems/thassa
             nixpkgsConfig
+            quadlet.nixosModules.quadlet
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.aurelia = import ./homes/shell-linux;
+            }
           ];
         };
       homeConfigurations.nivix = home-manager-unstable.lib.homeManagerConfiguration {
@@ -101,7 +97,6 @@
       in
       {
         formatter = pkgs.nixpkgs-fmt;
-        packages.apisix-ingress-controller = pkgs.callPackage ./packages/apisix-ingress-controller.nix { };
         packages.age-plugin-op = pkgs.callPackage ./packages/age-plugin-op.nix { };
       }
     );
