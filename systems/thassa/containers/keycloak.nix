@@ -9,8 +9,8 @@
 
   virtualisation.quadlet.containers.keycloak-postgres = {
     containerConfig = {
-      name = "keycloak_postgres";
-      hostname = "keycloak_postgres";
+      name = "keycloak-postgres";
+      hostname = "keycloak-postgres";
       image = "docker.io/library/postgres:16.3";
       volumes = [
         "/data/keycloak/postgres:/var/lib/postgresql/data:U"
@@ -36,7 +36,7 @@
       image = "quay.io/aurelias/keycloak@sha256:555bb616194c50cf2123519be93c514727dcdacdd5984abe27cfe58ce939603d";
       environments = {
         "KC_DB" = "postgres";
-        "KC_DB_URL_HOST" = "keycloak_postgres";
+        "KC_DB_URL_HOST" = "keycloak-postgres";
         "KC_DB_URL_DATABASE" = "postgres";
         "KC_DB_USERNAME" = "postgres";
         "KC_HOSTNAME" = "id.nullvoid.space";
