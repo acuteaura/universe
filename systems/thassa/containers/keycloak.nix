@@ -1,7 +1,7 @@
 { ... }:
 {
-  virtualisation.quadlet.networks.keycloak = {};
-  
+  virtualisation.quadlet.networks.keycloak = { };
+
   fileSystems."/data/keycloak" = {
     device = "/dev/disk/by-id/scsi-0HC_Volume_101019958";
     fsType = "ext4";
@@ -18,11 +18,11 @@
       environmentFiles = [
         "/etc/keycloak.env"
       ];
-      networks = ["keycloak.network"];
+      networks = [ "keycloak.network" ];
     };
     unitConfig = {
-      After = ["network.target"];
-      Wants = ["network.target"];
+      After = [ "network.target" ];
+      Wants = [ "network.target" ];
       RequiresMountsFor = [
         "/data/keycloak"
       ];
@@ -46,11 +46,14 @@
       environmentFiles = [
         "/etc/keycloak.env"
       ];
-      networks = ["keycloak.network"];
+      networks = [ "keycloak.network" ];
+      publishPorts = [
+        "127.0.0.1:8080:8080"
+      ];
     };
     unitConfig = {
-      After = ["network.target"];
-      Wants = ["network.target"];
+      After = [ "network.target" ];
+      Wants = [ "network.target" ];
     };
   };
 }

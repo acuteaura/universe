@@ -2,7 +2,8 @@
 
 {
   imports =
-    [ (modulesPath + "/profiles/qemu-guest.nix")
+    [
+      (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod" ];
@@ -13,12 +14,14 @@
   boot.loader.grub.device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_49594015";
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/e8b1686b-5fc5-4e23-acfb-593631588b23";
+    {
+      device = "/dev/disk/by-uuid/e8b1686b-5fc5-4e23-acfb-593631588b23";
       fsType = "ext4";
     };
 
   fileSystems."/efi" =
-    { device = "systemd-1";
+    {
+      device = "systemd-1";
       fsType = "autofs";
     };
 

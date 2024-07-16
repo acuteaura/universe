@@ -5,6 +5,7 @@
 
     ../_modules/base.nix
 
+    ./nginx.nix
     ./hardware-config.nix
   ];
 
@@ -26,7 +27,7 @@
   programs._1password.enable = true;
 
   # nixos sucks tbh
-  networking.firewall.interfaces."podman+".allowedUDPPorts = [53 5353];
+  networking.firewall.interfaces."podman+".allowedUDPPorts = [ 53 5353 ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
