@@ -36,7 +36,7 @@
       image = "quay.io/aurelias/keycloak@sha256:60bc127834e07c790113959d0642752b4fec7adc6262739c4fa65d4daab9c87b";
       environments = {
         "KC_DB" = "postgres";
-        "KC_DB_URL_HOST" = "keycloak_postgres";
+        "KC_DB_URL_HOST" = "keycloak_postgress";
         "KC_DB_URL_DATABASE" = "postgres";
         "KC_DB_USERNAME" = "postgres";
         "KC_HOSTNAME" = "id.nullvoid.space";
