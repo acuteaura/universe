@@ -19,4 +19,9 @@
       };
     };
   };
+
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "past.tree1213@cognitive-antivirus.net";
+  };
 }
