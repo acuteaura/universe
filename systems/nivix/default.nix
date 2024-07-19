@@ -6,6 +6,7 @@
     ../_modules/desktop-plasma.nix
     ../_modules/containers.nix
     ../_modules/smb-nas.nix
+    ../_modules/rustdesk.nix
     ../_modules/work.nix
     ../_modules/vmware-guest.nix
     ./amdgpu.nix
@@ -55,6 +56,7 @@
   # locally installed packages
   environment.systemPackages = with pkgs; [
     age-plugin-op
+    waynergy
   ];
 
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;

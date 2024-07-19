@@ -27,6 +27,11 @@
   services.gvfs.enable = true;
   services.tumbler.enable = true;
 
+  networking.firewall = {
+    trustedInterfaces = ["tailscale0"];
+    allowedUDPPorts = [ config.services.tailscale.port ];
+  };
+
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
