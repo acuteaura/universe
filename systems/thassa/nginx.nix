@@ -43,10 +43,6 @@
           ${realIpsFromList cfipv4}
           ${realIpsFromList cfipv6}
           real_ip_header CF-Connecting-IP;
-
-          ${allowFromList cfipv4}
-          ${allowFromList cfipv6}
-          deny all;
         '';
       };
     };
