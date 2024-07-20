@@ -32,25 +32,16 @@
       virtualHosts."id.nullvoid.space" = {
         forceSSL = true;
         enableACME = true;
-        locations."/realms/master" = {
-          proxyPass = "http://127.0.0.1:8080";
-          proxyWebsockets = true;
-          extraConfig = ''
-            client_max_body_size 256M;
-            allow 89.1.7.228;
-            deny all;
-          '';
-        };
-        locations."/admin" = {
-          proxyPass = "http://127.0.0.1:8080";
-          proxyWebsockets = true;
-          extraConfig = ''
-            client_max_body_size 256M;
-            allow 89.1.7.228;
-            deny all;
-          '';
-        };
         locations."/" = {
+          proxyPass = "http://127.0.0.1:8080";
+          proxyWebsockets = true;
+          extraConfig = ''
+            client_max_body_size 256M;
+            allow 89.1.7.228;
+            deny all;
+          '';
+        };
+        locations."/realms/nvs" = {
           proxyPass = "http://127.0.0.1:8080";
           proxyWebsockets = true;
           extraConfig = ''
