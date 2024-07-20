@@ -23,5 +23,6 @@
     tshark
     flyctl
     whois
+    yt-dlp
   ];
 }
