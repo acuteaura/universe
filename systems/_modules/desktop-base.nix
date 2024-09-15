@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 {
   # Yep, it's a desktop!
   # Enable the X11 windowing system.
@@ -49,6 +49,7 @@
     # common dependency
     gnome.zenity
     gparted
+    #unstable.zed-editor
   ];
 
   fonts.packages = with pkgs; [

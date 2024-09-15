@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, unstable, ... }:
 {
   imports = [
     ../base.nix
@@ -19,6 +19,6 @@
   home.homeDirectory = "/home/aurelia";
 
   home.packages = with pkgs; [
-
+    pgadmin4-desktopmode
   ];
 }

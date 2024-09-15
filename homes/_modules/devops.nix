@@ -8,7 +8,6 @@
     gnumake
     go
     hcloud
-    litestream
     nixpkgs-fmt
     opentofu
     sqlite

@@ -13,13 +13,6 @@
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    lix.url = "git+https://git@git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1";
-    lix.flake = false;
-
-    lix-module.url = "git+https://git.lix.systems/lix-project/nixos-module";
-    lix-module.inputs.lix.follows = "lix";
-    lix-module.inputs.nixpkgs.follows = "nixpkgs";
-
     quadlet = {
       url = "github:SEIAROTg/quadlet-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,21 +29,23 @@
           ];
         };
       };
+      unstable = import nixpkgs-unstable { config.allowUnfree = true; system = "x86_64-linux"; };
     in
     {
       nixosConfigurations.nivix =
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { age-plugin-op = self.packages.x86_64-linux.age-plugin-op; };
+          specialArgs = { age-plugin-op = self.packages.x86_64-linux.age-plugin-op; inherit unstable;  };
           modules = [
             ./systems/nivix
-            inputs.lix-module.nixosModules.default
+            #inputs.lix-module.nixosModules.default
             nixpkgsConfig
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.aurelia = import ./homes/nivix;
+              home-manager.extraSpecialArgs = { inherit unstable; };
             }
           ];
         };

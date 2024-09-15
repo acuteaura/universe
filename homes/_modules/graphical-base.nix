@@ -1,7 +1,7 @@
 # Only use this set of packages on NixOS with a matching branch!
 # Mesa has become very reliant on matching versions...
 
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 {
   home.packages = with pkgs; [
     appimage-run
@@ -26,5 +26,6 @@
     vlc
     vscode
     wezterm
+    unstable.zed-editor
   ];
 }
