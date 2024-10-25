@@ -37,7 +37,6 @@
           proxyWebsockets = true;
           extraConfig = ''
             client_max_body_size 256M;
-            allow 89.1.7.228;
             deny all;
           '';
         };
@@ -46,6 +45,11 @@
           proxyWebsockets = true;
           extraConfig = ''
             client_max_body_size 256M;
+          '';
+        };
+        locations."/realms/nvs/metrics" = {
+          extraConfig = ''
+            deny all;
           '';
         };
         extraConfig = ''
