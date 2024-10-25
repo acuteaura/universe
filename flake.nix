@@ -62,6 +62,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.aurelia = import ./homes/shell-linux;
+              home-manager.extraSpecialArgs = { inherit unstable; };
             }
           ];
         };
