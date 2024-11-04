@@ -12,6 +12,7 @@
     nixpkgs-fmt
     opentofu
     sqlite
+    unstable.python3
 
     unstable.eslint
     unstable.vue-language-server

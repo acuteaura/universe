@@ -30,6 +30,7 @@
         };
       };
       unstable = import nixpkgs-unstable { config.allowUnfree = true; system = "x86_64-linux"; };
+      unstable-darwin = import nixpkgs-unstable { config.allowUnfree = true; system = "aarch64-darwin"; };
     in
     {
       nixosConfigurations.nivix =
@@ -82,6 +83,7 @@
       };
       homeConfigurations.shell-aarch64-darwin = home-manager-unstable.lib.homeManagerConfiguration {
         pkgs = nixpkgs-unstable.legacyPackages.aarch64-darwin;
+        extraSpecialArgs = { unstable = unstable-darwin; };
         modules = [
           ./homes/shell-darwin
           nixpkgsConfig
