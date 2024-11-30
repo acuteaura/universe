@@ -33,7 +33,7 @@
     containerConfig = {
       name = "keycloak";
       hostname = "keycloak";
-      image = "quay.io/aurelias/keycloak:ae6017f21e07ab615623dd12c974309897768644@sha256:2670368af5169deaf5f50cdb4c5c67d5108db87f0f174cd0105998d50141ce2e";
+      image = "quay.io/aurelias/keycloak:66bd54a7c00fe6060af6e5efea9bfa26836307db";
       environments = {
         "KC_DB" = "postgres";
         "KC_DB_URL_HOST" = "keycloak-postgres";
