@@ -33,13 +33,13 @@
     containerConfig = {
       name = "keycloak";
       hostname = "keycloak";
-      image = "quay.io/aurelias/keycloak:8a112a198f5b8f92ea92bff66f158472c8db663b";
+      image = "quay.io/aurelias/keycloak:007bcccdf2b61dafca462a1ea9d592a0272366be";
       environments = {
         "KC_DB" = "postgres";
         "KC_DB_URL_HOST" = "keycloak-postgres";
         "KC_DB_URL_DATABASE" = "postgres";
         "KC_DB_USERNAME" = "postgres";
-        "KC_HOSTNAME" = "id.nullvoid.space";
+        "KC_HOSTNAME" = "https:/id.nullvoid.space";
         "KEYCLOAK_ADMIN" = "root";
         "JAVA_OPTS_APPEND" = "-Djava.net.preferIPv4Stack=false -Djava.net.preferIPv6Addresses=true";
       };

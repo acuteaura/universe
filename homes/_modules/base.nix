@@ -14,7 +14,6 @@
     hyfetch
     jq
     just
-    ncdu
     rclone
     restic
     ripgrep
