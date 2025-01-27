@@ -39,7 +39,6 @@
           specialArgs = { age-plugin-op = self.packages.x86_64-linux.age-plugin-op; inherit unstable; };
           modules = [
             ./systems/nivix
-            #inputs.lix-module.nixosModules.default
             nixpkgsConfig
             home-manager.nixosModules.home-manager
             {
@@ -67,13 +66,6 @@
             }
           ];
         };
-      homeConfigurations.nivix = home-manager-unstable.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [
-          ./homes/nivix
-          nixpkgsConfig
-        ];
-      };
       homeConfigurations.shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         modules = [

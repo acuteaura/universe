@@ -1,5 +1,5 @@
 universe_repo := "~/Code/universe"
-date := `date -u --rfc-3339=seconds`
+date := `date -u +"%Y-%m-%d %H:%M:%S%z"`
 
 default:
     @just --list
