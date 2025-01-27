@@ -1,4 +1,4 @@
-universe_repo := "~/Code/universe"
+universe_repo := "~/Projects/universe"
 date := `date -u +"%Y-%m-%d %H:%M:%S%z"`
 
 default:
