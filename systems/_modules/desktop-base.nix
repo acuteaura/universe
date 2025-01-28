@@ -46,7 +46,7 @@
 
   environment.systemPackages = with pkgs; [
     # common dependency
-    gnome.zenity
+    zenity
     gparted
     #unstable.zed-editor
   ];
