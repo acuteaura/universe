@@ -6,7 +6,6 @@
   home.packages = with pkgs; [
     appimage-run
     brave
-    cryptomator
     easyeffects
     firefox
     haruna
