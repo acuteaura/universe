@@ -1,4 +1,4 @@
-{ lib, config, pkgs, age-plugin-op, ... }:
+{ lib, config, pkgs, ... }:
 {
   imports = [
     ../_modules/base.nix
@@ -55,7 +55,6 @@
 
   # locally installed packages
   environment.systemPackages = with pkgs; [
-    age-plugin-op
     waynergy
   ];
 

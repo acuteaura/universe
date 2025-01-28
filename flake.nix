@@ -37,7 +37,7 @@
       nixosConfigurations.nivix =
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { age-plugin-op = self.packages.x86_64-linux.age-plugin-op; inherit unstable; };
+          specialArgs = { inherit unstable; };
           modules = [
             ./systems/nivix
             nixpkgsConfig
@@ -88,7 +88,6 @@
       in
       {
         formatter = pkgs.nixpkgs-fmt;
-        packages.age-plugin-op = pkgs.callPackage ./packages/age-plugin-op.nix { };
       }
     );
 }
