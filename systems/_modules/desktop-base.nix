@@ -7,7 +7,6 @@
   services.xserver.desktopManager.xterm.enable = false;
 
   # Enable desktop hardware features
-  sound.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;

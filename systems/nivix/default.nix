@@ -13,7 +13,7 @@
     ./hardware.nix
   ];
 
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_6_13;
 
   time.timeZone = "Europe/Berlin";
 
