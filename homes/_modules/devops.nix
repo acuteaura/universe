@@ -12,6 +12,7 @@
     nixpkgs-fmt
     opentofu
     sqlite
+    flyctl
 
     unstable.eslint
     unstable.vue-language-server

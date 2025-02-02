@@ -19,9 +19,7 @@
     s-tui
     socat
     sqlite
-    tcpdump
-    tshark
-    flyctl
+
     whois
     yt-dlp
   ];

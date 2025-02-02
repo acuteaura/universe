@@ -2,7 +2,6 @@
 {
   home.packages = with pkgs; [
     age
-    binwalk
     btop
     chezmoi
     coreutils
@@ -28,5 +27,16 @@
 
     neovim
     efm-langserver
+  ] ++ lib.optionals (pkgs.stdenv.isDarwin) [
+    bash
+    coreutils
+    curl
+    gnugrep
+    gnused
+    qemu
+  ] ++ lib.optionals (pkgs.stdenv.isLinux) [
+    # broken dependency on darwin: sleuthkit
+    # ...because nixpkgs doesn't give a shit about darwin
+    binwalk
   ];
 }

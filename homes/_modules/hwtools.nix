@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
+
+  ] ++ lib.optionals (pkgs.stdenv.isLinux) [
     dmidecode
     pciutils
     powertop

@@ -8,7 +8,6 @@
     ../_modules/devops.nix
     ../_modules/kube.nix
     ../_modules/security.nix
-    ../_modules/darwin.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
