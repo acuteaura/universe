@@ -8,6 +8,7 @@
     kubectx
     kubelogin
     kubernetes-helm
+    kustomize
     minikube
   ];
 }
