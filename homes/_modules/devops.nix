@@ -4,6 +4,7 @@
     act
     azure-cli
     bun
+    devbox
     flyctl
     gh
     gnumake
