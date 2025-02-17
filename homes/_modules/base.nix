@@ -16,7 +16,6 @@
     rclone
     restic
     ripgrep
-    semgrep
     socat
     starship
     syncthing

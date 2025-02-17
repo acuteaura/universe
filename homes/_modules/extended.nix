@@ -4,7 +4,6 @@
     act
     azure-cli
     btop
-    dmidecode
     docker-compose
     ffmpeg
     gnumake
@@ -14,12 +13,8 @@
     nmap
     openssl
     opentofu
-    pciutils
     powertop
-    s-tui
-    socat
     sqlite
-
     whois
     yt-dlp
   ];

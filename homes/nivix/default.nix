@@ -12,7 +12,6 @@
     ../_modules/graphical-base.nix
     ../_modules/graphical-personal.nix
     ../_modules/jetbrains.nix
-    ../_modules/linux.nix
   ];
 
   home.username = "aurelia";

@@ -75,6 +75,14 @@
           nixpkgsConfig
         ];
       };
+      homeConfigurations.shell-devcontainer = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit unstable; };
+        modules = [
+          ./homes/shell-devcontainer
+          nixpkgsConfig
+        ];
+      };
       homeConfigurations.shell-aarch64-darwin = home-manager-unstable.lib.homeManagerConfiguration {
         pkgs = nixpkgs-unstable.legacyPackages.aarch64-darwin;
         extraSpecialArgs = { unstable = unstable-darwin; };
