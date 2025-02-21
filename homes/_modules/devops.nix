@@ -6,14 +6,15 @@
     bun
     devbox
     flyctl
+    flyctl
     gh
     gnumake
     go
     hcloud
     nixpkgs-fmt
     opentofu
+    rustup
     sqlite
-    flyctl
 
     unstable.eslint
     unstable.vue-language-server
