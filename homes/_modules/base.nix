@@ -4,7 +4,7 @@
     age
     btop
     chezmoi
-    coreutils
+    curl
     dig
     direnv
     file
@@ -22,16 +22,14 @@
     tmux
     whois
     yq-go
+    zellij
     zstd
 
-    neovim
     efm-langserver
+    micro
+    neovim
   ] ++ lib.optionals (pkgs.stdenv.isDarwin) [
     bash
-    coreutils
-    curl
-    gnugrep
-    gnused
     qemu
   ] ++ lib.optionals (pkgs.stdenv.isLinux) [
     # broken dependency on darwin: sleuthkit

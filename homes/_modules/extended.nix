@@ -1,21 +1,12 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
-    act
-    azure-cli
-    btop
-    docker-compose
+    coreutils
     ffmpeg
-    gnumake
-    hcloud
-    hyfetch
+    gnugrep
+    gnused
     internetarchive
-    nmap
     openssl
-    opentofu
-    powertop
-    sqlite
-    whois
     yt-dlp
   ];
 }
