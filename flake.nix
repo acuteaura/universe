@@ -85,6 +85,14 @@
           nixpkgsConfig
         ];
       };
+      homeConfigurations.shell-fat-x86_64-linux = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit unstable;};
+        modules = [
+          ./homes/shell-fat-linux
+          nixpkgsConfig
+        ];
+      };
       homeConfigurations.shell-devcontainer = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit unstable;};

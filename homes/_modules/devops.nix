@@ -6,11 +6,9 @@
 }: {
   home.packages = with pkgs; [
     act
-    azure-cli
     bun
     clang
     devbox
-    flyctl
     flyctl
     gh
     gnumake
@@ -21,11 +19,5 @@
     opentofu
     rustup
     sqlite
-
-    unstable.eslint
-    unstable.vue-language-server
-    unstable.tailwindcss-language-server
-    unstable.yaml-language-server
-    unstable.typescript-language-server
   ];
 }
