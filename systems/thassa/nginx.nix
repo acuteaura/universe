@@ -76,7 +76,6 @@
       kTLS = true;
       sslCertificate = "/etc/certificates/nullvoid.space-cf.crt";
       sslCertificateKey = "/etc/certificates/nullvoid.space-cf.key";
-      sslTrustedCertificate = "/etc/certificates/authenticated_origin_pull_ca.pem";
       locations."/" = {
         proxyPass = "http://127.0.0.1:8080";
         proxyWebsockets = true;
@@ -98,6 +97,7 @@
         '';
       };
       extraConfig = ''
+        ssl_client_certificate /etc/certificates/authenticated_origin_pull_ca.pem;
         ssl_verify_client on;
         ${realIpsFromList cfipv4}
         ${realIpsFromList cfipv6}
