@@ -74,5 +74,5 @@
     defaults.email = "past.tree1213@cognitive-antivirus.net";
   };
 
-  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedTCPPorts = [80 443 49152];
 }
