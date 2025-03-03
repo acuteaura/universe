@@ -11,6 +11,7 @@
     fish
     git
     hyfetch
+    iperf
     jq
     just
     rclone

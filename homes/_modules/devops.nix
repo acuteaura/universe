@@ -4,6 +4,7 @@
     act
     azure-cli
     bun
+    clang
     devbox
     flyctl
     flyctl
@@ -11,6 +12,7 @@
     gnumake
     go
     hcloud
+    llvm
     nixpkgs-fmt
     opentofu
     rustup
