@@ -68,13 +68,7 @@
           ./systems/thassa
           nixpkgsConfig
           inputs.quadlet.nixosModules.quadlet
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.aurelia = import ./homes/shell-linux;
-            home-manager.extraSpecialArgs = {inherit unstable;};
-          }
+          
         ];
       };
       homeConfigurations.shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
