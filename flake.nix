@@ -68,7 +68,6 @@
           ./systems/thassa
           nixpkgsConfig
           inputs.quadlet.nixosModules.quadlet
-          
         ];
       };
       homeConfigurations.shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {

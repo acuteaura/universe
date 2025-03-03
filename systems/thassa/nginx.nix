@@ -32,10 +32,12 @@
     };
 
     virtualHosts."id.nullvoid.space" = {
-      listen = {
-        port = 49152;
-        ssl = true;
-      };
+      listen = [
+        {
+          port = 49152;
+          ssl = true;
+        }
+      ];
       forceSSL = true;
       enableACME = true;
       locations."/" = {
