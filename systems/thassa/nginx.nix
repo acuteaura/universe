@@ -71,15 +71,15 @@
     };
 
     virtualHosts."id.nullvoid.space" = {
-      listen = [
-        {
-          addr = "0.0.0.0";
-          port = 49152;
-          ssl = true;
-        }
-      ];
+      listen = cloudflareListenIPv4 ++ cloudflareListenIPv6;
       forceSSL = true;
-      enableACME = true;
+      kTLS = true;
+      extraConfig = ''
+        ssl_verify_client on;
+      ''
+      sslCertificate = "/etc/certificates/nullvoid.space-cf.crt";
+      sslCertificateKey = "/etc/certificates/nullvoid.space-cf.key";
+      sslTrustedCertificate = "/etc/certificates/authenticated_origin_pull_ca.pem";
       locations."/" = {
         proxyPass = "http://127.0.0.1:8080";
         proxyWebsockets = true;
