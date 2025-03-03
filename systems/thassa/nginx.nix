@@ -34,6 +34,7 @@
     virtualHosts."id.nullvoid.space" = {
       listen = [
         {
+          addr = "0.0.0.0";
           port = 49152;
           ssl = true;
         }
