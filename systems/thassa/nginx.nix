@@ -74,9 +74,6 @@
       listen = cloudflareListenIPv4 ++ cloudflareListenIPv6;
       forceSSL = true;
       kTLS = true;
-      extraConfig = ''
-        ssl_verify_client on;
-      '';
       sslCertificate = "/etc/certificates/nullvoid.space-cf.crt";
       sslCertificateKey = "/etc/certificates/nullvoid.space-cf.key";
       sslTrustedCertificate = "/etc/certificates/authenticated_origin_pull_ca.pem";
@@ -101,6 +98,7 @@
         '';
       };
       extraConfig = ''
+        ssl_verify_client on;
         ${realIpsFromList cfipv4}
         ${realIpsFromList cfipv6}
         real_ip_header CF-Connecting-IP;
