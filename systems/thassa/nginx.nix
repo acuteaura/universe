@@ -15,6 +15,44 @@
       url = "https://www.cloudflare.com/ips-v6";
       sha256 = "1ad09hijignj6zlqvdjxv7rjj8567z357zfavv201b9vx3ikk7cy";
     });
+    defaultListenIPv4 = [
+      {
+        addr = "0.0.0.0";
+        port = 80;
+        ssl = false;
+      }
+      {
+        addr = "0.0.0.0";
+        port = 443;
+        ssl = true;
+      }
+    ];
+    cloudflareListenIPv4 = [
+      {
+        addr = "0.0.0.0";
+        port = 49152;
+        ssl = true;
+      }
+    ];
+    defaultListenIPv6 = [
+      {
+        addr = "[::]";
+        port = 80;
+        ssl = false;
+      }
+      {
+        addr = "[::]";
+        port = 443;
+        ssl = true;
+      }
+    ];
+    cloudflareListenIPv6 = [
+      {
+        addr = "[::]";
+        port = 49152;
+        ssl = true;
+      }
+    ];
   in {
     enable = true;
 
@@ -24,6 +62,7 @@
     recommendedTlsSettings = true;
 
     virtualHosts."78.47.161.199" = {
+      listen = defaultListenIPv4 // defaultListenIPv6 // cloudflareListenIPv4 // cloudflareListenIPv6;
       rejectSSL = true;
       default = true;
       locations."/" = {
