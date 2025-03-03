@@ -1,5 +1,9 @@
-{ config, pkgs, unstable, ... }:
 {
+  config,
+  pkgs,
+  unstable,
+  ...
+}: {
   home.packages = with pkgs; [
     act
     azure-cli

@@ -1,9 +1,13 @@
-{ config, pkgs, unstable, ... }:
 {
+  config,
+  pkgs,
+  unstable,
+  ...
+}: {
   # Yep, it's a desktop!
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.excludePackages = [ pkgs.xterm ];
+  services.xserver.excludePackages = [pkgs.xterm];
   services.xserver.desktopManager.xterm.enable = false;
 
   # Enable desktop hardware features
@@ -27,8 +31,8 @@
   services.tumbler.enable = true;
 
   networking.firewall = {
-    trustedInterfaces = [ "tailscale0" ];
-    allowedUDPPorts = [ config.services.tailscale.port ];
+    trustedInterfaces = ["tailscale0"];
+    allowedUDPPorts = [config.services.tailscale.port];
   };
 
   programs._1password.enable = true;

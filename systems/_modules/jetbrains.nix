@@ -1,6 +1,10 @@
-{ config, pkgs, ... }:
 {
-  /*  nixpkgs.overlays = [
+  config,
+  pkgs,
+  ...
+}: {
+  /*
+      nixpkgs.overlays = [
     (final: prev:
     let
       toolNames = ["goland"];
@@ -17,7 +21,8 @@
         });
       };
     in { jetbrains = prev.jetbrains // builtins.foldl' (acc: toolName: acc // makeToolOverlay toolName) {} toolNames; })
-  ];*/
+  ];
+  */
 
   environment.systemPackages = with pkgs; [
     jetbrains.goland

@@ -19,57 +19,67 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, ... }:
-    let
-      nixpkgsConfig = {
-        nixpkgs.config = {
-          allowUnfree = true;
-          permittedInsecurePackages = [
-            "python3.11-django-3.1.14"
-            "python3.12-django-3.1.14"
-          ];
-        };
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    home-manager,
+    home-manager-unstable,
+    ...
+  }: let
+    nixpkgsConfig = {
+      nixpkgs.config = {
+        allowUnfree = true;
+        permittedInsecurePackages = [
+          "python3.11-django-3.1.14"
+          "python3.12-django-3.1.14"
+        ];
       };
-      unstable = import nixpkgs-unstable { config.allowUnfree = true; system = "x86_64-linux"; };
-      unstable-darwin = import nixpkgs-unstable { config.allowUnfree = true; system = "aarch64-darwin"; };
-    in
+    };
+    unstable = import nixpkgs-unstable {
+      config.allowUnfree = true;
+      system = "x86_64-linux";
+    };
+    unstable-darwin = import nixpkgs-unstable {
+      config.allowUnfree = true;
+      system = "aarch64-darwin";
+    };
+  in
     {
-      nixosConfigurations.nivix =
-        nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit unstable; };
-          modules = [
-            ./systems/nivix
-            nixpkgsConfig
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.aurelia = import ./homes/nivix;
-              home-manager.extraSpecialArgs = { inherit unstable; };
-            }
-          ];
-        };
-      nixosConfigurations.thassa =
-        nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { };
-          modules = [
-            ./systems/thassa
-            nixpkgsConfig
-            inputs.quadlet.nixosModules.quadlet
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.aurelia = import ./homes/shell-linux;
-              home-manager.extraSpecialArgs = { inherit unstable; };
-            }
-          ];
-        };
+      nixosConfigurations.nivix = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit unstable;};
+        modules = [
+          ./systems/nivix
+          nixpkgsConfig
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.aurelia = import ./homes/nivix;
+            home-manager.extraSpecialArgs = {inherit unstable;};
+          }
+        ];
+      };
+      nixosConfigurations.thassa = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {};
+        modules = [
+          ./systems/thassa
+          nixpkgsConfig
+          inputs.quadlet.nixosModules.quadlet
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.aurelia = import ./homes/shell-linux;
+            home-manager.extraSpecialArgs = {inherit unstable;};
+          }
+        ];
+      };
       homeConfigurations.shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = { inherit unstable; };
+        extraSpecialArgs = {inherit unstable;};
         modules = [
           ./homes/shell-linux
           nixpkgsConfig
@@ -77,7 +87,7 @@
       };
       homeConfigurations.shell-devcontainer = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = { inherit unstable; };
+        extraSpecialArgs = {inherit unstable;};
         modules = [
           ./homes/shell-devcontainer
           nixpkgsConfig
@@ -85,18 +95,21 @@
       };
       homeConfigurations.shell-aarch64-darwin = home-manager-unstable.lib.homeManagerConfiguration {
         pkgs = nixpkgs-unstable.legacyPackages.aarch64-darwin;
-        extraSpecialArgs = { unstable = unstable-darwin; };
+        extraSpecialArgs = {unstable = unstable-darwin;};
         modules = [
           ./homes/shell-darwin
           nixpkgsConfig
         ];
       };
-    } // inputs.flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs { config.allowUnfree = true; system = "${system}"; };
-      in
-      {
-        formatter = pkgs.nixpkgs-fmt;
+    }
+    // inputs.flake-utils.lib.eachDefaultSystem (
+      system: let
+        pkgs = import nixpkgs {
+          config.allowUnfree = true;
+          system = "${system}";
+        };
+      in {
+        formatter = pkgs.alejandra;
       }
     );
 }

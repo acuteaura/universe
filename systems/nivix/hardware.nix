@@ -1,7 +1,12 @@
-{ config, pkgs, lib, modulesPath, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  modulesPath,
+  ...
+}: {
   # Booting
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = ["amdgpu"];
   boot.loader = {
     grub = {
       enable = true;
@@ -13,10 +18,10 @@
   };
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "thunderbolt" ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
-  boot.kernelParams = [ "amdgpu.sg_display=0" "transparent_hugepage=never" ];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "thunderbolt"];
+  boot.kernelModules = ["kvm-amd"];
+  boot.extraModulePackages = [];
+  boot.kernelParams = ["amdgpu.sg_display=0" "transparent_hugepage=never"];
 
   services.power-profiles-daemon.enable = true;
 
@@ -38,25 +43,22 @@
 
   boot.zfs.devNodes = "/dev/disk/by-label/";
 
-  fileSystems."/" =
-    {
-      device = "nivix/root";
-      fsType = "zfs";
-    };
+  fileSystems."/" = {
+    device = "nivix/root";
+    fsType = "zfs";
+  };
 
-  fileSystems."/home" =
-    {
-      device = "nivix/home";
-      fsType = "zfs";
-    };
+  fileSystems."/home" = {
+    device = "nivix/home";
+    fsType = "zfs";
+  };
 
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-label/boot";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/boot";
+    fsType = "vfat";
+  };
 
-  swapDevices = [ ];
+  swapDevices = [];
 
   hardware.enableRedistributableFirmware = true;
   hardware.cpu.amd.updateMicrocode = true;

@@ -1,6 +1,5 @@
-{ pkgs, ... }:
-{
-  services.xserver.videoDrivers = [ "amdgpu" ];
+{pkgs, ...}: {
+  services.xserver.videoDrivers = ["amdgpu"];
 
   hardware.graphics = {
     enable = true;

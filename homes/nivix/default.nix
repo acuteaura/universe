@@ -1,5 +1,10 @@
-{ config, pkgs, lib, unstable, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  unstable,
+  ...
+}: {
   imports = [
     ../base.nix
 

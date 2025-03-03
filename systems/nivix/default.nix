@@ -1,5 +1,9 @@
-{ lib, config, pkgs, ... }:
 {
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../_modules/base.nix
     ../_modules/desktop-base.nix
@@ -25,13 +29,13 @@
   users.users.aurelia = {
     isNormalUser = true;
     group = "aurelia";
-    extraGroups = [ "wheel" "docker" ];
-    packages = with pkgs; [ ];
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q" ];
+    extraGroups = ["wheel" "docker"];
+    packages = with pkgs; [];
+    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q"];
     shell = pkgs.fish;
   };
 
-  programs._1password-gui.polkitPolicyOwners = [ "aurelia" ];
+  programs._1password-gui.polkitPolicyOwners = ["aurelia"];
   environment.etc."1password/custom_allowed_browsers" = {
     text = ''
       librewolf

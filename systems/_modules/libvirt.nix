@@ -1,5 +1,8 @@
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  ...
+}: {
   virtualisation.libvirtd = {
     enable = true;
     package = pkgs.libvirt;
@@ -8,7 +11,7 @@
     qemu = {
       swtpm.enable = true;
       ovmf.enable = true;
-      ovmf.packages = [ pkgs.OVMFFull.fd ];
+      ovmf.packages = [pkgs.OVMFFull.fd];
       package = pkgs.qemu;
     };
   };

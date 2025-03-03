@@ -1,7 +1,10 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Configure Nix itself
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   networking.networkmanager = {
     enable = true;
@@ -52,5 +55,4 @@
   nix.package = pkgs.lix;
 
   # Copy the NixOS configuration file and link it from the resulting system
-
 }

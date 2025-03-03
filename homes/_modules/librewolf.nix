@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.librewolf = {
     enable = true;
     # Enable WebGL, cookies and history

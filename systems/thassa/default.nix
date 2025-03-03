@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./containers/keycloak.nix
 
@@ -12,13 +16,13 @@
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
   networking.hostName = "thassa";
-  users.users.root.openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q'' ];
+  users.users.root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q''];
 
   users.users.aurelia = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "qemu-libvirtd" ];
-    packages = with pkgs; [ ];
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q" ];
+    extraGroups = ["wheel" "qemu-libvirtd"];
+    packages = with pkgs; [];
+    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q"];
     shell = pkgs.fish;
   };
 
@@ -27,7 +31,7 @@
   programs._1password.enable = true;
 
   # nixos sucks tbh
-  networking.firewall.interfaces."podman+".allowedUDPPorts = [ 53 5353 ];
+  networking.firewall.interfaces."podman+".allowedUDPPorts = [53 5353];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
