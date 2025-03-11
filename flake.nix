@@ -85,6 +85,7 @@
         specialArgs = {inherit unstable;};
         modules = [
           ./systems/wsl
+          nixos-wsl.nixosModules.default
           nixpkgsConfig
         ];
       };
