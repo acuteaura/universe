@@ -28,6 +28,7 @@
     nixpkgs-unstable,
     home-manager,
     home-manager-unstable,
+    nixos-wsl,
     ...
   }: let
     nixpkgsConfig = {
