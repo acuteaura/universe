@@ -14,7 +14,7 @@
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    nixos-wsl.nixpkgs.follows = "nixpkgs-unstable";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     quadlet = {
       url = "github:SEIAROTg/quadlet-nix";
