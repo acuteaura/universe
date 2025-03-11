@@ -13,6 +13,9 @@
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nixos-wsl.nixpkgs.follows = "nixpkgs-unstable";
+
     quadlet = {
       url = "github:SEIAROTg/quadlet-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -75,6 +78,14 @@
             home-manager.users.aurelia = import ./homes/shell-linux;
             home-manager.extraSpecialArgs = {inherit unstable;};
           }
+        ];
+      };
+      nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit unstable;};
+        modules = [
+          ./systems/wsl
+          nixpkgsConfig
         ];
       };
       homeConfigurations.shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
