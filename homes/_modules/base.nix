@@ -12,6 +12,7 @@
       curl
       dig
       direnv
+      efm-langserver
       file
       fish
       git
@@ -19,6 +20,10 @@
       iperf
       jq
       just
+      micro
+      neovim
+      nil
+      nixd
       rclone
       restic
       ripgrep
@@ -30,10 +35,6 @@
       yq-go
       zellij
       zstd
-
-      efm-langserver
-      micro
-      neovim
     ]
     ++ lib.optionals (pkgs.stdenv.isDarwin) [
       bash
