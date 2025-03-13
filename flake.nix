@@ -50,6 +50,21 @@
     };
   in
     {
+      nixosConfigurations.cyberdaemon = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit unstable;};
+        modules = [
+          ./systems/cyberdaemon
+          nixpkgsConfig
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.aurelia = import ./homes/nivix;
+            home-manager.extraSpecialArgs = {inherit unstable;};
+          }
+        ];
+      };
       nixosConfigurations.nivix = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit unstable;};
