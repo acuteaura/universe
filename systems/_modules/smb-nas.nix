@@ -1,7 +1,9 @@
-{pkgs, ...}: {
+{pkgs, ...}: let 
+  const = import ../../constants.nix;
+in {
   environment.systemPackages = [pkgs.cifs-utils];
   fileSystems."/mnt/media" = {
-    device = "//100.66.158.81/media";
+    device = "//${const.tailscaleIP.sunhome}/media";
     fsType = "cifs";
     options = let
       # this line prevents hanging on network split
@@ -9,7 +11,7 @@
     in ["${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=1000"];
   };
   fileSystems."/mnt/scratch" = {
-    device = "//100.66.158.81/aurelia";
+    device = "//${const.tailscaleIP.sunhome}/aurelia";
     fsType = "cifs";
     options = let
       # this line prevents hanging on network split
