@@ -91,6 +91,10 @@
           client_max_body_size 256M;
         '';
       };
+      locations."/resources" = {
+        proxyPass = "http://127.0.0.1:8080";
+        proxyWebsockets = true;
+      };
       locations."/realms/nvs/metrics" = {
         extraConfig = ''
           deny all;
