@@ -12,6 +12,9 @@
     protontricks
     winetricks
     wineWowPackages.stable
+
+    unigine-superposition
+    unigine-valley
   ];
   hardware.xpadneo.enable = true;
 

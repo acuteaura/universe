@@ -11,9 +11,11 @@
     ../_modules/containers.nix
     ../_modules/smb-nas.nix
     ../_modules/rustdesk.nix
+    ../_modules/games.nix
     ../_modules/work.nix
     ./amdgpu.nix
     ./hardware.nix
+
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_6_12;
@@ -68,6 +70,8 @@
   services.printing.enable = true;
 
   programs.nix-ld.enable = true;
+
+  nix.settings.trusted-users = "aurelia";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
