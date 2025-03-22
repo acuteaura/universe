@@ -60,7 +60,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.aurelia = import ./homes/nivix;
+            home-manager.users.aurelia = import ./homes/nivix.nix;
             home-manager.extraSpecialArgs = {inherit unstable;};
           }
         ];
@@ -75,7 +75,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.aurelia = import ./homes/nivix;
+            home-manager.users.aurelia = import ./homes/nivix.nix;
             home-manager.extraSpecialArgs = {inherit unstable;};
           }
         ];
@@ -91,7 +91,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.aurelia = import ./homes/shell-linux;
+            home-manager.users.aurelia = import ./homes/shell-linux.nix;
             home-manager.extraSpecialArgs = {inherit unstable;};
           }
         ];
@@ -109,7 +109,7 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit unstable;};
         modules = [
-          ./homes/shell-linux
+          ./homes/shell-linux.nix
           nixpkgsConfig
         ];
       };
@@ -117,7 +117,7 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit unstable;};
         modules = [
-          ./homes/shell-fat-linux
+          ./homes/shell-fat-linux.nix
           nixpkgsConfig
         ];
       };
@@ -125,7 +125,15 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit unstable;};
         modules = [
-          ./homes/shell-devcontainer
+          ./homes/shell-devcontainer.nix
+          nixpkgsConfig
+        ];
+      };
+      homeConfigurations.shell-nas = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit unstable;};
+        modules = [
+          ./homes/shell-nas.nix
           nixpkgsConfig
         ];
       };
@@ -133,7 +141,7 @@
         pkgs = nixpkgs-unstable.legacyPackages.aarch64-darwin;
         extraSpecialArgs = {unstable = unstable-darwin;};
         modules = [
-          ./homes/shell-darwin
+          ./homes/shell-darwin.nix
           nixpkgsConfig
         ];
       };

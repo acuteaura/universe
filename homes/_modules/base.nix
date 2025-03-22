@@ -16,6 +16,7 @@
       file
       fish
       git
+      git-annex
       hyfetch
       iperf
       jq

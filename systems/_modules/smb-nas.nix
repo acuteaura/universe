@@ -1,4 +1,4 @@
-{pkgs, ...}: let 
+{pkgs, ...}: let
   const = import ../../constants.nix;
 in {
   environment.systemPackages = [pkgs.cifs-utils];

@@ -15,7 +15,6 @@
     ../_modules/work.nix
     ./amdgpu.nix
     ./hardware.nix
-
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_6_12;
