@@ -4,6 +4,7 @@
   ...
 }: {
   home.packages = with pkgs; [
+    clusterctl
     helm-docs
     k9s
     kind

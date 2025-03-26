@@ -13,6 +13,7 @@
       dig
       direnv
       efm-langserver
+      fd
       file
       fish
       git
@@ -32,6 +33,7 @@
       starship
       syncthing
       tmux
+      uutils-coreutils-noprefix
       whois
       yq-go
       zellij

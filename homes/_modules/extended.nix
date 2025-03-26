@@ -4,7 +4,6 @@
   ...
 }: {
   home.packages = with pkgs; [
-    coreutils
     ffmpeg
     gnugrep
     gnused
