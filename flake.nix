@@ -105,32 +105,32 @@
           nixpkgsConfig
         ];
       };
-      homeConfigurations.shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      homeConfigurations.shell-x86_64-linux = home-manager-unstable.lib.homeManagerConfiguration {
+        pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit unstable;};
         modules = [
           ./homes/shell-linux.nix
           nixpkgsConfig
         ];
       };
-      homeConfigurations.shell-fat-x86_64-linux = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      homeConfigurations.shell-fat-x86_64-linux = home-manager-unstable.lib.homeManagerConfiguration {
+        pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit unstable;};
         modules = [
           ./homes/shell-fat-linux.nix
           nixpkgsConfig
         ];
       };
-      homeConfigurations.shell-devcontainer = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      homeConfigurations.shell-devcontainer = home-manager-unstable.lib.homeManagerConfiguration {
+        pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit unstable;};
         modules = [
           ./homes/shell-devcontainer.nix
           nixpkgsConfig
         ];
       };
-      homeConfigurations.shell-nas = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      homeConfigurations.shell-nas = home-manager-unstable.lib.homeManagerConfiguration {
+        pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
         extraSpecialArgs = {inherit unstable;};
         modules = [
           ./homes/shell-nas.nix

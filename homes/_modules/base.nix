@@ -7,6 +7,7 @@
     [
       age
       alejandra
+      attic-client
       btop
       chezmoi
       curl
