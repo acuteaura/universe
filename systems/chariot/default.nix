@@ -1,6 +1,5 @@
 {
   lib,
-  config,
   pkgs,
   ...
 }: {
@@ -29,20 +28,19 @@
     isNormalUser = true;
     group = "aurelia";
     extraGroups = ["wheel" "docker"];
-    packages = with pkgs; [];
     openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q"];
     shell = pkgs.fish;
   };
   nix.settings.trusted-users = ["aurelia"];
   programs._1password-gui.polkitPolicyOwners = ["aurelia"];
 
-  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.enable = false;
   services.displayManager = {
     defaultSession = "plasma";
     sddm = {
       # broken with fish
       # https://github.com/NixOS/nixpkgs/issues/287646
-      enable = false;
+      enable = true;
       wayland.enable = true;
     };
   };
@@ -51,6 +49,13 @@
   #programs.ssh.askPassword = lib.mkForce "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
 
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
+
+# Network
+  networking = {
+    hostId = "7807e590";
+    hostName = "chariot";
+    nftables.enable = true;
+  };
 
   # random tools
   services.avahi = {

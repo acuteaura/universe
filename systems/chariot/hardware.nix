@@ -1,8 +1,4 @@
 {
-  config,
-  pkgs,
-  lib,
-  modulesPath,
   ...
 }: {
   # Booting
@@ -34,22 +30,15 @@
 
   services.hardware.bolt.enable = true;
 
-  # Network
-  networking = {
-    hostId = "758fce08";
-    hostName = "nivix";
-    nftables.enable = true;
-  };
-
   boot.zfs.devNodes = "/dev/disk/by-label/";
 
   fileSystems."/" = {
-    device = "nivix/root";
+    device = "chariot/root";
     fsType = "zfs";
   };
 
   fileSystems."/home" = {
-    device = "nivix/home";
+    device = "chariot/home";
     fsType = "zfs";
   };
 
