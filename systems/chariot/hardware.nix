@@ -1,6 +1,4 @@
-{
-  ...
-}: {
+{...}: {
   # Booting
   boot.initrd.kernelModules = ["amdgpu"];
   boot.loader = {

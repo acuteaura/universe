@@ -50,7 +50,7 @@
 
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
-# Network
+  # Network
   networking = {
     hostId = "7807e590";
     hostName = "chariot";

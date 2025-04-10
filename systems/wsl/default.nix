@@ -1,4 +1,4 @@
-{ pkgs, ...}: {
+{pkgs, ...}: {
   imports = [
     ../_modules/base.nix
   ];
