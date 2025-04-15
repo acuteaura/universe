@@ -111,13 +111,20 @@
           }
         ];
       };
-      nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.wsl = nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit unstable;};
         modules = [
           ./systems/wsl
           nixos-wsl.nixosModules.default
           nixpkgsConfig
+          home-manager-unstable.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.aurelia = import ./homes/shell-linux.nix;
+            home-manager.extraSpecialArgs = {inherit unstable;};
+          }
         ];
       };
       homeConfigurations.shell-x86_64-linux = home-manager-unstable.lib.homeManagerConfiguration {

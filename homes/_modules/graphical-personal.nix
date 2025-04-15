@@ -1,7 +1,6 @@
 # Only use this set of packages on NixOS with a matching branch!
 # Mesa has become very reliant on matching versions...
 {
-  config,
   pkgs,
   ...
 }: {

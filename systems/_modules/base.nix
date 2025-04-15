@@ -31,6 +31,7 @@
   environment.systemPackages = with pkgs; [
     fish
 
+    attic-client
     btrfs-progs
     curl
     cryptsetup
