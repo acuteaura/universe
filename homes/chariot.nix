@@ -12,6 +12,7 @@
     ./_modules/graphical-personal.nix
     ./_modules/jetbrains.nix
     ./apps/aptakube.nix
+    ./apps/headlamp.nix
   ];
 
   home.username = "aurelia";

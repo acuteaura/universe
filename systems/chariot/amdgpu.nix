@@ -7,6 +7,8 @@
     extraPackages = with pkgs; [
       libvdpau-va-gl
       rocmPackages.clr.icd
+      amdvlk
+      mesa
     ];
   };
 

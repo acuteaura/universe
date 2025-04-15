@@ -1,9 +1,9 @@
 {
-  config,
   pkgs,
   ...
 }: {
   home.packages = with pkgs; [
+    cilium-cli
     clusterctl
     helm-docs
     k9s
