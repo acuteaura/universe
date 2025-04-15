@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   headlamp = pkgs.appimageTools.wrapType2 {
     name = "headlamp";
     src = pkgs.fetchurl {

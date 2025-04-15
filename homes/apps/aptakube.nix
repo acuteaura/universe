@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   aptakube = pkgs.appimageTools.wrapType2 {
     name = "aptakube";
     src = pkgs.fetchurl {
