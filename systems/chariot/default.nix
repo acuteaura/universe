@@ -81,7 +81,7 @@
     #sslCert = "/etc/chariot.atlas-ide.ts.net.crt";
   };
 
-    security.polkit.extraConfig = ''
+  security.polkit.extraConfig = ''
     polkit.addRule(function(action, subject) {
       if (subject.isInGroup("wheel"))
       {
