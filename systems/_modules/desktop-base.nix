@@ -1,7 +1,7 @@
 {
   config,
   pkgs,
-  unstable,
+  lib,
   ...
 }: {
   # Yep, it's a desktop!
@@ -12,11 +12,11 @@
 
   # Enable desktop hardware features
   services.pipewire = {
-    enable = true;
+    enable = lib.mkDefault true;
     alsa.enable = true;
     pulse.enable = true;
   };
-  hardware.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = lib.mkDefault false;
   hardware.bluetooth.enable = true;
 
   # prevents AirPods being stolen back by bluez when requesting connection elsewhere

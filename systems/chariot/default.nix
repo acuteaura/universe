@@ -72,10 +72,26 @@
 
   services.xrdp = {
     enable = true;
-    defaultWindowManager = "startplasma-x11";
+    defaultWindowManager = "${pkgs.writeShellScript "xrdp-session-script" ''
+      systemd-inhibit --mode=block --what="sleep:idle:handle-lid-switch" --why=xrdp startplasma-x11
+    ''}";
     openFirewall = true;
     audio.enable = true;
+    #sslKey = "/etc/chariot.atlas-ide.ts.net.key";
+    #sslCert = "/etc/chariot.atlas-ide.ts.net.crt";
   };
+
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if (subject.isInGroup("wheel"))
+      {
+        return polkit.Result.YES;
+      }
+    });
+  '';
+
+  services.pipewire.enable = lib.mkForce false;
+  hardware.pulseaudio.enable = lib.mkForce true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
