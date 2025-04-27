@@ -25,6 +25,7 @@
       efiSupport = true;
       device = "nodev";
       configurationLimit = 16;
+      useOSProber = true;
     };
     efi.canTouchEfiVariables = true;
   };
@@ -42,7 +43,7 @@
 
   time.timeZone = "Europe/Berlin";
 
-    users.groups.aurelia = {
+  users.groups.aurelia = {
     name = "aurelia";
     gid = 1000;
   };
