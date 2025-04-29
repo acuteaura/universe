@@ -9,9 +9,7 @@
     ../_modules/desktop-plasma.nix
     ../_modules/containers.nix
     ../_modules/smb-nas.nix
-    ../_modules/rustdesk.nix
     ../_modules/work.nix
-    ../_modules/vmware-guest.nix
     ./amdgpu.nix
     ./hardware.nix
   ];

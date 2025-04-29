@@ -10,7 +10,6 @@
     ../_modules/desktop-plasma.nix
     ../_modules/containers.nix
     ../_modules/smb-nas.nix
-    ../_modules/rustdesk.nix
     ../_modules/games.nix
     ../_modules/work.nix
     ./amdgpu.nix

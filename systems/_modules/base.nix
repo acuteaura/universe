@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   ...
 }: {
@@ -37,6 +36,7 @@
     cryptsetup
     dig
     e2fsprogs
+    exfatprogs
     git
     htop
     ncdu
@@ -54,6 +54,4 @@
   hardware.keyboard.qmk.enable = true;
 
   nix.package = pkgs.lix;
-
-  # Copy the NixOS configuration file and link it from the resulting system
 }
