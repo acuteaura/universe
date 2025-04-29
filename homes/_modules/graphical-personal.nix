@@ -14,5 +14,8 @@
     shotwell
     simh
     ventoy-full
+
+    remmina
+    freerdp3
   ];
 }

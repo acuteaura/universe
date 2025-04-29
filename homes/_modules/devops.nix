@@ -4,7 +4,7 @@
     bun
     clang
     devbox
-    flyctl
+    fly
     gh
     gnumake
     go

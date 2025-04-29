@@ -1,7 +1,7 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
+  imports = [
+    ./sunshine.nix
+  ];
   environment.systemPackages = with pkgs; [
     gamemode
     gamescope
@@ -15,7 +15,7 @@
     unigine-superposition
     unigine-valley
   ];
-  hardware.xpadneo.enable = true;
+  hardware.xpadneo.enable = false;
 
   programs.steam = {
     enable = true;
