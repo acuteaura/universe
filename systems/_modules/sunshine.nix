@@ -1,31 +1,43 @@
 {pkgs, ...}: let
-  changeResScript = pkgs.writeScript "set-res.fish" ''
+  phyMode = "5120x1440@240";
+  phyScreen = "DP-2";
+  virtScreen = "HDMI-A-1";
+  setVirtScript = pkgs.writeScript "set-screen-virt.fish" ''
     #!${pkgs.fish}/bin/fish
-    argparse 'w/width=' 'h/height=' 'f/fps=' -- $argv; or exit 1
     set final_w 1920
     set final_h 1080
     set final_f 60
-    if [ $_flag_w = "1920" ] && [ $_flag_h = "1200" ]
+    set final_s 1
+    echo "hello from script" > /tmp/resswitch.log
+    if [ "1920" = "$SUNSHINE_CLIENT_WIDTH" ] && [ "1200" = "$SUNSHINE_CLIENT_HEIGHT" ]
       set final_w 1920
       set final_h 1200
     end
-    if [ $_flag_w = "2560" ] && [ $_flag_h = "1600" ]
-      set final_w 1920
-      set final_h 1200
+    if [ "2560" = "$SUNSHINE_CLIENT_WIDTH" ] && [ "1600" = "$SUNSHINE_CLIENT_HEIGHT" ]
+      echo "hit 2560x1600!" >> /tmp/resswitch.log
+      set final_w 2560
+      set final_h 1600
+      set final_s 2
     end
-    if [ $_flag_f = "120" ] || [ $_flag_f = "144" ] || [ $_flag_f = "240" ]
+    if [ $SUNSHINE_CLIENT_FPS = "120" ] || [ $SUNSHINE_CLIENT_FPS = "144" ] || [ $SUNSHINE_CLIENT_FPS = "240" ]
+      echo "hit 120 FPS" >> /tmp/resswitch.log
       set final_f 120
     end
-    ${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-2.mode.{$final_w}x{$final_h}@{$final_f}
+    ${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.${phyScreen}.disable output.${virtScreen}.enable output.${virtScreen}.mode.{$final_w}x{$final_h}@{$final_f} output.${virtScreen}.scale.{$final_s}
   '';
-  steamCmd = pkgs.writeScript ''launch-steam.fish'' ''
+  setPhyScript = pkgs.writeScript "set-screen-phy.fish" ''
     #!${pkgs.fish}/bin/fish
-    setsid steam steam://bigpicture > /tmp/steam-launch.stdout 2> /tmp/steam-launch.stderr
+    set -x QT_QPA_PLATFORM wayland
+    ${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.${virtScreen}.disable output.${phyScreen}.enable output.${phyScreen}.mode.${phyMode}
   '';
+  setPhyScriptApp = pkgs.writeShellApplication {
+    name = "set-phy-out";
+    text = setPhyScript;
+  };
   prepRes = [
     {
-      do = "${changeResScript} -w \$SUNSHINE_CLIENT_WIDTH -h $SUNSHINE_CLIENT_HEIGHT -f $SUNSHINE_CLIENT_FPS";
-      undo = "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.DP-2.mode.5120x1440@240";
+      do = "${setVirtScript}";
+      undo = "${setPhyScript}";
     }
   ];
   # Helper utility for launching Steam games from Sunshine. This works around
@@ -94,5 +106,5 @@ in {
     ];
   };
 
-  environment.systemPackages = [steam-run-url];
+  environment.systemPackages = [steam-run-url setPhyScriptApp];
 }

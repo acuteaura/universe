@@ -1,0 +1,41 @@
+{
+  pkgs,
+  unstable,
+  ...
+}: {
+  environment.systemPackages = with pkgs; [
+    appimage-run
+    archivebox
+    blender
+    brave
+    cool-retro-term
+    discord
+    easyeffects
+    firefox
+    foliate
+    handbrake
+    haruna
+    inkscape
+    insomnia
+    kdePackages.kdenlive
+    kdePackages.koko
+    kdePackages.krecorder
+    obsidian
+    pgadmin4-desktopmode
+    qmk
+    remmina
+    seafile-client
+    shotwell
+    signal-desktop
+    sqlitebrowser
+    strawberry
+    syncthingtray
+    thunderbird
+    unstable.zed-editor
+    virt-manager
+    virt-viewer
+    vlc
+    vscode
+    wezterm
+  ];
+}

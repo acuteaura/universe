@@ -10,9 +10,11 @@
     ../_modules/desktop-plasma.nix
     ../_modules/containers.nix
     ../_modules/smb-nas.nix
-    ../_modules/rustdesk.nix
     ../_modules/games.nix
     ../_modules/work.nix
+
+    ../_modules/apps.nix
+
     ./amdgpu.nix
     ./hardware.nix
   ];
@@ -87,6 +89,9 @@
   services.printing.enable = true;
 
   programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = [
+    pkgs.icu
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

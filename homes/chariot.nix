@@ -8,8 +8,6 @@
     ./_modules/hwtools.nix
     ./_modules/kube.nix
     ./_modules/security.nix
-    ./_modules/graphical-base.nix
-    ./_modules/graphical-personal.nix
     ./_modules/jetbrains.nix
     ./apps/aptakube.nix
     ./apps/headlamp.nix

@@ -60,7 +60,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.aurelia = import ./homes/nivix.nix;
+            home-manager.users.aurelia = import ./homes/cyberdaemon.nix;
             home-manager.extraSpecialArgs = {inherit unstable;};
           }
         ];
@@ -91,21 +91,6 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.aurelia = import ./homes/fool.nix;
-            home-manager.extraSpecialArgs = {inherit unstable;};
-          }
-        ];
-      };
-      nixosConfigurations.nivix = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {inherit unstable;};
-        modules = [
-          ./systems/nivix
-          nixpkgsConfig
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.aurelia = import ./homes/nivix.nix;
             home-manager.extraSpecialArgs = {inherit unstable;};
           }
         ];

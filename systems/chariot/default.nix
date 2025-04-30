@@ -7,6 +7,7 @@
     ../_modules/base.nix
     ../_modules/desktop-base.nix
     ../_modules/desktop-plasma.nix
+    ../_modules/apps.nix
     ../_modules/containers.nix
     ../_modules/smb-nas.nix
     ../_modules/work.nix
