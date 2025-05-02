@@ -1,6 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
-    ./sunshine.nix
+    ./sunshine
   ];
   environment.systemPackages = with pkgs; [
     gamemode
@@ -15,7 +19,8 @@
     unigine-superposition
     unigine-valley
   ];
-  hardware.xpadneo.enable = false;
+  hardware.xpadneo.enable = lib.mkDefault false;
+  services.sunshine-with-virtdisplay.enable = lib.mkDefault false;
 
   programs.steam = {
     enable = true;

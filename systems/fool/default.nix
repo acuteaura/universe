@@ -1,9 +1,4 @@
-{
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../_modules/base.nix
     ../_modules/desktop-base.nix
@@ -11,6 +6,7 @@
     ../_modules/containers.nix
     ../_modules/smb-nas.nix
     ../_modules/games.nix
+    ../_modules/libvirt.nix
     ../_modules/work.nix
 
     ../_modules/apps.nix
@@ -71,6 +67,8 @@
       wayland.enable = true;
     };
   };
+
+  services.sunshine-with-virtdisplay.enable = true;
 
   # tiebreaking required if you have gnome+kde
   #programs.ssh.askPassword = lib.mkForce "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
