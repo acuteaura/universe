@@ -7,7 +7,10 @@
     appimage-run
     archivebox
     blender
-    brave
+    (pkgs.brave.override {
+      vulkanSupport = true;
+      commandLineArgs = "--enable-features=AcceleratedVideoDecodeLinuxGL,VaapiVideoDecoder,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE";
+    })
     cool-retro-term
     discord
     easyeffects
@@ -37,5 +40,8 @@
     vlc
     vscode
     wezterm
+
+    streamcontroller
+    obs-studio
   ];
 }

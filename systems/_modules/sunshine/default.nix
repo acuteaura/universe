@@ -13,6 +13,8 @@
   virtScreen = "HDMI-A-1";
   setVirtScript = pkgs.writeScript "set-virt-out.fish" ''
     #!${pkgs.fish}/bin/fish
+    set logfile "/tmp/set-virt-out.log"
+    echo "started set-virt-out (date)" >> $logfile
     argparse "s/scale=?" "w/width=?" "h/height=?" "f/fps=?" -- $argv
     set final_w (set -q _flag_w && echo $_flag_w || echo "$SUNSHINE_CLIENT_WIDTH")
     set final_h (set -q _flag_h && echo $_flag_h || echo "$SUNSHINE_CLIENT_HEIGHT")
@@ -21,6 +23,7 @@
 
     # MBP workaround
     if [ "$final_w" = "3024" ] && [ "$final_h" = "1890" ]
+      echo "mbp workaround applied" >> $logfile
       set final_w 2560
       set final_h 1600
       set final_f 60
@@ -31,7 +34,9 @@
       set final_f 120
     end
 
-    ${kScreenDoctor} output.${phyScreen}.disable output.${virtScreen}.enable output.${virtScreen}.mode.{$final_w}x{$final_h}@{$final_f} output.${virtScreen}.scale.{$final_s}
+    echo "final res: "{$final_w}x{$final_h}@{$final_f} >> $logfile
+
+    ${kScreenDoctor} output.${phyScreen}.disable output.${virtScreen}.enable output.${virtScreen}.mode.{$final_w}x{$final_h}@{$final_f} output.${virtScreen}.scale.{$final_s} >> $logfile 2>> $logfile
   '';
   setPhyScript = pkgs.writeScript "set-screen-phy.fish" ''
     #!${pkgs.fish}/bin/fish

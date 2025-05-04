@@ -30,4 +30,6 @@
   environment.systemPackages = with pkgs; [
     virtiofsd
   ];
+
+  networking.firewall.trustedInterfaces = ["virbr0"];
 }

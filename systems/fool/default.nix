@@ -13,6 +13,7 @@
 
     ./amdgpu.nix
     ./hardware.nix
+    ./vfio.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_6_12;
@@ -90,6 +91,20 @@
   programs.nix-ld.libraries = [
     pkgs.icu
   ];
+
+  vfio.enable = false;
+
+  programs.kdeconnect.enable = true;
+
+  networking.firewall = rec {
+    allowedTCPPortRanges = [
+      {
+        from = 1714;
+        to = 1764;
+      }
+    ];
+    allowedUDPPortRanges = allowedTCPPortRanges;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
