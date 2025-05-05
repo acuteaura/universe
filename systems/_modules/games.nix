@@ -1,21 +1,22 @@
 {
   pkgs,
   lib,
+  unstable,
   ...
 }: {
   imports = [
     ./sunshine
   ];
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with unstable; [
     gamemode
     gamescope
     lutris
     mangohud
     protonup-qt
     protontricks
-    winetricks
-    wineWowPackages.stable
-
+    protonplus
+    bottles
+    
     unigine-superposition
     unigine-valley
   ];
