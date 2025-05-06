@@ -60,6 +60,7 @@
     ibm-plex
     inter
     victor-mono
+    vegur
   ];
 
   hardware.sane.enable = true;

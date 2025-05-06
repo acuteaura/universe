@@ -4,9 +4,6 @@
   unstable,
   ...
 }: {
-  imports = [
-    ./sunshine
-  ];
   environment.systemPackages = with unstable; [
     gamemode
     gamescope
@@ -19,9 +16,10 @@
     
     unigine-superposition
     unigine-valley
+
+    moonlight-qt
   ];
   hardware.xpadneo.enable = lib.mkDefault false;
-  services.sunshine-with-virtdisplay.enable = lib.mkDefault false;
 
   programs.steam = {
     enable = true;

@@ -63,14 +63,14 @@
     nssmdns4 = true;
     openFirewall = true;
   };
-  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.enable = false;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   services.printing.enable = true;
 
   programs.nix-ld.enable = true;
 
-  nix.settings.trusted-users = "aurelia";
+  nix.settings.trusted-users = ["aurelia"];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

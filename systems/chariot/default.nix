@@ -11,6 +11,7 @@
     ../_modules/containers.nix
     ../_modules/smb-nas.nix
     ../_modules/work.nix
+    ../_modules/sunshine
     ./amdgpu.nix
     ./hardware.nix
   ];
