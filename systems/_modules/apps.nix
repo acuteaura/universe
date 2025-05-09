@@ -43,5 +43,14 @@
 
     streamcontroller
     obs-studio
+
+    ardour
+    lmms
+    krita
   ];
+
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
 }
