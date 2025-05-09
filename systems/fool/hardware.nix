@@ -7,32 +7,6 @@
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
-  boot.loader = {
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
-      configurationLimit = 16;
-      useOSProber = true;
-    };
-    efi.canTouchEfiVariables = true;
-  };
-  boot.initrd.systemd.enable = true;
-  boot.plymouth.enable = true;
-
-  services.power-profiles-daemon.enable = true;
-
-  services.hardware.bolt.enable = true;
-
-  # Network
-  networking = {
-    hostId = "e4d619e1";
-    hostName = "fool";
-    nftables.enable = true;
-  };
-
-  boot.zfs.devNodes = "/dev/disk/by-label/";
-
   fileSystems."/" = {
     device = "fool/root";
     fsType = "zfs";
@@ -51,6 +25,16 @@
 
   fileSystems."/nix" = {
     device = "fool/nix";
+    fsType = "zfs";
+  };
+
+  fileSystems."/media/steam-library" = {
+    device = "magician/steam-library";
+    fsType = "zfs";
+  };
+
+  fileSystems."/media/wecontinue" = {
+    device = "fool/wecontinue";
     fsType = "zfs";
   };
 

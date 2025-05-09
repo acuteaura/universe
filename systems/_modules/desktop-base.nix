@@ -16,7 +16,6 @@
     alsa.enable = true;
     pulse.enable = true;
   };
-  hardware.pulseaudio.enable = lib.mkDefault false;
   hardware.bluetooth.enable = true;
 
   # prevents AirPods being stolen back by bluez when requesting connection elsewhere
