@@ -47,6 +47,7 @@
     ardour
     lmms
     krita
+    ocs-url
   ];
 
   programs.localsend = {
