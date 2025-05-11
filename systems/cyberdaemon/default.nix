@@ -6,18 +6,24 @@
 }: {
   imports = [
     ../_modules/base.nix
+    ../_modules/containers.nix
     ../_modules/desktop-base.nix
     ../_modules/desktop-plasma.nix
-    ../_modules/apps.nix
-    ../_modules/containers.nix
+    ../_modules/libvirt.nix
     ../_modules/smb-nas.nix
-    ../_modules/games.nix
+    ../_modules/wine.nix
     ../_modules/work.nix
+
+    ../_modules/emulators.nix
+    ../_modules/games.nix
+
+    ../_modules/apps.nix
+
     ./amdgpu.nix
     ./hardware.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_6_14;
 
   time.timeZone = "Europe/Berlin";
 
@@ -71,6 +77,9 @@
   programs.nix-ld.enable = true;
 
   nix.settings.trusted-users = ["aurelia"];
+
+  services.fprintd.enable = true;
+  security.pam.services.login.fprintAuth = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

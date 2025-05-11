@@ -39,6 +39,10 @@
           "python3.12-django-3.1.14"
         ];
       };
+      nixpkgs.overlays = [
+        (import ./overlays/brave.nix)
+        #(import ./overlays/fprintd-myself.nix)
+      ];
     };
     unstable = import nixpkgs-unstable {
       config.allowUnfree = true;
@@ -50,13 +54,13 @@
     };
   in
     {
-      nixosConfigurations.cyberdaemon = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.cyberdaemon = nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit unstable;};
         modules = [
           ./systems/cyberdaemon
           nixpkgsConfig
-          home-manager.nixosModules.home-manager
+          home-manager-unstable.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
