@@ -41,7 +41,6 @@
       };
       nixpkgs.overlays = [
         (import ./overlays/brave.nix)
-        #(import ./overlays/fprintd-myself.nix)
       ];
     };
     unstable = import nixpkgs-unstable {

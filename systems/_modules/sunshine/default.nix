@@ -75,6 +75,9 @@ in {
       capSysAdmin = true;
       openFirewall = true;
       applications.apps = import ./apps.nix {inherit pkgs setPhyScript setVirtScript steam-run-url;};
+      settings = {
+        min_log_level = "info";
+      };
     };
 
     systemd.user.services.steam-run-url-service = {
