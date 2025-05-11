@@ -11,6 +11,7 @@
     kdePackages.partitionmanager
     kdePackages.plasma-thunderbolt
     kdePackages.plasma-vault
+    kdePackages.qtstyleplugin-kvantum
 
     # required for system info
     clinfo
