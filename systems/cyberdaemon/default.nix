@@ -25,6 +25,8 @@
 
   boot.kernelPackages = pkgs.linuxPackages_6_14;
 
+  systemd.coredump.enable = true;
+
   time.timeZone = "Europe/Berlin";
 
   users.groups.aurelia = {
@@ -80,7 +82,7 @@
 
   services.fprintd.enable = true;
   security.pam.services.login.fprintAuth = false;
-  nixpkgs.overlays = [ (import ../../overlays/fprintd-cs9711.nix) ];
+  nixpkgs.overlays = [(import ../../overlays/fprintd-cs9711.nix)];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

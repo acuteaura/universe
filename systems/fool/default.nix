@@ -54,10 +54,11 @@
   users.users.aurelia = {
     isNormalUser = true;
     group = "aurelia";
-    extraGroups = ["wheel" "docker"];
+    extraGroups = ["wheel" "docker" "adbusers"];
     openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q"];
     shell = pkgs.fish;
   };
+  programs.adb.enable = true;
 
   nix.settings.trusted-users = ["aurelia"];
 
@@ -115,6 +116,7 @@
   hardware.cpu.amd.ryzen-smu.enable = true;
 
   zramSwap.enable = true;
+  virtualisation.waydroid.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

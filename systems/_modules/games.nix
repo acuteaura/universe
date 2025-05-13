@@ -9,6 +9,7 @@
 
     unigine-superposition
     unigine-valley
+    phoronix-test-suite
 
     moonlight-qt
   ];

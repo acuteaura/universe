@@ -44,6 +44,8 @@
     tmux
     wget
     zstd
+
+    lzip
   ];
 
   programs.fish.enable = true;
