@@ -1,3 +1,4 @@
+# broken because fprintd requires a newer version :(
 final: prev: {
   libfprint = prev.libfprint.overrideAttrs (old: {
     version = "git";
