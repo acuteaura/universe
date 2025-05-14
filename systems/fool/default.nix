@@ -19,6 +19,7 @@
     ./amdgpu.nix
     ./hardware.nix
     ./vfio.nix
+    ./smb.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_6_14;

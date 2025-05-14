@@ -45,6 +45,8 @@
     lmms
     krita
     ocs-url
+    maestral
+    maestral-gui
   ];
 
   programs.localsend = {
