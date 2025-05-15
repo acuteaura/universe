@@ -46,8 +46,10 @@
     zstd
 
     lzip
+    gnupg
   ];
 
+  programs.gnupg.agent.enable = true;
   programs.fish.enable = true;
 
   hardware.keyboard.qmk.enable = true;

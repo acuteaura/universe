@@ -1,5 +1,5 @@
-{...} : {
-    services.samba = {
+{...}: {
+  services.samba = {
     enable = true;
     openFirewall = true;
 

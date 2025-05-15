@@ -21,6 +21,7 @@
 
     ./amdgpu.nix
     ./hardware.nix
+    ./smb.nix
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_6_14;
@@ -80,9 +81,8 @@
 
   nix.settings.trusted-users = ["aurelia"];
 
-  services.fprintd.enable = true;
+  services.fprintd.enable = false;
   security.pam.services.login.fprintAuth = false;
-  nixpkgs.overlays = [(import ../../overlays/fprintd-cs9711.nix)];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
