@@ -29,24 +29,25 @@
 
     attic-client
     btrfs-progs
-    curl
     cryptsetup
+    curl
     dig
     e2fsprogs
     exfatprogs
     git
+    gnupg
+    hdparm
     htop
+    lzip
     ncdu
     neovim
+    ntfs3g
     pv
     restic
     socat
     tmux
     wget
     zstd
-
-    lzip
-    gnupg
   ];
 
   programs.gnupg.agent.enable = true;

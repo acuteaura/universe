@@ -9,8 +9,8 @@
     ./_modules/kube.nix
     ./_modules/security.nix
     ./_modules/jetbrains.nix
-    ./apps/aptakube.nix
-    ./apps/headlamp.nix
+    ../apps/aptakube.nix
+    ../apps/headlamp.nix
   ];
 
   home.username = "aurelia";

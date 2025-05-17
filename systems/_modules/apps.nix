@@ -3,9 +3,14 @@
   unstable,
   ...
 }: {
+  imports = [
+    ../../apps/headlamp.nix
+  ];
+
   environment.systemPackages = with pkgs; [
     appimage-run
     archivebox
+    ardour
     blender
     brave
     cool-retro-term
@@ -20,7 +25,13 @@
     kdePackages.kdenlive
     kdePackages.koko
     kdePackages.krecorder
+    krita
+    lmms
+    maestral
+    maestral-gui
+    obs-studio
     obsidian
+    ocs-url
     pgadmin4-desktopmode
     qmk
     remmina
@@ -37,19 +48,15 @@
     vlc
     vscode
     wezterm
-
-    streamcontroller
-    obs-studio
-
-    ardour
-    lmms
-    krita
-    ocs-url
-    maestral
-    maestral-gui
+    wl-clipboard-rs
   ];
 
   programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  programs.ausweisapp = {
     enable = true;
     openFirewall = true;
   };

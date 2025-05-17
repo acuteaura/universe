@@ -5,10 +5,10 @@
 }: let
   relinkSaves = pkgs.writeScript "relink-saves" ''
     #!${pkgs.fish}/bin/fish
-    set compatdir /media/steam-library/steamapps/compatdata/
+    set compatdir_magician /media/steam-library-magician/steamapps/compatdata/
 
     # expedition
-    set co_save_dir "$compatdir/1903340/pfx/drive_c/users/steamuser/AppData/Local/Sandfall/Saved/SaveGames/76561197998319308"
+    set co_save_dir "$compatdir_magician/1903340/pfx/drive_c/users/steamuser/AppData/Local/Sandfall/Saved/SaveGames/76561197998319308"
     if not test -L "$co_save_dir"
       if test -d "$co_save_dir"
         printf "Deleting existing save folder"
@@ -19,7 +19,7 @@
     end
 
     # thelongdark
-    set tld_save_dir "$compatdir/305620/pfx/drive_c/users/steamuser/AppData/Local/Hinterland/TheLongDark"
+    set tld_save_dir "$compatdir_magician/305620/pfx/drive_c/users/steamuser/AppData/Local/Hinterland/TheLongDark"
     if not test -L "$tld_save_dir"
       if test -d "$tld_save_dir"
         printf "Deleting existing save folder\n"

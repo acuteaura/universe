@@ -13,7 +13,7 @@
     terminal = false;
   };
 in {
-  home.packages = [
+  environment.systemPackages = [
     aptakube
     aptakubeDesktopItem
   ];

@@ -28,9 +28,14 @@
     fsType = "zfs";
   };
 
-  fileSystems."/media/steam-library" = {
+  fileSystems."/media/steam-library-magician" = {
     device = "magician/steam-library";
     fsType = "zfs";
+  };
+
+  fileSystems."/media/steam-library-empress" = {
+  device = "empress/steam-library";
+  fsType = "zfs";
   };
 
   fileSystems."/media/wecontinue" = {
