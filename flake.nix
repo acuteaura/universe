@@ -3,23 +3,24 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-
-    flake-utils.url = "github:numtide/flake-utils";
-
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixpkgs-beta.url = "nixpkgs/nixos-25.05";
+    home-manager-beta.url = "github:nix-community/home-manager/release-25.05";
+    home-manager-beta.inputs.nixpkgs.follows = "nixpkgs-beta";
+
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager-unstable.url = "github:nix-community/home-manager";
     home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    quadlet = {
-      url = "github:SEIAROTg/quadlet-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flake-utils.url = "github:numtide/flake-utils";
+
+    quadlet.url = "github:SEIAROTg/quadlet-nix";
+    quadlet.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -68,13 +69,13 @@
           }
         ];
       };
-      nixosConfigurations.chariot = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.chariot = inputs.nixpkgs-beta.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit unstable;};
         modules = [
           ./systems/chariot
           nixpkgsConfig
-          home-manager.nixosModules.home-manager
+          inputs.home-manager-beta.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
@@ -83,7 +84,7 @@
           }
         ];
       };
-      nixosConfigurations.fool = nixpkgs-unstable.lib.nixosSystem {
+      nixosConfigurations.fool = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit unstable;};
         modules = [

@@ -9,13 +9,14 @@
     ../_modules/containers.nix
     ../_modules/desktop-base.nix
     ../_modules/desktop-plasma.nix
+    ../_modules/games.nix
     ../_modules/libvirt.nix
     ../_modules/smb-nas.nix
+    ../_modules/system-config-defaults.nix
+    ../_modules/user-aurelia.nix
     ../_modules/wine.nix
     ../_modules/work.nix
     ../_modules/xrdp.nix
-    ../_modules/system-config-defaults.nix
-    ../_modules/user-aurelia.nix
 
     ../_modules/apps.nix
 
@@ -53,9 +54,6 @@
     hostName = "chariot";
     nftables.enable = true;
   };
-
-  services.pipewire.enable = lib.mkForce false;
-  hardware.pulseaudio.enable = lib.mkForce true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
