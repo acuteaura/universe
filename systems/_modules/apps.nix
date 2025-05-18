@@ -23,6 +23,7 @@
     haruna
     inkscape
     insomnia
+    insync
     kdePackages.kdenlive
     kdePackages.koko
     kdePackages.krecorder

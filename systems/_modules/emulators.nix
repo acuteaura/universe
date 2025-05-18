@@ -8,6 +8,5 @@
     melonDS
     rpcs3
     shadps4
-    torzu
   ];
 }
