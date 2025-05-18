@@ -1,17 +1,4 @@
 {...}: {
-  # Booting
-  boot.initrd.kernelModules = ["amdgpu"];
-  boot.loader = {
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
-      configurationLimit = 16;
-    };
-    efi.canTouchEfiVariables = true;
-  };
-  boot.initrd.systemd.enable = true;
-  boot.plymouth.enable = true;
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "thunderbolt"];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];

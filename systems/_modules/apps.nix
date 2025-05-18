@@ -18,6 +18,7 @@
     easyeffects
     firefox
     foliate
+    gparted
     handbrake
     haruna
     inkscape

@@ -8,11 +8,20 @@
       libvdpau-va-gl
       rocmPackages.clr.icd
       amdvlk
-      mesa
+    ];
+    extraPackages32 = [
+      pkgs.driversi686Linux.amdvlk
     ];
   };
 
+  environment.variables.AMD_VULKAN_ICD = "RADV";
+
   environment.systemPackages = with pkgs; [
     radeontop
+    amdgpu_top
+    lact
   ];
+
+  systemd.packages = with pkgs; [lact];
+  systemd.services.lactd.wantedBy = ["multi-user.target"];
 }

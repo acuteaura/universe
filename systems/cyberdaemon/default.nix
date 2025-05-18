@@ -11,40 +11,41 @@
     ../_modules/desktop-plasma.nix
     ../_modules/libvirt.nix
     ../_modules/smb-nas.nix
+    ../_modules/system-config-defaults.nix
+    ../_modules/user-aurelia.nix
     ../_modules/wine.nix
     ../_modules/work.nix
+    ../_modules/amdgpu.nix
 
     ../_modules/emulators.nix
     ../_modules/games.nix
 
     ../_modules/apps.nix
 
-    ./amdgpu.nix
     ./hardware.nix
     ./smb.nix
   ];
-
-  boot.kernelPackages = pkgs.linuxPackages_6_14;
-
-  systemd.coredump.enable = true;
-
-  time.timeZone = "Europe/Berlin";
-
-  users.groups.aurelia = {
-    name = "aurelia";
-    gid = 1000;
+  # Booting
+  boot.initrd.kernelModules = ["amdgpu"];
+  boot.loader = {
+    grub = {
+      enable = true;
+      efiSupport = true;
+      device = "nodev";
+      configurationLimit = 16;
+    };
+    efi.canTouchEfiVariables = true;
   };
+  boot.initrd.systemd.enable = true;
+  boot.plymouth.enable = true;
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "thunderbolt"];
+  boot.kernelModules = ["kvm-amd"];
+  boot.extraModulePackages = [];
+  boot.kernelParams = ["amdgpu.sg_display=0" "transparent_hugepage=never"];
 
-  users.users.aurelia = {
-    isNormalUser = true;
-    group = "aurelia";
-    extraGroups = ["wheel" "docker"];
-    packages = with pkgs; [];
-    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q"];
-    shell = pkgs.fish;
-  };
+  services.power-profiles-daemon.enable = true;
+  services.hardware.bolt.enable = true;
 
-  programs._1password-gui.polkitPolicyOwners = ["aurelia"];
   environment.etc."1password/custom_allowed_browsers" = {
     text = ''
     '';
@@ -60,26 +61,6 @@
       wayland.enable = true;
     };
   };
-
-  # tiebreaking required if you have gnome+kde
-  #programs.ssh.askPassword = lib.mkForce "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
-
-  #systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
-
-  # random tools
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
-  services.mullvad-vpn.enable = false;
-  services.mullvad-vpn.package = pkgs.mullvad-vpn;
-
-  services.printing.enable = true;
-
-  programs.nix-ld.enable = true;
-
-  nix.settings.trusted-users = ["aurelia"];
 
   services.fprintd.enable = false;
   security.pam.services.login.fprintAuth = false;

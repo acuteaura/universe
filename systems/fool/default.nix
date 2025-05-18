@@ -8,21 +8,22 @@
     ../_modules/smb-nas.nix
     ../_modules/wine.nix
     ../_modules/work.nix
+    ../_modules/system-config-defaults.nix
+    ../_modules/user-aurelia.nix
+    ../_modules/amdgpu.nix
 
     ../_modules/emulators.nix
     ../_modules/games.nix
     ../_modules/sunshine
 
     ../_modules/apps.nix
-    ../_modules/wecontinue.nix
 
-    ./amdgpu.nix
+    ./gpu-tweaks.nix
     ./hardware.nix
     ./vfio.nix
     ./smb.nix
+    ./wecontinue.nix
   ];
-
-  boot.kernelPackages = pkgs.linuxPackages_6_14;
 
   boot.loader = {
     grub = {
@@ -45,25 +46,6 @@
     hostName = "fool";
     nftables.enable = true;
   };
-
-  time.timeZone = "Europe/Berlin";
-
-  users.groups.aurelia = {
-    name = "aurelia";
-    gid = 1000;
-  };
-  users.users.aurelia = {
-    isNormalUser = true;
-    group = "aurelia";
-    extraGroups = ["wheel" "docker" "adbusers"];
-    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q"];
-    shell = pkgs.fish;
-  };
-  programs.adb.enable = true;
-
-  nix.settings.trusted-users = ["aurelia"];
-
-  programs._1password-gui.polkitPolicyOwners = ["aurelia"];
 
   environment.etc."1password/custom_allowed_browsers" = {
     text = '''';
@@ -116,8 +98,8 @@
 
   hardware.cpu.amd.ryzen-smu.enable = true;
 
-  zramSwap.enable = true;
   virtualisation.waydroid.enable = true;
+  programs.adb.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -5,28 +5,6 @@
   modulesPath,
   ...
 }: {
-  # Booting
-  boot.initrd.kernelModules = ["amdgpu"];
-  boot.loader = {
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
-      configurationLimit = 16;
-    };
-    efi.canTouchEfiVariables = true;
-  };
-  boot.initrd.systemd.enable = true;
-  boot.plymouth.enable = true;
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "thunderbolt"];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
-  boot.kernelParams = ["amdgpu.sg_display=0" "transparent_hugepage=never"];
-
-  services.power-profiles-daemon.enable = true;
-
-  services.hardware.bolt.enable = true;
-
   # Network
   networking = {
     hostId = "5934b829";

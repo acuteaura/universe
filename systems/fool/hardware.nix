@@ -34,8 +34,8 @@
   };
 
   fileSystems."/media/steam-library-empress" = {
-  device = "empress/steam-library";
-  fsType = "zfs";
+    device = "empress/steam-library";
+    fsType = "zfs";
   };
 
   fileSystems."/media/wecontinue" = {

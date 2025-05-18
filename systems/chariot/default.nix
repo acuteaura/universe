@@ -4,35 +4,37 @@
   ...
 }: {
   imports = [
+    ../_modules/amdgpu.nix
     ../_modules/base.nix
+    ../_modules/containers.nix
     ../_modules/desktop-base.nix
     ../_modules/desktop-plasma.nix
-    ../_modules/apps.nix
-    ../_modules/containers.nix
+    ../_modules/libvirt.nix
     ../_modules/smb-nas.nix
+    ../_modules/wine.nix
     ../_modules/work.nix
-    ../_modules/sunshine
-    ./amdgpu.nix
+    ../_modules/xrdp.nix
+    ../_modules/system-config-defaults.nix
+    ../_modules/user-aurelia.nix
+
+    ../_modules/apps.nix
+
     ./hardware.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
-
-  time.timeZone = "Europe/Berlin";
-
-  users.groups.aurelia = {
-    name = "aurelia";
-    gid = 1000;
+  # Booting
+  boot.initrd.kernelModules = ["amdgpu"];
+  boot.loader = {
+    grub = {
+      enable = true;
+      efiSupport = true;
+      device = "nodev";
+      configurationLimit = 16;
+    };
+    efi.canTouchEfiVariables = true;
   };
-  users.users.aurelia = {
-    isNormalUser = true;
-    group = "aurelia";
-    extraGroups = ["wheel" "docker"];
-    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q"];
-    shell = pkgs.fish;
-  };
-  nix.settings.trusted-users = ["aurelia"];
-  programs._1password-gui.polkitPolicyOwners = ["aurelia"];
+  boot.initrd.systemd.enable = true;
+  boot.plymouth.enable = true;
 
   services.xserver.displayManager.gdm.enable = false;
   services.displayManager = {
@@ -45,50 +47,12 @@
     };
   };
 
-  # tiebreaking required if you have gnome+kde
-  #programs.ssh.askPassword = lib.mkForce "${pkgs.gnome.seahorse}/libexec/seahorse/ssh-askpass";
-
-  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
-
   # Network
   networking = {
     hostId = "7807e590";
     hostName = "chariot";
     nftables.enable = true;
   };
-
-  # random tools
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
-  services.mullvad-vpn.enable = false;
-  services.mullvad-vpn.package = pkgs.mullvad-vpn;
-
-  services.printing.enable = true;
-
-  programs.nix-ld.enable = true;
-
-  services.xrdp = {
-    enable = true;
-    defaultWindowManager = "${pkgs.writeShellScript "xrdp-session-script" ''
-      systemd-inhibit --mode=block --what="sleep:idle:handle-lid-switch" --why=xrdp startplasma-x11
-    ''}";
-    openFirewall = true;
-    audio.enable = true;
-    #sslKey = "/etc/chariot.atlas-ide.ts.net.key";
-    #sslCert = "/etc/chariot.atlas-ide.ts.net.crt";
-  };
-
-  security.polkit.extraConfig = ''
-    polkit.addRule(function(action, subject) {
-      if (subject.isInGroup("wheel"))
-      {
-        return polkit.Result.YES;
-      }
-    });
-  '';
 
   services.pipewire.enable = lib.mkForce false;
   hardware.pulseaudio.enable = lib.mkForce true;

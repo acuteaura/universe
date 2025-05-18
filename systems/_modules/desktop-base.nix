@@ -13,33 +13,40 @@
   # Enable desktop hardware features
   services.pipewire = {
     enable = lib.mkDefault true;
-    alsa.enable = true;
-    pulse.enable = true;
+    alsa.enable = lib.mkDefault true;
+    pulse.enable = lib.mkDefault true;
   };
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth.enable = lib.mkDefault true;
 
   # prevents AirPods being stolen back by bluez when requesting connection elsewhere
   hardware.bluetooth.settings.Policy.ReconnectAttempts = 0;
 
   # Flatpak wants these
-  services.flatpak.enable = true;
+  services.flatpak.enable = lib.mkDefault true;
 
   # Ancillary services
-  services.pcscd.enable = true;
-  services.gvfs.enable = true;
-  services.tumbler.enable = true;
+  services.pcscd.enable = lib.mkDefault true;
+  services.gvfs.enable = lib.mkDefault true;
+  services.tumbler.enable = lib.mkDefault true;
 
-  networking.firewall = {
-    trustedInterfaces = ["tailscale0"];
-    allowedUDPPorts = [config.services.tailscale.port];
+  services.avahi = {
+    enable = lib.mkDefault true;
+    nssmdns4 = lib.mkDefault true;
+    openFirewall = lib.mkDefault true;
   };
+
+  services.printing.enable = lib.mkDefault true;
+  services.printing.drivers = with pkgs; [
+    epson-escpr
+    epson-escpr2
+  ];
 
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
   };
 
-  programs.thunar.enable = true;
+  programs.thunar.enable = lib.mkDefault false;
   programs.thunar.plugins = with pkgs.xfce; [
     thunar-archive-plugin
     thunar-volman
@@ -48,10 +55,7 @@
   programs.dconf.enable = true;
 
   environment.systemPackages = with pkgs; [
-    # common dependency
     zenity
-    gparted
-    #unstable.zed-editor
   ];
 
   fonts.packages = with pkgs; [
@@ -65,12 +69,6 @@
   hardware.sane.enable = true;
   hardware.sane.extraBackends = with pkgs; [
     epsonscan2
-  ];
-
-  services.printing.enable = true;
-  services.printing.drivers = with pkgs; [
-    epson-escpr
-    epson-escpr2
   ];
 
   security.pam.services.sudo.nodelay = true;
