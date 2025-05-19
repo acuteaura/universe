@@ -14,7 +14,6 @@
     ./_modules/hwtools.nix
     ./_modules/kube.nix
     ./_modules/security.nix
-    ./_modules/jetbrains.nix
   ];
 
   home.username = "aurelia";

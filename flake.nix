@@ -84,13 +84,13 @@
           }
         ];
       };
-      nixosConfigurations.fool = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.fool = inputs.nixpkgs-beta.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {inherit unstable;};
         modules = [
           ./systems/fool
           nixpkgsConfig
-          home-manager-unstable.nixosModules.home-manager
+          inputs.home-manager-beta.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;

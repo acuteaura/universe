@@ -63,5 +63,10 @@
   programs.fish.enable = lib.mkDefault true;
   programs.nix-ld.enable = lib.mkDefault true;
 
+  nix.settings = {
+    substituters = ["https://attic.nullvoid.space/sunhome"];
+    trusted-public-keys = ["sunhome:3aBZKTmYovMvwc7Q/l6sVBY4dEKf8qdkOJjCGoGLD1k="];
+  };
+
   nix.package = lib.mkDefault pkgs.lix;
 }
