@@ -100,6 +100,11 @@
 
   virtualisation.waydroid.enable = true;
   programs.adb.enable = true;
+  services.ollama = {
+    enable = true;
+    loadModels = ["devstral" "deepseek-r1:14b"];
+    acceleration = "rocm";
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
