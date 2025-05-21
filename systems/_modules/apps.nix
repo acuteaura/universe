@@ -51,6 +51,7 @@
     vscode
     wezterm
     wl-clipboard-rs
+    ghostty
   ];
 
   programs.localsend = {

@@ -1,3 +1,4 @@
+# broken: uses <nixpkgs> and can't be overwritten
 self: super: {
   waydroid_script = import (super.fetchFromGitHub {
     owner = "casualsnek";

@@ -42,6 +42,7 @@
       };
       nixpkgs.overlays = [
         (import ./overlays/brave.nix)
+        (import ./overlays/jetbrains-pin.nix)
       ];
     };
     unstable = import nixpkgs-unstable {
