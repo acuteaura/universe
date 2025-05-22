@@ -54,6 +54,8 @@
     wezterm
     wl-clipboard-rs
     zed-editor
+
+    rpi-imager
   ];
 
   programs.localsend = {
