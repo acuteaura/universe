@@ -47,11 +47,6 @@
     nftables.enable = true;
   };
 
-  environment.etc."1password/custom_allowed_browsers" = {
-    text = '''';
-    mode = "644";
-  };
-
   services.displayManager = {
     defaultSession = "plasma";
     sddm = {
@@ -105,6 +100,7 @@
     loadModels = ["devstral" "deepseek-r1:14b"];
     acceleration = "rocm";
   };
+  services.open-webui.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

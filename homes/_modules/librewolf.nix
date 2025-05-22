@@ -1,6 +1,7 @@
-{...}: {
+{pkgs, ...}: {
   programs.librewolf = {
     enable = true;
+    package = pkgs.librewolf-unwrapped;
     # Enable WebGL, cookies and history
     settings = {
       "webgl.disabled" = false;

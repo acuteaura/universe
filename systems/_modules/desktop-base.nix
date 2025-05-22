@@ -82,7 +82,7 @@
       librewolf
       vivaldi-bin
     '';
-    mode = "644";
+    mode = "0755";
   };
 
   services.hardware.bolt.enable = true;

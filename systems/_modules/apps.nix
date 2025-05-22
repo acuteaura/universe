@@ -1,6 +1,5 @@
 {
   pkgs,
-  unstable,
   ...
 }: {
   imports = [
@@ -16,8 +15,10 @@
     cool-retro-term
     discord
     easyeffects
+    f2fs-tools
     firefox
     foliate
+    ghostty
     gparted
     handbrake
     haruna
@@ -28,7 +29,9 @@
     kdePackages.koko
     kdePackages.krecorder
     krita
+    librewolf
     lmms
+    lmstudio
     maestral
     maestral-gui
     obs-studio
@@ -44,14 +47,13 @@
     strawberry
     syncthingtray
     thunderbird
-    unstable.zed-editor
     virt-manager
     virt-viewer
     vlc
     vscode
     wezterm
     wl-clipboard-rs
-    ghostty
+    zed-editor
   ];
 
   programs.localsend = {

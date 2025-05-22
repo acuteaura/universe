@@ -46,12 +46,6 @@
   services.power-profiles-daemon.enable = true;
   services.hardware.bolt.enable = true;
 
-  environment.etc."1password/custom_allowed_browsers" = {
-    text = ''
-    '';
-    mode = "644";
-  };
-
   services.displayManager = {
     defaultSession = "plasma";
     sddm = {

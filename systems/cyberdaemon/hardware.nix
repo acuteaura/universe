@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  modulesPath,
-  ...
-}: {
+{...}: {
   # Network
   networking = {
     hostId = "5934b829";
