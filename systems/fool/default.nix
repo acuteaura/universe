@@ -17,6 +17,7 @@
     ../_modules/sunshine
 
     ../_modules/apps.nix
+    ../_modules/portal.nix
 
     ./gpu-tweaks.nix
     ./hardware.nix

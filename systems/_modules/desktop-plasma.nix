@@ -14,6 +14,10 @@
     kdePackages.qtstyleplugin-kvantum
     kio-fuse
 
+    adwaita-icon-theme
+    kora-icon-theme
+    nordic
+
     # required for system info
     clinfo
     glxinfo

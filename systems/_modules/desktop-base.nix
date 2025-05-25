@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   ...
@@ -83,6 +82,25 @@
       vivaldi-bin
     '';
     mode = "0755";
+  };
+
+  environment.etc."brave/policies/managed/aura.json" = {
+    text = ''
+      {
+        "BraveAIChatEnabled": 0,
+        "BraveRewardsDisabled": 1,
+        "BraveVPNDisabled": 1,
+        "BraveWalletDisabled": 1,
+        "ExtensionInstallForcelist": [
+          "cdglnehniifkbagbbombnjghhcihifij",
+          "aeblfdkhhhdcdjpifhhbdiojplfjncoa",
+          "hdokiejnpimakedhajhdlcegeplioahd",
+          "cjpalhdlnbpafiamejdnhcphjbkeiagm"
+        ],
+        "IPFSEnabled": false,
+        "TorDisabled": 1
+      }
+    '';
   };
 
   services.hardware.bolt.enable = true;
