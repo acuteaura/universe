@@ -6,12 +6,11 @@
   environment.systemPackages = with pkgs; [
     gamemode
     mangohud
+    heroic
 
     unigine-superposition
     unigine-valley
     phoronix-test-suite
-
-    moonlight-qt
   ];
   hardware.xpadneo.enable = lib.mkDefault false;
 

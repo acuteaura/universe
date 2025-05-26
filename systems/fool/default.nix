@@ -17,7 +17,6 @@
     ../_modules/sunshine
 
     ../_modules/apps.nix
-    ../_modules/portal.nix
 
     ./gpu-tweaks.nix
     ./hardware.nix
@@ -90,6 +89,7 @@
       }
     ];
     allowedUDPPortRanges = allowedTCPPortRanges;
+    trustedInterfaces = ["br0"];
   };
 
   hardware.cpu.amd.ryzen-smu.enable = true;
@@ -102,6 +102,7 @@
     acceleration = "rocm";
   };
   services.open-webui.enable = true;
+  networking.networkmanager.unmanaged = ["virbr0" "docker0"];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

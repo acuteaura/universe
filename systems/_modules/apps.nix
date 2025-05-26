@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../../apps/headlamp.nix
   ];
@@ -34,6 +31,7 @@
     lmstudio
     maestral
     maestral-gui
+    moonlight-qt
     obs-studio
     obsidian
     ocs-url

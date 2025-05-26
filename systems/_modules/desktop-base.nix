@@ -84,7 +84,7 @@
     mode = "0755";
   };
 
-  environment.etc."brave/policies/managed/aura.json" = {
+  environment.etc."brave/policies/managed/anti-eich-aktion.json" = {
     text = ''
       {
         "BraveAIChatEnabled": 0,
@@ -102,6 +102,9 @@
       }
     '';
   };
+
+  xdg.portal.enable = true;
+  xdg.portal.xdgOpenUsePortal = true;
 
   services.hardware.bolt.enable = true;
 }
