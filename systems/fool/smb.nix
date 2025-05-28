@@ -1,12 +1,18 @@
 {...}: {
   services.samba = {
     enable = true;
-    openFirewall = true;
+
+    # no need to open legacy ports
+    openFirewall = false;
 
     settings = {
       global = {
         "server string" = "fool";
         "workgroup" = "TRANSCOMMUNE";
+
+        "server min protocol" = "SMB3";
+        "client min protocol" = "SMB3";
+        "disable netbios" = "yes";
 
         "guest account" = "nobody";
         "map to guest" = "bad user";
@@ -31,5 +37,14 @@
         "valid users" = "aurelia";
       };
     };
+  };
+
+  networking.firewall = {
+    allowedTCPPorts = [445];
+  };
+
+  services.samba-wsdd = {
+    enable = true;
+    openFirewall = true;
   };
 }

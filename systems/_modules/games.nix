@@ -7,6 +7,7 @@
     gamemode
     mangohud
     heroic
+    steamtinkerlaunch
 
     unigine-superposition
     unigine-valley

@@ -39,7 +39,6 @@
   boot.kernelParams = ["amdgpu.sg_display=0" "transparent_hugepage=never"];
 
   services.power-profiles-daemon.enable = true;
-  services.hardware.bolt.enable = true;
 
   services.displayManager = {
     defaultSession = "plasma";

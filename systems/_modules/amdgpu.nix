@@ -7,14 +7,12 @@
     extraPackages = with pkgs; [
       libvdpau-va-gl
       rocmPackages.clr.icd
-      amdvlk
     ];
-    extraPackages32 = [
-      pkgs.driversi686Linux.amdvlk
+    extraPackages32 = with pkgs.pkgsi686Linux; [
     ];
   };
 
-  environment.variables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
+  #environment.variables.VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json";
 
   environment.systemPackages = with pkgs; [
     radeontop

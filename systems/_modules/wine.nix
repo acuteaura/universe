@@ -2,6 +2,6 @@
   environment.systemPackages = with pkgs; [
     protonup-qt
     protonplus
-    bottles
+    (bottles.override {removeWarningPopup = true;})
   ];
 }

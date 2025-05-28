@@ -58,7 +58,6 @@
   services.sunshine-with-virtdisplay.enable = true;
 
   services.power-profiles-daemon.enable = true;
-  services.hardware.bolt.enable = true;
 
   # random tools
   services.avahi = {
@@ -102,7 +101,46 @@
     acceleration = "rocm";
   };
   services.open-webui.enable = true;
+
+  networking.networkmanager.enable = false;
   networking.networkmanager.unmanaged = ["virbr0" "docker0"];
+
+  networking = {
+    useDHCP = false;
+    useNetworkd = true;
+    tempAddresses = "disabled";
+  };
+  systemd.network = {
+    enable = true;
+    netdevs = {
+      "20-br0" = {
+        netdevConfig = {
+          Kind = "bridge";
+          Name = "br0";
+        };
+      };
+    };
+    networks = {
+      "50-eno1" = {
+        matchConfig.Name = "eno1";
+        networkConfig.Bridge = "br0";
+        linkConfig.RequiredForOnline = "enslaved";
+      };
+      "60-thunderbolt0" = {
+        matchConfig.Name = "thunderbolt0";
+        networkConfig.DHCP = "no";
+        linkConfig.RequiredForOnline = "no";
+      };
+      "90-br0" = {
+        matchConfig.Name = "br0";
+        bridgeConfig = {};
+        networkConfig.DHCP = "yes";
+        linkConfig = {
+          RequiredForOnline = "carrier";
+        };
+      };
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

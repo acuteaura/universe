@@ -103,8 +103,9 @@
     '';
   };
 
-  xdg.portal.enable = true;
-  xdg.portal.xdgOpenUsePortal = true;
+  xdg.portal.enable = lib.mkDefault true;
+  xdg.portal.xdgOpenUsePortal = lib.mkDefault true;
 
-  services.hardware.bolt.enable = true;
+  services.hardware.bolt.enable = lib.mkDefault true;
+  networking.firewall.trustedInterfaces = ["thunderbolt*"];
 }
