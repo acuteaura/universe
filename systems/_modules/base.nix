@@ -57,6 +57,7 @@
     tmux
     wget
     zstd
+    openssl
   ];
 
   programs.gnupg.agent.enable = lib.mkDefault true;

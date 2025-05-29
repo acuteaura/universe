@@ -75,6 +75,8 @@
     icu
     libgcc
     zlib
+    stdenv.cc.cc.lib
+    libz
   ];
 
   vfio.enable = false;
@@ -88,7 +90,6 @@
       }
     ];
     allowedUDPPortRanges = allowedTCPPortRanges;
-    trustedInterfaces = ["br0"];
   };
 
   hardware.cpu.amd.ryzen-smu.enable = true;
@@ -134,8 +135,15 @@
       "90-br0" = {
         matchConfig.Name = "br0";
         bridgeConfig = {};
-        networkConfig.DHCP = "yes";
+        networkConfig = {
+          DHCP = "no";
+          Address = "192.168.2.2/24";
+          Gateway = "192.168.2.1";
+          DNS = "192.168.2.1";
+          IgnoreCarrierLoss = "yes";
+        };
         linkConfig = {
+          MACAddress = "08:bf:b8:19:16:f5";
           RequiredForOnline = "carrier";
         };
       };
