@@ -8,52 +8,46 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Install Nix
-      uses: DeterminateSystems/nix-installer-action@main
-    
-    - name: Create new branch
-      id: branch
-      run: |
-        if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-          BRANCH_NAME="update-flake-deps-$(openssl rand -hex 3)"
-        else
-          BRANCH_NAME="update-flake-deps-$(date +'%Y%m%d')"
-        fi
-        echo "branch=$BRANCH_NAME" >> $GITHUB_OUTPUT
-
-    - name: Update flake dependencies
-      id: update
-      run: |
-        nix flake update
-        if git diff --quiet; then
-          echo "changed=false" >> $GITHUB_OUTPUT
-        else
-          echo "changed=true" >> $GITHUB_OUTPUT
-        fi
-
-    - name: Attempt to build NixOS system (dry-run)
-      if: steps.update.outputs.changed == 'true'
-      run: |
-        nix build .#nixosConfigurations.nivix.config.system.build.toplevel --dry-run
-        nix build .#homeConfigurations.nivix.activationPackage --dry-run
-
-    - name: Push changes
-      if: steps.update.outputs.changed == 'true'
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ steps.branch.outputs.branch }}
-        force: true
-
-    - name: Create Pull Request
-      if: steps.update.outputs.changed == 'true'
-      uses: peter-evans/create-pull-request@v3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        branch: ${{ steps.branch.outputs.branch }}
-        title: 'Update Nix Flake Dependencies'
-        body: 'This PR updates the Nix flake dependencies and attempts to build the NixOS system.'
-        reviewers: 'acuteaura'
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: install lix
+        uses: canidae-solutions/lix-quick-install-action@v3
+      - name: Create new branch
+        id: branch
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            BRANCH_NAME="update-flake-deps-$(openssl rand -hex 3)"
+          else
+            BRANCH_NAME="update-flake-deps-$(date +'%Y%m%d')"
+          fi
+          echo "branch=$BRANCH_NAME" >> $GITHUB_OUTPUT
+      - name: Update flake dependencies
+        id: update
+        run: |
+          nix flake update
+          if git diff --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Attempt to build NixOS system (dry-run)
+        if: steps.update.outputs.changed == 'true'
+        run: |
+          nix build .#nixosConfigurations.fool.config.system.build.toplevel --dry-run
+          nix build .#homeConfigurations..activationPackage --dry-run
+      - name: Push changes
+        if: steps.update.outputs.changed == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ steps.branch.outputs.branch }}
+          force: true
+      - name: Create Pull Request
+        if: steps.update.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ steps.branch.outputs.branch }}
+          title: "Update Nix Flake Dependencies"
+          body: "This PR updates the Nix flake dependencies and attempts to build the NixOS system."
+          reviewers: "acuteaura"

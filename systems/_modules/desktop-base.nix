@@ -3,8 +3,10 @@
   lib,
   ...
 }: {
-  # Yep, it's a desktop!
-  # Enable the X11 windowing system.
+  # desktops need to be responsive
+  nix.daemonCPUSchedPolicy = "idle";
+  nix.daemonIOSchedClass = "idle";
+
   services.xserver.enable = true;
   services.xserver.excludePackages = [pkgs.xterm];
   services.xserver.desktopManager.xterm.enable = false;

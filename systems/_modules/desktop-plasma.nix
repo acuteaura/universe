@@ -7,6 +7,7 @@
     kdePackages.filelight
     kdePackages.kdeconnect-kde
     kdePackages.kio
+    kdePackages.krfb
     kdePackages.partitionmanager
     kdePackages.plasma-thunderbolt
     kdePackages.plasma-vault
