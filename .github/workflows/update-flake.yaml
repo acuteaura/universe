@@ -13,7 +13,7 @@ jobs:
       - name: "test cursed shit"
         run: echo $VAR
         env:
-          VAR: ${{ var.TEST_VAR || "alternative" }}
+          VAR: ${{ var.TEST_VAR && var.TEST_VAR || "alternative" }}
       - name: install lix
         uses: canidae-solutions/lix-quick-install-action@v3
       - name: Create new branch
