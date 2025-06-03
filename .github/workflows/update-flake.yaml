@@ -2,6 +2,8 @@ name: Update Nix Flake Dependencies and Build NixOS System
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *"
 
 jobs:
   update-and-build:
@@ -10,10 +12,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: "test cursed shit"
-        run: echo $VAR
-        env:
-          VAR: ${{ vars.TEST_VAR || "alternative" }}
       - name: install lix
         uses: canidae-solutions/lix-quick-install-action@v3
       - name: Create new branch
@@ -38,7 +36,6 @@ jobs:
         if: steps.update.outputs.changed == 'true'
         run: |
           nix build .#nixosConfigurations.fool.config.system.build.toplevel --dry-run
-          nix build .#homeConfigurations..activationPackage --dry-run
       - name: Push changes
         if: steps.update.outputs.changed == 'true'
         uses: ad-m/github-push-action@master
