@@ -25,13 +25,8 @@
     home-manager-unstable,
     ...
   }: let
-    baseSystem = {
-      system = "x86_64-linux";
-      specialArgs = {inherit unstable;};
-    };
     nixpkgsConfig = {
       nixpkgs.config = {
-        allowUnfree = true;
         permittedInsecurePackages = [
           "python3.11-django-3.1.14"
           "python3.12-django-3.1.14"
@@ -49,76 +44,47 @@
   in
     {
       nixosConfigurations = {
-        cyberdaemon = nixpkgs-unstable.lib.nixosSystem {
-          inherit (baseSystem) system specialArgs;
-          modules = [
-            ./systems/cyberdaemon
-            (import ./basesystem.nix {
-              pkgs = nixpkgs.legacyPackages.x86_64-linux;
-              inherit unstable home-manager;
-              home-manager-imports = [
-                ./home-manager/base.nix
-                ./home-manager/shell.nix
-              ];
-            })
+        cyberdaemon = import ./basesystem.nix {
+          inherit nixpkgs nixpkgs-unstable home-manager;
+          nixos-imports = [./systems/cyberdaemon];
+          home-manager-imports = [
+            ./home-manager/base.nix
+            ./home-manager/shell.nix
           ];
         };
-        chariot = inputs.nixpkgs.lib.nixosSystem {
-          inherit (baseSystem) system specialArgs;
-          modules = [
-            ./systems/chariot
-            (import ./basesystem.nix {
-              pkgs = nixpkgs.legacyPackages.x86_64-linux;
-              inherit unstable home-manager;
-              home-manager-imports = [
-                ./home-manager/base.nix
-                ./home-manager/shell.nix
-              ];
-            })
+        chariot = import ./basesystem.nix {
+          inherit nixpkgs nixpkgs-unstable home-manager;
+          nixos-imports = [./systems/chariot];
+          home-manager-imports = [
+            ./home-manager/base.nix
+            ./home-manager/shell.nix
           ];
         };
-        fool = nixpkgs.lib.nixosSystem {
-          inherit (baseSystem) system specialArgs;
-          modules = [
-            (import ./basesystem.nix {
-              pkgs = nixpkgs.legacyPackages.x86_64-linux;
-              inherit unstable home-manager;
-              nixos-imports = [./systems/fool];
-              home-manager-imports = [
-                ./home-manager/base.nix
-                ./home-manager/shell.nix
-              ];
-            })
+        fool = import ./basesystem.nix {
+          inherit nixpkgs nixpkgs-unstable home-manager;
+          nixos-imports = [./systems/fool];
+          home-manager-imports = [
+            ./home-manager/base.nix
+            ./home-manager/shell.nix
           ];
         };
-        thassa = nixpkgs.lib.nixosSystem {
-          inherit (baseSystem) system specialArgs;
-          modules = [
-            ./systems/thassa
-            (import ./basesystem.nix {
-              pkgs = nixpkgs.legacyPackages.x86_64-linux;
-              inherit unstable home-manager;
-              home-manager-imports = [
-                ./home-manager/base.nix
-                ./home-manager/shell.nix
-              ];
-            })
+        thassa = import ./basesystem.nix {
+          inherit nixpkgs nixpkgs-unstable home-manager;
+          nixos-imports = [
             inputs.quadlet.nixosModules.quadlet
+            ./systems/thassa
+          ];
+          home-manager-imports = [
+            ./home-manager/base.nix
+            ./home-manager/shell.nix
           ];
         };
-        wsl = nixpkgs.lib.nixosSystem {
-          inherit (baseSystem) system specialArgs;
-          modules = [
-            ./systems/wsl
-            inputs.nixos-wsl.nixosModules.default
-            (import ./basesystem.nix {
-              pkgs = nixpkgs.legacyPackages.x86_64-linux;
-              inherit unstable home-manager;
-              home-manager-imports = [
-                ./home-manager/base.nix
-                ./home-manager/shell.nix
-              ];
-            })
+        wsl = import ./basesystem.nix {
+          inherit nixpkgs nixpkgs-unstable home-manager;
+          nixos-imports = [./systems/wsl];
+          home-manager-imports = [
+            ./home-manager/base.nix
+            ./home-manager/shell.nix
           ];
         };
       };

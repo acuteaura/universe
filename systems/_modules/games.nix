@@ -8,10 +8,6 @@
     mangohud
     heroic
     steamtinkerlaunch
-
-    unigine-superposition
-    unigine-valley
-    phoronix-test-suite
   ];
   hardware.xpadneo.enable = lib.mkDefault false;
 

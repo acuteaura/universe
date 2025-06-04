@@ -51,13 +51,15 @@
     ncdu
     neovim
     ntfs3g
+    openssl
+    p7zip
     pv
     restic
     socat
     tmux
+    unrar-free
     wget
     zstd
-    openssl
   ];
 
   programs.gnupg.agent.enable = lib.mkDefault true;

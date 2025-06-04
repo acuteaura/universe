@@ -21,14 +21,12 @@
     haruna
     inkscape
     insomnia
-    insync
     kdePackages.kdenlive
     kdePackages.koko
     kdePackages.krecorder
     krita
     librewolf
     lmms
-    lmstudio
     maestral
     maestral-gui
     moonlight-qt

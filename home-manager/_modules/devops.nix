@@ -8,12 +8,14 @@
     fly
     gh
     gnumake
-    go
+    gom
     hcloud
     llvm
     nixpkgs-fmt
     opentofu
     rustup
     sqlite
+    pgo-client
+    nodejs_22
   ];
 }

@@ -1,31 +1,65 @@
 {
-  pkgs,
-  unstable,
+  nixpkgs,
+  nixpkgs-unstable,
+  useUnstable ? false,
+  system ? "x86_64-linux",
   nixos-imports ? [],
   home-manager,
   home-manager-imports ? [],
   home-manager-username ? "aurelia",
   home-manager-homedir ? "/home/aurelia",
   ...
-}: {
-  imports = [home-manager.nixosModules.home-manager] ++ nixos-imports;
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.extraSpecialArgs = {inherit unstable;};
-  nixpkgs.config = {
-    allowUnfree = true;
+}: let
+  nixpkgsConfig = {
+    allowUnfree = false;
+    allowUnfreePredicate = pkg:
+      builtins.elem (nixpkgs.lib.getName pkg) [
+        "1password"
+        "1password-cli"
+        "discord"
+        "obsidian"
+        "steam"
+        "steam-unwrapped"
+        "vscode"
+      ];
     permittedInsecurePackages = [
-      "python3.11-django-3.1.14"
       "python3.12-django-3.1.14"
     ];
   };
-  nixpkgs.overlays = [
-    (import ./overlays/brave.nix)
-    (import ./overlays/jetbrains-pin.nix)
-  ];
-  home-manager.users.aurelia = {
-    imports = home-manager-imports;
-    home.username = home-manager-username;
-    home.homeDirectory = home-manager-homedir;
+  unstable = import nixpkgs-unstable {
+    system = system;
+    config = nixpkgsConfig;
   };
-}
+
+  systemFunc =
+    if useUnstable
+    then nixpkgs-unstable.lib.nixosSystem
+    else nixpkgs.lib.nixosSystem;
+
+  pkgs =
+    if useUnstable
+    then nixpkgs-unstable.legacyPackages."${system}"
+    else nixpkgs.legacyPackages."${system}";
+in
+  systemFunc {
+    system = system;
+    specialArgs = {inherit unstable;};
+    modules = [
+      {
+        imports = [home-manager.nixosModules.home-manager] ++ nixos-imports;
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs = {inherit unstable;};
+        nixpkgs.config = nixpkgsConfig;
+        nixpkgs.overlays = [
+          (import ./overlays/brave.nix)
+          (import ./overlays/jetbrains-pin.nix)
+        ];
+        home-manager.users.aurelia = {
+          imports = home-manager-imports;
+          home.username = home-manager-username;
+          home.homeDirectory = home-manager-homedir;
+        };
+      }
+    ];
+  }
