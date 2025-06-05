@@ -15,6 +15,7 @@
     f2fs-tools
     firefox
     foliate
+    fooyin
     ghostty
     gparted
     handbrake
@@ -22,8 +23,6 @@
     inkscape
     insomnia
     kdePackages.kdenlive
-    kdePackages.koko
-    kdePackages.krecorder
     krita
     librewolf
     lmms
@@ -34,24 +33,20 @@
     obsidian
     ocs-url
     pgadmin4-desktopmode
-    qmk
     remmina
+    rpi-imager
     seafile-client
-    shotwell
     signal-desktop
     sqlitebrowser
-    strawberry
     syncthingtray
     thunderbird
+    via
     virt-manager
     virt-viewer
     vlc
     vscode
     wezterm
-    wl-clipboard-rs
     zed-editor
-
-    rpi-imager
   ];
 
   programs.localsend = {

@@ -20,6 +20,7 @@
         "obsidian"
         "steam"
         "steam-unwrapped"
+        "libvgm"
         "vscode"
       ];
     permittedInsecurePackages = [

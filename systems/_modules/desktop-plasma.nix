@@ -1,6 +1,12 @@
 {pkgs, ...}: {
   services.desktopManager.plasma6.enable = true;
 
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    kdepim-runtime
+    elisa
+    oxygen
+  ];
+
   environment.systemPackages = with pkgs; [
     qt6.qtimageformats
 
@@ -13,6 +19,7 @@
     kdePackages.plasma-vault
     kdePackages.powerdevil
     kdePackages.qtstyleplugin-kvantum
+    kdePackages.krecorder
     kio-fuse
 
     adwaita-icon-theme

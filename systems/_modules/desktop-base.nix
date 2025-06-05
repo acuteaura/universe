@@ -57,6 +57,8 @@
 
   environment.systemPackages = with pkgs; [
     zenity
+    wayland-utils
+    wl-clipboard-rs
   ];
 
   fonts.packages = with pkgs; [
