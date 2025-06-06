@@ -154,6 +154,12 @@
     };
   };
 
+  hardware.bluetooth.settings = {
+    General = {
+      ControllerMode = "bredr";
+    };
+  };
+
   # let's have a dirty hack for fun
   nix.settings.system-features = ["benchmark" "big-parallel" "kvm" "nixos-test" "gccarch-znver4"];
   # nixpkgs.hostPlatform = {
