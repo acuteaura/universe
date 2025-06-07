@@ -18,6 +18,11 @@
     pulse.enable = lib.mkDefault true;
   };
   hardware.bluetooth.enable = lib.mkDefault true;
+  hardware.bluetooth.settings = {
+    General = {
+      ControllerMode = "bredr";
+    };
+  };
 
   # prevents AirPods being stolen back by bluez when requesting connection elsewhere
   hardware.bluetooth.settings.Policy.ReconnectAttempts = 0;
@@ -73,6 +78,8 @@
   hardware.sane.extraBackends = with pkgs; [
     epsonscan2
   ];
+
+  hardware.keyboard.qmk.enable = true;
 
   security.pam.services.sudo.nodelay = true;
   security.pam.services.sudo.failDelay = {

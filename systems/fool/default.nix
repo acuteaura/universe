@@ -42,7 +42,7 @@
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
   boot.zfs.devNodes = "/dev/disk/by-id/";
-  boot.zfs.extraPools = ["magician" "priestress"];
+  boot.zfs.extraPools = ["magician" "priestress" "justice"];
 
   # Network
   networking = {
@@ -151,12 +151,6 @@
           RequiredForOnline = "carrier";
         };
       };
-    };
-  };
-
-  hardware.bluetooth.settings = {
-    General = {
-      ControllerMode = "bredr";
     };
   };
 

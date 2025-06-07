@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  unstable,
+  ...
+}: {
   imports = [
     ../../apps/headlamp.nix
   ];
@@ -26,6 +30,7 @@
     krita
     librewolf
     lmms
+    ludusavi
     maestral
     maestral-gui
     moonlight-qt
@@ -46,7 +51,7 @@
     vlc
     vscode
     wezterm
-    zed-editor
+    unstable.zed-editor
   ];
 
   programs.localsend = {

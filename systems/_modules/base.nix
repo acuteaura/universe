@@ -67,8 +67,8 @@
   programs.nix-ld.enable = lib.mkDefault true;
 
   nix.settings = {
-    substituters = ["https://attic.nullvoid.space/sunhome"];
-    trusted-public-keys = ["sunhome:3aBZKTmYovMvwc7Q/l6sVBY4dEKf8qdkOJjCGoGLD1k="];
+    substituters = ["https://attic.nullvoid.space/default"];
+    trusted-public-keys = ["default:LZHLvF1j4Aees2xS1uEAN7ZJ/IacERC/77qkSV1G8fw="];
   };
 
   nix.package = lib.mkDefault pkgs.lix;
