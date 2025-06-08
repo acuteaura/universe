@@ -15,6 +15,7 @@
 
     flake-utils.url = "github:numtide/flake-utils";
     quadlet.url = "github:SEIAROTg/quadlet-nix";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
   };
 
   outputs = inputs @ {
@@ -23,6 +24,7 @@
     nixpkgs-unstable,
     home-manager,
     home-manager-unstable,
+    nix-flatpak,
     ...
   }: let
     nixpkgsConfig = {
@@ -45,7 +47,7 @@
     {
       nixosConfigurations = {
         cyberdaemon = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable home-manager;
+          inherit nixpkgs nixpkgs-unstable home-manager nix-flatpak;
           nixos-imports = [./systems/cyberdaemon];
           home-manager-imports = [
             ./home-manager/base.nix
@@ -53,7 +55,7 @@
           ];
         };
         chariot = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable home-manager;
+          inherit nixpkgs nixpkgs-unstable home-manager nix-flatpak;
           nixos-imports = [./systems/chariot];
           home-manager-imports = [
             ./home-manager/base.nix
@@ -61,7 +63,7 @@
           ];
         };
         fool = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable home-manager;
+          inherit nixpkgs nixpkgs-unstable home-manager nix-flatpak;
           nixos-imports = [./systems/fool];
           home-manager-imports = [
             ./home-manager/base.nix
@@ -69,7 +71,7 @@
           ];
         };
         thassa = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable home-manager;
+          inherit nixpkgs nixpkgs-unstable home-manager nix-flatpak;
           nixos-imports = [
             inputs.quadlet.nixosModules.quadlet
             ./systems/thassa
@@ -80,7 +82,7 @@
           ];
         };
         wsl = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable home-manager;
+          inherit nixpkgs nixpkgs-unstable home-manager nix-flatpak;
           nixos-imports = [./systems/wsl];
           home-manager-imports = [
             ./home-manager/base.nix

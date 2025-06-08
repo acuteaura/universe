@@ -8,6 +8,7 @@
   home-manager-imports ? [],
   home-manager-username ? "aurelia",
   home-manager-homedir ? "/home/aurelia",
+  nix-flatpak,
   ...
 }: let
   nixpkgsConfig = {
@@ -47,7 +48,12 @@ in
     specialArgs = {inherit unstable;};
     modules = [
       {
-        imports = [home-manager.nixosModules.home-manager] ++ nixos-imports;
+        imports =
+          [
+            home-manager.nixosModules.home-manager
+            nix-flatpak.nixosModules.nix-flatpak
+          ]
+          ++ nixos-imports;
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = {inherit unstable;};
@@ -57,7 +63,11 @@ in
           (import ./overlays/jetbrains-pin.nix)
         ];
         home-manager.users.aurelia = {
-          imports = home-manager-imports;
+          imports =
+            [
+              nix-flatpak.homeManagerModules.nix-flatpak
+            ]
+            ++ home-manager-imports;
           home.username = home-manager-username;
           home.homeDirectory = home-manager-homedir;
         };

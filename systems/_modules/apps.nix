@@ -52,6 +52,7 @@
     vscode
     wezterm
     unstable.zed-editor
+    (pkgs.callPackage ../../packages/yuzu {}).eden
   ];
 
   programs.localsend = {
@@ -63,4 +64,8 @@
     enable = true;
     openFirewall = true;
   };
+
+  services.flatpak.packages = [
+    "app.zen_browser.zen"
+  ];
 }
