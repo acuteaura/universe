@@ -2,7 +2,7 @@
   const = import ../../constants.nix;
 in {
   environment.systemPackages = [pkgs.cifs-utils];
-  fileSystems."/mnt/media" = {
+  fileSystems."/media/smb/media" = {
     device = "//${const.tailscaleIP.sunhome}/media";
     fsType = "cifs";
     options = let
@@ -10,7 +10,7 @@ in {
       automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
     in ["${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=1000"];
   };
-  fileSystems."/mnt/scratch" = {
+  fileSystems."/media/smb/scratch" = {
     device = "//${const.tailscaleIP.sunhome}/aurelia";
     fsType = "cifs";
     options = let

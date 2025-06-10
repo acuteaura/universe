@@ -114,8 +114,18 @@
     '';
   };
 
-  xdg.portal.enable = lib.mkDefault true;
-  xdg.portal.xdgOpenUsePortal = lib.mkDefault true;
+  xdg.portal = {
+    enable = true;
+    config = {
+      common = {
+        default = [
+          "kde"
+          "gtk"
+          "gnome"
+        ];
+      };
+    };
+  };
 
   services.hardware.bolt.enable = lib.mkDefault true;
   networking.firewall.trustedInterfaces = ["thunderbolt*"];

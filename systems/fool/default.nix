@@ -105,7 +105,6 @@
     loadModels = ["devstral" "deepseek-r1:14b"];
     acceleration = "rocm";
   };
-  services.open-webui.enable = true;
 
   networking.networkmanager.enable = false;
   networking.networkmanager.unmanaged = ["virbr0" "docker0"];

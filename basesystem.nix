@@ -65,7 +65,7 @@ in
         home-manager.users.aurelia = {
           imports =
             [
-              nix-flatpak.homeManagerModules.nix-flatpak
+              #nix-flatpak.homeManagerModules.nix-flatpak
             ]
             ++ home-manager-imports;
           home.username = home-manager-username;

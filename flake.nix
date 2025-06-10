@@ -68,6 +68,7 @@
           home-manager-imports = [
             ./home-manager/base.nix
             ./home-manager/shell.nix
+            ./home-manager/desktop.nix
           ];
         };
         thassa = import ./basesystem.nix {
