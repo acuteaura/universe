@@ -5,6 +5,9 @@
     kdepim-runtime
     elisa
     oxygen
+    kwallet
+    kwallet-pam
+    kwalletmanager
   ];
 
   environment.systemPackages = with pkgs; [
@@ -32,4 +35,6 @@
     glxinfo
     vulkan-tools
   ];
+
+  services.gnome.gnome-keyring.enable = true;
 }
