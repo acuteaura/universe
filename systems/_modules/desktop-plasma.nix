@@ -26,7 +26,6 @@
     kora-icon-theme
     nordic
     papirus-nord
-    papirus-icon-theme
 
     # required for system info
     clinfo
