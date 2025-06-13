@@ -2,8 +2,6 @@ name: Update Nix Flake Dependencies and Build NixOS System
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 2 * * *"
 
 jobs:
   update-and-build:
