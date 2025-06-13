@@ -60,6 +60,8 @@
     unrar-free
     wget
     zstd
+
+    nix-output-monitor
   ];
 
   programs.gnupg.agent.enable = lib.mkDefault true;
