@@ -26,6 +26,7 @@
       ];
     permittedInsecurePackages = [
       "python3.12-django-3.1.14"
+      "freeimage-3.18.0-unstable-2024-04-18"
     ];
   };
   unstable = import nixpkgs-unstable {

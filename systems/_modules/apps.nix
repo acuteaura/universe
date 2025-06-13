@@ -52,7 +52,6 @@
     vscode
     wezterm
     unstable.zed-editor
-    (pkgs.callPackage ../../packages/yuzu {}).eden
   ];
 
   programs.localsend = {

@@ -1,4 +1,10 @@
-{unstable, ...}: {
+{
+  pkgs,
+  unstable,
+  ...
+}: let
+  yuzu = pkgs.callPackage ../../packages/yuzu {};
+in {
   environment.systemPackages = with unstable; [
     azahar
     ryubing
@@ -8,5 +14,7 @@
     melonDS
     rpcs3
     shadps4
+    emulationstation-de
+    yuzu.eden
   ];
 }
