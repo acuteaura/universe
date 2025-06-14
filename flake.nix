@@ -16,6 +16,9 @@
     flake-utils.url = "github:numtide/flake-utils";
     quadlet.url = "github:SEIAROTg/quadlet-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
+
+    gpd-fan.url = "github:Cryolitia/gpd-fan-driver";
+    gpd-fan.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -48,7 +51,13 @@
       nixosConfigurations = {
         cyberdaemon = import ./basesystem.nix {
           inherit nixpkgs nixpkgs-unstable home-manager nix-flatpak;
-          nixos-imports = [./systems/cyberdaemon];
+          nixos-imports = [
+            ./systems/cyberdaemon
+            inputs.gpd-fan.nixosModules.default
+            {
+              hardware.gpd-fan.enable = true;
+            }
+          ];
           home-manager-imports = [
             ./home-manager/base.nix
             ./home-manager/shell.nix

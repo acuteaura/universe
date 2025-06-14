@@ -33,6 +33,10 @@
     system = system;
     config = nixpkgsConfig;
   };
+  defaultPkgs = import nixpkgs {
+    system = system;
+    config = nixpkgsConfig;
+  };
 
   systemFunc =
     if useUnstable
@@ -46,7 +50,7 @@
 in
   systemFunc {
     system = system;
-    specialArgs = {inherit unstable;};
+    specialArgs = {inherit unstable defaultPkgs;};
     modules = [
       {
         imports =
