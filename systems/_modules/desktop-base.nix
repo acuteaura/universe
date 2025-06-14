@@ -64,6 +64,8 @@
     zenity
     wayland-utils
     wl-clipboard-rs
+    libsecret
+    seahorse
   ];
 
   fonts.packages = with pkgs; [
