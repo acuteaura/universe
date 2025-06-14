@@ -16,6 +16,7 @@
     cool-retro-term
     discord
     easyeffects
+    element-desktop
     f2fs-tools
     firefox
     foliate

@@ -35,6 +35,4 @@
     glxinfo
     vulkan-tools
   ];
-
-  services.gnome.gnome-keyring.enable = true;
 }
