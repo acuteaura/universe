@@ -23,6 +23,7 @@
         "steam-unwrapped"
         "libvgm"
         "vscode"
+        "rose-pine-kvantum"
       ];
     permittedInsecurePackages = [
       "python3.12-django-3.1.14"

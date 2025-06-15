@@ -5,9 +5,6 @@
     kdepim-runtime
     elisa
     oxygen
-    kwallet
-    kwallet-pam
-    kwalletmanager
   ];
 
   environment.systemPackages = with pkgs; [
@@ -21,14 +18,16 @@
     kdePackages.plasma-thunderbolt
     kdePackages.plasma-vault
     kdePackages.powerdevil
-    kdePackages.qtstyleplugin-kvantum
     kdePackages.krecorder
     kio-fuse
 
-    adwaita-icon-theme
-    kora-icon-theme
-    nordic
-    papirus-nord
+    kdePackages.qtstyleplugin-kvantum
+    tela-icon-theme
+    tela-circle-icon-theme
+    (pkgs.callPackage ../../packages/rose-pine-kvantum.nix {})
+    rose-pine-cursor
+    rose-pine-gtk-theme
+    rose-pine-icon-theme
 
     # required for system info
     clinfo
