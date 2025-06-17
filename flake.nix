@@ -51,6 +51,7 @@
       nixosConfigurations = {
         cyberdaemon = import ./basesystem.nix {
           inherit nixpkgs nixpkgs-unstable home-manager nix-flatpak;
+          useUnstable = true;
           nixos-imports = [
             ./systems/cyberdaemon
             inputs.gpd-fan.nixosModules.default
