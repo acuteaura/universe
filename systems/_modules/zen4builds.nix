@@ -15,6 +15,7 @@
         lkl = defaultPkgs.lkl;
         openldap = defaultPkgs.openldap;
         openblas = defaultPkgs.openblas;
+        lix = defaultPkgs.lix;
 
         gfortran = defaultPkgs.gfortran;
       }
