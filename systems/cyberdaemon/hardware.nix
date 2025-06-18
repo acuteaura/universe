@@ -14,17 +14,17 @@
   boot.zfs.devNodes = "/dev/disk/by-label/";
 
   fileSystems."/" = {
-    device = "cyberboot/root";
+    device = "cyberdaemon/root";
     fsType = "zfs";
   };
 
   fileSystems."/home" = {
-    device = "cyberboot/home";
+    device = "cyberdaemon/home";
     fsType = "zfs";
   };
 
   fileSystems."/nix" = {
-    device = "cyberboot/nix";
+    device = "cyberdaemon/nix";
     fsType = "zfs";
   };
 
