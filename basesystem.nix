@@ -24,6 +24,8 @@
         "libvgm"
         "vscode"
         "rose-pine-kvantum"
+        "idea-ultimate-with-plugins"
+        "idea-ultimate"
       ];
     permittedInsecurePackages = [
       "python3.12-django-3.1.14"
@@ -66,7 +68,6 @@ in
         nixpkgs.config = nixpkgsConfig;
         nixpkgs.overlays = [
           (import ./overlays/brave.nix)
-          (import ./overlays/jetbrains-pin.nix)
         ];
         home-manager.users.aurelia = {
           imports =

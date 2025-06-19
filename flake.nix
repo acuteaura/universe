@@ -66,7 +66,9 @@
           ];
         };
         chariot = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable home-manager nix-flatpak;
+          inherit nixpkgs nixpkgs-unstable nix-flatpak;
+          home-manager = home-manager-unstable;
+          useUnstable = true;
           nixos-imports = [./systems/chariot];
           home-manager-imports = [
             ./home-manager/base.nix

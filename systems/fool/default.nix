@@ -153,22 +153,7 @@
     };
   };
 
-  # let's have a dirty hack for fun
   nix.settings.system-features = ["benchmark" "big-parallel" "kvm" "nixos-test" "gccarch-znver4"];
-  # nixpkgs.hostPlatform = {
-  #   gcc.arch = "znver4";
-  #   gcc.tune = "znver4";
-  #   system = "x86_64-linux";
-  # };
-  # nixpkgs.overlays = [
-  #   (
-  #     final: prev: {
-  #       gsl = prev.gsl.overrideAttrs {
-  #         doCheck = false;
-  #       };
-  #     }
-  #   )
-  # ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

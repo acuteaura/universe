@@ -22,13 +22,11 @@
     kio-fuse
 
     kdePackages.qtstyleplugin-kvantum
-    tela-icon-theme
-    tela-circle-icon-theme
+    reversal-icon-theme
     (pkgs.callPackage ../../packages/rose-pine-kvantum.nix {})
     (pkgs.callPackage ../../packages/rose-pine-kde-colors.nix {})
     rose-pine-cursor
     rose-pine-gtk-theme
-    rose-pine-icon-theme
 
     # required for system info
     clinfo
