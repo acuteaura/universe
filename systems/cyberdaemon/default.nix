@@ -12,7 +12,6 @@
     ../_modules/work.nix
     ../_modules/amdgpu.nix
 
-    ../_modules/zen4builds.nix
 
     ../_modules/emulators.nix
     ../_modules/games.nix

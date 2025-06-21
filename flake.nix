@@ -50,8 +50,8 @@
     {
       nixosConfigurations = {
         cyberdaemon = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager-unstable;
-          useUnstable = true;
+          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable;
+          useUnstable = false;
           nixos-imports = [
             ./systems/cyberdaemon
             inputs.gpd-fan.nixosModules.default
@@ -66,7 +66,7 @@
         };
         chariot = import ./basesystem.nix {
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable;
-          useUnstable = true;
+          useUnstable = false;
           nixos-imports = [./systems/chariot];
           home-manager-imports = [
             ./home-manager/base.nix
