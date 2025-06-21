@@ -1,14 +1,15 @@
 {
   nixpkgs,
   nixpkgs-unstable,
-  useUnstable ? false,
-  system ? "x86_64-linux",
   nixos-imports ? [],
   home-manager,
+  home-manager-unstable,
   home-manager-imports ? [],
   home-manager-username ? "aurelia",
   home-manager-homedir ? "/home/aurelia",
-  nix-flatpak,
+  useUnstable ? false,
+  system ? "x86_64-linux",
+  nix-flatpak ? {},
   ...
 }: let
   nixpkgsConfig = {
@@ -29,6 +30,7 @@
       ];
     permittedInsecurePackages = [
       "python3.12-django-3.1.14"
+      "python3.13-django-3.1.14"
       "freeimage-3.18.0-unstable-2024-04-18"
     ];
   };
@@ -50,6 +52,11 @@
     if useUnstable
     then nixpkgs-unstable.legacyPackages."${system}"
     else nixpkgs.legacyPackages."${system}";
+
+  homeManagerModule =
+    if useUnstable
+    then home-manager-unstable.nixosModules.home-manager
+    else home-manager.nixosModules.home-manager;
 in
   systemFunc {
     system = system;
@@ -58,7 +65,7 @@ in
       {
         imports =
           [
-            home-manager.nixosModules.home-manager
+            homeManagerModule
             nix-flatpak.nixosModules.nix-flatpak
           ]
           ++ nixos-imports;

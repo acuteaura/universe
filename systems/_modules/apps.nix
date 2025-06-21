@@ -9,7 +9,6 @@
 
   environment.systemPackages = with pkgs; [
     appimage-run
-    archivebox
     ardour
     blender
     brave
@@ -23,14 +22,12 @@
     fooyin
     ghostty
     gparted
-    handbrake
     haruna
     inkscape
     insomnia
     kdePackages.kdenlive
     krita
     librewolf
-    lmms
     ludusavi
     maestral
     maestral-gui
@@ -38,10 +35,9 @@
     obs-studio
     obsidian
     ocs-url
-    pgadmin4-desktopmode
     remmina
     rpi-imager
-    seafile-client
+
     signal-desktop
     sqlitebrowser
     syncthingtray
@@ -53,6 +49,13 @@
     vscode
     wezterm
     unstable.zed-editor
+
+    # check these for build failures on 25.11
+    archivebox
+    pgadmin4-desktopmode
+    lmms
+    seafile-client
+    handbrake
   ];
 
   programs.localsend = {

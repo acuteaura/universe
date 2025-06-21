@@ -50,8 +50,7 @@
     {
       nixosConfigurations = {
         cyberdaemon = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable nix-flatpak;
-          home-manager = home-manager-unstable;
+          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager-unstable;
           useUnstable = true;
           nixos-imports = [
             ./systems/cyberdaemon
@@ -66,8 +65,7 @@
           ];
         };
         chariot = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable nix-flatpak;
-          home-manager = home-manager-unstable;
+          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable;
           useUnstable = true;
           nixos-imports = [./systems/chariot];
           home-manager-imports = [
@@ -76,7 +74,8 @@
           ];
         };
         fool = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable home-manager nix-flatpak;
+          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable;
+          useUnstable = false;
           nixos-imports = [./systems/fool];
           home-manager-imports = [
             ./home-manager/base.nix
@@ -85,7 +84,7 @@
           ];
         };
         thassa = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable home-manager nix-flatpak;
+          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable;
           nixos-imports = [
             inputs.quadlet.nixosModules.quadlet
             ./systems/thassa
@@ -96,7 +95,7 @@
           ];
         };
         wsl = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable home-manager nix-flatpak;
+          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable;
           nixos-imports = [./systems/wsl];
           home-manager-imports = [
             ./home-manager/base.nix

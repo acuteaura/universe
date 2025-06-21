@@ -98,7 +98,7 @@
 
   hardware.cpu.amd.ryzen-smu.enable = true;
 
-  virtualisation.waydroid.enable = true;
+  #virtualisation.waydroid.enable = true;
   programs.adb.enable = true;
   services.ollama = {
     enable = true;
