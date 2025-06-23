@@ -100,11 +100,11 @@
 
   #virtualisation.waydroid.enable = true;
   programs.adb.enable = true;
-  services.ollama = {
-    enable = true;
-    loadModels = ["devstral" "deepseek-r1:14b"];
-    acceleration = "rocm";
-  };
+  #services.ollama = {
+  #  enable = true;
+  #  loadModels = ["devstral" "deepseek-r1:14b"];
+  #  acceleration = "rocm";
+  #};
 
   networking.networkmanager.enable = false;
   networking.networkmanager.unmanaged = ["virbr0" "docker0"];

@@ -75,7 +75,7 @@
         };
         fool = import ./basesystem.nix {
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable;
-          useUnstable = false;
+          useUnstable = true;
           nixos-imports = [./systems/fool];
           home-manager-imports = [
             ./home-manager/base.nix

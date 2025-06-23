@@ -60,31 +60,29 @@
 in
   systemFunc {
     system = system;
-    specialArgs = {inherit unstable defaultPkgs;};
-    modules = [
-      {
-        imports =
-          [
-            homeManagerModule
-            nix-flatpak.nixosModules.nix-flatpak
-          ]
-          ++ nixos-imports;
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = {inherit unstable;};
-        nixpkgs.config = nixpkgsConfig;
-        nixpkgs.overlays = [
-          (import ./overlays/brave.nix)
-        ];
-        home-manager.users.aurelia = {
-          imports =
-            [
-              #nix-flatpak.homeManagerModules.nix-flatpak
-            ]
-            ++ home-manager-imports;
-          home.username = home-manager-username;
-          home.homeDirectory = home-manager-homedir;
-        };
-      }
-    ];
+    specialArgs = {inherit unstable;};
+    modules =
+      [
+        homeManagerModule
+        nix-flatpak.nixosModules.nix-flatpak
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = {inherit unstable;};
+          nixpkgs.config = nixpkgsConfig;
+          nixpkgs.overlays = [
+            (import ./overlays/brave.nix)
+          ];
+          home-manager.users.aurelia = {
+            imports =
+              [
+                #nix-flatpak.homeManagerModules.nix-flatpak
+              ]
+              ++ home-manager-imports;
+            home.username = home-manager-username;
+            home.homeDirectory = home-manager-homedir;
+          };
+        }
+      ]
+      ++ nixos-imports;
   }

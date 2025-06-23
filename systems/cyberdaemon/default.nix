@@ -1,4 +1,4 @@
-{defaultPkgs, ...}: {
+{...}: {
   imports = [
     ../_modules/base.nix
     ../_modules/containers.nix
