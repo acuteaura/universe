@@ -50,12 +50,14 @@
     wezterm
     unstable.zed-editor
 
+    gearlever
+
     # check these for build failures on 25.11
-    archivebox
-    pgadmin4-desktopmode
-    lmms
-    seafile-client
-    handbrake
+    #archivebox
+    #pgadmin4-desktopmode
+    #lmms
+    #seafile-client
+    #handbrake
   ];
 
   programs.localsend = {
