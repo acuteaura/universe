@@ -81,6 +81,8 @@
     zlib
     stdenv.cc.cc.lib
     libz
+    xorg.libxcb
+    libGL
   ];
 
   vfio.enable = false;
