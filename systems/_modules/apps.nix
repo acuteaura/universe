@@ -8,7 +8,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    appimage-run
     ardour
     blender
     brave
@@ -68,6 +67,16 @@
   programs.ausweisapp = {
     enable = true;
     openFirewall = true;
+  };
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [thunar-archive-plugin thunar-dropbox-plugin thunar-volman];
   };
 
   services.flatpak.packages = [
