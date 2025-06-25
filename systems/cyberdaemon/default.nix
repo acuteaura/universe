@@ -12,7 +12,6 @@
     ../_modules/work.nix
     ../_modules/amdgpu.nix
 
-
     ../_modules/emulators.nix
     ../_modules/games.nix
 
@@ -21,6 +20,18 @@
     ./hardware.nix
     ./smb.nix
   ];
+
+  networking = {
+    hostId = "5934b829";
+    hostName = "cyberdaemon";
+    nftables.enable = true;
+  };
+
+  hardware.enableRedistributableFirmware = true;
+  hardware.cpu.amd.updateMicrocode = true;
+  services.fwupd.enable = true;
+  networking.useDHCP = false;
+
   # Booting
   boot.initrd.kernelModules = ["amdgpu"];
   boot.loader = {
