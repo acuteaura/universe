@@ -33,6 +33,20 @@
     };
   };
 
+  programs.gnupg.agent.enable = lib.mkDefault true;
+  programs.fish.enable = lib.mkDefault true;
+  programs.nix-ld.enable = lib.mkDefault true;
+  programs.nix-ld.libraries = with pkgs;
+    lib.mkDefault [
+      icu
+      libgcc
+      zlib
+      stdenv.cc.cc.lib
+      libz
+    ];
+
+  nix.package = lib.mkDefault pkgs.lix;
+
   environment.systemPackages = with pkgs; [
     fish
 
@@ -63,10 +77,4 @@
 
     nix-output-monitor
   ];
-
-  programs.gnupg.agent.enable = lib.mkDefault true;
-  programs.fish.enable = lib.mkDefault true;
-  programs.nix-ld.enable = lib.mkDefault true;
-
-  nix.package = lib.mkDefault pkgs.lix;
 }

@@ -64,37 +64,10 @@
   services.power-profiles-daemon.enable = true;
 
   # random tools
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
   services.mullvad-vpn.enable = false;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
-  services.printing.enable = true;
-
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    icu
-    libgcc
-    zlib
-    stdenv.cc.cc.lib
-    libz
-  ];
-
   vfio.enable = false;
-
-  programs.kdeconnect.enable = true;
-  networking.firewall = rec {
-    allowedTCPPortRanges = [
-      {
-        from = 1714;
-        to = 1764;
-      }
-    ];
-    allowedUDPPortRanges = allowedTCPPortRanges;
-  };
 
   hardware.cpu.amd.ryzen-smu.enable = true;
 
