@@ -8,7 +8,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    appimage-run
     ardour
     blender
     brave
@@ -50,12 +49,14 @@
     wezterm
     unstable.zed-editor
 
+    gearlever
+
     # check these for build failures on 25.11
-    archivebox
-    pgadmin4-desktopmode
-    lmms
-    seafile-client
-    handbrake
+    #archivebox
+    #pgadmin4-desktopmode
+    #lmms
+    #seafile-client
+    #handbrake
   ];
 
   programs.localsend = {
@@ -66,6 +67,16 @@
   programs.ausweisapp = {
     enable = true;
     openFirewall = true;
+  };
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [thunar-archive-plugin thunar-dropbox-plugin thunar-volman];
   };
 
   services.flatpak.packages = [

@@ -70,6 +70,7 @@
     pv
     restic
     socat
+    sshfs
     tmux
     unrar-free
     wget
