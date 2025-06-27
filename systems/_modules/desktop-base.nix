@@ -36,7 +36,7 @@
   services.tumbler.enable = lib.mkDefault true;
 
   services.avahi = {
-    enable = lib.mkDefault true;
+    enable = lib.mkDefault false;
     nssmdns4 = lib.mkDefault true;
     openFirewall = lib.mkDefault true;
   };

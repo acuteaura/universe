@@ -78,14 +78,4 @@
 
     nix-output-monitor
   ];
-<<<<<<< Updated upstream
-=======
-
-  programs.gnupg.agent.enable = lib.mkDefault true;
-  programs.fish.enable = lib.mkDefault true;
-  programs.nix-ld.enable = lib.mkDefault true;
-  services.davfs2.enable = true;
-
-  nix.package = lib.mkDefault pkgs.lix;
->>>>>>> Stashed changes
 }

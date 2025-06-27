@@ -126,6 +126,18 @@
     };
   };
 
+  programs.steam.gamescopeSession.args = [
+    "--expose-wayland"
+    "-e" # Enable steam integration
+    "--steam"
+    "--adaptive-sync"
+    "-r 240"
+    "--hdr-enabled"
+    "--hdr-itm-enable"
+    #  DP output
+    "--prefer-output DP-2"
+  ];
+
   nix.settings.system-features = ["benchmark" "big-parallel" "kvm" "nixos-test" "gccarch-znver4"];
 
   # This value determines the NixOS release from which the default

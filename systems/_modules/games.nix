@@ -18,16 +18,9 @@
     localNetworkGameTransfers.openFirewall = true;
     gamescopeSession = {
       enable = lib.mkDefault true;
-      args = [
+      args = lib.mkDefault [
         "--expose-wayland"
         "-e" # Enable steam integration
-        "--steam"
-        "--adaptive-sync"
-        "-r 240"
-        "--hdr-enabled"
-        "--hdr-itm-enable"
-        #  DP output
-        "--prefer-output DP-2"
       ];
     };
   };
