@@ -11,7 +11,7 @@
     ../_modules/desktop-plasma.nix
     ../_modules/games.nix
     ../_modules/libvirt.nix
-    ../_modules/smb-nas.nix
+    ../_modules/mounts.nix
     ../_modules/system-config-defaults.nix
     ../_modules/user-aurelia.nix
     ../_modules/wine.nix

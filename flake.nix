@@ -19,6 +19,9 @@
 
     gpd-fan.url = "github:Cryolitia/gpd-fan-driver";
     gpd-fan.inputs.nixpkgs.follows = "nixpkgs";
+
+    jovian-nixos.url = "github:Jovian-Experiments/Jovian-NixOS";
+    jovian-nixos.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs = inputs @ {
@@ -51,10 +54,11 @@
       nixosConfigurations = {
         cyberdaemon = import ./basesystem.nix {
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable;
-          useUnstable = false;
+          useUnstable = true;
           nixos-imports = [
             ./systems/cyberdaemon
             inputs.gpd-fan.nixosModules.default
+            inputs.jovian-nixos.nixosModules.jovian
             {
               hardware.gpd-fan.enable = true;
             }
@@ -146,6 +150,8 @@
         };
       };
       nixosModules.constants = import ./constants.nix;
+      packages.aptakube = unstable.callPackage ./packages/aptakube.nix {};
+      packages.headlamp = unstable.callPackage ./packages/headlamp.nix {};
     }
     // inputs.flake-utils.lib.eachDefaultSystem (
       system: let

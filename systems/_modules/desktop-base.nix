@@ -18,11 +18,11 @@
     pulse.enable = lib.mkDefault true;
   };
   hardware.bluetooth.enable = lib.mkDefault true;
-  hardware.bluetooth.settings = {
-    General = {
-      ControllerMode = "bredr";
-    };
-  };
+  # hardware.bluetooth.settings = {
+  #   General = {
+  #     ControllerMode = "bredr";
+  #   };
+  # };
 
   # prevents AirPods being stolen back by bluez when requesting connection elsewhere
   hardware.bluetooth.settings.Policy.ReconnectAttempts = 0;

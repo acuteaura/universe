@@ -3,10 +3,6 @@
   unstable,
   ...
 }: {
-  imports = [
-    ../../apps/headlamp.nix
-  ];
-
   environment.systemPackages = with pkgs; [
     ardour
     blender
@@ -50,6 +46,9 @@
     unstable.zed-editor
 
     gearlever
+
+    (pkgs.callPackage ../../packages/aptakube.nix {})
+    (pkgs.callPackage ../../packages/headlamp.nix {})
 
     # check these for build failures on 25.11
     #archivebox

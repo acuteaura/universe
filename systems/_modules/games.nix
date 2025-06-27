@@ -10,13 +10,14 @@
     steamtinkerlaunch
   ];
   hardware.xpadneo.enable = lib.mkDefault false;
+  hardware.steam-hardware.enable = true;
 
   programs.steam = {
     enable = true;
     protontricks.enable = true;
     localNetworkGameTransfers.openFirewall = true;
     gamescopeSession = {
-      enable = true;
+      enable = lib.mkDefault true;
       args = [
         "--expose-wayland"
         "-e" # Enable steam integration

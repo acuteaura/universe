@@ -9,7 +9,7 @@
     ../_modules/desktop-base.nix
     ../_modules/desktop-plasma.nix
     ../_modules/libvirt.nix
-    ../_modules/smb-nas.nix
+    ../_modules/mounts.nix
     ../_modules/wine.nix
     ../_modules/work.nix
     ../_modules/system-config-defaults.nix

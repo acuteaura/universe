@@ -27,6 +27,8 @@
         "rose-pine-kvantum"
         "idea-ultimate-with-plugins"
         "idea-ultimate"
+        "steam-jupiter-unwrapped"
+        "steamdeck-hw-theme"
       ];
     permittedInsecurePackages = [
       "python3.12-django-3.1.14"

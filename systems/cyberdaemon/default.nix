@@ -5,7 +5,7 @@
     ../_modules/desktop-base.nix
     ../_modules/desktop-plasma.nix
     ../_modules/libvirt.nix
-    ../_modules/smb-nas.nix
+    ../_modules/mounts.nix
     ../_modules/system-config-defaults.nix
     ../_modules/user-aurelia.nix
     ../_modules/wine.nix
@@ -70,6 +70,17 @@
     enable = true;
     ui.enable = true;
   };
+  jovian.steam = {
+    enable = true;
+    autoStart = false;
+    updater.splash = "jovian";
+  };
+  jovian.decky-loader.enable = true;
+  jovian.devices = {
+    steamdeck.enable = false;
+  };
+  jovian.hardware.has.amd.gpu = true;
+  programs.steam.gamescopeSession.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
