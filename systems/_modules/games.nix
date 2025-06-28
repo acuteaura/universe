@@ -4,13 +4,13 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    gamemode
     mangohud
     heroic
     steamtinkerlaunch
   ];
   hardware.xpadneo.enable = lib.mkDefault false;
   hardware.steam-hardware.enable = true;
+  programs.gamemode.enable = true;
 
   programs.steam = {
     enable = true;
