@@ -74,6 +74,7 @@ in
           nixpkgs.config = nixpkgsConfig;
           nixpkgs.overlays = [
             (import ./overlays/brave.nix)
+            (import ./overlays/hhd.nix)
           ];
           home-manager.users.aurelia = {
             imports =

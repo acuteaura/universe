@@ -16,6 +16,8 @@
     ../_modules/user-aurelia.nix
     ../_modules/amdgpu.nix
 
+    ../_modules/hhd.nix
+
     ../_modules/emulators.nix
     ../_modules/games.nix
     ../_modules/sunshine

@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
     ../_modules/base.nix
     ../_modules/containers.nix
@@ -11,6 +11,7 @@
     ../_modules/wine.nix
     ../_modules/work.nix
     ../_modules/amdgpu.nix
+    ../_modules/hhd.nix
 
     ../_modules/emulators.nix
     ../_modules/games.nix
@@ -65,11 +66,6 @@
   services.fprintd.enable = false;
   security.pam.services.login.fprintAuth = false;
 
-  services.handheld-daemon = {
-    user = "aurelia";
-    enable = true;
-    ui.enable = true;
-  };
   jovian.steam = {
     enable = true;
     autoStart = false;

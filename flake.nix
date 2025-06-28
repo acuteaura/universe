@@ -152,6 +152,7 @@
       nixosModules.constants = import ./constants.nix;
       packages.aptakube = unstable.callPackage ./packages/aptakube.nix {};
       packages.headlamp = unstable.callPackage ./packages/headlamp.nix {};
+      packages.hhd-adjustor = unstable.callPackage ./packages/hhd-adjustor.nix {};
     }
     // inputs.flake-utils.lib.eachDefaultSystem (
       system: let
