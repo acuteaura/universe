@@ -40,9 +40,10 @@
     lib.mkDefault [
       icu
       libgcc
-      zlib
-      stdenv.cc.cc.lib
       libz
+      stdenv.cc.cc.lib
+      xorg.libxcb
+      zlib
     ];
 
   nix.package = lib.mkDefault pkgs.lix;

@@ -27,12 +27,10 @@
     maestral
     maestral-gui
     moonlight-qt
-    obs-studio
     obsidian
     ocs-url
     remmina
     rpi-imager
-
     signal-desktop
     sqlitebrowser
     syncthingtray
@@ -45,17 +43,28 @@
     wezterm
     unstable.zed-editor
 
+    podman-desktop
+    pods
+
     gearlever
 
     (pkgs.callPackage ../../packages/aptakube.nix {})
     (pkgs.callPackage ../../packages/headlamp.nix {})
+    (pkgs.wrapOBS {
+      plugins = with pkgs.obs-studio-plugins; [
+        obs-vaapi
+        obs-vkcapture
+        obs-gstreamer
+        obs-pipewire-audio-capture
+      ];
+    })
 
     # check these for build failures on 25.11
-    #archivebox
-    #pgadmin4-desktopmode
+    archivebox
+    pgadmin4-desktopmode
     #lmms
-    #seafile-client
-    #handbrake
+    seafile-client
+    handbrake
   ];
 
   programs.localsend = {

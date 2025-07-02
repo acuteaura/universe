@@ -1,6 +1,7 @@
 {
   nixpkgs,
   nixpkgs-unstable,
+  nixpkgsConfig,
   nixos-imports ? [],
   home-manager,
   home-manager-unstable,
@@ -12,30 +13,6 @@
   nix-flatpak ? {},
   ...
 }: let
-  nixpkgsConfig = {
-    allowUnfree = false;
-    allowUnfreePredicate = pkg:
-      builtins.elem (nixpkgs.lib.getName pkg) [
-        "1password"
-        "1password-cli"
-        "discord"
-        "obsidian"
-        "steam"
-        "steam-unwrapped"
-        "libvgm"
-        "vscode"
-        "rose-pine-kvantum"
-        "idea-ultimate-with-plugins"
-        "idea-ultimate"
-        "steam-jupiter-unwrapped"
-        "steamdeck-hw-theme"
-      ];
-    permittedInsecurePackages = [
-      "python3.12-django-3.1.14"
-      "python3.13-django-3.1.14"
-      "freeimage-3.18.0-unstable-2024-04-18"
-    ];
-  };
   unstable = import nixpkgs-unstable {
     system = system;
     config = nixpkgsConfig;
@@ -65,27 +42,13 @@ in
     specialArgs = {inherit unstable;};
     modules =
       [
-        homeManagerModule
         nix-flatpak.nixosModules.nix-flatpak
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {inherit unstable;};
-          nixpkgs.config = nixpkgsConfig;
-          nixpkgs.overlays = [
-            (import ./overlays/brave.nix)
-            (import ./overlays/hhd.nix)
-          ];
-          home-manager.users.aurelia = {
-            imports =
-              [
-                #nix-flatpak.homeManagerModules.nix-flatpak
-              ]
-              ++ home-manager-imports;
-            home.username = home-manager-username;
-            home.homeDirectory = home-manager-homedir;
-          };
-        }
+        nixpkgsConfig
+        homeManagerModule
+        (import ./basehm.nix {
+          inherit nixpkgsConfig home-manager-imports home-manager-username home-manager-homedir;
+          extraSpecialArgs = {inherit unstable;};
+        })
       ]
       ++ nixos-imports;
   }

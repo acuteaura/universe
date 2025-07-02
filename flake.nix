@@ -33,14 +33,7 @@
     nix-flatpak,
     ...
   }: let
-    nixpkgsConfig = {
-      nixpkgs.config = {
-        permittedInsecurePackages = [
-          "python3.11-django-3.1.14"
-          "python3.12-django-3.1.14"
-        ];
-      };
-    };
+    nixpkgsConfig = import ./nixpkgs-config.nix {nixpkgs = nixpkgs;};
     unstable = import nixpkgs-unstable {
       config.allowUnfree = true;
       system = "x86_64-linux";
@@ -53,7 +46,7 @@
     {
       nixosConfigurations = {
         cyberdaemon = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable;
+          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           useUnstable = true;
           nixos-imports = [
             ./systems/cyberdaemon
@@ -69,7 +62,7 @@
           ];
         };
         chariot = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable;
+          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           useUnstable = false;
           nixos-imports = [./systems/chariot];
           home-manager-imports = [
@@ -78,7 +71,7 @@
           ];
         };
         fool = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable;
+          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           useUnstable = true;
           nixos-imports = [./systems/fool];
           home-manager-imports = [
@@ -88,7 +81,7 @@
           ];
         };
         thassa = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable;
+          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           nixos-imports = [
             inputs.quadlet.nixosModules.quadlet
             ./systems/thassa
@@ -99,7 +92,7 @@
           ];
         };
         wsl = import ./basesystem.nix {
-          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable;
+          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           nixos-imports = [./systems/wsl];
           home-manager-imports = [
             ./home-manager/base.nix
@@ -112,8 +105,12 @@
           pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
           extraSpecialArgs = {inherit unstable;};
           modules = [
-            ./home-manager/shell.nix
-            nixpkgsConfig
+            (import ./basehm.nix {
+              inherit nixpkgsConfig;
+              home-manager-imports = [./homes/shell.nix];
+              home-manager-username = "aurelia";
+              home-manager-homedir = "/home/aurelia";
+            })
           ];
         };
         shell-fat-x86_64-linux = home-manager.lib.homeManagerConfiguration {
