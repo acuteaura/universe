@@ -30,7 +30,6 @@
   nixpkgs.overlays =
     [
       (import ./overlays/brave.nix)
-      (import ./overlays/hhd.nix)
       (import ./overlays/fix-python3.nix)
     ]
     ++ extraOverlays;

@@ -41,6 +41,8 @@
       aptakube = self.packages.aptakube;
       headlamp = self.packages.headlamp;
       yuzu = self.packages.yuzu;
+      handheld-daemon = self.packages.hhd;
+      adjustor = self.packages.hhd-adjustor;
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       getName = nixpkgs.lib.getName;
