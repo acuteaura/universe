@@ -4,7 +4,7 @@
     enable = true;
     ui.enable = true;
     package = pkgs.handheld-daemon.override {
-      withAdjustor = true;
+      extraDependencies = [pkgs.adjustor];
     };
   };
 }

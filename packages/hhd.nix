@@ -2,7 +2,6 @@
   lib,
   python3Packages,
   fetchFromGitHub,
-  withAdjustor ? false,
   # dependencies
   systemd,
   hidapi,
@@ -13,7 +12,7 @@
   lsof,
   btrfs-progs,
   util-linux,
-  adjustor,
+  extraDependencies ? [],
 }:
 python3Packages.buildPythonApplication rec {
   pname = "handheld-daemon";
@@ -86,9 +85,7 @@ python3Packages.buildPythonApplication rec {
       setuptools
       xlib
     ]
-    ++ lib.optionals withAdjustor [
-      adjustor
-    ];
+    ++ extraDependencies;
 
   # This package doesn't have upstream tests.
   doCheck = false;

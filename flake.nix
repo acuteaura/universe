@@ -41,8 +41,8 @@
       aptakube = self.packages.aptakube;
       headlamp = self.packages.headlamp;
       yuzu = self.packages.yuzu;
-      handheld-daemon = self.packages.hhd;
-      adjustor = self.packages.hhd-adjustor;
+      handheld-daemon = self.packages.handheld-daemon;
+      adjustor = self.packages.adjustor;
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       getName = nixpkgs.lib.getName;
@@ -160,8 +160,8 @@
       nixosModules.constants = import ./constants.nix;
       packages.aptakube = unstable.callPackage ./packages/aptakube.nix {};
       packages.headlamp = unstable.callPackage ./packages/headlamp.nix {};
-      packages.hhd = unstable.callPackage ./packages/hhd.nix {};
-      packages.hhd-adjustor = unstable.callPackage ./packages/hhd-adjustor.nix {};
+      packages.handheld-daemon = unstable.callPackage ./packages/hhd.nix {};
+      packages.adjustor = unstable.callPackage ./packages/adjustor.nix {};
       packages.yuzu = unstable.callPackage ./packages/yuzu {};
     }
     // inputs.flake-utils.lib.eachDefaultSystem (
