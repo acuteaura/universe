@@ -26,9 +26,6 @@
         "django"
         "freeimage"
       ];
-    permittedInsecurePackages = [
-      "python3.12-django-3.1.14"
-    ];
   };
   nixpkgs.overlays =
     [
