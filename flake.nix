@@ -22,6 +22,9 @@
 
     jovian-nixos.url = "github:Jovian-Experiments/Jovian-NixOS";
     jovian-nixos.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    kwin-effects-forceblur.url = "github:taj-ny/kwin-effects-forceblur";
+    kwin-effects-forceblur.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs = inputs @ {
@@ -33,13 +36,22 @@
     nix-flatpak,
     ...
   }: let
-    nixpkgsConfig = import ./nixpkgs-config.nix {nixpkgs = nixpkgs;};
+    packageOverlay = final: prev: {
+      kwin-effects-forceblur = inputs.kwin-effects-forceblur.packages."${final.system}".default;
+      aptakube = self.packages.aptakube;
+      headlamp = self.packages.headlamp;
+      yuzu = self.packages.yuzu;
+    };
+    nixpkgsConfig = import ./nixpkgs-config.nix {
+      getName = nixpkgs.lib.getName;
+      extraOverlays = [packageOverlay];
+    };
     unstable = import nixpkgs-unstable {
-      config.allowUnfree = true;
+      config = nixpkgsConfig;
       system = "x86_64-linux";
     };
     unstable-darwin = import nixpkgs-unstable {
-      config.allowUnfree = true;
+      config = nixpkgsConfig;
       system = "aarch64-darwin";
     };
   in
@@ -57,7 +69,6 @@
             }
           ];
           home-manager-imports = [
-            ./home-manager/base.nix
             ./home-manager/shell.nix
           ];
         };
@@ -66,16 +77,16 @@
           useUnstable = false;
           nixos-imports = [./systems/chariot];
           home-manager-imports = [
-            ./home-manager/base.nix
             ./home-manager/shell.nix
           ];
         };
         fool = import ./basesystem.nix {
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           useUnstable = true;
-          nixos-imports = [./systems/fool];
+          nixos-imports = [
+            ./systems/fool
+          ];
           home-manager-imports = [
-            ./home-manager/base.nix
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
           ];
@@ -87,7 +98,6 @@
             ./systems/thassa
           ];
           home-manager-imports = [
-            ./home-manager/base.nix
             ./home-manager/shell.nix
           ];
         };
@@ -95,7 +105,6 @@
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           nixos-imports = [./systems/wsl];
           home-manager-imports = [
-            ./home-manager/base.nix
             ./home-manager/shell.nix
           ];
         };
@@ -149,7 +158,9 @@
       nixosModules.constants = import ./constants.nix;
       packages.aptakube = unstable.callPackage ./packages/aptakube.nix {};
       packages.headlamp = unstable.callPackage ./packages/headlamp.nix {};
+      packages.hhd = unstable.callPackage ./packages/hhd.nix {};
       packages.hhd-adjustor = unstable.callPackage ./packages/hhd-adjustor.nix {};
+      packages.yuzu = unstable.callPackage ./packages/yuzu {};
     }
     // inputs.flake-utils.lib.eachDefaultSystem (
       system: let

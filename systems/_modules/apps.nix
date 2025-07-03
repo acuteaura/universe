@@ -48,8 +48,8 @@
 
     gearlever
 
-    (pkgs.callPackage ../../packages/aptakube.nix {})
-    (pkgs.callPackage ../../packages/headlamp.nix {})
+    aptakube
+    headlamp
     (pkgs.wrapOBS {
       plugins = with pkgs.obs-studio-plugins; [
         obs-vaapi

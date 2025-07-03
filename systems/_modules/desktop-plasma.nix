@@ -22,11 +22,7 @@
     kio-fuse
 
     kdePackages.qtstyleplugin-kvantum
-    reversal-icon-theme
-    (pkgs.callPackage ../../packages/rose-pine-kvantum.nix {})
-    (pkgs.callPackage ../../packages/rose-pine-kde-colors.nix {})
-    rose-pine-cursor
-    rose-pine-gtk-theme
+    kwin-effects-forceblur
 
     # required for system info
     clinfo

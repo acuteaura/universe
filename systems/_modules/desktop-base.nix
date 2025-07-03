@@ -65,6 +65,7 @@
     wl-clipboard-rs
     libsecret
     seahorse
+    nwg-look
   ];
 
   fonts.packages = with pkgs; [
