@@ -44,6 +44,7 @@
       stdenv.cc.cc.lib
       xorg.libxcb
       zlib
+      libgbm
     ];
 
   nix.package = lib.mkDefault pkgs.lix;
