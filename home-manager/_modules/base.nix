@@ -4,6 +4,7 @@
       age
       alejandra
       attic-client
+      atuin
       btop
       chezmoi
       curl
