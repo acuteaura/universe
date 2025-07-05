@@ -66,17 +66,25 @@
   services.fprintd.enable = false;
   security.pam.services.login.fprintAuth = false;
 
-  jovian.steam = {
-    enable = false;
-    autoStart = false;
-    updater.splash = "jovian";
+  jovian = {
+    steam = {
+      enable = true;
+      autoStart = false;
+      updater.splash = "jovian";
+      user = "aurelia";
+    };
+    decky-loader.enable = true;
+    devices = {
+      steamdeck.enable = false;
+    };
+    hardware.has.amd.gpu = false;
+    steamos = {
+      enableVendorRadv = false;
+      enableMesaPatches = false;
+      enableAutoMountUdevRules = false;
+    };
   };
-  jovian.decky-loader.enable = false;
-  jovian.devices = {
-    steamdeck.enable = false;
-  };
-  jovian.hardware.has.amd.gpu = false;
-  programs.steam.gamescopeSession.enable = true;
+  programs.steam.gamescopeSession.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
