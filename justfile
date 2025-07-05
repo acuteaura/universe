@@ -9,4 +9,5 @@ push:
     git push origin HEAD
 
 rebuild TYPE *FLAGS:
-    sudo fish -c "nixos-rebuild {{TYPE}} --flake . --log-format internal-json {{FLAGS}} &| nom --json"
+    #!/usr/bin/env fish
+    nixos-rebuild {{TYPE}} --flake . --log-format internal-json --sudo {{FLAGS}} &| nom --json
