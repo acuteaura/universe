@@ -19,6 +19,7 @@
     kdePackages.plasma-vault
     kdePackages.powerdevil
     kdePackages.krecorder
+    kdePackages.kasts
     kio-fuse
 
     kdePackages.qtstyleplugin-kvantum
