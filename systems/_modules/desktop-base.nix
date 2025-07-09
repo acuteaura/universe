@@ -27,9 +27,6 @@
   # prevents AirPods being stolen back by bluez when requesting connection elsewhere
   hardware.bluetooth.settings.Policy.ReconnectAttempts = 0;
 
-  # Flatpak wants these
-  services.flatpak.enable = lib.mkDefault true;
-
   # Ancillary services
   services.pcscd.enable = lib.mkDefault true;
   services.gvfs.enable = lib.mkDefault true;
@@ -93,6 +90,7 @@
     text = ''
       librewolf
       vivaldi-bin
+      .flatpak-session-helper-wrapped
     '';
     mode = "0755";
   };

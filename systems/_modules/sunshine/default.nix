@@ -13,6 +13,7 @@
   virtScreen = "HDMI-A-1";
   setVirtScript = pkgs.writeScript "set-virt-out.fish" ''
     #!${pkgs.fish}/bin/fish
+    set -x QT_QPA_PLATFORM wayland-egl
     set logfile "/tmp/set-virt-out.log"
     echo "started set-virt-out (date)" >> $logfile
     argparse "s/scale=?" "w/width=?" "h/height=?" "f/fps=?" -- $argv
