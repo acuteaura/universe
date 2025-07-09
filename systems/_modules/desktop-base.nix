@@ -11,6 +11,9 @@
   services.xserver.excludePackages = [pkgs.xterm];
   services.xserver.desktopManager.xterm.enable = false;
 
+  services.flatpak.enable = true;
+  services.flatpak.remotes = []; # just use the user one
+
   # Enable desktop hardware features
   services.pipewire = {
     enable = lib.mkDefault true;

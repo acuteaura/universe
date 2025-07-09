@@ -46,7 +46,7 @@ in
         nixpkgsConfig
         homeManagerModule
         (import ./basehm.nix {
-          inherit nixpkgsConfig home-manager-imports home-manager-username home-manager-homedir;
+          inherit nixpkgsConfig home-manager-imports home-manager-username home-manager-homedir nix-flatpak;
           extraSpecialArgs = {inherit unstable;};
         })
       ]

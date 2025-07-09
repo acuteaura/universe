@@ -3,12 +3,8 @@
   unstable,
   ...
 }: {
-  imports = [
-    ./apps-flatpak.nix
-  ];
   environment.systemPackages = with pkgs; [
     brave
-    f2fs-tools
     firefox
     gparted
     librewolf
@@ -32,7 +28,6 @@
     })
 
     # check these for build failures on 25.11
-    archivebox
   ];
 
   programs.localsend = {

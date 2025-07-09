@@ -72,6 +72,7 @@
           ];
           home-manager-imports = [
             ./home-manager/shell.nix
+            ./home-manager/desktop.nix
           ];
         };
         chariot = import ./basesystem.nix {
@@ -80,6 +81,7 @@
           nixos-imports = [./systems/chariot];
           home-manager-imports = [
             ./home-manager/shell.nix
+            ./home-manager/desktop.nix
           ];
         };
         fool = import ./basesystem.nix {

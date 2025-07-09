@@ -53,12 +53,9 @@
     fish
 
     attic-client
-    btrfs-progs
     cryptsetup
     curl
     dig
-    e2fsprogs
-    exfatprogs
     git
     gnupg
     hdparm
@@ -66,7 +63,6 @@
     lzip
     ncdu
     neovim
-    ntfs3g
     openssl
     p7zip
     pv
@@ -77,6 +73,13 @@
     unrar-free
     wget
     zstd
+
+    # filesystem tools
+    btrfs-progs
+    e2fsprogs
+    exfatprogs
+    f2fs-tools
+    ntfs3g
 
     nix-output-monitor
   ];
