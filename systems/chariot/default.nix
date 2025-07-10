@@ -37,7 +37,6 @@
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 
-  services.xserver.displayManager.gdm.enable = false;
   services.displayManager = {
     defaultSession = "plasma";
     sddm = {
