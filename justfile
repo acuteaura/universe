@@ -6,7 +6,7 @@ default:
 
 push:
     git add .
-    git commit -m "update {{date}}" || true
+    git commit -m "update from {{hostname}}@{{date}}" || true
     git push origin HEAD
 
 rebuild TYPE *FLAGS:
