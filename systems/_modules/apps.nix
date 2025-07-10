@@ -26,8 +26,6 @@
         obs-pipewire-audio-capture
       ];
     })
-
-    # check these for build failures on 25.11
   ];
 
   programs.localsend = {
