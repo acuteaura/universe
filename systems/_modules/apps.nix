@@ -7,11 +7,13 @@
     brave
     firefox
     gparted
+    insync
     librewolf
     ludusavi
     maestral
     maestral-gui
     ocs-url
+    scrcpy
     via
     virt-manager
     vscode

@@ -12,3 +12,9 @@ push:
 rebuild TYPE *FLAGS:
     nix build .#nixosConfigurations.{{ hostname }}.config.system.build.toplevel --log-format internal-json {{FLAGS}} |& nom --json
     nixos-rebuild {{TYPE}} --flake . --sudo
+
+switch:
+    @just rebuild switch
+
+boot:
+    @just rebuild boot
