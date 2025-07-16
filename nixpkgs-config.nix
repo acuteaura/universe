@@ -32,6 +32,7 @@
     [
       (import ./overlays/brave.nix)
       (import ./overlays/fix-python3.nix)
+      (import ./overlays/pin-versions.nix)
     ]
     ++ extraOverlays;
 }

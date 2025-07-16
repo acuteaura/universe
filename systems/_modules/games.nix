@@ -13,7 +13,7 @@
   programs.gamemode.enable = true;
 
   programs.steam = {
-    enable = true;
+    enable = lib.mkDefault true;
     protontricks.enable = true;
     localNetworkGameTransfers.openFirewall = true;
     gamescopeSession = {

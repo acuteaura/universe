@@ -73,13 +73,9 @@
 
   hardware.cpu.amd.ryzen-smu.enable = true;
 
-  #virtualisation.waydroid.enable = true;
+  virtualisation.waydroid.enable = true;
   programs.adb.enable = true;
-  #services.ollama = {
-  #  enable = true;
-  #  loadModels = ["devstral" "deepseek-r1:14b"];
-  #  acceleration = "rocm";
-  #};
+  programs.steam.enable = false;
 
   networking.networkmanager.enable = false;
   networking.networkmanager.unmanaged = ["virbr0" "docker0"];
