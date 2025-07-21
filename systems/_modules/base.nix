@@ -4,8 +4,11 @@
   lib,
   ...
 }: {
-  # Configure Nix itself
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_6_15;
+  time.timeZone = lib.mkDefault "Europe/Berlin";
+  systemd.coredump.enable = lib.mkDefault true;
+  zramSwap.enable = lib.mkDefault true;
+  i18n.defaultLocale = "en_US.UTF-8";
 
   networking.networkmanager = {
     enable = lib.mkDefault true;
@@ -47,6 +50,8 @@
       libgbm
     ];
 
+  # Configure Nix itself
+  nix.settings.experimental-features = lib.mkDefault ["nix-command" "flakes"];
   nix.package = lib.mkDefault pkgs.lix;
 
   environment.systemPackages = with pkgs; [

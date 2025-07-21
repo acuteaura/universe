@@ -6,7 +6,6 @@
     ../_modules/desktop-plasma.nix
     ../_modules/libvirt.nix
     ../_modules/mounts.nix
-    ../_modules/system-config-defaults.nix
     ../_modules/user-aurelia.nix
     ../_modules/wine.nix
     ../_modules/work.nix

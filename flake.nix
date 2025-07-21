@@ -75,6 +75,15 @@
             ./home-manager/desktop.nix
           ];
         };
+        construct = import ./basesystem.nix {
+          inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
+          useUnstable = true;
+          nixos-imports = [./systems/construct];
+          home-manager-imports = [
+            ./home-manager/shell.nix
+            ./home-manager/desktop.nix
+          ];
+        };
         chariot = import ./basesystem.nix {
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           useUnstable = true;

@@ -46,15 +46,9 @@ in {
     ];
 
     overrides.global = {
-      Context.filesystems = [
-        "/home/aurelia/.themes:ro"
-        "/home/aurelia/.icons:ro"
-        "/home/aurelia/.themes:ro"
-        "/home/aurelia/.local/share/themes"
-        "/home/aurelia/.local/share/icons"
-      ];
+      Context.filesystems = [];
       Environment = {
-        GTK_THEME = "Fluent-dark-compact:dark";
+        #GTK_THEME = "Fluent-dark-compact:dark";
       };
     };
     overrides."app.zen_browser.zen" = {

@@ -12,7 +12,6 @@
     ../_modules/mounts.nix
     ../_modules/wine.nix
     ../_modules/work.nix
-    ../_modules/system-config-defaults.nix
     ../_modules/user-aurelia.nix
     ../_modules/amdgpu.nix
 

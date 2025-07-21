@@ -15,10 +15,14 @@
   services.flatpak.remotes = []; # just use the user one
 
   # Enable desktop hardware features
+  services.pulseaudio.enable = lib.mkDefault false;
+  security.rtkit.enable = lib.mkDefault true;
   services.pipewire = {
     enable = lib.mkDefault true;
     alsa.enable = lib.mkDefault true;
+    alsa.support32Bit = lib.mkDefault true;
     pulse.enable = lib.mkDefault true;
+    jack.enable = lib.mkDefault false;
   };
   hardware.bluetooth.enable = lib.mkDefault true;
   # hardware.bluetooth.settings = {
@@ -40,7 +44,6 @@
     openFirewall = lib.mkDefault true;
   };
 
-  services.printing.enable = lib.mkDefault true;
   services.printing.drivers = with pkgs; [
     epson-escpr
     epson-escpr2
