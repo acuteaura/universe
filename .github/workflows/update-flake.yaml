@@ -3,9 +3,13 @@ name: Update Nix Flake Dependencies and Build NixOS System
 on:
   workflow_dispatch:
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   update-and-build:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-8vcpu-ubuntu-2404
 
     steps:
       - name: Checkout repository
@@ -30,10 +34,19 @@ jobs:
           else
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
-      - name: Attempt to build NixOS system (dry-run)
+      - name: Setup attic
+        run: |
+          nix profile install nixpkgs/fa64ec5c1ca6f17746f3defedb988b9248e97616#attic-client
+          attic login server ${{ vars.ATTIC_ENDPOINT }} ${{ secrets.ATTIC_TOKEN }}
+          attic use ${{ vars.ATTIC_CACHE }}
+      - name: Build NixOS system
         if: steps.update.outputs.changed == 'true'
         run: |
-          nix build .#nixosConfigurations.fool.config.system.build.toplevel --dry-run
+          nix build .#nixosConfigurations.fool.config.system.build.toplevel
+      - name: Push cache
+        run: |
+          attic push ${{ vars.ATTIC_CACHE }} result
+          rm result
       - name: Push changes
         if: steps.update.outputs.changed == 'true'
         uses: ad-m/github-push-action@master
@@ -48,5 +61,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ steps.branch.outputs.branch }}
           title: "Update Nix Flake Dependencies"
-          body: "This PR updates the Nix flake dependencies and attempts to build the NixOS system."
+          body: "This PR updates the Nix flake dependencies."
           reviewers: "acuteaura"
