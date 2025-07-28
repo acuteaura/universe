@@ -3,6 +3,10 @@ name: Update Nix Flake Dependencies and Build NixOS System
 on:
   workflow_dispatch:
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   update-and-build:
     runs-on: blacksmith-8vcpu-ubuntu-2404
