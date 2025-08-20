@@ -128,7 +128,11 @@
           extraSpecialArgs = {unstable = unstable;};
           modules = [
             (import ./basehmuser.nix {
-              home-manager-imports = [nixpkgsConfig ./home-manager/shell.nix];
+              home-manager-imports = [
+                nixpkgsConfig
+                nix-flatpak.homeManagerModules.nix-flatpak
+                ./home-manager/shell.nix
+              ];
               home-manager-username = "aurelia";
               home-manager-homedir = "/home/aurelia";
             })
