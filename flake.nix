@@ -124,47 +124,25 @@
       };
       homeConfigurations = {
         shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {inherit unstable;};
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {unstable = unstable;};
           modules = [
-            (import ./basehm.nix {
-              inherit nixpkgsConfig;
-              home-manager-imports = [./homes/shell.nix];
+            (import ./basehmuser.nix {
+              home-manager-imports = [nixpkgsConfig ./home-manager/shell.nix];
               home-manager-username = "aurelia";
               home-manager-homedir = "/home/aurelia";
             })
           ];
         };
-        shell-fat-x86_64-linux = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {inherit unstable;};
-          modules = [
-            ./home-manager/shell.nix
-            nixpkgsConfig
-          ];
-        };
-        shell-devcontainer = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {inherit unstable;};
-          modules = [
-            ./home-manager/shell.nix
-            nixpkgsConfig
-          ];
-        };
-        shell-nas = home-manager-unstable.lib.homeManagerConfiguration {
-          pkgs = nixpkgs-unstable.legacyPackages.x86_64-linux;
-          extraSpecialArgs = {inherit unstable;};
-          modules = [
-            ./home-manager/shell.nix
-            nixpkgsConfig
-          ];
-        };
-        shell-aarch64-darwin = home-manager-unstable.lib.homeManagerConfiguration {
-          pkgs = nixpkgs-unstable.legacyPackages.aarch64-darwin;
+        shell-aarch64-darwin = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {unstable = unstable-darwin;};
           modules = [
-            ./home-manager/shell.nix
-            nixpkgsConfig
+            (import ./basehmuser.nix {
+              home-manager-imports = [nixpkgsConfig ./home-manager/shell.nix];
+              home-manager-username = "aurelia";
+              home-manager-homedir = "/Users/aurelia";
+            })
           ];
         };
       };

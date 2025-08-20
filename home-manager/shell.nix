@@ -3,12 +3,10 @@
     [
       age
       age-plugin-yubikey
-      archivebox
       attic-client
       atuin
       btop
       chezmoi
-      cryptsetup
       curl
       devbox
       dig
@@ -47,7 +45,7 @@
       starship
       syncthing
       tmux
-      unrar-free
+      unrar
       uutils-coreutils
       wget
       whois
@@ -131,5 +129,7 @@
       stress
       usbutils
       hdparm
+
+      cryptsetup
     ];
 }

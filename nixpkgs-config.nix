@@ -21,6 +21,7 @@
         "steamdeck-hw-theme"
         "via"
         "vscode"
+        "unrar"
       ];
     allowInsecurePredicate = pkg:
       builtins.elem (getName pkg) [

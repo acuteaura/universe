@@ -4,7 +4,7 @@
   home-manager-homedir ? "/home/aurelia",
   home-manager-imports,
   nixpkgsConfig,
-  nix-flatpak,
+  nix-flatpak ? null,
 }: {
   imports = [nixpkgsConfig];
 
@@ -12,11 +12,5 @@
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = extraSpecialArgs;
   home-manager.backupFileExtension = "hmbak";
-  home-manager.users."${home-manager-username}" = {
-    home.stateVersion = "23.11";
-    programs.home-manager.enable = true;
-    imports = [nix-flatpak.homeManagerModules.nix-flatpak] ++ home-manager-imports;
-    home.username = home-manager-username;
-    home.homeDirectory = home-manager-homedir;
-  };
+  home-manager.users."${home-manager-username}" = import ./basehmuser.nix {inherit home-manager-username home-manager-homedir home-manager-imports;};
 }
