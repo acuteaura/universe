@@ -138,6 +138,23 @@
             })
           ];
         };
+        desktop-x86_64-linux = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {unstable = unstable;};
+          modules = [
+            (import ./basehmuser.nix {
+              home-manager-imports = [
+                nixpkgsConfig
+                nix-flatpak.homeManagerModules.nix-flatpak
+                ./home-manager/shell.nix
+                ./home-manager/fonts.nix
+                ./home-manager/desktop.nix
+              ];
+              home-manager-username = "aurelia";
+              home-manager-homedir = "/home/aurelia";
+            })
+          ];
+        };
         shell-aarch64-darwin = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           extraSpecialArgs = {unstable = unstable-darwin;};
