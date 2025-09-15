@@ -102,6 +102,7 @@
       kubernetes-helm
       kustomize
       minikube
+      talosctl
     ]
     ++ lib.optionals (pkgs.stdenv.isDarwin) [
       bash
