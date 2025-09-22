@@ -37,7 +37,6 @@
         "KC_DB_URL_DATABASE" = "postgres";
         "KC_DB_USERNAME" = "postgres";
         "KC_HOSTNAME" = "https://id.nullvoid.space";
-        "KEYCLOAK_ADMIN" = "root";
         "JAVA_OPTS_APPEND" = "-Djava.net.preferIPv4Stack=false -Djava.net.preferIPv6Addresses=true";
       };
       environmentFiles = [
