@@ -9,8 +9,6 @@
     dolphin-emu-primehack
     duckstation
     pcsx2
-    # broken
-    #pkgs.yuzu.eden
     ppsspp-qt
     rpcs3
     ryubing

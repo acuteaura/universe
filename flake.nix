@@ -168,12 +168,6 @@
         };
       };
       nixosModules.constants = import ./constants.nix;
-      packages.aptakube = unstable.callPackage ./packages/aptakube.nix {};
-      packages.headlamp = unstable.callPackage ./packages/headlamp.nix {};
-      packages.handheld-daemon = unstable.callPackage ./packages/hhd.nix {};
-      packages.adjustor = unstable.callPackage ./packages/adjustor.nix {};
-      packages.yuzu = unstable.callPackage ./packages/yuzu {};
-      packages.gitversion = unstable.callPackage ./packages/gitversion.nix {};
     }
     // inputs.flake-utils.lib.eachDefaultSystem (
       system: let
