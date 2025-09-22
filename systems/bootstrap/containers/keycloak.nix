@@ -3,11 +3,6 @@
 
   virtualisation.quadlet.networks.keycloak = {};
 
-  fileSystems."/data/keycloak" = {
-    device = "/dev/disk/by-id/scsi-0HC_Volume_101019958";
-    fsType = "ext4";
-  };
-
   virtualisation.quadlet.containers.keycloak-postgres = {
     containerConfig = {
       name = "keycloak-postgres";
