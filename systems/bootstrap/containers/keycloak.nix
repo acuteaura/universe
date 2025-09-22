@@ -1,5 +1,5 @@
 {...}: {
-  virtualisation.quadlet.autoEscape = true
+  virtualisation.quadlet.autoEscape = true;
 
   virtualisation.quadlet.networks.keycloak = {};
 
