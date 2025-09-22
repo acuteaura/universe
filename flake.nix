@@ -106,6 +106,7 @@
         };
         bootstrap = import ./basesystem.nix {
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
+          system = "aarch64-linux";
           nixos-imports = [
             inputs.quadlet.nixosModules.quadlet
             ./systems/bootstrap
