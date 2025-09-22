@@ -104,11 +104,11 @@
             ./home-manager/desktop.nix
           ];
         };
-        thassa = import ./basesystem.nix {
+        bootstrap = import ./basesystem.nix {
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           nixos-imports = [
             inputs.quadlet.nixosModules.quadlet
-            ./systems/thassa
+            ./systems/bootstrap
           ];
           home-manager-imports = [
             ./home-manager/shell.nix
