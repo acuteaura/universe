@@ -5,34 +5,21 @@
       age-plugin-yubikey
       attic-client
       atuin
-      btop
       chezmoi
-      curl
       devbox
-      dig
       direnv
       fd
-      ffmpeg
-      file
-      fish
-      git
       git-annex
       gitversion
-      gnugrep
-      gnumake
-      gnupg
-      gnused
-      htop
       hyfetch
       internetarchive
       iperf
       jq
-      llvm
       lzip
       micro
       ncdu
       neovim
-      openssl
+
       p7zip
       pgo-client
       pv
@@ -41,18 +28,16 @@
       ripgrep
       socat
       sqlite
-      sshfs
+
       starship
       syncthing
       tmux
-      unrar
       uutils-coreutils
-      wget
-      whois
       yq-go
       yt-dlp
       zellij
       zstd
+      whois
 
       # devops shit
       act
@@ -69,26 +54,13 @@
       tshark
       hcloud
 
-      # languages
+      # languages and compilers
       bun
       go
       nodejs_22
       nushell
-
-      # language servers and tools
-      alejandra
       clang
-      efm-langserver
-      eslint
-      nil
-      nixd
-      nixpkgs-fmt
-      nufmt
       rustup
-      tailwindcss-language-server
-      typescript-language-server
-      vue-language-server
-      yaml-language-server
 
       # k8s stuff
       cilium-cli
@@ -115,8 +87,6 @@
       docker-credential-helpers
     ]
     ++ lib.optionals (pkgs.stdenv.isLinux) [
-      # broken dependency on darwin: sleuthkit
-      # ...because nixpkgs doesn't give a shit about darwin
       binwalk
 
       distrobox
@@ -130,7 +100,5 @@
       stress
       usbutils
       hdparm
-
-      cryptsetup
     ];
 }

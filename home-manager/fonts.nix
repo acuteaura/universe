@@ -1,4 +1,4 @@
-{pkgs,...}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     dm-mono
     b612

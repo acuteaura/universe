@@ -51,8 +51,9 @@
       ];
     };
     unitConfig = {
-      After = ["network.target"];
-      Wants = ["network.target"];
+      After = ["network.target" "keycloak-postgres.service"];
+      Wants = ["network.target" "keycloak-postgres.service"];
+      ConditionPathExists = ["/etc/keycloak.env"];
     };
   };
 }
