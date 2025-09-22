@@ -15,12 +15,19 @@
 
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
-  networking.hostName = "thassa";
+
+  networking.useDHCP = lib.mkDefault true;
+
+  networking.hostName = "bootstrap";
+  networking.domain = "nullvoid.space";
+
   users.users.root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q''];
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   users.users.aurelia = {
     isNormalUser = true;
-    extraGroups = ["wheel" "qemu-libvirtd"];
+    extraGroups = ["wheel"];
     packages = with pkgs; [];
     openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q"];
     shell = pkgs.fish;

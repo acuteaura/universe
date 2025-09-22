@@ -10,7 +10,7 @@
     containerConfig = {
       name = "keycloak-postgres";
       hostname = "keycloak-postgres";
-      image = "docker.io/library/postgres:16.6";
+      image = "docker.io/library/postgres:16.10";
       volumes = [
         "/data/keycloak/postgres:/var/lib/postgresql/data:U"
       ];
@@ -25,6 +25,7 @@
       RequiresMountsFor = [
         "/data/keycloak"
       ];
+      ConditionPathExists = ["/etc/keycloak.env"];
     };
   };
 
@@ -32,7 +33,7 @@
     containerConfig = {
       name = "keycloak";
       hostname = "keycloak";
-      image = "quay.io/aurelias/keycloak:8d95868b3d168ec6525a644fa787ec0bcd17494e";
+      image = "quay.io/aurelias/keycloak:f94fd69894903324df6415bde179d50ebed6b72b@sha256:a457dc97dd3cd2024a29a9874749bf22ac66c97a2f652062fbbad632477166c7";
       environments = {
         "KC_DB" = "postgres";
         "KC_DB_URL_HOST" = "keycloak-postgres";
