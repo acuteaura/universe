@@ -46,6 +46,14 @@
   # nixos sucks tbh
   networking.firewall.interfaces."podman+".allowedUDPPorts = [53 5353];
 
+  boot.loader.systemd-boot.configurationLimit = 5;
+  nix.gc.automatic = true;
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "-d";
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It's perfectly fine and recommended to leave
