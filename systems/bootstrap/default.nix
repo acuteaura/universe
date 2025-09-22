@@ -37,8 +37,8 @@
 
   programs._1password.enable = true;
 
-  fileSystems."/data/keycloak" = {
-    device = "/dev/disk/by-id/scsi-0HC_Volume_101019958";
+  fileSystems."/data" = {
+    device = "/dev/disk/by-id/scsi-0HC_Volume_103515584";
     fsType = "ext4";
     options = ["nofail" "x-systemd.device-timeout=10s"];
   };

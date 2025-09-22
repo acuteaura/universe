@@ -20,7 +20,7 @@
       After = ["network.target"];
       Wants = ["network.target"];
       RequiresMountsFor = [
-        "/data/keycloak"
+        "/data"
       ];
       ConditionPathExists = ["/etc/keycloak.env"];
     };
