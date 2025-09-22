@@ -1,4 +1,6 @@
 {...}: {
+  virtualisation.quadlet.autoEscape = true
+
   virtualisation.quadlet.networks.keycloak = {};
 
   fileSystems."/data/keycloak" = {
