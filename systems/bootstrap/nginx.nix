@@ -112,8 +112,19 @@
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = "past.tree1213@cognitive-antivirus.net";
+    defaults = {
+      email = "past.tree1213@cognitive-antivirus.net";
+      reloadServices = [ "nginx" ];
+    };
+    certs = {
+      "id.nullvoid.space" = {
+        group = "nginx";
+        dnsProvider = "cloudflare";
+        environmentFile = "/etc/cloudflare.env";
+      };
+    };
   };
+
 
   networking.firewall.allowedTCPPorts = [80 443 49152];
 }
