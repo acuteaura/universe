@@ -61,17 +61,17 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    virtualHosts."78.47.161.199" = {
-      listen = defaultListenIPv4 ++ defaultListenIPv6 ++ cloudflareListenIPv4 ++ cloudflareListenIPv6;
-      rejectSSL = true;
-      default = true;
-      locations."/" = {
-        return = "404";
-      };
-    };
+    # virtualHosts."78.47.161.199" = {
+    #   listen = defaultListenIPv4 ++ defaultListenIPv6 ++ cloudflareListenIPv4 ++ cloudflareListenIPv6;
+    #   rejectSSL = true;
+    #   default = true;
+    #   locations."/" = {
+    #     return = "404";
+    #   };
+    # };
 
     virtualHosts."id.nullvoid.space" = {
-      listen = cloudflareListenIPv4 ++ cloudflareListenIPv6;
+      listen = defaultListenIPv4 ++ defaultListenIPv6;
       forceSSL = true;
       kTLS = true;
       sslCertificate = "/var/lib/acme/id.nullvoid.space/fullchain.pem";
