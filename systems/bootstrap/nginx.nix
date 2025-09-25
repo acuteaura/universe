@@ -74,8 +74,8 @@
       listen = cloudflareListenIPv4 ++ cloudflareListenIPv6;
       forceSSL = true;
       kTLS = true;
-      sslCertificate = "/etc/certificates/nullvoid.space-cf.crt";
-      sslCertificateKey = "/etc/certificates/nullvoid.space-cf.key";
+      sslCertificate = "/var/lib/acme/id.nullvoid.space/fullchain.pem";
+      sslCertificateKey = "/var/lib/acme/id.nullvoid.space/key.pem";
       locations."/" = {
         proxyPass = "http://127.0.0.1:8080";
         proxyWebsockets = true;
@@ -100,13 +100,13 @@
           deny all;
         '';
       };
-      extraConfig = ''
-        ssl_client_certificate /etc/certificates/authenticated_origin_pull_ca.pem;
-        ssl_verify_client on;
-        ${realIpsFromList cfipv4}
-        ${realIpsFromList cfipv6}
-        real_ip_header CF-Connecting-IP;
-      '';
+      # extraConfig = ''
+      #   ssl_client_certificate /etc/certificates/authenticated_origin_pull_ca.pem;
+      #   ssl_verify_client on;
+      #   ${realIpsFromList cfipv4}
+      #   ${realIpsFromList cfipv6}
+      #   real_ip_header CF-Connecting-IP;
+      # '';
     };
   };
 
