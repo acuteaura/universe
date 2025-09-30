@@ -7,6 +7,7 @@
     ../_modules/containers.nix
     ../_modules/desktop-base.nix
     ../_modules/desktop-plasma.nix
+    ../_modules/browsers.nix
     ../_modules/libvirt.nix
     ../_modules/mounts.nix
     ../_modules/wine.nix
