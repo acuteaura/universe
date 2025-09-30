@@ -29,7 +29,7 @@
   ];
 
   boot.loader = {
-    boot.loader.systemd-boot = {
+    systemd-boot = {
       enable = true;
       configurationLimit = 10;
       consoleMode = "max";
