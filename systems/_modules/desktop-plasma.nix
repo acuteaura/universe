@@ -2,9 +2,11 @@
   services.desktopManager.plasma6.enable = true;
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    kdepim-runtime
     elisa
+    kdepim-runtime
+    konsole
     oxygen
+    plasma-browser-integration
   ];
 
   environment.systemPackages = with pkgs; [

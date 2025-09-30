@@ -1,6 +1,5 @@
 {
   pkgs,
-  zen4pkgs,
   ...
 }: {
   imports = [
@@ -11,15 +10,13 @@
     ../_modules/libvirt.nix
     ../_modules/mounts.nix
     ../_modules/wine.nix
-    ../_modules/work.nix
+    #../_modules/work.nix
     ../_modules/user-aurelia.nix
     ../_modules/amdgpu.nix
 
-    ../_modules/hhd.nix
-
-    ../_modules/emulators.nix
+    #../_modules/emulators.nix
     ../_modules/games.nix
-    ../_modules/sunshine
+    #../_modules/sunshine
 
     ../_modules/apps.nix
 
@@ -31,19 +28,22 @@
   ];
 
   boot.loader = {
-    grub = {
+    boot.loader.systemd-boot = {
       enable = true;
-      efiSupport = true;
-      device = "nodev";
-      configurationLimit = 16;
-      useOSProber = false;
+      configurationLimit = 10;
+      consoleMode = "max";
+      rebootForBitlocker = true;
+      memtest86.enable = true;
     };
     efi.canTouchEfiVariables = true;
   };
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
   boot.zfs.devNodes = "/dev/disk/by-id/";
-  boot.zfs.extraPools = ["magician" "priestress" "justice"];
+  #boot.zfs.extraPools = ["magician" "priestress" "justice"];
+
+  boot.kernelPackages = pkgs.linuxPackages_cachyos; #.cachyOverride { mArch = "ZEN4"; };
+  boot.zfs.package = pkgs.zfs_cachyos;
 
   # Network
   networking = {
@@ -60,7 +60,7 @@
     };
   };
 
-  services.sunshine-with-virtdisplay.enable = true;
+  #services.sunshine-with-virtdisplay.enable = true;
 
   services.power-profiles-daemon.enable = true;
 
@@ -70,7 +70,8 @@
 
   vfio.enable = false;
 
-  hardware.cpu.amd.ryzen-smu.enable = true;
+  # TODO: broken
+  #hardware.cpu.amd.ryzen-smu.enable = true;
 
   virtualisation.waydroid.enable = true;
   programs.adb.enable = true;
@@ -109,10 +110,7 @@
         matchConfig.Name = "br0";
         bridgeConfig = {};
         networkConfig = {
-          DHCP = "no";
-          Address = "192.168.2.2/24";
-          Gateway = "192.168.2.1";
-          DNS = "192.168.2.1";
+          DHCP = "yes";
           IgnoreCarrierLoss = "yes";
         };
         linkConfig = {

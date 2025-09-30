@@ -3,6 +3,9 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.05";
+
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -38,11 +41,6 @@
   }: let
     packageOverlay = final: prev: {
       kwin-effects-forceblur = inputs.kwin-effects-forceblur.packages."${final.system}".default;
-      aptakube = self.packages.aptakube;
-      headlamp = self.packages.headlamp;
-      yuzu = self.packages.yuzu;
-      handheld-daemon = self.packages.handheld-daemon;
-      adjustor = self.packages.adjustor;
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       getName = nixpkgs.lib.getName;
@@ -97,6 +95,7 @@
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           useUnstable = true;
           nixos-imports = [
+            inputs.chaotic.nixosModules.default
             ./systems/fool
           ];
           home-manager-imports = [

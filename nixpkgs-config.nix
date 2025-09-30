@@ -8,6 +8,7 @@
       builtins.elem (getName pkg) [
         "1password"
         "1password-cli"
+        "aptakube"
         "discord"
         "idea-ultimate"
         "idea-ultimate-with-plugins"
@@ -26,7 +27,6 @@
     allowInsecurePredicate = pkg:
       builtins.elem (getName pkg) [
         "django"
-        "freeimage"
       ];
   };
   nixpkgs.overlays =

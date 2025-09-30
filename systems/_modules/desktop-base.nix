@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  unstable,
   ...
 }: {
   # desktops need to be responsive
@@ -61,27 +62,23 @@
   ];
 
   programs.dconf.enable = true;
+  programs.seahorse.enable = true;
+  programs.ssh.askPassword = lib.mkForce "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
+  services.gnome.gnome-keyring.enable = true;
 
   environment.systemPackages = with pkgs; [
     zenity
     wayland-utils
     wl-clipboard-rs
     libsecret
-    seahorse
     nwg-look
 
-    brave
-    firefox
+    ghostty
     gparted
-    insync
-    librewolf
     ludusavi
-    maestral
-    maestral-gui
     ocs-url
     scrcpy
     via
-    virt-manager
     vscode
     unstable.zed-editor
   ];
@@ -105,34 +102,6 @@
   security.pam.services.sudo.failDelay = {
     enable = true;
     delay = 200000;
-  };
-
-  environment.etc."1password/custom_allowed_browsers" = {
-    text = ''
-      librewolf
-      vivaldi-bin
-      .flatpak-session-helper-wrapped
-    '';
-    mode = "0755";
-  };
-
-  environment.etc."brave/policies/managed/anti-eich-aktion.json" = {
-    text = ''
-      {
-        "BraveAIChatEnabled": 0,
-        "BraveRewardsDisabled": 1,
-        "BraveVPNDisabled": 1,
-        "BraveWalletDisabled": 1,
-        "ExtensionInstallForcelist": [
-          "cdglnehniifkbagbbombnjghhcihifij",
-          "aeblfdkhhhdcdjpifhhbdiojplfjncoa",
-          "hdokiejnpimakedhajhdlcegeplioahd",
-          "cjpalhdlnbpafiamejdnhcphjbkeiagm"
-        ],
-        "IPFSEnabled": false,
-        "TorDisabled": 1
-      }
-    '';
   };
 
   xdg.portal = {

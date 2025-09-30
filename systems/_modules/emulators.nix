@@ -7,7 +7,6 @@
     azahar
     dolphin-emu
     dolphin-emu-primehack
-    duckstation
     pcsx2
     ppsspp-qt
     rpcs3
