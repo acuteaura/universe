@@ -81,16 +81,17 @@ in {
       };
     };
 
-    boot.kernelParams = [
-      "video=HDMI-A-1:1920x1080@60"
-      "video=HDMI-A-1:1920x1080@120"
-      "video=HDMI-A-1:2560x1440@60"
-      "video=HDMI-A-1:2560x1440@120"
-      "video=HDMI-A-1:2560x1600@60"
-      "video=HDMI-A-1:2560x1600@120"
-      "video=HDMI-A-1:2880x1920@60"
-      "video=HDMI-A-1:2880x1920@120"
-    ];
+    # let's not pretend this ever worked
+    # boot.kernelParams = [
+    #   "video=HDMI-A-1:1920x1080@60"
+    #   "video=HDMI-A-1:1920x1080@120"
+    #   "video=HDMI-A-1:2560x1440@60"
+    #   "video=HDMI-A-1:2560x1440@120"
+    #   "video=HDMI-A-1:2560x1600@60"
+    #   "video=HDMI-A-1:2560x1600@120"
+    #   "video=HDMI-A-1:2880x1920@60"
+    #   "video=HDMI-A-1:2880x1920@120"
+    # ];
 
     systemd.user.services.steam-run-url-service = {
       enable = true;

@@ -13,7 +13,6 @@
         "BraveVPNDisabled": true,
         "BraveAIChatEnabled": false,
         "TorDisabled": true,
-        "PasswordManagerEnabled": false,
         "BraveNewsDisabled": true,
         "BraveTalkDisabled": true,
         "BraveWaybackMachineEnabled": false,

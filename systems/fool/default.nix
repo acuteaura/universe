@@ -60,6 +60,7 @@
       wayland.enable = true;
     };
   };
+  security.pam.services.sddm.enableGnomeKeyring = true;
 
   #services.sunshine-with-virtdisplay.enable = true;
 
@@ -76,7 +77,7 @@
 
   virtualisation.waydroid.enable = true;
   programs.adb.enable = true;
-  programs.steam.enable = false;
+  programs.steam.enable = true;
 
   networking.networkmanager.enable = false;
   networking.networkmanager.unmanaged = ["virbr0" "docker0"];
@@ -85,6 +86,10 @@
     useDHCP = false;
     useNetworkd = true;
     tempAddresses = "disabled";
+  };
+  services.resolved = {
+    enable = true;
+    fallbackDns = [];
   };
   systemd.network = {
     enable = true;
@@ -113,6 +118,9 @@
         networkConfig = {
           DHCP = "yes";
           IgnoreCarrierLoss = "yes";
+        };
+        dhcpV4Config = {
+          UseDNS = true;
         };
         linkConfig = {
           MACAddress = "08:bf:b8:19:16:f5";
