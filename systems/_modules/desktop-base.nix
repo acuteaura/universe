@@ -8,12 +8,21 @@
   nix.daemonCPUSchedPolicy = "idle";
   nix.daemonIOSchedClass = "idle";
 
+  # might be needed for xwayland?
   services.xserver.enable = true;
   services.xserver.excludePackages = [pkgs.xterm];
   services.xserver.desktopManager.xterm.enable = false;
 
   services.flatpak.enable = true;
   services.flatpak.remotes = []; # just use the user one
+
+  services.displayManager = {
+    defaultSession = lib.mkDefault "plasma";
+    sddm = {
+      enable = lib.mkDefault true;
+      wayland.enable = lib.mkDefault true;
+    };
+  };
 
   # Enable desktop hardware features
   services.pulseaudio.enable = lib.mkDefault false;
@@ -65,6 +74,7 @@
   programs.seahorse.enable = true;
   programs.ssh.askPassword = lib.mkForce "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
   services.gnome.gnome-keyring.enable = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
 
   environment.systemPackages = with pkgs; [
     zenity
@@ -89,14 +99,16 @@
 
   hardware.keyboard.qmk.enable = true;
 
+  security.sudo-rs.enable = true;
   security.pam.services.sudo.nodelay = true;
   security.pam.services.sudo.failDelay = {
     enable = true;
-    delay = 200000;
+    delay = 200000; # us -> 2 seconds
   };
 
   xdg.portal = {
-    enable = true;
+    enable = lib.mkDefault true;
+    xdgOpenUsePortal = lib.mkDefault true;
     config = {
       common = {
         default = [
@@ -104,9 +116,15 @@
           "gtk"
           "gnome"
         ];
+        "org.freedesktop.impl.portal.Secret" = [
+          "gnome-keyring"
+        ];
       };
     };
   };
+
+  services.power-profiles-daemon.enable = lib.mkDefault true;
+  services.thermald.enable = lib.mkDefault true;
 
   services.hardware.bolt.enable = lib.mkDefault true;
   networking.firewall.trustedInterfaces = ["thunderbolt*"];

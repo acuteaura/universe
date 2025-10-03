@@ -8,50 +8,35 @@
   modulesPath,
   ...
 }: {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
-
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid" "usb_storage" "sr_mod" "sdhci_pci"];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = ["amdgpu"];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/d012e7cf-00bb-4b2a-ad77-0732a2cdbecd";
-    fsType = "btrfs";
-    options = ["subvol=@"];
-  };
-
-  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/28b9b551-7750-4daa-8d2c-b13548e5ad36";
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/d012e7cf-00bb-4b2a-ad77-0732a2cdbecd";
-    fsType = "btrfs";
-    options = ["subvol=@nix"];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/d012e7cf-00bb-4b2a-ad77-0732a2cdbecd";
-    fsType = "btrfs";
-    options = ["subvol=@home"];
-  };
-
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/20CD-C912";
+    device = "/dev/disk/by-label/LBOOT";
     fsType = "vfat";
     options = ["fmask=0022" "dmask=0022"];
   };
 
+  fileSystems."/" = {
+    device = "cyberdaemon/root";
+    fsType = "zfs";
+  };
+
+  fileSystems."/home" = {
+    device = "cyberdaemon/home";
+    fsType = "zfs";
+  };
+
+  fileSystems."/nix" = {
+    device = "cyberdaemon/nix";
+    fsType = "zfs";
+  };
+
   swapDevices = [];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.enableRedistributableFirmware = true;
+  hardware.cpu.amd.updateMicrocode = true;
+  services.fwupd.enable = true;
 }

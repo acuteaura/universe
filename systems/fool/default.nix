@@ -1,31 +1,30 @@
 {pkgs, ...}: {
   imports = [
     ../_modules/base.nix
-    ../_modules/containers.nix
     ../_modules/desktop-base.nix
     ../_modules/desktop-plasma.nix
+
+    ../_modules/apps-flatpak.nix
+    ../_modules/apps.nix
     ../_modules/browsers.nix
+    ../_modules/containers.nix
+    ../_modules/emulators.nix
+    ../_modules/games.nix
     ../_modules/libvirt.nix
     ../_modules/mounts.nix
     ../_modules/wine.nix
-    #../_modules/work.nix
+
     ../_modules/user-aurelia.nix
     ../_modules/amdgpu.nix
-
-    #../_modules/emulators.nix
-    ../_modules/games.nix
-    #../_modules/sunshine
-
-    ../_modules/apps.nix
-    ../_modules/apps-flatpak.nix
 
     ./gpu-tweaks.nix
     ./hardware.nix
     ./vfio.nix
     ./smb.nix
-    ./wecontinue.nix
   ];
 
+  # BOOT
+  #########################################
   boot.loader = {
     systemd-boot = {
       enable = true;
@@ -38,10 +37,12 @@
   };
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
+
+  boot.kernelPackages = pkgs.linuxPackages_cachyos; #.cachyOverride { mArch = "ZEN4"; };
+
   boot.zfs.devNodes = "/dev/disk/by-id/";
   #boot.zfs.extraPools = ["magician" "priestress" "justice"];
 
-  boot.kernelPackages = pkgs.linuxPackages_cachyos; #.cachyOverride { mArch = "ZEN4"; };
   boot.zfs.package = pkgs.zfs_cachyos;
   boot.kernelModules = ["coretemp" "nct6775"];
 
@@ -49,27 +50,7 @@
   networking = {
     hostId = "e4d619e1";
     hostName = "fool";
-    nftables.enable = true;
   };
-
-  services.displayManager = {
-    defaultSession = "plasma";
-    sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
-  };
-  security.pam.services.sddm.enableGnomeKeyring = true;
-
-  #services.sunshine-with-virtdisplay.enable = true;
-
-  services.power-profiles-daemon.enable = true;
-  programs.coolercontrol.enable = true;
-  services.thermald.enable = true;
-
-  environment.etc."sysconfig/lm_sensors".text = ''
-    HWMON_MODULES="coretemp"
-  '';
 
   # random tools
   services.mullvad-vpn.enable = false;
@@ -77,12 +58,8 @@
 
   vfio.enable = false;
 
-  # TODO: broken
-  #hardware.cpu.amd.ryzen-smu.enable = true;
-
   virtualisation.waydroid.enable = true;
   programs.adb.enable = true;
-  programs.steam.enable = true;
 
   networking.networkmanager.enable = false;
   networking.networkmanager.unmanaged = ["virbr0" "docker0"];

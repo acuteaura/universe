@@ -62,5 +62,5 @@ in {
     setGPUPerfScriptPkg
   ];
 
-  boot.kernelParams = ["amdgpu.ppfeaturemask=0xffffffff"];
+  boot.kernelParams = ["amdgpu.ppfeaturemask=0xffffffff" "amdgpu.dcdebugmask=0x12"];
 }

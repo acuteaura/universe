@@ -64,6 +64,7 @@
             ./systems/cyberdaemon
             inputs.gpd-fan.nixosModules.default
             inputs.jovian-nixos.nixosModules.jovian
+            inputs.chaotic.nixosModules.default
             {
               hardware.gpd-fan.enable = true;
             }

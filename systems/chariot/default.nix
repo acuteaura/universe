@@ -1,56 +1,53 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
-    ../_modules/amdgpu.nix
     ../_modules/base.nix
-    ../_modules/containers.nix
     ../_modules/desktop-base.nix
     ../_modules/desktop-plasma.nix
+
+    ../_modules/apps-flatpak.nix
+    ../_modules/apps.nix
+    ../_modules/browsers.nix
+    ../_modules/containers.nix
+    ../_modules/emulators.nix
     ../_modules/games.nix
     ../_modules/libvirt.nix
     ../_modules/mounts.nix
-    ../_modules/user-aurelia.nix
     ../_modules/wine.nix
-    ../_modules/work.nix
-    ../_modules/xrdp.nix
 
-    ../_modules/apps.nix
+    ../_modules/user-aurelia.nix
+    ../_modules/amdgpu.nix
 
+    ./gpu-tweaks.nix
     ./hardware.nix
+    ./vfio.nix
+    ./smb.nix
   ];
 
-  # Booting
-  boot.initrd.kernelModules = ["amdgpu"];
+  # BOOT
+  #########################################
   boot.loader = {
-    grub = {
+    systemd-boot = {
       enable = true;
-      efiSupport = true;
-      device = "nodev";
-      configurationLimit = 16;
+      configurationLimit = 10;
+      consoleMode = "max";
+      rebootForBitlocker = true;
+      memtest86.enable = true;
     };
     efi.canTouchEfiVariables = true;
   };
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 
-  services.displayManager = {
-    defaultSession = "plasma";
-    sddm = {
-      # broken with fish
-      # https://github.com/NixOS/nixpkgs/issues/287646
-      enable = true;
-      wayland.enable = true;
-    };
-  };
+  boot.kernelPackages = pkgs.linuxPackages_cachyos; #.cachyOverride { mArch = "ZEN4"; };
+
+  boot.zfs.devNodes = "/dev/disk/by-id/";
+
+  boot.zfs.package = pkgs.zfs_cachyos;
 
   # Network
   networking = {
     hostId = "7807e590";
     hostName = "chariot";
-    nftables.enable = true;
   };
 
   # This value determines the NixOS release from which the default

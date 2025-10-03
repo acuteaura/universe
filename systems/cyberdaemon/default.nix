@@ -1,69 +1,59 @@
 {pkgs, ...}: {
   imports = [
     ../_modules/base.nix
-    ../_modules/containers.nix
+
     ../_modules/desktop-base.nix
     ../_modules/desktop-plasma.nix
-    ../_modules/libvirt.nix
-    ../_modules/mounts.nix
-    ../_modules/user-aurelia.nix
-    ../_modules/wine.nix
-    ../_modules/work.nix
-    ../_modules/amdgpu.nix
-    ../_modules/hhd.nix
 
+    ../_modules/apps-flatpak.nix
+    ../_modules/apps.nix
+    ../_modules/browsers.nix
+    ../_modules/containers.nix
     ../_modules/emulators.nix
     ../_modules/games.nix
+    ../_modules/hhd.nix
+    ../_modules/libvirt.nix
+    ../_modules/mounts.nix
+    ../_modules/wine.nix
 
-    ../_modules/apps.nix
+    ../_modules/user-aurelia.nix
+    ../_modules/amdgpu.nix
+
+
 
     ./hardware.nix
     ./smb.nix
   ];
 
-  networking = {
-    hostId = "5934b829";
-    hostName = "cyberdaemon";
-    nftables.enable = true;
-  };
-
-  hardware.enableRedistributableFirmware = true;
-  hardware.cpu.amd.updateMicrocode = true;
-  services.fwupd.enable = true;
-  networking.useDHCP = false;
-
-  # Booting
-  boot.initrd.kernelModules = ["amdgpu"];
+  # BOOT
+  #########################################
   boot.loader = {
-    grub = {
+    systemd-boot = {
       enable = true;
-      efiSupport = true;
-      device = "nodev";
-      configurationLimit = 16;
+      configurationLimit = 10;
+      consoleMode = "max";
+      rebootForBitlocker = true;
+      memtest86.enable = true;
     };
     efi.canTouchEfiVariables = true;
   };
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "thunderbolt"];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
-  boot.kernelParams = ["amdgpu.sg_display=0" "transparent_hugepage=never"];
 
-  services.power-profiles-daemon.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos; #.cachyOverride { mArch = "ZEN4"; };
 
-  services.displayManager = {
-    defaultSession = "plasma";
-    sddm = {
-      # broken with fish (?)
-      # https://github.com/NixOS/nixpkgs/issues/287646
-      enable = true;
-      wayland.enable = true;
-    };
+  boot.zfs.devNodes = "/dev/disk/by-id/";
+  #boot.zfs.extraPools = ["magician" "priestress" "justice"];
+
+  boot.zfs.package = pkgs.zfs_cachyos;
+  boot.kernelModules = ["coretemp" "nct6775"];
+
+  networking = {
+    hostId = "5934b829";
+    hostName = "cyberdaemon";
   };
 
-  services.fprintd.enable = false;
-  security.pam.services.login.fprintAuth = false;
+  programs.coolercontrol.enable = true;
 
   jovian = {
     steam = {
@@ -78,8 +68,6 @@
     };
     hardware.has.amd.gpu = false;
     steamos = {
-      enableVendorRadv = false;
-      enableMesaPatches = false;
       enableAutoMountUdevRules = false;
     };
   };

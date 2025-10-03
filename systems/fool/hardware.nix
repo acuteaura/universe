@@ -25,31 +25,6 @@
     fsType = "zfs";
   };
 
-  # fileSystems."/media/steam-library-magician" = {
-  #   device = "magician/steam-library";
-  #   fsType = "zfs";
-  # };
-
-  # fileSystems."/media/steam-library-empress" = {
-  #   device = "empress/steam-library";
-  #   fsType = "zfs";
-  # };
-
-  # fileSystems."/media/wecontinue" = {
-  #   device = "fool/wecontinue";
-  #   fsType = "zfs";
-  # };
-
-  # fileSystems."/media/epicgames" = {
-  #   device = "empress/epicgames";
-  #   fsType = "zfs";
-  # };
-
-  # fileSystems."/media/msfs" = {
-  #   device = "magician/msfs";
-  #   fsType = "zfs";
-  # };
-
   swapDevices = [];
 
   hardware.enableRedistributableFirmware = true;

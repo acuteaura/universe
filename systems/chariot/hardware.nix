@@ -12,6 +12,12 @@
 
   boot.zfs.devNodes = "/dev/disk/by-label/";
 
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/LBOOT";
+    fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
+  };
+
   fileSystems."/" = {
     device = "chariot/root";
     fsType = "zfs";
@@ -22,9 +28,9 @@
     fsType = "zfs";
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
-    fsType = "vfat";
+  fileSystems."/nix" = {
+    device = "chariot/nix";
+    fsType = "zfs";
   };
 
   swapDevices = [];

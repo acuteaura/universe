@@ -10,9 +10,8 @@
   zramSwap.enable = lib.mkDefault true;
   i18n.defaultLocale = "en_US.UTF-8";
 
-  networking.networkmanager = {
-    enable = lib.mkDefault true;
-  };
+  networking.networkmanager.enable = lib.mkDefault true;
+  networking.nftables.enable = lib.mkDefault true;
   services.resolved.enable = lib.mkDefault true;
   services.tailscale.enable = lib.mkDefault true;
   networking.firewall = {
