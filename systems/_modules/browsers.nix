@@ -1,32 +1,18 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     brave
     firefox
     librewolf
   ];
 
-  environment.etc."brave/policies/managed/anti-eich-aktion.json" = {
-    text = ''
-      {
-        "BraveRewardsDisabled": true,
-        "BraveWalletDisabled": true,
-        "BraveVPNDisabled": true,
-        "BraveAIChatEnabled": false,
-        "TorDisabled": true,
-        "BraveNewsDisabled": true,
-        "BraveTalkDisabled": true,
-        "BraveWaybackMachineEnabled": false,
-        "BraveP3AEnabled": false,
-        "BraveStatsPingEnabled": false,
-        "BraveWebDiscoveryEnabled": false,
-        "BravePlaylistEnabled": false,
-        "ExtensionInstallForcelist": [
-          "aeblfdkhhhdcdjpifhhbdiojplfjncoa",
-          "cdglnehniifkbagbbombnjghhcihifij"
-        ]
-      }
-    '';
-  };
+  environment.etc."brave/policies/managed/brave.json".text =
+    builtins.toJSON (import ./browserpolicy.nix).brave;
+
+  environment.etc."opt/edge/policies/managed/edge.json".text =
+    builtins.toJSON (import ./browserpolicy.nix).edge;
+
+  environment.etc."opt/chrome/policies/managed/chrome.json".text =
+    builtins.toJSON (import ./browserpolicy.nix).chrome;
 
   environment.etc."1password/custom_allowed_browsers" = {
     text = ''

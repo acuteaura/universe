@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../_modules/base.nix
     ../_modules/containers.nix
@@ -20,6 +17,7 @@
     #../_modules/sunshine
 
     ../_modules/apps.nix
+    ../_modules/apps-flatpak.nix
 
     ./gpu-tweaks.nix
     ./hardware.nix
@@ -45,6 +43,7 @@
 
   boot.kernelPackages = pkgs.linuxPackages_cachyos; #.cachyOverride { mArch = "ZEN4"; };
   boot.zfs.package = pkgs.zfs_cachyos;
+  boot.kernelModules = ["coretemp" "nct6775"];
 
   # Network
   networking = {
@@ -65,6 +64,12 @@
   #services.sunshine-with-virtdisplay.enable = true;
 
   services.power-profiles-daemon.enable = true;
+  programs.coolercontrol.enable = true;
+  services.thermald.enable = true;
+
+  environment.etc."sysconfig/lm_sensors".text = ''
+    HWMON_MODULES="coretemp"
+  '';
 
   # random tools
   services.mullvad-vpn.enable = false;

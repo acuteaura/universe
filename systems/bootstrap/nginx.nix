@@ -114,7 +114,7 @@
     acceptTerms = true;
     defaults = {
       email = "past.tree1213@cognitive-antivirus.net";
-      reloadServices = [ "nginx" ];
+      reloadServices = ["nginx"];
     };
     certs = {
       "id.nullvoid.space" = {
@@ -124,7 +124,6 @@
       };
     };
   };
-
 
   networking.firewall.allowedTCPPorts = [80 443 49152];
 }

@@ -75,13 +75,14 @@
       kustomize
       minikube
       talosctl
+
+      lima
     ]
     ++ lib.optionals (pkgs.stdenv.isDarwin) [
       bash
       qemu
 
       colima
-      lima
       docker-client
       docker-buildx
       docker-credential-helpers

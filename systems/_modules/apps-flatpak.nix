@@ -16,7 +16,7 @@ in {
     packages = [
       (flathubApp "org.ardour.Ardour")
       (flathubApp "org.blender.Blender")
-      (flathubApp "com.discordapp.Discord")
+      (flathubApp "dev.vencord.Vesktop")
       (flathubApp "com.github.johnfactotum.Foliate")
       (flathubApp "org.fooyin.fooyin")
       (flathubApp "org.kde.haruna")

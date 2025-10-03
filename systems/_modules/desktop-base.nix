@@ -72,15 +72,6 @@
     wl-clipboard-rs
     libsecret
     nwg-look
-
-    ghostty
-    gparted
-    ludusavi
-    ocs-url
-    scrcpy
-    via
-    vscode
-    unstable.zed-editor
   ];
 
   fonts.packages = with pkgs; [

@@ -53,6 +53,7 @@
   swapDevices = [];
 
   hardware.enableRedistributableFirmware = true;
+  #hardware.enableAllFirmware = true;
   hardware.cpu.amd.updateMicrocode = true;
   services.fwupd.enable = true;
 }
