@@ -17,10 +17,7 @@
     ../_modules/user-aurelia.nix
     ../_modules/amdgpu.nix
 
-    ./gpu-tweaks.nix
     ./hardware.nix
-    ./vfio.nix
-    ./smb.nix
   ];
 
   # BOOT
