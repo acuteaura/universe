@@ -6,7 +6,6 @@
   environment.systemPackages = with pkgs; [
     ghostty
     gparted
-    ludusavi
     ocs-url
     scrcpy
     via
