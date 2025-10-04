@@ -86,7 +86,10 @@
         chariot = import ./basesystem.nix {
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           useUnstable = true;
-          nixos-imports = [./systems/chariot];
+          nixos-imports = [
+            ./systems/chariot
+            inputs.chaotic.nixosModules.default
+          ];
           home-manager-imports = [
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
