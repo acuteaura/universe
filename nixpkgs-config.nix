@@ -27,6 +27,7 @@
     allowInsecurePredicate = pkg:
       builtins.elem (getName pkg) [
         "django"
+        "qtwebengine"
       ];
   };
   nixpkgs.overlays =

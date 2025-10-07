@@ -82,6 +82,7 @@
     wl-clipboard-rs
     libsecret
     nwg-look
+    mission-center
   ];
 
   fonts.packages = with pkgs; [

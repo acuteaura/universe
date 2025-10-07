@@ -1,6 +1,10 @@
 {pkgs, ...}: {
   services.desktopManager.plasma6.enable = true;
 
+  # i hate amdgpu
+  # https://gitlab.freedesktop.org/drm/amd/-/issues/2950
+  environment.sessionVariables.KWIN_DRM_NO_AMS = "1";
+
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     elisa
     kdepim-runtime

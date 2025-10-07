@@ -17,6 +17,8 @@
     ../_modules/user-aurelia.nix
     ../_modules/amdgpu.nix
 
+    ../_modules/work.nix
+
     ./gpu-tweaks.nix
     ./hardware.nix
     ./vfio.nix
