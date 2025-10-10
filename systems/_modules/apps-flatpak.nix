@@ -17,6 +17,7 @@ in {
       (flathubApp "org.ardour.Ardour")
       (flathubApp "org.blender.Blender")
       (flathubApp "dev.vencord.Vesktop")
+      (flathubApp "com.bottleshq.Bottles")
       (flathubApp "com.github.johnfactotum.Foliate")
       (flathubApp "org.fooyin.fooyin")
       (flathubApp "org.kde.haruna")
