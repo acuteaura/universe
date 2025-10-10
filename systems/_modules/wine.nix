@@ -3,5 +3,6 @@
     protonup-qt
     protonplus
     (bottles.override {removeWarningPopup = true;})
+    umu-launcher
   ];
 }

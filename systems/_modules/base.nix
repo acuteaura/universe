@@ -12,12 +12,14 @@
 
   networking.networkmanager.enable = lib.mkDefault true;
   networking.nftables.enable = lib.mkDefault true;
+  networking.firewall.enable = lib.mkDefault true;
   services.resolved.enable = lib.mkDefault true;
-  services.tailscale.enable = lib.mkDefault true;
-  networking.firewall = {
-    trustedInterfaces = ["tailscale0"];
-    allowedUDPPorts = [config.services.tailscale.port];
+  services.tailscale = {
+    enable = lib.mkDefault true;
+    openFirewall = lib.mkDefault true;
+    useRoutingFeatures = lib.mkDefault "client";
   };
+  networking.firewall.trustedInterfaces = ["tailscale*"];
 
   programs.nix-index = {
     enable = lib.mkDefault true;
@@ -60,6 +62,7 @@
     cryptsetup
     curl
     dig
+    file
     git
     gnupg
     hdparm
@@ -67,6 +70,7 @@
     lzip
     ncdu
     neovim
+    nil
     openssl
     p7zip
     pv
