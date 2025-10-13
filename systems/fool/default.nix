@@ -14,10 +14,12 @@
     ../_modules/mounts.nix
     ../_modules/wine.nix
 
+    ../_modules/kernel.nix
+
     ../_modules/user-aurelia.nix
     ../_modules/amdgpu.nix
 
-    ../_modules/work.nix
+    #../_modules/work.nix
 
     ./gpu-tweaks.nix
     ./hardware.nix
@@ -40,13 +42,12 @@
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_cachyos; #.cachyOverride { mArch = "ZEN4"; };
-
   boot.zfs.devNodes = "/dev/disk/by-id/";
   boot.zfs.extraPools = ["nm790"];
 
-  boot.zfs.package = pkgs.zfs_cachyos;
   boot.kernelModules = ["coretemp" "nct6775"];
+
+  cachyos.kernel.enable = true;
 
   # Network
   networking = {

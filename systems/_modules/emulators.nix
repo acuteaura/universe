@@ -6,12 +6,13 @@
   environment.systemPackages = with unstable; [
     azahar
     dolphin-emu
-    dolphin-emu-primehack
+    #dolphin-emu-primehack
+    eden
     pcsx2
     ppsspp-qt
     rpcs3
     ryubing
-    shadps4
+    #shadps4
     xemu
 
     (retroarch.withCores (cores:

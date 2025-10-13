@@ -28,6 +28,8 @@
 
     kwin-effects-forceblur.url = "github:taj-ny/kwin-effects-forceblur";
     kwin-effects-forceblur.inputs.nixpkgs.follows = "nixpkgs-unstable";
+
+    eden.url = "github:acuteaura/eden-flake";
   };
 
   outputs = inputs @ {
@@ -44,15 +46,20 @@
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       getName = nixpkgs.lib.getName;
-      extraOverlays = [packageOverlay];
+      extraOverlays = [
+        packageOverlay
+        inputs.eden.overlays.default
+      ];
     };
     unstable = import nixpkgs-unstable {
-      config = nixpkgsConfig;
       system = "x86_64-linux";
+      config = nixpkgsConfig.nixpkgs.config;
+      overlays = nixpkgsConfig.nixpkgs.overlays;
     };
     unstable-darwin = import nixpkgs-unstable {
-      config = nixpkgsConfig;
       system = "aarch64-darwin";
+      config = nixpkgsConfig.nixpkgs.config;
+      overlays = nixpkgsConfig.nixpkgs.overlays;
     };
   in
     {

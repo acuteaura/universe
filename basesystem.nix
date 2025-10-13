@@ -15,11 +15,13 @@
 }: let
   unstable = import nixpkgs-unstable {
     system = system;
-    config = nixpkgsConfig;
+    config = nixpkgsConfig.nixpkgs.config;
+    overlays = nixpkgsConfig.nixpkgs.overlays;
   };
   defaultPkgs = import nixpkgs {
     system = system;
-    config = nixpkgsConfig;
+    config = nixpkgsConfig.nixpkgs.config;
+    overlays = nixpkgsConfig.nixpkgs.overlays;
   };
 
   systemFunc =
