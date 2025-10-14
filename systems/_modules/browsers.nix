@@ -3,6 +3,7 @@
     brave
     firefox
     librewolf
+    chromium
   ];
 
   environment.etc."brave/policies/managed/brave.json".text =
