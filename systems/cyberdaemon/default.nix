@@ -19,8 +19,6 @@
     ../_modules/user-aurelia.nix
     ../_modules/amdgpu.nix
 
-
-
     ./hardware.nix
     ./smb.nix
   ];

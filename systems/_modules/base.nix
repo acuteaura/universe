@@ -78,7 +78,7 @@
     socat
     sshfs
     tmux
-    unrar-free
+    unar
     wget
     zstd
 

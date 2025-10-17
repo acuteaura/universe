@@ -31,7 +31,7 @@
   #########################################
   boot.loader = {
     systemd-boot = {
-      enable = true;
+      enable = false;
       configurationLimit = 10;
       consoleMode = "max";
       rebootForBitlocker = true;
@@ -39,8 +39,13 @@
     };
     efi.canTouchEfiVariables = true;
   };
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
+  environment.systemPackages = with pkgs; [ sbctl tpm2-tools ];
 
   boot.zfs.devNodes = "/dev/disk/by-id/";
   boot.zfs.extraPools = ["nm790"];
@@ -56,7 +61,7 @@
   };
 
   # random tools
-  services.mullvad-vpn.enable = false;
+  services.mullvad-vpn.enable = true;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   vfio.enable = false;

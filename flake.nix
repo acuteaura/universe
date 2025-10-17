@@ -3,33 +3,42 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.05";
-
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    home-manager-unstable.url = "github:nix-community/home-manager";
-    home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+    chaotic-unstable.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
+    eden.url = "github:acuteaura/eden-flake";
     flake-utils.url = "github:numtide/flake-utils";
     quadlet.url = "github:SEIAROTg/quadlet-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
 
-    gpd-fan.url = "github:Cryolitia/gpd-fan-driver";
-    gpd-fan.inputs.nixpkgs.follows = "nixpkgs";
+    gpd-fan-unstable = {
+      url = "github:Cryolitia/gpd-fan-driver";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
-    jovian-nixos.url = "github:Jovian-Experiments/Jovian-NixOS";
-    jovian-nixos.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    jovian-nixos-unstable = {
+      follows = "chaotic-unstable/jovian";
+    };
 
-    kwin-effects-forceblur.url = "github:taj-ny/kwin-effects-forceblur";
-    kwin-effects-forceblur.inputs.nixpkgs.follows = "nixpkgs-unstable";
-
-    eden.url = "github:acuteaura/eden-flake";
+    kwin-effects-forceblur = {
+      url = "github:taj-ny/kwin-effects-forceblur";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = inputs @ {
@@ -69,9 +78,9 @@
           useUnstable = true;
           nixos-imports = [
             ./systems/cyberdaemon
-            inputs.gpd-fan.nixosModules.default
-            inputs.jovian-nixos.nixosModules.jovian
-            inputs.chaotic.nixosModules.default
+            inputs.gpd-fan-unstable.nixosModules.default
+            inputs.jovian-nixos-unstable.nixosModules.jovian
+            inputs.chaotic-unstable.nixosModules.default
             {
               hardware.gpd-fan.enable = true;
             }
@@ -95,7 +104,7 @@
           useUnstable = true;
           nixos-imports = [
             ./systems/chariot
-            inputs.chaotic.nixosModules.default
+            inputs.chaotic-unstable.nixosModules.default
           ];
           home-manager-imports = [
             ./home-manager/shell.nix
@@ -106,7 +115,8 @@
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           useUnstable = true;
           nixos-imports = [
-            inputs.chaotic.nixosModules.default
+            inputs.chaotic-unstable.nixosModules.default
+            inputs.lanzaboote.nixosModules.lanzaboote
             ./systems/fool
           ];
           home-manager-imports = [
@@ -133,7 +143,9 @@
           ];
         };
       };
-      homeConfigurations = {
+      homeConfigurations = let
+        nix-flatpak-module = nix-flatpak.homeManagerModules.nix-flatpak;
+      in {
         shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = {unstable = unstable;};
@@ -141,7 +153,7 @@
             (import ./basehmuser.nix {
               home-manager-imports = [
                 nixpkgsConfig
-                nix-flatpak.homeManagerModules.nix-flatpak
+                nix-flatpak-module
                 ./home-manager/shell.nix
               ];
               home-manager-username = "aurelia";
@@ -156,7 +168,7 @@
             (import ./basehmuser.nix {
               home-manager-imports = [
                 nixpkgsConfig
-                nix-flatpak.homeManagerModules.nix-flatpak
+                nix-flatpak-module
                 ./home-manager/shell.nix
                 ./home-manager/fonts.nix
                 ./home-manager/desktop.nix
