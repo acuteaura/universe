@@ -52,6 +52,7 @@
   }: let
     packageOverlay = final: prev: {
       kwin-effects-forceblur = inputs.kwin-effects-forceblur.packages."${final.system}".default;
+      adjustor = self.packages.${final.system}.adjustor;
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       getName = nixpkgs.lib.getName;
@@ -60,6 +61,11 @@
         inputs.eden.overlays.default
       ];
     };
+    commonImports = [
+      inputs.chaotic-unstable.nixosModules.default
+      inputs.lanzaboote.nixosModules.lanzaboote
+      inputs.quadlet.nixosModules.quadlet
+    ];
     unstable = import nixpkgs-unstable {
       system = "x86_64-linux";
       config = nixpkgsConfig.nixpkgs.config;
@@ -80,11 +86,10 @@
             ./systems/cyberdaemon
             inputs.gpd-fan-unstable.nixosModules.default
             inputs.jovian-nixos-unstable.nixosModules.jovian
-            inputs.chaotic-unstable.nixosModules.default
             {
               hardware.gpd-fan.enable = true;
             }
-          ];
+          ] ++ commonImports;
           home-manager-imports = [
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
@@ -93,7 +98,9 @@
         construct = import ./basesystem.nix {
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           useUnstable = true;
-          nixos-imports = [./systems/construct];
+          nixos-imports = [
+            ./systems/construct
+          ] ++ commonImports;
           home-manager-imports = [
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
@@ -104,8 +111,7 @@
           useUnstable = true;
           nixos-imports = [
             ./systems/chariot
-            inputs.chaotic-unstable.nixosModules.default
-          ];
+          ] ++ commonImports;
           home-manager-imports = [
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
@@ -115,10 +121,8 @@
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           useUnstable = true;
           nixos-imports = [
-            inputs.chaotic-unstable.nixosModules.default
-            inputs.lanzaboote.nixosModules.lanzaboote
             ./systems/fool
-          ];
+          ] ++ commonImports;
           home-manager-imports = [
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
@@ -128,7 +132,6 @@
           inherit nixpkgs nixpkgs-unstable nix-flatpak home-manager home-manager-unstable nixpkgsConfig;
           system = "aarch64-linux";
           nixos-imports = [
-            inputs.quadlet.nixosModules.quadlet
             ./systems/bootstrap
           ];
           home-manager-imports = [
@@ -140,7 +143,7 @@
           nixos-imports = [./systems/wsl];
           home-manager-imports = [
             ./home-manager/shell.nix
-          ];
+          ] ++ commonImports;
         };
       };
       homeConfigurations = let
@@ -199,6 +202,7 @@
         };
       in {
         formatter = pkgs.alejandra;
+        packages.adjustor = pkgs.callPackage ./packages/adjustor/default.nix {};
       }
     );
 }

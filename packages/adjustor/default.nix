@@ -8,7 +8,7 @@
 }:
 python3Packages.buildPythonPackage rec {
   pname = "adjustor";
-  version = "3.10.5";
+  version = "3.11.8";
   pyproject = true;
 
   src = fetchFromGitHub {

@@ -27,7 +27,7 @@
   #########################################
   boot.loader = {
     systemd-boot = {
-      enable = true;
+      enable = false;
       configurationLimit = 10;
       consoleMode = "max";
       rebootForBitlocker = true;
@@ -35,6 +35,11 @@
     };
     efi.canTouchEfiVariables = true;
   };
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
+  environment.systemPackages = with pkgs; [ sbctl tpm2-tools ];
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 
