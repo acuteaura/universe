@@ -43,7 +43,7 @@
     enable = true;
     pkiBundle = "/var/lib/sbctl";
   };
-  environment.systemPackages = with pkgs; [ sbctl tpm2-tools ];
+  environment.systemPackages = with pkgs; [sbctl tpm2-tools];
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 

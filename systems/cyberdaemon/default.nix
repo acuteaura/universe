@@ -39,14 +39,14 @@
     enable = true;
     pkiBundle = "/var/lib/sbctl";
   };
-  environment.systemPackages = with pkgs; [ sbctl tpm2-tools ];
+  environment.systemPackages = with pkgs; [sbctl tpm2-tools];
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 
   boot.kernelPackages = pkgs.linuxPackages_cachyos; #.cachyOverride { mArch = "ZEN4"; };
 
   boot.zfs.devNodes = "/dev/disk/by-id/";
-  #boot.zfs.extraPools = ["magician" "priestress" "justice"];
+  #boot.zfs.extraPools = [];
 
   boot.zfs.package = pkgs.zfs_cachyos;
   boot.kernelModules = ["coretemp" "nct6775"];
@@ -55,8 +55,6 @@
     hostId = "5934b829";
     hostName = "cyberdaemon";
   };
-
-  programs.coolercontrol.enable = true;
 
   jovian = {
     steam = {
