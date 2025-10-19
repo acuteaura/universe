@@ -84,14 +84,11 @@
           useUnstable = true;
           nixos-imports = [
             ./systems/cyberdaemon
-            inputs.gpd-fan-unstable.nixosModules.default
+            #inputs.gpd-fan-unstable.nixosModules.default
             inputs.chaotic-unstable.nixosModules.default
             inputs.jovian-nixos-unstable.nixosModules.jovian
             inputs.lanzaboote-unstable.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
-            {
-              hardware.gpd-fan.enable = true;
-            }
           ];
           home-manager-imports = [
             ./home-manager/shell.nix
