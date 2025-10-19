@@ -57,7 +57,6 @@
   }: let
     packageOverlay = final: prev: {
       kwin-effects-forceblur = inputs.kwin-effects-forceblur.packages."${final.system}".default;
-      adjustor = self.packages.${final.system}.adjustor;
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       getName = nixpkgs.lib.getName;
@@ -213,7 +212,6 @@
         };
       in {
         formatter = pkgs.alejandra;
-        packages.adjustor = pkgs.callPackage ./packages/adjustor/default.nix {};
       }
     );
 }

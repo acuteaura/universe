@@ -15,7 +15,7 @@ python3Packages.buildPythonPackage rec {
     owner = "hhd-dev";
     repo = "adjustor";
     rev = "refs/tags/v${version}";
-    hash = "sha256-DShb1chEkkTRGjQCE708tJABwYERJxajT3nHwHqyKN4=";
+    hash = "sha256-BS0zV8nan61fTUs3v6nmGBuqPEDjATxBG792ZrrreAI=";
   };
 
   # This package relies on several programs expected to be on the user's PATH.
