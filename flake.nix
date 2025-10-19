@@ -19,6 +19,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    lanzaboote-unstable = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     chaotic-unstable.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     eden.url = "github:acuteaura/eden-flake";
@@ -61,11 +66,6 @@
         inputs.eden.overlays.default
       ];
     };
-    commonImports = [
-      inputs.chaotic-unstable.nixosModules.default
-      inputs.lanzaboote.nixosModules.lanzaboote
-      inputs.quadlet.nixosModules.quadlet
-    ];
     unstable = import nixpkgs-unstable {
       system = "x86_64-linux";
       config = nixpkgsConfig.nixpkgs.config;
@@ -85,11 +85,14 @@
           nixos-imports = [
             ./systems/cyberdaemon
             inputs.gpd-fan-unstable.nixosModules.default
+            inputs.chaotic-unstable.nixosModules.default
             inputs.jovian-nixos-unstable.nixosModules.jovian
+            inputs.lanzaboote-unstable.nixosModules.lanzaboote
+            inputs.quadlet.nixosModules.quadlet
             {
               hardware.gpd-fan.enable = true;
             }
-          ] ++ commonImports;
+          ];
           home-manager-imports = [
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
@@ -100,7 +103,10 @@
           useUnstable = true;
           nixos-imports = [
             ./systems/construct
-          ] ++ commonImports;
+            inputs.chaotic-unstable.nixosModules.default
+            inputs.lanzaboote-unstable.nixosModules.lanzaboote
+            inputs.quadlet.nixosModules.quadlet
+          ];
           home-manager-imports = [
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
@@ -111,7 +117,10 @@
           useUnstable = true;
           nixos-imports = [
             ./systems/chariot
-          ] ++ commonImports;
+            inputs.chaotic-unstable.nixosModules.default
+            inputs.lanzaboote-unstable.nixosModules.lanzaboote
+            inputs.quadlet.nixosModules.quadlet
+          ];
           home-manager-imports = [
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
@@ -122,7 +131,10 @@
           useUnstable = true;
           nixos-imports = [
             ./systems/fool
-          ] ++ commonImports;
+            inputs.chaotic-unstable.nixosModules.default
+            inputs.lanzaboote-unstable.nixosModules.lanzaboote
+            inputs.quadlet.nixosModules.quadlet
+          ];
           home-manager-imports = [
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
@@ -133,6 +145,8 @@
           system = "aarch64-linux";
           nixos-imports = [
             ./systems/bootstrap
+            inputs.chaotic-unstable.nixosModules.default
+            inputs.quadlet.nixosModules.quadlet
           ];
           home-manager-imports = [
             ./home-manager/shell.nix
@@ -143,7 +157,7 @@
           nixos-imports = [./systems/wsl];
           home-manager-imports = [
             ./home-manager/shell.nix
-          ] ++ commonImports;
+          ];
         };
       };
       homeConfigurations = let
