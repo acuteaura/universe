@@ -44,7 +44,7 @@
   };
 
   # nixos sucks tbh
-  networking.firewall.interfaces."podman+".allowedUDPPorts = [53 5353];
+  networking.firewall.interfaces."podman*".allowedUDPPorts = [53 5353];
 
   boot.loader.systemd-boot.configurationLimit = 5;
   nix.gc = {
