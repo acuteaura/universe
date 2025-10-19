@@ -2,6 +2,7 @@
   lib,
   python3Packages,
   fetchFromGitHub,
+
   # dependencies
   systemd,
   hidapi,
@@ -12,7 +13,8 @@
   lsof,
   btrfs-progs,
   util-linux,
-  extraDependencies ? [],
+  # enable injecting adjustor
+  extraDependencies ? [ ],
 }:
 python3Packages.buildPythonApplication rec {
   pname = "handheld-daemon";
@@ -28,7 +30,7 @@ python3Packages.buildPythonApplication rec {
 
   # Handheld-daemon runs some selinux-related utils which are not in nixpkgs.
   # NixOS doesn't support selinux so we can safely remove them
-  patches = [./0001-remove-selinux-fixes.patch];
+  patches = [ ./0001-remove-selinux-fixes.patch ];
 
   # This package relies on several programs expected to be on the user's PATH.
   # We take a more reproducible approach by patching the absolute path to each of these required
@@ -79,7 +81,8 @@ python3Packages.buildPythonApplication rec {
     setuptools
   ];
 
-  dependencies = with python3Packages;
+  dependencies =
+    with python3Packages;
     [
       evdev
       pyserial
@@ -105,7 +108,6 @@ python3Packages.buildPythonApplication rec {
     changelog = "https://github.com/hhd-dev/hhd/releases/tag/${src.tag}";
     license = lib.licenses.gpl3Only;
     maintainers = with lib.maintainers; [
-      appsforartists
       toast
     ];
     mainProgram = "hhd";
