@@ -4,7 +4,7 @@
   config,
   ...
 }: {
-  options.cachyos.kernel.enable = with lib;
+  options.universe.cachyos-kernel.enable = with lib;
     mkEnableOption "Enable CachyOS kernel with ZFS";
 
   config = let

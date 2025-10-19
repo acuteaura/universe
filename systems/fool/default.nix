@@ -52,7 +52,7 @@
 
   boot.kernelModules = ["coretemp" "nct6775"];
 
-  cachyos.kernel.enable = true;
+  universe.cachyos-kernel.enable = true;
 
   # Network
   networking = {

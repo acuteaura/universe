@@ -26,6 +26,9 @@
     ./smb.nix
   ];
 
+  universe.cachyos-kernel.enable = true;
+  universe.secureboot.enable = true;
+
   environment.systemPackages = with pkgs; [sbctl tpm2-tools];
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
