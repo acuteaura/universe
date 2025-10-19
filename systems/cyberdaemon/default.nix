@@ -15,7 +15,9 @@
     ../_modules/libvirt.nix
     ../_modules/mounts.nix
     ../_modules/wine.nix
+
     ../_modules/kernel.nix
+    ../_modules/boot.nix
 
     ../_modules/user-aurelia.nix
     ../_modules/amdgpu.nix
@@ -24,22 +26,6 @@
     ./smb.nix
   ];
 
-  # BOOT
-  #########################################
-  boot.loader = {
-    systemd-boot = {
-      enable = false;
-      configurationLimit = 10;
-      consoleMode = "max";
-      rebootForBitlocker = true;
-      memtest86.enable = true;
-    };
-    efi.canTouchEfiVariables = true;
-  };
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/var/lib/sbctl";
-  };
   environment.systemPackages = with pkgs; [sbctl tpm2-tools];
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
