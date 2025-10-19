@@ -12,12 +12,12 @@
   in {
     boot = {
       lanzaboote = {
-        enable = if cfg.enable then true else false;
+        enable = lib.mkIf cfg.enable true;
         pkiBundle = "/var/lib/sbctl";
       };
       loader = {
         systemd-boot = {
-          enable = if cfg.enable then false else true;
+          enable = lib.mkIf (!cfg.enable) true;
           configurationLimit = 10;
           consoleMode = "max";
           rebootForBitlocker = true;
