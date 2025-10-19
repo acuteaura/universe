@@ -8,7 +8,7 @@
     mkEnableOption "Enable CachyOS kernel with ZFS";
 
   config = let
-    cfg = config.cachyos.kernel;
+    cfg = config.universe.cachyos-kernel;
   in {
     boot.kernelPackages = (
       if cfg.enable
