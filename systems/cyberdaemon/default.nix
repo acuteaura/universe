@@ -32,6 +32,11 @@
   environment.systemPackages = with pkgs; [sbctl tpm2-tools];
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
+  boot.plymouth.extraConfig = ''
+    [Daemon]
+    DeviceScale=2
+  '';
+
 
   boot.zfs.devNodes = "/dev/disk/by-id/";
   #boot.zfs.extraPools = [];
