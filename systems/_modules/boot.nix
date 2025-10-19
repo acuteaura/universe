@@ -13,7 +13,7 @@
     boot = {
       lanzaboote = {
         enable = if cfg.enable then true else false;
-        lanzaboote.pkiBundle = "/var/lib/sbctl";
+        pkiBundle = "/var/lib/sbctl";
       };
       loader = {
         systemd-boot = {
