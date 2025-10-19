@@ -59,6 +59,7 @@
     fish
 
     attic-client
+    btop
     cryptsetup
     curl
     dig
