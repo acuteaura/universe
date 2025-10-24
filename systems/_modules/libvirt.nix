@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   virtualisation.libvirtd = {
     enable = true;
     package = pkgs.libvirt;
@@ -28,7 +29,10 @@
   environment.systemPackages = with pkgs; [
     virt-manager
     virtiofsd
+
+    winapps
+    winapps-launcher
   ];
 
-  networking.firewall.trustedInterfaces = ["virbr0"];
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
 }
