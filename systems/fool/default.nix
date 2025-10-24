@@ -48,7 +48,7 @@
   boot.plymouth.enable = true;
 
   boot.zfs.devNodes = "/dev/disk/by-id/";
-  boot.zfs.extraPools = ["nm790"];
+  boot.zfs.extraPools = ["nm790" "sn850x"];
 
   boot.kernelModules = ["coretemp" "nct6775"];
 

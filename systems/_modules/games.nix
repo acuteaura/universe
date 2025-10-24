@@ -10,6 +10,9 @@
     lsfg-vk
     lsfg-vk-ui
   ];
+  system.userActivationScripts.steamtinkerlaunchCompatAdd.text = ''
+    ${pkgs.steamtinkerlaunch}/bin/steamtinkerlaunch compat add
+  '';
   hardware.xpadneo.enable = lib.mkDefault false;
   hardware.steam-hardware.enable = lib.mkDefault true;
   programs.gamemode.enable = lib.mkDefault true;

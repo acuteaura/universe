@@ -54,9 +54,12 @@
     openFirewall = lib.mkDefault true;
   };
 
+  services.printing.enable = true;
   services.printing.drivers = with pkgs; [
-    epson-escpr
+    cups-filters
+    cups-browsed
     epson-escpr2
+    epson-escpr
   ];
 
   programs._1password.enable = true;
@@ -95,8 +98,18 @@
 
   hardware.sane.enable = true;
   hardware.sane.extraBackends = with pkgs; [
-    epsonscan2
+    sane-airscan
   ];
+  environment.etc."sane.d/airscan.conf".text = ''
+    # Disable auto-discovery since scanner is in different broadcast domain
+    [options]
+    discovery = disable
+
+    # Epson ET-2850 configuration
+    [devices]
+    "Epson ET-2850" = https://192.168.12.81/eSCL/, eSCL
+  '';
+  services.udev.packages = [ pkgs.sane-airscan ];
 
   hardware.keyboard.qmk.enable = true;
 

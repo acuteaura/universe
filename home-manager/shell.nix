@@ -22,10 +22,8 @@
 
       p7zip
       pgo-client
-      pv
       rclone
       restic
-      ripgrep
       socat
       sqlite
 
@@ -38,6 +36,7 @@
       zellij
       zstd
       whois
+      zellij
 
       # devops shit
       act
@@ -46,13 +45,14 @@
       gh
       opentofu
       just
+      hcloud
 
       # sec
       nmap
       semgrep
       tcpdump
       tshark
-      hcloud
+      bandwhich
 
       # languages and compilers
       bun

@@ -38,7 +38,26 @@
   };
 
   programs.gnupg.agent.enable = lib.mkDefault true;
-  programs.fish.enable = lib.mkDefault true;
+
+  programs.fish = {
+    enable = lib.mkDefault true;
+    vendor = {
+      functions.enable = lib.mkDefault true;
+      completions.enable = lib.mkDefault true;
+    };
+    shellAliases = {
+      ls = "exa";
+      cat = "bat";
+      grep = "rg";
+      du = "dust";
+      top = "procs";
+    };
+  };
+  programs.zoxide = {
+    enable = lib.mkDefault true;
+    enableFishIntegration = lib.mkDefault true;
+  };
+
   programs.nix-ld.enable = lib.mkDefault true;
   programs.nix-ld.libraries = with pkgs;
     lib.mkDefault [
@@ -91,5 +110,17 @@
     ntfs3g
 
     nix-output-monitor
+
+    bat
+    dust
+    eza
+    fd
+    fzf
+    procs
+    ripgrep
+    sd
+    tmux
+    zellij
+    zstd
   ];
 }

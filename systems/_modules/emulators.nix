@@ -14,6 +14,13 @@
     ryubing
     #shadps4
     xemu
+    (gargoyle.overrideAttrs (oldAttrs: {
+      # https://github.com/NixOS/nixpkgs/pull/454189
+      postPatch = (oldAttrs.postPatch or "") + ''
+        substituteInPlace CMakeLists.txt \
+          --replace-fail "cmake_minimum_required(VERSION 3.3)" "cmake_minimum_required(VERSION 3.10)"
+      '';
+    }))
 
     (retroarch.withCores (cores:
       with cores; [

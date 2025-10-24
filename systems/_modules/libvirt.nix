@@ -32,7 +32,10 @@
 
     winapps
     winapps-launcher
+    freerdp
   ];
+
+  environment.sessionVariables.LIBVIRT_DEFAULT_URI = "qemu:///system";
 
   networking.firewall.trustedInterfaces = [ "virbr0" ];
 }
