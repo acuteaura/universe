@@ -1,7 +1,8 @@
-{...}: {
+{ ... }:
+{
   virtualisation.quadlet.autoEscape = true;
 
-  virtualisation.quadlet.networks.keycloak = {};
+  virtualisation.quadlet.networks.keycloak = { };
 
   virtualisation.quadlet.containers.keycloak-postgres = {
     containerConfig = {
@@ -14,15 +15,15 @@
       environmentFiles = [
         "/etc/keycloak.env"
       ];
-      networks = ["keycloak.network"];
+      networks = [ "keycloak.network" ];
     };
     unitConfig = {
-      After = ["network.target"];
-      Wants = ["network.target"];
+      After = [ "network.target" ];
+      Wants = [ "network.target" ];
       RequiresMountsFor = [
         "/data"
       ];
-      ConditionPathExists = ["/etc/keycloak.env"];
+      ConditionPathExists = [ "/etc/keycloak.env" ];
     };
   };
 
@@ -30,7 +31,7 @@
     containerConfig = {
       name = "keycloak";
       hostname = "keycloak";
-      image = "quay.io/aurelias/keycloak:21a97da229c496634c4269e9c4743c6d5d235e94";
+      image = "quay.io/aurelias/keycloak:220e735df0cb2e0528fc2ad9e7a0f0317ac6d07b@sha256:d328d513428bfd7630b58d324de6c5702c68ab55dc0872c74902500d5f5b2547";
       environments = {
         "KC_DB" = "postgres";
         "KC_DB_URL_HOST" = "keycloak-postgres";
@@ -42,15 +43,21 @@
       environmentFiles = [
         "/etc/keycloak.env"
       ];
-      networks = ["keycloak.network"];
+      networks = [ "keycloak.network" ];
       publishPorts = [
         "127.0.0.1:8080:8080"
       ];
     };
     unitConfig = {
-      After = ["network.target" "keycloak-postgres.service"];
-      Wants = ["network.target" "keycloak-postgres.service"];
-      ConditionPathExists = ["/etc/keycloak.env"];
+      After = [
+        "network.target"
+        "keycloak-postgres.service"
+      ];
+      Wants = [
+        "network.target"
+        "keycloak-postgres.service"
+      ];
+      ConditionPathExists = [ "/etc/keycloak.env" ];
     };
   };
 }
