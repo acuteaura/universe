@@ -25,7 +25,7 @@
     };
 
     winapps-unstable = {
-      url = "github:winapps-org/winapps";
+      url = "github:acuteaura-forks/winapps";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 

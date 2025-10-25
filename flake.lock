@@ -786,15 +786,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1761221437,
-        "narHash": "sha256-6V+PkcUvinA/Ryl+tZO0pLvEmJWzfieMKj8UyAFvduo=",
-        "owner": "winapps-org",
+        "lastModified": 1761398773,
+        "narHash": "sha256-vTxfhGDVkcudkZ8W17HYGjsn/sGdZURW7/1iXPqbb58=",
+        "owner": "acuteaura-forks",
         "repo": "winapps",
-        "rev": "daa052d42d338a50bb3e093a0c86daa3d32f08c5",
+        "rev": "165ec18b799a7b17cf6ca978c277ac06fc3125be",
         "type": "github"
       },
       "original": {
-        "owner": "winapps-org",
+        "owner": "acuteaura-forks",
         "repo": "winapps",
         "type": "github"
       }
