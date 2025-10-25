@@ -1,9 +1,9 @@
 {
   pkgs,
-  config,
   lib,
   ...
-}: {
+}:
+{
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_6_15;
   time.timeZone = lib.mkDefault "Europe/Berlin";
   systemd.coredump.enable = lib.mkDefault true;
@@ -19,7 +19,7 @@
     openFirewall = lib.mkDefault true;
     useRoutingFeatures = lib.mkDefault "client";
   };
-  networking.firewall.trustedInterfaces = ["tailscale*"];
+  networking.firewall.trustedInterfaces = [ "tailscale*" ];
 
   programs.nix-index = {
     enable = lib.mkDefault true;
@@ -59,7 +59,8 @@
   };
 
   programs.nix-ld.enable = lib.mkDefault true;
-  programs.nix-ld.libraries = with pkgs;
+  programs.nix-ld.libraries =
+    with pkgs;
     lib.mkDefault [
       icu
       libgcc
@@ -71,7 +72,10 @@
     ];
 
   # Configure Nix itself
-  nix.settings.experimental-features = lib.mkDefault ["nix-command" "flakes"];
+  nix.settings.experimental-features = lib.mkDefault [
+    "nix-command"
+    "flakes"
+  ];
   nix.package = lib.mkDefault pkgs.lix;
 
   environment.systemPackages = with pkgs; [
@@ -122,5 +126,7 @@
     tmux
     zellij
     zstd
+
+    ghostty.terminfo
   ];
 }
