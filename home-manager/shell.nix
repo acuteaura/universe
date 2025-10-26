@@ -1,18 +1,13 @@
 {pkgs, ...}: {
   home.packages = with pkgs;
     [
-      age
       age-plugin-yubikey
-      attic-client
       atuin
       chezmoi
       devbox
       direnv
-      fd
       git-annex
-      gitversion
       hyfetch
-      internetarchive
       iperf
       jq
       lzip

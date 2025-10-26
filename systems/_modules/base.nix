@@ -45,31 +45,12 @@
       functions.enable = lib.mkDefault true;
       completions.enable = lib.mkDefault true;
     };
-    shellAliases = {
-      ls = "exa";
-      cat = "bat";
-      grep = "rg";
-      du = "dust";
-      top = "procs";
-    };
+    shellAliases = {};
   };
   programs.zoxide = {
     enable = lib.mkDefault true;
     enableFishIntegration = lib.mkDefault true;
   };
-
-  programs.nix-ld.enable = lib.mkDefault true;
-  programs.nix-ld.libraries =
-    with pkgs;
-    lib.mkDefault [
-      icu
-      libgcc
-      libz
-      stdenv.cc.cc.lib
-      xorg.libxcb
-      zlib
-      libgbm
-    ];
 
   # Configure Nix itself
   nix.settings.experimental-features = lib.mkDefault [
@@ -79,8 +60,7 @@
   nix.package = lib.mkDefault pkgs.lix;
 
   environment.systemPackages = with pkgs; [
-    fish
-
+    age
     attic-client
     btop
     cryptsetup
@@ -120,7 +100,6 @@
     eza
     fd
     fzf
-    procs
     ripgrep
     sd
     tmux
