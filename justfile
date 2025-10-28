@@ -22,3 +22,6 @@ switch:
 
 boot:
     @just rebuild boot
+
+update-dependencies:
+    nix flake lock --update-input nixpkgs --update-input home-manager --update-input nixpkgs-unstable --update-input home-manager-unstable --update-input chaotic-unstable

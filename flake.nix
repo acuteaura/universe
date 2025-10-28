@@ -25,13 +25,13 @@
     };
 
     winapps-unstable = {
-      url = "github:acuteaura-forks/winapps";
+      url = "github:winapps-org/winapps";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     chaotic-unstable.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
-    eden.url = "github:acuteaura/eden-flake";
+    eden.url = "github:Grantimatter/eden-flake";
     flake-utils.url = "github:numtide/flake-utils";
     quadlet.url = "github:SEIAROTg/quadlet-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
@@ -71,7 +71,6 @@
         getName = nixpkgs.lib.getName;
         extraOverlays = [
           packageOverlay
-          inputs.eden.overlays.default
         ];
       };
       unstable = import nixpkgs-unstable {
@@ -104,6 +103,8 @@
             inputs.jovian-nixos-unstable.nixosModules.jovian
             inputs.lanzaboote-unstable.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
+            inputs.eden.nixosModules.default
+
           ];
           home-manager-imports = [
             ./home-manager/shell.nix
@@ -125,6 +126,7 @@
             inputs.chaotic-unstable.nixosModules.default
             inputs.lanzaboote-unstable.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
+            inputs.eden.nixosModules.default
           ];
           home-manager-imports = [
             ./home-manager/shell.nix
@@ -146,6 +148,7 @@
             inputs.chaotic-unstable.nixosModules.default
             inputs.lanzaboote-unstable.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
+            inputs.eden.nixosModules.default
           ];
           home-manager-imports = [
             ./home-manager/shell.nix
@@ -167,6 +170,7 @@
             inputs.chaotic-unstable.nixosModules.default
             inputs.lanzaboote-unstable.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
+            inputs.eden.nixosModules.default
           ];
           home-manager-imports = [
             ./home-manager/shell.nix

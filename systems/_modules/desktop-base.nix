@@ -86,6 +86,7 @@
     libsecret
     nwg-look
     mission-center
+    seafile-client
   ];
 
   fonts.packages = with pkgs; [

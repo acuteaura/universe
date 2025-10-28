@@ -19,7 +19,6 @@ in {
       (flathubApp "com.github.mtkennerly.ludusavi")
       (flathubApp "com.github.wwmm.easyeffects")
       (flathubApp "com.moonlight_stream.Moonlight")
-      (flathubApp "com.seafile.Client")
       (flathubApp "com.usebottles.bottles")
       (flathubApp "dev.vencord.Vesktop")
       (flathubApp "fr.handbrake.ghb")
