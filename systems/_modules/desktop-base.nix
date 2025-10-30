@@ -3,18 +3,19 @@
   lib,
   unstable,
   ...
-}: {
+}:
+{
   # desktops need to be responsive
   nix.daemonCPUSchedPolicy = "idle";
   nix.daemonIOSchedClass = "idle";
 
   # might be needed for xwayland?
   services.xserver.enable = true;
-  services.xserver.excludePackages = [pkgs.xterm];
+  services.xserver.excludePackages = [ pkgs.xterm ];
   services.xserver.desktopManager.xterm.enable = false;
 
   services.flatpak.enable = true;
-  services.flatpak.remotes = []; # just use the user one
+  services.flatpak.remotes = [ ]; # just use the user one
 
   services.displayManager = {
     defaultSession = lib.mkDefault "plasma";
@@ -87,6 +88,7 @@
     nwg-look
     mission-center
     seafile-client
+    seafile-shared
   ];
 
   fonts.packages = with pkgs; [
@@ -142,5 +144,5 @@
   services.thermald.enable = lib.mkDefault true;
 
   services.hardware.bolt.enable = lib.mkDefault true;
-  networking.firewall.trustedInterfaces = ["thunderbolt*"];
+  networking.firewall.trustedInterfaces = [ "thunderbolt*" ];
 }

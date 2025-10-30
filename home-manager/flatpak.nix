@@ -1,9 +1,11 @@
-{...}: let
+{ ... }:
+let
   flathubApp = appId: {
     inherit appId;
     origin = "flathub";
   };
-in {
+in
+{
   services.flatpak = {
     update.onActivation = true;
     enable = false;
@@ -21,7 +23,6 @@ in {
       (flathubApp "com.github.mtkennerly.ludusavi")
       (flathubApp "com.github.wwmm.easyeffects")
       (flathubApp "com.moonlight_stream.Moonlight")
-      (flathubApp "com.seafile.Client")
       (flathubApp "fr.handbrake.ghb")
       (flathubApp "im.riot.Riot")
       (flathubApp "io.github.martchus.syncthingtray")
