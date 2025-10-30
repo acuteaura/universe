@@ -4,6 +4,10 @@
   ...
 }:
 {
+  networking.extraHosts = ''
+    127.0.0.1 id.nullvoid.space
+  '';
+
   services.nginx =
     let
       defaultListenIPv4 = [
@@ -73,7 +77,7 @@
           proxyWebsockets = true;
           extraConfig = ''
             client_max_body_size 256M;
-            allow 46.62.209.109;
+            allow 127.0.0.1;
             deny all;
           '';
         };
