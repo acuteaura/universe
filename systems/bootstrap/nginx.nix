@@ -73,7 +73,7 @@
           proxyWebsockets = true;
           extraConfig = ''
             client_max_body_size 256M;
-            allow 127.0.0.1;
+            allow 100.64.0.0/10;
             deny all;
           '';
         };
