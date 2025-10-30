@@ -1,9 +1,9 @@
 {
-  config,
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./containers/keycloak.nix
 
@@ -21,15 +21,19 @@
   networking.hostName = "bootstrap";
   networking.domain = "nullvoid.space";
 
-  users.users.root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q''];
+  users.users.root.openssh.authorizedKeys.keys = [
+    ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q''
+  ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   users.users.aurelia = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
-    packages = with pkgs; [];
-    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q"];
+    extraGroups = [ "wheel" ];
+    packages = with pkgs; [ ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJmjGIsSO9jE85xNPzzp0AWfOSXVL4qQ3cuXeKCvxe+q"
+    ];
     shell = pkgs.fish;
   };
 
@@ -40,11 +44,17 @@
   fileSystems."/data" = {
     device = "/dev/disk/by-id/scsi-0HC_Volume_103515584";
     fsType = "ext4";
-    options = ["nofail" "x-systemd.device-timeout=10s"];
+    options = [
+      "nofail"
+      "x-systemd.device-timeout=10s"
+    ];
   };
 
   # nixos sucks tbh
-  networking.firewall.interfaces."podman*".allowedUDPPorts = [53 5353];
+  networking.firewall.interfaces."podman*".allowedUDPPorts = [
+    53
+    5353
+  ];
 
   boot.loader.systemd-boot.configurationLimit = 5;
   nix.gc = {
