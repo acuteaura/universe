@@ -4,10 +4,6 @@
   ...
 }:
 {
-  networking.extraHosts = ''
-    127.0.0.1 id.nullvoid.space
-  '';
-
   services.nginx =
     let
       defaultListenIPv4 = [
