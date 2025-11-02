@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ../_modules/base.nix
     ../_modules/desktop-base.nix
@@ -42,7 +41,7 @@
   boot.plymouth.enable = true;
   boot.zfs.devNodes = "/dev/disk/by-id/";
 
-  universe.cachyos-kernel.enable = false;
+  universe.cachyos-kernel.enable = true;
 
   # Network
   networking = {

@@ -1,11 +1,9 @@
-{ ... }:
-let
+{...}: let
   flathubApp = appId: {
     inherit appId;
     origin = "flathub";
   };
-in
-{
+in {
   services.flatpak = {
     update.onActivation = true;
     enable = false;

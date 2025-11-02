@@ -1,11 +1,9 @@
-{ ... }:
-let
+{...}: let
   flathubApp = appId: {
     inherit appId;
     origin = "flathub";
   };
-in
-{
+in {
   services.flatpak = {
     update = {
       onActivation = true;
@@ -53,7 +51,7 @@ in
     ];
 
     overrides.global = {
-      Context.filesystems = [ ];
+      Context.filesystems = [];
       Environment = {
         #GTK_THEME = "Fluent-dark-compact:dark";
       };

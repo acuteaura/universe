@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ../_modules/base.nix
     ../_modules/desktop-base.nix
@@ -88,7 +87,7 @@
   };
   services.resolved = {
     enable = true;
-    fallbackDns = [ ];
+    fallbackDns = [];
   };
   systemd.network = {
     enable = true;
@@ -113,7 +112,7 @@
       };
       "90-br0" = {
         matchConfig.Name = "br0";
-        bridgeConfig = { };
+        bridgeConfig = {};
         networkConfig = {
           DHCP = "yes";
           IgnoreCarrierLoss = "yes";

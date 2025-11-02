@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     #azahar
     dolphin-emu
@@ -16,13 +12,14 @@
     gargoyle
 
     (retroarch.withCores (
-      cores: with cores; [
-        bsnes
-        easyrpg
-        gambatte
-        mgba
-        mupen64plus
-      ]
+      cores:
+        with cores; [
+          bsnes
+          easyrpg
+          gambatte
+          mgba
+          mupen64plus
+        ]
     ))
 
     # https://github.com/NixOS/nixpkgs/issues/418681

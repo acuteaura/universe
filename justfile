@@ -36,3 +36,4 @@ boot:
 
 update-dependencies:
     nix flake update nixpkgs home-manager chaotic
+    nix flake archive

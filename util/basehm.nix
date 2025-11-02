@@ -1,12 +1,11 @@
 {
-  extraSpecialArgs ? { },
+  extraSpecialArgs ? {},
   home-manager-username ? "aurelia",
   home-manager-homedir ? "/home/aurelia",
   home-manager-imports,
   nixpkgsConfig,
-}:
-{
-  imports = [ nixpkgsConfig ];
+}: {
+  imports = [nixpkgsConfig];
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;

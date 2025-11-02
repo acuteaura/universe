@@ -71,16 +71,19 @@
         config = nixpkgsConfig.nixpkgs.config;
         overlays = nixpkgsConfig.nixpkgs.overlays;
       };
+
+      baseSystem = import ./util/basesystem.nix {
+        inherit
+          nixpkgs
+          home-manager
+          nixpkgsConfig
+          ;
+        constants = self.nixosModules.constants;
+      };
     in
     {
       nixosConfigurations = {
-        cyberdaemon = import ./basesystem.nix {
-          inherit
-            nixpkgs
-            nix-flatpak
-            home-manager
-            nixpkgsConfig
-            ;
+        cyberdaemon = baseSystem {
           nixos-imports = [
             ./systems/cyberdaemon
             inputs.chaotic.nixosModules.default
@@ -94,13 +97,7 @@
             ./home-manager/desktop.nix
           ];
         };
-        chariot = import ./basesystem.nix {
-          inherit
-            nixpkgs
-            nix-flatpak
-            home-manager
-            nixpkgsConfig
-            ;
+        chariot = baseSystem {
           nixos-imports = [
             ./systems/chariot
             inputs.nix-flatpak.nixosModules.nix-flatpak
@@ -114,12 +111,7 @@
             ./home-manager/desktop.nix
           ];
         };
-        fool = import ./basesystem.nix {
-          inherit
-            nixpkgs
-            home-manager
-            nixpkgsConfig
-            ;
+        fool = baseSystem {
           nixos-imports = [
             ./systems/fool
             inputs.nix-flatpak.nixosModules.nix-flatpak
@@ -133,12 +125,7 @@
             ./home-manager/desktop.nix
           ];
         };
-        bootstrap = import ./basesystem.nix {
-          inherit
-            nixpkgs
-            home-manager
-            nixpkgsConfig
-            ;
+        bootstrap = baseSystem {
           system = "aarch64-linux";
           nixos-imports = [
             ./systems/bootstrap
@@ -149,12 +136,7 @@
             ./home-manager/shell.nix
           ];
         };
-        wsl = import ./basesystem.nix {
-          inherit
-            nixpkgs
-            home-manager
-            nixpkgsConfig
-            ;
+        wsl = baseSystem {
           nixos-imports = [ ./systems/wsl ];
           home-manager-imports = [
             ./home-manager/shell.nix
@@ -172,7 +154,7 @@
               unstable = unstable;
             };
             modules = [
-              (import ./basehmuser.nix {
+              (import ./util/basehmuser.nix {
                 home-manager-imports = [
                   nixpkgsConfig
                   nix-flatpak-module
@@ -189,7 +171,7 @@
               unstable = unstable;
             };
             modules = [
-              (import ./basehmuser.nix {
+              (import ./util/basehmuser.nix {
                 home-manager-imports = [
                   nixpkgsConfig
                   nix-flatpak-module
@@ -208,7 +190,7 @@
               unstable = unstable-darwin;
             };
             modules = [
-              (import ./basehmuser.nix {
+              (import ./util/basehmuser.nix {
                 home-manager-imports = [
                   nixpkgsConfig
                   ./home-manager/shell.nix

@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   services.desktopManager.plasma6.enable = true;
 
   # i hate amdgpu
