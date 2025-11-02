@@ -51,39 +51,37 @@
     };
   };
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      nixpkgs-unstable,
-      home-manager,
-      home-manager-unstable,
-      nix-flatpak,
-      ...
-    }:
-    let
-      packageOverlay = final: prev: {
-        kwin-effects-forceblur = inputs.kwin-effects-forceblur.packages."${final.system}".default;
-        winapps = inputs.winapps-unstable.packages."${final.system}".winapps;
-        winapps-launcher = inputs.winapps-unstable.packages."${final.system}".winapps-launcher;
-      };
-      nixpkgsConfig = import ./nixpkgs-config.nix {
-        getName = nixpkgs.lib.getName;
-        extraOverlays = [
-          packageOverlay
-        ];
-      };
-      unstable = import nixpkgs-unstable {
-        system = "x86_64-linux";
-        config = nixpkgsConfig.nixpkgs.config;
-        overlays = nixpkgsConfig.nixpkgs.overlays;
-      };
-      unstable-darwin = import nixpkgs-unstable {
-        system = "aarch64-darwin";
-        config = nixpkgsConfig.nixpkgs.config;
-        overlays = nixpkgsConfig.nixpkgs.overlays;
-      };
-    in
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    home-manager,
+    home-manager-unstable,
+    nix-flatpak,
+    ...
+  }: let
+    packageOverlay = final: prev: {
+      kwin-effects-forceblur = inputs.kwin-effects-forceblur.packages."${final.system}".default;
+      winapps = inputs.winapps-unstable.packages."${final.system}".winapps;
+      winapps-launcher = inputs.winapps-unstable.packages."${final.system}".winapps-launcher;
+    };
+    nixpkgsConfig = import ./nixpkgs-config.nix {
+      getName = nixpkgs.lib.getName;
+      extraOverlays = [
+        packageOverlay
+      ];
+    };
+    unstable = import nixpkgs-unstable {
+      system = "x86_64-linux";
+      config = nixpkgsConfig.nixpkgs.config;
+      overlays = nixpkgsConfig.nixpkgs.overlays;
+    };
+    unstable-darwin = import nixpkgs-unstable {
+      system = "aarch64-darwin";
+      config = nixpkgsConfig.nixpkgs.config;
+      overlays = nixpkgsConfig.nixpkgs.overlays;
+    };
+  in
     {
       nixosConfigurations = {
         cyberdaemon = import ./basesystem.nix {
@@ -104,7 +102,6 @@
             inputs.lanzaboote-unstable.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
             inputs.eden.nixosModules.default
-
           ];
           home-manager-imports = [
             ./home-manager/shell.nix
@@ -205,80 +202,76 @@
             home-manager-unstable
             nixpkgsConfig
             ;
-          nixos-imports = [ ./systems/wsl ];
+          nixos-imports = [./systems/wsl];
           home-manager-imports = [
             ./home-manager/shell.nix
           ];
         };
       };
-      homeConfigurations =
-        let
-          nix-flatpak-module = nix-flatpak.homeManagerModules.nix-flatpak;
-        in
-        {
-          shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            extraSpecialArgs = {
-              unstable = unstable;
-            };
-            modules = [
-              (import ./basehmuser.nix {
-                home-manager-imports = [
-                  nixpkgsConfig
-                  nix-flatpak-module
-                  ./home-manager/shell.nix
-                ];
-                home-manager-username = "aurelia";
-                home-manager-homedir = "/home/aurelia";
-              })
-            ];
+      homeConfigurations = let
+        nix-flatpak-module = nix-flatpak.homeManagerModules.nix-flatpak;
+      in {
+        shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {
+            unstable = unstable;
           };
-          desktop-x86_64-linux = home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            extraSpecialArgs = {
-              unstable = unstable;
-            };
-            modules = [
-              (import ./basehmuser.nix {
-                home-manager-imports = [
-                  nixpkgsConfig
-                  nix-flatpak-module
-                  ./home-manager/shell.nix
-                  ./home-manager/fonts.nix
-                  ./home-manager/desktop.nix
-                ];
-                home-manager-username = "aurelia";
-                home-manager-homedir = "/home/aurelia";
-              })
-            ];
-          };
-          shell-aarch64-darwin = home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-            extraSpecialArgs = {
-              unstable = unstable-darwin;
-            };
-            modules = [
-              (import ./basehmuser.nix {
-                home-manager-imports = [
-                  nixpkgsConfig
-                  ./home-manager/shell.nix
-                ];
-                home-manager-username = "aurelia";
-                home-manager-homedir = "/Users/aurelia";
-              })
-            ];
-          };
+          modules = [
+            (import ./basehmuser.nix {
+              home-manager-imports = [
+                nixpkgsConfig
+                nix-flatpak-module
+                ./home-manager/shell.nix
+              ];
+              home-manager-username = "aurelia";
+              home-manager-homedir = "/home/aurelia";
+            })
+          ];
         };
+        desktop-x86_64-linux = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = {
+            unstable = unstable;
+          };
+          modules = [
+            (import ./basehmuser.nix {
+              home-manager-imports = [
+                nixpkgsConfig
+                nix-flatpak-module
+                ./home-manager/shell.nix
+                ./home-manager/fonts.nix
+                ./home-manager/desktop.nix
+              ];
+              home-manager-username = "aurelia";
+              home-manager-homedir = "/home/aurelia";
+            })
+          ];
+        };
+        shell-aarch64-darwin = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          extraSpecialArgs = {
+            unstable = unstable-darwin;
+          };
+          modules = [
+            (import ./basehmuser.nix {
+              home-manager-imports = [
+                nixpkgsConfig
+                ./home-manager/shell.nix
+              ];
+              home-manager-username = "aurelia";
+              home-manager-homedir = "/Users/aurelia";
+            })
+          ];
+        };
+      };
       nixosModules.constants = import ./constants.nix;
     }
     // inputs.flake-utils.lib.eachDefaultSystem (
-      system:
-      let
+      system: let
         pkgs = import nixpkgs {
           system = "${system}";
         };
-      in
-      {
+      in {
         formatter = pkgs.alejandra;
       }
     );

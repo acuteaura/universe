@@ -2,8 +2,7 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_6_15;
   time.timeZone = lib.mkDefault "Europe/Berlin";
   systemd.coredump.enable = lib.mkDefault true;
@@ -19,7 +18,7 @@
     openFirewall = lib.mkDefault true;
     useRoutingFeatures = lib.mkDefault "client";
   };
-  networking.firewall.trustedInterfaces = [ "tailscale*" ];
+  networking.firewall.trustedInterfaces = ["tailscale*"];
 
   programs.nix-index = {
     enable = lib.mkDefault true;

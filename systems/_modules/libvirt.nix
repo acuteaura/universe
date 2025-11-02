@@ -2,8 +2,7 @@
   pkgs,
   config,
   ...
-}:
-{
+}: {
   virtualisation.libvirtd = {
     enable = true;
     package = pkgs.libvirt;
@@ -37,5 +36,5 @@
 
   environment.sessionVariables.LIBVIRT_DEFAULT_URI = "qemu:///system";
 
-  networking.firewall.trustedInterfaces = [ "virbr0" ];
+  networking.firewall.trustedInterfaces = ["virbr0"];
 }

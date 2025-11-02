@@ -37,7 +37,6 @@
     DeviceScale=2
   '';
 
-
   boot.zfs.devNodes = "/dev/disk/by-id/";
   #boot.zfs.extraPools = [];
 

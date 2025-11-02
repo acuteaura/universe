@@ -5,5 +5,5 @@ final: prev: {
       final.adjustor
     ];
   };
-  adjustor = final.callPackage (import ../packages/adjustor/default.nix) { };
+  adjustor = final.callPackage (import ../packages/adjustor/default.nix) {};
 }
