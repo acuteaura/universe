@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ../_modules/base.nix
     ../_modules/desktop-base.nix
@@ -12,6 +13,7 @@
     ../_modules/games.nix
     ../_modules/libvirt.nix
     ../_modules/mounts.nix
+    ../_modules/kernel.nix
     ../_modules/wine.nix
 
     ../_modules/user-aurelia.nix
@@ -24,7 +26,7 @@
   #########################################
   boot.loader = {
     systemd-boot = {
-      enable = true;
+      enable = false;
       configurationLimit = 10;
       consoleMode = "max";
       rebootForBitlocker = true;
@@ -32,14 +34,15 @@
     };
     efi.canTouchEfiVariables = true;
   };
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+  };
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
-
-  boot.kernelPackages = pkgs.linuxPackages_cachyos; #.cachyOverride { mArch = "ZEN4"; };
-
   boot.zfs.devNodes = "/dev/disk/by-id/";
 
-  boot.zfs.package = pkgs.zfs_cachyos;
+  universe.cachyos-kernel.enable = true;
 
   # Network
   networking = {

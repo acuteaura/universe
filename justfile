@@ -10,8 +10,19 @@ push:
     git commit -m "update from {{hostname}}@{{date}}" || true
     git push origin HEAD
 
-rebuild TYPE *FLAGS:
+build *FLAGS:
+    #!/usr/bin/env bash
+    set -euo pipefail
     nix build .#nixosConfigurations.{{ hostname }}.config.system.build.toplevel --log-format internal-json {{FLAGS}} |& nom --json
+    if command -v attic >/dev/null 2>&1 && attic cache info aurelia >/dev/null 2>&1; then
+        echo "Pushing to attic cache..."
+        attic push aurelia ./result
+    else
+        echo "Skipping attic push (attic not configured or cache 'aurelia' not found)"
+    fi
+
+rebuild TYPE *FLAGS:
+    @just build {{FLAGS}}
     nixos-rebuild {{TYPE}} --flake . --sudo
 
 install HOSTNAME *FLAGS:
