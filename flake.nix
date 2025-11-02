@@ -61,16 +61,6 @@
           packageOverlay
         ];
       };
-      unstable = import nixpkgs {
-        system = "x86_64-linux";
-        config = nixpkgsConfig.nixpkgs.config;
-        overlays = nixpkgsConfig.nixpkgs.overlays;
-      };
-      unstable-darwin = import nixpkgs {
-        system = "aarch64-darwin";
-        config = nixpkgsConfig.nixpkgs.config;
-        overlays = nixpkgsConfig.nixpkgs.overlays;
-      };
 
       baseSystem = import ./util/basesystem.nix {
         inherit
@@ -150,9 +140,6 @@
         {
           shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            extraSpecialArgs = {
-              unstable = unstable;
-            };
             modules = [
               (import ./util/basehmuser.nix {
                 home-manager-imports = [
@@ -167,9 +154,6 @@
           };
           desktop-x86_64-linux = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            extraSpecialArgs = {
-              unstable = unstable;
-            };
             modules = [
               (import ./util/basehmuser.nix {
                 home-manager-imports = [
@@ -186,9 +170,6 @@
           };
           shell-aarch64-darwin = home-manager.lib.homeManagerConfiguration {
             pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-            extraSpecialArgs = {
-              unstable = unstable-darwin;
-            };
             modules = [
               (import ./util/basehmuser.nix {
                 home-manager-imports = [
