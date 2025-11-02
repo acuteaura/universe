@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  unstable,
   ...
 }:
 {
@@ -112,7 +111,7 @@
     [devices]
     "Epson ET-2850" = https://192.168.12.81/eSCL/, eSCL
   '';
-  services.udev.packages = [pkgs.sane-airscan];
+  services.udev.packages = [ pkgs.sane-airscan ];
 
   hardware.keyboard.qmk.enable = true;
 

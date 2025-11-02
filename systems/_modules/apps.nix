@@ -1,8 +1,8 @@
 {
   pkgs,
-  unstable,
   ...
-}: {
+}:
+{
   environment.systemPackages = with pkgs; [
     ghostty
     gparted
@@ -39,6 +39,10 @@
 
   programs.thunar = {
     enable = false;
-    plugins = with pkgs.xfce; [thunar-archive-plugin thunar-dropbox-plugin thunar-volman];
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-dropbox-plugin
+      thunar-volman
+    ];
   };
 }

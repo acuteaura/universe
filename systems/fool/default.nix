@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ../_modules/base.nix
     ../_modules/desktop-base.nix
@@ -43,14 +44,19 @@
     enable = true;
     pkiBundle = "/var/lib/sbctl";
   };
-  environment.systemPackages = with pkgs; [sbctl tpm2-tools];
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 
   boot.zfs.devNodes = "/dev/disk/by-id/";
-  boot.zfs.extraPools = ["nm790" "sn850x"];
+  boot.zfs.extraPools = [
+    "nm790"
+    "sn850x"
+  ];
 
-  boot.kernelModules = ["coretemp" "nct6775"];
+  boot.kernelModules = [
+    "coretemp"
+    "nct6775"
+  ];
 
   universe.cachyos-kernel.enable = true;
 
@@ -70,7 +76,10 @@
   programs.adb.enable = true;
 
   networking.networkmanager.enable = false;
-  networking.networkmanager.unmanaged = ["virbr0" "docker0"];
+  networking.networkmanager.unmanaged = [
+    "virbr0"
+    "docker0"
+  ];
 
   networking = {
     useDHCP = false;
@@ -79,7 +88,7 @@
   };
   services.resolved = {
     enable = true;
-    fallbackDns = [];
+    fallbackDns = [ ];
   };
   systemd.network = {
     enable = true;
@@ -104,7 +113,7 @@
       };
       "90-br0" = {
         matchConfig.Name = "br0";
-        bridgeConfig = {};
+        bridgeConfig = { };
         networkConfig = {
           DHCP = "yes";
           IgnoreCarrierLoss = "yes";
@@ -132,7 +141,13 @@
     "--prefer-output DP-2"
   ];
 
-  nix.settings.system-features = ["benchmark" "big-parallel" "kvm" "nixos-test" "gccarch-znver4"];
+  nix.settings.system-features = [
+    "benchmark"
+    "big-parallel"
+    "kvm"
+    "nixos-test"
+    "gccarch-znver4"
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

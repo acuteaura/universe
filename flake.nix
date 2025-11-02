@@ -2,52 +2,42 @@
   description = "aurelia's universe flake";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
-    home-manager-unstable = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.2";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    lanzaboote-unstable = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        rust-overlay.follows = "rust-overlay";
+      };
     };
 
     winapps-unstable = {
       url = "github:winapps-org/winapps";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    chaotic-unstable.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     eden.url = "github:Grantimatter/eden-flake";
     flake-utils.url = "github:numtide/flake-utils";
     quadlet.url = "github:SEIAROTg/quadlet-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
 
-    gpd-fan-unstable = {
-      url = "github:Cryolitia/gpd-fan-driver";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    jovian-nixos-unstable = {
-      follows = "chaotic-unstable/jovian";
+    jovian = {
+      follows = "chaotic/jovian";
     };
 
     kwin-effects-forceblur = {
       url = "github:taj-ny/kwin-effects-forceblur";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -55,9 +45,7 @@
     inputs@{
       self,
       nixpkgs,
-      nixpkgs-unstable,
       home-manager,
-      home-manager-unstable,
       nix-flatpak,
       ...
     }:
@@ -73,12 +61,12 @@
           packageOverlay
         ];
       };
-      unstable = import nixpkgs-unstable {
+      unstable = import nixpkgs {
         system = "x86_64-linux";
         config = nixpkgsConfig.nixpkgs.config;
         overlays = nixpkgsConfig.nixpkgs.overlays;
       };
-      unstable-darwin = import nixpkgs-unstable {
+      unstable-darwin = import nixpkgs {
         system = "aarch64-darwin";
         config = nixpkgsConfig.nixpkgs.config;
         overlays = nixpkgsConfig.nixpkgs.overlays;
@@ -89,41 +77,17 @@
         cyberdaemon = import ./basesystem.nix {
           inherit
             nixpkgs
-            nixpkgs-unstable
             nix-flatpak
             home-manager
-            home-manager-unstable
             nixpkgsConfig
             ;
-          useUnstable = true;
           nixos-imports = [
             ./systems/cyberdaemon
-            inputs.chaotic-unstable.nixosModules.default
-            inputs.jovian-nixos-unstable.nixosModules.jovian
-            inputs.lanzaboote-unstable.nixosModules.lanzaboote
+            inputs.chaotic.nixosModules.default
+            inputs.jovian.nixosModules.jovian
+            inputs.lanzaboote.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
             inputs.eden.nixosModules.default
-          ];
-          home-manager-imports = [
-            ./home-manager/shell.nix
-            ./home-manager/desktop.nix
-          ];
-        };
-        construct = import ./basesystem.nix {
-          inherit
-            nixpkgs
-            nixpkgs-unstable
-            nix-flatpak
-            home-manager
-            home-manager-unstable
-            nixpkgsConfig
-            ;
-          useUnstable = true;
-          nixos-imports = [
-            ./systems/construct
-            inputs.chaotic-unstable.nixosModules.default
-            inputs.lanzaboote-unstable.nixosModules.lanzaboote
-            inputs.quadlet.nixosModules.quadlet
           ];
           home-manager-imports = [
             ./home-manager/shell.nix
@@ -133,17 +97,15 @@
         chariot = import ./basesystem.nix {
           inherit
             nixpkgs
-            nixpkgs-unstable
             nix-flatpak
             home-manager
-            home-manager-unstable
             nixpkgsConfig
             ;
-          useUnstable = true;
           nixos-imports = [
             ./systems/chariot
-            inputs.chaotic-unstable.nixosModules.default
-            inputs.lanzaboote-unstable.nixosModules.lanzaboote
+            inputs.nix-flatpak.nixosModules.nix-flatpak
+            inputs.chaotic.nixosModules.default
+            inputs.lanzaboote.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
             inputs.eden.nixosModules.default
           ];
@@ -155,16 +117,13 @@
         fool = import ./basesystem.nix {
           inherit
             nixpkgs
-            nixpkgs-unstable
-            nix-flatpak
             home-manager
-            home-manager-unstable
             nixpkgsConfig
             ;
-          useUnstable = true;
           nixos-imports = [
             ./systems/fool
-            inputs.chaotic-unstable.nixosModules.default
+            inputs.nix-flatpak.nixosModules.nix-flatpak
+            inputs.chaotic.nixosModules.default
             inputs.lanzaboote-unstable.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
             inputs.eden.nixosModules.default
@@ -177,16 +136,13 @@
         bootstrap = import ./basesystem.nix {
           inherit
             nixpkgs
-            nixpkgs-unstable
-            nix-flatpak
             home-manager
-            home-manager-unstable
             nixpkgsConfig
             ;
           system = "aarch64-linux";
           nixos-imports = [
             ./systems/bootstrap
-            inputs.chaotic-unstable.nixosModules.default
+            inputs.chaotic.nixosModules.default
             inputs.quadlet.nixosModules.quadlet
           ];
           home-manager-imports = [
@@ -196,10 +152,7 @@
         wsl = import ./basesystem.nix {
           inherit
             nixpkgs
-            nixpkgs-unstable
-            nix-flatpak
             home-manager
-            home-manager-unstable
             nixpkgsConfig
             ;
           nixos-imports = [ ./systems/wsl ];

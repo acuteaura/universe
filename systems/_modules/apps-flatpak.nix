@@ -1,11 +1,17 @@
-{...}: let
+{ ... }:
+let
   flathubApp = appId: {
     inherit appId;
     origin = "flathub";
   };
-in {
+in
+{
   services.flatpak = {
-    update.onActivation = true;
+    update = {
+      onActivation = true;
+      auto.enable = false;
+    };
+
     enable = true;
     remotes = [
       {
@@ -47,7 +53,7 @@ in {
     ];
 
     overrides.global = {
-      Context.filesystems = [];
+      Context.filesystems = [ ];
       Environment = {
         #GTK_THEME = "Fluent-dark-compact:dark";
       };

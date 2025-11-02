@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_6_15;
   time.timeZone = lib.mkDefault "Europe/Berlin";
   systemd.coredump.enable = lib.mkDefault true;
@@ -18,7 +19,7 @@
     openFirewall = lib.mkDefault true;
     useRoutingFeatures = lib.mkDefault "client";
   };
-  networking.firewall.trustedInterfaces = ["tailscale*"];
+  networking.firewall.trustedInterfaces = [ "tailscale*" ];
 
   programs.nix-index = {
     enable = lib.mkDefault true;
@@ -44,7 +45,7 @@
       functions.enable = lib.mkDefault true;
       completions.enable = lib.mkDefault true;
     };
-    shellAliases = {};
+    shellAliases = { };
   };
   programs.zoxide = {
     enable = lib.mkDefault true;
@@ -78,9 +79,11 @@
     p7zip
     pv
     restic
+    sbctl
     socat
     sshfs
     tmux
+    tpm2-tools
     unar
     wget
     zstd

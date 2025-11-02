@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ../_modules/base.nix
 
@@ -29,7 +30,6 @@
   universe.cachyos-kernel.enable = true;
   universe.secureboot.enable = true;
 
-  environment.systemPackages = with pkgs; [sbctl tpm2-tools];
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
   boot.plymouth.extraConfig = ''
@@ -40,7 +40,10 @@
   boot.zfs.devNodes = "/dev/disk/by-id/";
   #boot.zfs.extraPools = [];
 
-  boot.kernelModules = ["coretemp" "nct6775"];
+  boot.kernelModules = [
+    "coretemp"
+    "nct6775"
+  ];
 
   networking = {
     hostId = "5934b829";

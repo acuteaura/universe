@@ -42,7 +42,7 @@
   boot.plymouth.enable = true;
   boot.zfs.devNodes = "/dev/disk/by-id/";
 
-  universe.cachyos-kernel.enable = true;
+  universe.cachyos-kernel.enable = false;
 
   # Network
   networking = {

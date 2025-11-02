@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   services.desktopManager.plasma6.enable = true;
 
   # i hate amdgpu
@@ -32,7 +33,7 @@
 
     # required for system info
     clinfo
-    glxinfo
+    mesa-demos
     vulkan-tools
   ];
 

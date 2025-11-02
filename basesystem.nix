@@ -1,56 +1,31 @@
 {
   nixpkgs,
-  nixpkgs-unstable,
   nixpkgsConfig,
-  nixos-imports ? [],
+  nixos-imports ? [ ],
   home-manager,
-  home-manager-unstable,
-  home-manager-imports ? [],
+  home-manager-imports ? [ ],
   home-manager-username ? "aurelia",
   home-manager-homedir ? "/home/aurelia",
-  useUnstable ? false,
   system ? "x86_64-linux",
-  nix-flatpak ? {},
   ...
-}: let
-  unstable = import nixpkgs-unstable {
-    system = system;
-    config = nixpkgsConfig.nixpkgs.config;
-    overlays = nixpkgsConfig.nixpkgs.overlays;
-  };
-  defaultPkgs = import nixpkgs {
-    system = system;
-    config = nixpkgsConfig.nixpkgs.config;
-    overlays = nixpkgsConfig.nixpkgs.overlays;
-  };
-
-  systemFunc =
-    if useUnstable
-    then nixpkgs-unstable.lib.nixosSystem
-    else nixpkgs.lib.nixosSystem;
-
-  pkgs =
-    if useUnstable
-    then nixpkgs-unstable.legacyPackages."${system}"
-    else nixpkgs.legacyPackages."${system}";
-
-  homeManagerModule =
-    if useUnstable
-    then home-manager-unstable.nixosModules.home-manager
-    else home-manager.nixosModules.home-manager;
+}:
+let
+  systemFunc = nixpkgs.lib.nixosSystem;
+  homeManagerModule = home-manager.nixosModules.home-manager;
 in
-  systemFunc {
-    system = system;
-    specialArgs = {inherit unstable;};
-    modules =
-      [
-        nix-flatpak.nixosModules.nix-flatpak
+systemFunc {
+  system = system;
+  modules = [
+    nixpkgsConfig
+    homeManagerModule
+    (import ./basehm.nix {
+      inherit
         nixpkgsConfig
-        homeManagerModule
-        (import ./basehm.nix {
-          inherit nixpkgsConfig home-manager-imports home-manager-username home-manager-homedir nix-flatpak;
-          extraSpecialArgs = {inherit unstable;};
-        })
-      ]
-      ++ nixos-imports;
-  }
+        home-manager-imports
+        home-manager-username
+        home-manager-homedir
+        ;
+    })
+  ]
+  ++ nixos-imports;
+}
