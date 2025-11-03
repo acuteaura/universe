@@ -8,7 +8,7 @@ on:
 
 jobs:
   lint:
-    runs-on: blacksmith-8vcpu-ubuntu-2404
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
