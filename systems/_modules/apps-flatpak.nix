@@ -1,4 +1,4 @@
-{...}: let
+_: let
   flathubApp = appId: {
     inherit appId;
     origin = "flathub";

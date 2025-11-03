@@ -1,5 +1,8 @@
-{ pkgs, constants, ... }:
 {
+  pkgs,
+  constants,
+  ...
+}: {
   users.groups.aurelia = {
     name = "aurelia";
     gid = 1000;
@@ -19,6 +22,6 @@
     openssh.authorizedKeys.keys = constants.sshKeys.aurelia;
     shell = pkgs.fish;
   };
-  nix.settings.trusted-users = [ "aurelia" ];
-  programs._1password-gui.polkitPolicyOwners = [ "aurelia" ];
+  nix.settings.trusted-users = ["aurelia"];
+  programs._1password-gui.polkitPolicyOwners = ["aurelia"];
 }

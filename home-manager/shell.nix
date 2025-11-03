@@ -35,7 +35,7 @@
 
       # devops shit
       act
-      (azure-cli.withExtensions [ ])
+      (azure-cli.withExtensions [])
       fly
       gh
       opentofu
@@ -76,7 +76,7 @@
       # the "thanks i hate it" tools
       claude-code
     ]
-    ++ lib.optionals (pkgs.stdenv.isDarwin) [
+    ++ lib.optionals pkgs.stdenv.isDarwin [
       bash
       qemu
 
@@ -85,7 +85,7 @@
       docker-buildx
       docker-credential-helpers
     ]
-    ++ lib.optionals (pkgs.stdenv.isLinux) [
+    ++ lib.optionals pkgs.stdenv.isLinux [
       binwalk
 
       distrobox

@@ -16,13 +16,6 @@
         ssl = true;
       }
     ];
-    cloudflareListenIPv4 = [
-      {
-        addr = "0.0.0.0";
-        port = 49152;
-        ssl = true;
-      }
-    ];
     defaultListenIPv6 = [
       {
         addr = "[::]";
@@ -32,13 +25,6 @@
       {
         addr = "[::]";
         port = 443;
-        ssl = true;
-      }
-    ];
-    cloudflareListenIPv6 = [
-      {
-        addr = "[::]";
-        port = 49152;
         ssl = true;
       }
     ];

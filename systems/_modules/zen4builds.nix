@@ -10,14 +10,14 @@
   nixpkgs.overlays = [
     (
       final: prev: {
-        gsl = defaultPkgs.gsl;
-        lib2geom = defaultPkgs.lib2geom;
-        lkl = defaultPkgs.lkl;
-        openldap = defaultPkgs.openldap;
-        openblas = defaultPkgs.openblas;
-        lix = defaultPkgs.lix;
+        inherit (defaultPkgs) gsl;
+        inherit (defaultPkgs) lib2geom;
+        inherit (defaultPkgs) lkl;
+        inherit (defaultPkgs) openldap;
+        inherit (defaultPkgs) openblas;
+        inherit (defaultPkgs) lix;
 
-        gfortran = defaultPkgs.gfortran;
+        inherit (defaultPkgs) gfortran;
       }
     )
   ];

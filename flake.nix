@@ -41,41 +41,39 @@
     };
   };
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      nix-flatpak,
-      ...
-    }:
-    let
-      packageOverlay = final: prev: {
-        kwin-effects-forceblur = inputs.kwin-effects-forceblur.packages."${final.system}".default;
-        winapps = inputs.winapps-unstable.packages."${final.system}".winapps;
-        winapps-launcher = inputs.winapps-unstable.packages."${final.system}".winapps-launcher;
-      };
-      nixpkgsConfig = import ./nixpkgs-config.nix {
-        getName = nixpkgs.lib.getName;
-        extraOverlays = [
-          packageOverlay
-        ];
-      };
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    nix-flatpak,
+    ...
+  }: let
+    packageOverlay = final: prev: {
+      kwin-effects-forceblur = inputs.kwin-effects-forceblur.packages."${final.system}".default;
+      inherit (inputs.winapps-unstable.packages."${final.system}") winapps winapps-launcher;
+    };
+    nixpkgsConfig = import ./nixpkgs-config.nix {
+      inherit (nixpkgs.lib) getName;
+      extraOverlays = [
+        packageOverlay
+      ];
+    };
 
-      baseSystem = import ./util/basesystem.nix {
-        inherit
-          nixpkgs
-          home-manager
-          nixpkgsConfig
-          ;
-        constants = self.nixosModules.constants;
-      };
-    in
+    baseSystem = import ./util/basesystem.nix {
+      inherit
+        nixpkgs
+        home-manager
+        nixpkgsConfig
+        ;
+      inherit (self.nixosModules) constants;
+    };
+  in
     {
       nixosConfigurations = {
         cyberdaemon = baseSystem {
           nixos-imports = [
             ./systems/cyberdaemon
+            inputs.nix-flatpak.nixosModules.nix-flatpak
             inputs.chaotic.nixosModules.default
             inputs.jovian.nixosModules.jovian
             inputs.lanzaboote.nixosModules.lanzaboote
@@ -126,73 +124,81 @@
             ./home-manager/shell.nix
           ];
         };
-        wsl = baseSystem {
-          nixos-imports = [ ./systems/wsl ];
-          home-manager-imports = [
-            ./home-manager/shell.nix
+      };
+      homeConfigurations = let
+        nix-flatpak-module = nix-flatpak.homeManagerModules.nix-flatpak;
+      in {
+        shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          modules = [
+            (import ./util/basehmuser.nix {
+              home-manager-imports = [
+                nixpkgsConfig
+                nix-flatpak-module
+                ./home-manager/shell.nix
+              ];
+              home-manager-username = "aurelia";
+              home-manager-homedir = "/home/aurelia";
+            })
+          ];
+        };
+        desktop-x86_64-linux = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          modules = [
+            (import ./util/basehmuser.nix {
+              home-manager-imports = [
+                nixpkgsConfig
+                nix-flatpak-module
+                ./home-manager/shell.nix
+                ./home-manager/fonts.nix
+                ./home-manager/desktop.nix
+              ];
+              home-manager-username = "aurelia";
+              home-manager-homedir = "/home/aurelia";
+            })
+          ];
+        };
+        shell-aarch64-darwin = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          modules = [
+            (import ./util/basehmuser.nix {
+              home-manager-imports = [
+                nixpkgsConfig
+                ./home-manager/shell.nix
+              ];
+              home-manager-username = "aurelia";
+              home-manager-homedir = "/Users/aurelia";
+            })
           ];
         };
       };
-      homeConfigurations =
-        let
-          nix-flatpak-module = nix-flatpak.homeManagerModules.nix-flatpak;
-        in
-        {
-          shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            modules = [
-              (import ./util/basehmuser.nix {
-                home-manager-imports = [
-                  nixpkgsConfig
-                  nix-flatpak-module
-                  ./home-manager/shell.nix
-                ];
-                home-manager-username = "aurelia";
-                home-manager-homedir = "/home/aurelia";
-              })
-            ];
-          };
-          desktop-x86_64-linux = home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            modules = [
-              (import ./util/basehmuser.nix {
-                home-manager-imports = [
-                  nixpkgsConfig
-                  nix-flatpak-module
-                  ./home-manager/shell.nix
-                  ./home-manager/fonts.nix
-                  ./home-manager/desktop.nix
-                ];
-                home-manager-username = "aurelia";
-                home-manager-homedir = "/home/aurelia";
-              })
-            ];
-          };
-          shell-aarch64-darwin = home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-            modules = [
-              (import ./util/basehmuser.nix {
-                home-manager-imports = [
-                  nixpkgsConfig
-                  ./home-manager/shell.nix
-                ];
-                home-manager-username = "aurelia";
-                home-manager-homedir = "/Users/aurelia";
-              })
-            ];
-          };
-        };
       nixosModules.constants = import ./constants.nix;
     }
     // inputs.flake-utils.lib.eachDefaultSystem (
-      system:
-      let
+      system: let
         pkgs = import nixpkgs {
-          system = "${system}";
+          inherit system;
+          inherit (nixpkgsConfig.nixpkgs) config overlays;
         };
-      in
-      {
+      in {
         formatter = pkgs.alejandra;
+
+        apps.lint = {
+          type = "app";
+          program = "${pkgs.writeShellScript "lint" ''
+            ${pkgs.statix}/bin/statix check "$@"
+            ${pkgs.deadnix}/bin/deadnix --no-lambda-arg --no-lambda-pattern-names "$@"
+          ''}";
+        };
+
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            alejandra
+            statix
+            deadnix
+            nixfmt-rfc-style
+          ];
+        };
       }
     );
 }

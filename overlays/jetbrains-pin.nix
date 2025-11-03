@@ -12,5 +12,5 @@ self: super: let
       };
     };
 in {
-  jetbrains = oldPkgs.jetbrains;
+  inherit (oldPkgs) jetbrains;
 }

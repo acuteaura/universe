@@ -1,8 +1,7 @@
 let
-  constants = (import ./constants.nix);
+  constants = import ./constants.nix;
 
   keysAurelia = constants.sshKeys.aurelia;
-in
-{
+in {
   "bootstrap.age".publicKeys = keysAurelia;
 }

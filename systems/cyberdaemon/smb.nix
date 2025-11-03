@@ -1,4 +1,4 @@
-{...}: let
+_: let
   const = import ../../constants.nix;
 in {
   fileSystems."/media/fool/aurelia" = {

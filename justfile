@@ -37,3 +37,12 @@ boot:
 update-dependencies:
     nix flake update nixpkgs home-manager chaotic
     nix flake archive
+
+lint:
+    nix run .#lint -- {{ justfile_directory() }}
+
+format:
+    nix fmt {{ justfile_directory() }}
+
+check:
+    nix flake check --no-build
