@@ -9,6 +9,7 @@
         "1password"
         "1password-cli"
         "aptakube"
+        "claude-code"
         "discord"
         "idea-ultimate"
         "idea-ultimate-with-plugins"

@@ -106,7 +106,7 @@
             ./systems/fool
             inputs.nix-flatpak.nixosModules.nix-flatpak
             inputs.chaotic.nixosModules.default
-            inputs.lanzaboote-unstable.nixosModules.lanzaboote
+            inputs.lanzaboote.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
             inputs.eden.nixosModules.default
           ];

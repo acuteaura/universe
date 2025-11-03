@@ -35,7 +35,7 @@
 
       # devops shit
       act
-      azure-cli
+      (azure-cli.withExtensions [ ])
       fly
       gh
       opentofu
@@ -72,6 +72,9 @@
       talosctl
 
       lima
+
+      # the "thanks i hate it" tools
+      claude-code
     ]
     ++ lib.optionals (pkgs.stdenv.isDarwin) [
       bash

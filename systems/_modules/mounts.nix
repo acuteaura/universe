@@ -19,14 +19,4 @@ in {
     fsType = "davfs";
     options = ["${automount_opts},uid=1000,gid=1000"];
   };
-  fileSystems."/media/sshfs/sunhome" = {
-    device = "aurelia@sunhome:";
-    fsType = "sshfs";
-    options = ["defaults,${automount_opts},_netdev,uid=1000,gid=1000"];
-  };
-  fileSystems."/media/sshfs/ally" = {
-    device = "aurelia@ally:";
-    fsType = "sshfs";
-    options = ["defaults,${automount_opts},_netdev,uid=1000,gid=1000"];
-  };
 }

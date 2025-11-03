@@ -72,8 +72,8 @@
     thunar-volman
   ];
 
-  programs.dconf.enable = true;
-  programs.seahorse.enable = true;
+  programs.dconf.enable = lib.mkDefault true;
+  programs.seahorse.enable = lib.mkDefault true;
   programs.ssh.askPassword = lib.mkForce "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.sddm.enableGnomeKeyring = true;
@@ -85,8 +85,8 @@
     libsecret
     nwg-look
     mission-center
-    seafile-client
     seafile-shared
+    junction
   ];
 
   fonts.packages = with pkgs; [

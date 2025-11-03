@@ -64,5 +64,29 @@ in {
         "org.freedesktop.Flatpak" = "talk";
       };
     };
+
+    # element is a smartass
+    overrides."im.riot.Riot" = {
+      Context = {
+        sockets = [
+          "session-bus"
+        ];
+        filesystems = [
+          "xdg-download"
+        ];
+      };
+
+      Environment = {
+        XDG_CURRENT_DESKTOP = "GNOME";
+        DESKTOP_SESSION = "gnome";
+        # Unset KDE variables
+        KDE_FULL_SESSION = "";
+        KDE_SESSION_VERSION = "";
+      };
+
+      "Session Bus Policy" = {
+        "org.freedesktop.secrets" = "talk";
+      };
+    };
   };
 }

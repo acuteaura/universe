@@ -7,8 +7,6 @@
   system ? "x86_64-linux",
 }:
 let
-  systemFunc = nixpkgs.lib.nixosSystem;
-  homeManagerModule = home-manager.nixosModules.home-manager;
   defaultSystem = system;
 in
 {
@@ -18,14 +16,14 @@ in
   home-manager-homedir ? "/home/aurelia",
   system ? defaultSystem,
 }:
-systemFunc {
+nixpkgs.lib.nixosSystem {
   specialArgs = extraSpecialArgs // {
     inherit constants;
   };
   system = system;
   modules = [
     nixpkgsConfig
-    homeManagerModule
+    home-manager.nixosModules.home-manager
     (import ./basehm.nix {
       inherit
         nixpkgsConfig

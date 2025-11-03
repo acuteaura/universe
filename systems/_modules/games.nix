@@ -17,6 +17,10 @@
   hardware.steam-hardware.enable = lib.mkDefault true;
   programs.gamemode.enable = lib.mkDefault true;
 
+  environment.sessionVariables = {
+    MESA_SHADER_CACHE_MAX_SIZE = "10G";
+  };
+
   programs.steam = {
     enable = lib.mkDefault true;
     protontricks.enable = lib.mkDefault true;
