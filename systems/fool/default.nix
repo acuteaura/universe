@@ -67,6 +67,7 @@
   ];
 
   universe.cachyos-kernel.enable = true;
+  universe.desktop-plasma.enable = true;
 
   # Network
   networking = {
@@ -77,7 +78,7 @@
   # random tools
   services.mullvad-vpn.enable = true;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
-  services.sunshine-with-virtdisplay.enable = true;
+  universe.sunshine.enable = true;
 
   vfio.enable = false;
 

@@ -65,11 +65,11 @@
     ];
   };
 in {
-  options.services.sunshine-with-virtdisplay = {
+  options.universe.sunshine = {
     enable = lib.mkEnableOption "sunshine with virtual display switching";
   };
 
-  config = lib.mkIf config.services.sunshine-with-virtdisplay.enable {
+  config = lib.mkIf config.universe.sunshine.enable {
     services.sunshine = {
       enable = true;
       autoStart = true;

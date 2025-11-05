@@ -42,6 +42,7 @@
   boot.zfs.devNodes = "/dev/disk/by-id/";
 
   universe.cachyos-kernel.enable = true;
+  universe.desktop-plasma.enable = true;
 
   # Network
   networking = {

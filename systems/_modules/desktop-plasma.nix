@@ -1,49 +1,61 @@
-{pkgs, ...}: {
-  services.desktopManager.plasma6.enable = true;
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
+  options.universe.desktop-plasma.enable = with lib; mkEnableOption "Enable KDE Plasma desktop environment";
 
-  # i hate amdgpu
-  # https://gitlab.freedesktop.org/drm/amd/-/issues/2950
-  environment.sessionVariables.KWIN_DRM_NO_AMS = "1";
+  config = lib.mkIf config.universe.desktop-plasma.enable {
+    # Enable desktop-base by default when plasma is enabled
+    universe.desktop-base.enable = lib.mkDefault true;
 
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    elisa
-    kdepim-runtime
-    konsole
-    oxygen
-    plasma-browser-integration
-  ];
+    services.desktopManager.plasma6.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    qt6.qtimageformats
+    # i hate amdgpu
+    # https://gitlab.freedesktop.org/drm/amd/-/issues/2950
+    environment.sessionVariables.KWIN_DRM_NO_AMS = "1";
 
-    kdePackages.filelight
-    kdePackages.kdeconnect-kde
-    kdePackages.kio
-    kdePackages.krfb
-    kdePackages.partitionmanager
-    kdePackages.plasma-thunderbolt
-    kdePackages.plasma-vault
-    kdePackages.powerdevil
-    kdePackages.krecorder
-    kio-fuse
-
-    kdePackages.qtstyleplugin-kvantum
-    kwin-effects-forceblur
-
-    # required for system info
-    clinfo
-    mesa-demos
-    vulkan-tools
-  ];
-
-  programs.kdeconnect.enable = true;
-  networking.firewall = rec {
-    allowedTCPPortRanges = [
-      {
-        from = 1714;
-        to = 1764;
-      }
+    environment.plasma6.excludePackages = with pkgs.kdePackages; [
+      elisa
+      kdepim-runtime
+      konsole
+      oxygen
+      plasma-browser-integration
     ];
-    allowedUDPPortRanges = allowedTCPPortRanges;
+
+    environment.systemPackages = with pkgs; [
+      qt6.qtimageformats
+
+      kdePackages.filelight
+      kdePackages.kdeconnect-kde
+      kdePackages.kio
+      kdePackages.krfb
+      kdePackages.partitionmanager
+      kdePackages.plasma-thunderbolt
+      kdePackages.plasma-vault
+      kdePackages.powerdevil
+      kdePackages.krecorder
+      kio-fuse
+
+      kdePackages.qtstyleplugin-kvantum
+      kwin-effects-forceblur
+
+      # required for system info
+      clinfo
+      mesa-demos
+      vulkan-tools
+    ];
+
+    programs.kdeconnect.enable = true;
+    networking.firewall = rec {
+      allowedTCPPortRanges = [
+        {
+          from = 1714;
+          to = 1764;
+        }
+      ];
+      allowedUDPPortRanges = allowedTCPPortRanges;
+    };
   };
 }

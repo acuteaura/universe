@@ -12,6 +12,7 @@
     inkscape
     kdePackages.kdenlive
     krita
+    lmstudio
     moonlight-qt
     ocs-url
     scrcpy

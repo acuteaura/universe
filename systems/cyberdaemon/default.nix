@@ -28,6 +28,7 @@
 
   universe.cachyos-kernel.enable = true;
   universe.secureboot.enable = true;
+  universe.desktop-plasma.enable = true;
 
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;

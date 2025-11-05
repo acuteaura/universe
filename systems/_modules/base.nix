@@ -1,112 +1,117 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
-  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_6_15;
-  time.timeZone = lib.mkDefault "Europe/Berlin";
-  systemd.coredump.enable = lib.mkDefault true;
-  zramSwap.enable = lib.mkDefault true;
-  i18n.defaultLocale = "en_US.UTF-8";
+  options.universe.base.enable = with lib; mkEnableOption "Enable base system configuration" // {default = true;};
 
-  networking.networkmanager.enable = lib.mkDefault true;
-  networking.nftables.enable = lib.mkDefault true;
-  networking.firewall.enable = lib.mkDefault true;
-  services.resolved.enable = lib.mkDefault true;
-  services.tailscale = {
-    enable = lib.mkDefault true;
-    openFirewall = lib.mkDefault true;
-    useRoutingFeatures = lib.mkDefault "client";
-  };
-  networking.firewall.trustedInterfaces = ["tailscale*"];
+  config = lib.mkIf config.universe.base.enable {
+    boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_6_15;
+    time.timeZone = lib.mkDefault "Europe/Berlin";
+    systemd.coredump.enable = lib.mkDefault true;
+    zramSwap.enable = lib.mkDefault true;
+    i18n.defaultLocale = "en_US.UTF-8";
 
-  programs.nix-index = {
-    enable = lib.mkDefault true;
-    enableFishIntegration = lib.mkDefault true;
-  };
-  programs.command-not-found.enable = lib.mkDefault false;
-
-  services.openssh = {
-    enable = lib.mkDefault true;
-    # require public key authentication for better security
-    settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-      PermitRootLogin = "yes";
+    networking.networkmanager.enable = lib.mkDefault true;
+    networking.nftables.enable = lib.mkDefault true;
+    networking.firewall.enable = lib.mkDefault true;
+    services.resolved.enable = lib.mkDefault true;
+    services.tailscale = {
+      enable = lib.mkDefault true;
+      openFirewall = lib.mkDefault true;
+      useRoutingFeatures = lib.mkDefault "client";
     };
-  };
+    networking.firewall.trustedInterfaces = ["tailscale*"];
 
-  programs.gnupg.agent.enable = lib.mkDefault true;
-
-  programs.fish = {
-    enable = lib.mkDefault true;
-    vendor = {
-      functions.enable = lib.mkDefault true;
-      completions.enable = lib.mkDefault true;
+    programs.nix-index = {
+      enable = lib.mkDefault true;
+      enableFishIntegration = lib.mkDefault true;
     };
-    shellAliases = {};
+    programs.command-not-found.enable = lib.mkDefault false;
+
+    services.openssh = {
+      enable = lib.mkDefault true;
+      # require public key authentication for better security
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "yes";
+      };
+    };
+
+    programs.gnupg.agent.enable = lib.mkDefault true;
+
+    programs.fish = {
+      enable = lib.mkDefault true;
+      vendor = {
+        functions.enable = lib.mkDefault true;
+        completions.enable = lib.mkDefault true;
+      };
+      shellAliases = {};
+    };
+    programs.zoxide = {
+      enable = lib.mkDefault true;
+      enableFishIntegration = lib.mkDefault true;
+    };
+
+    # Configure Nix itself
+    nix.settings.experimental-features = lib.mkDefault [
+      "nix-command"
+      "flakes"
+    ];
+    nix.package = lib.mkDefault pkgs.lix;
+
+    environment.systemPackages = with pkgs; [
+      age
+      attic-client
+      btop
+      cryptsetup
+      curl
+      dig
+      file
+      git
+      gnupg
+      hdparm
+      htop
+      lzip
+      ncdu
+      neovim
+      nil
+      openssl
+      p7zip
+      pv
+      restic
+      sbctl
+      socat
+      sshfs
+      tmux
+      tpm2-tools
+      unar
+      wget
+      zstd
+
+      # filesystem tools
+      btrfs-progs
+      e2fsprogs
+      exfatprogs
+      f2fs-tools
+      ntfs3g
+
+      nix-output-monitor
+
+      bat
+      dust
+      eza
+      fd
+      fzf
+      ripgrep
+      sd
+      tmux
+      zellij
+      zstd
+
+      ghostty.terminfo
+    ];
   };
-  programs.zoxide = {
-    enable = lib.mkDefault true;
-    enableFishIntegration = lib.mkDefault true;
-  };
-
-  # Configure Nix itself
-  nix.settings.experimental-features = lib.mkDefault [
-    "nix-command"
-    "flakes"
-  ];
-  nix.package = lib.mkDefault pkgs.lix;
-
-  environment.systemPackages = with pkgs; [
-    age
-    attic-client
-    btop
-    cryptsetup
-    curl
-    dig
-    file
-    git
-    gnupg
-    hdparm
-    htop
-    lzip
-    ncdu
-    neovim
-    nil
-    openssl
-    p7zip
-    pv
-    restic
-    sbctl
-    socat
-    sshfs
-    tmux
-    tpm2-tools
-    unar
-    wget
-    zstd
-
-    # filesystem tools
-    btrfs-progs
-    e2fsprogs
-    exfatprogs
-    f2fs-tools
-    ntfs3g
-
-    nix-output-monitor
-
-    bat
-    dust
-    eza
-    fd
-    fzf
-    ripgrep
-    sd
-    tmux
-    zellij
-    zstd
-
-    ghostty.terminfo
-  ];
 }
