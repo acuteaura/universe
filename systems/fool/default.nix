@@ -12,6 +12,7 @@
     ../_modules/games.nix
     ../_modules/libvirt.nix
     ../_modules/mounts.nix
+    ../_modules/sunshine
     ../_modules/wine.nix
 
     ../_modules/kernel.nix
@@ -52,6 +53,14 @@
     "sn850x"
   ];
 
+  # Limit ZFS ARC to 16GB max (instead of the broken auto-detect of 61GB on 64GB system)
+  # This prevents OOM kills when running VMs + K8s + desktop
+  # Using kernelParams instead of extraModprobeConfig to ensure params are set during initrd
+  boot.kernelParams = [
+    "zfs.zfs_arc_max=17179869184"  # 16 GiB
+    "zfs.zfs_arc_min=4294967296"   # 4 GiB
+  ];
+
   boot.kernelModules = [
     "coretemp"
     "nct6775"
@@ -68,6 +77,7 @@
   # random tools
   services.mullvad-vpn.enable = true;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
+  services.sunshine-with-virtdisplay.enable = true;
 
   vfio.enable = false;
 

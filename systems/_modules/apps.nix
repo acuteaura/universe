@@ -1,10 +1,22 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    ardour
+    blender
+    easyeffects
+    foliate
+    fooyin
     ghostty
     gparted
+    handbrake
+    haruna
+    inkscape
+    kdePackages.kdenlive
+    krita
+    moonlight-qt
     ocs-url
     scrcpy
     via
+    vlc
     vscode
     zed-editor
 

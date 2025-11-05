@@ -1,13 +1,13 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    #azahar
+    azahar
     dolphin-emu
     #dolphin-emu-primehack
     pcsx2
     ppsspp-qt
-    #rpcs3
+    rpcs3
     ryubing
-    #shadps4
+    shadps4
     xemu
     gargoyle
 
