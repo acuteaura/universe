@@ -28,11 +28,11 @@ rebuild TYPE *FLAGS:
 install HOSTNAME *FLAGS:
     nixos-install --flake .#{{HOSTNAME}} {{substituters}} {{FLAGS}}
 
-switch:
-    @just rebuild switch
+switch *FLAGS:
+    @just rebuild switch {{FLAGS}}
 
-boot:
-    @just rebuild boot
+boot *FLAGS:
+    @just rebuild boot {{FLAGS}}
 
 update-dependencies:
     nix flake update nixpkgs home-manager chaotic

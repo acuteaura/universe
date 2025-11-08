@@ -64,6 +64,7 @@
 
     environment.systemPackages = with pkgs; [
       age
+      alejandra
       attic-client
       btop
       cryptsetup

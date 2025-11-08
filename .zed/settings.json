@@ -1,0 +1,24 @@
+{
+  "lsp": {
+    "nil": {
+      "binary": {
+        "path": "nil"
+      },
+      "settings": {
+        "nil": {
+          "nix": {
+            "flake": {
+              "autoArchive": true,
+              "autoEvalInputs": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "languages": {
+    "Nix": {
+      "language_servers": ["nil"]
+    }
+  }
+}

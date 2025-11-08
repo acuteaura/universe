@@ -4,11 +4,23 @@
   config,
   ...
 }: {
-  options.universe.desktop-base.enable = with lib; mkEnableOption "Enable desktop base configuration";
+  imports = [
+  ];
+
+  options.universe.desktop-base = {
+    enable = lib.mkEnableOption "Enable desktop base configuration";
+  };
 
   config = lib.mkIf config.universe.desktop-base.enable {
     # Enable base system by default when desktop-base is enabled
     universe.base.enable = lib.mkDefault true;
+
+    # Enable default apps and features by default
+    universe.apps.enable = lib.mkDefault true;
+    universe.flatpak-apps.enable = lib.mkDefault true;
+    universe.games.enable = lib.mkDefault true;
+    universe.emulators.enable = lib.mkDefault true;
+    universe.wine.enable = lib.mkDefault true;
 
     # desktops need to be responsive
     nix.daemonCPUSchedPolicy = "idle";

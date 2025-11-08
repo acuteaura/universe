@@ -18,22 +18,17 @@
         rust-overlay.follows = "rust-overlay";
       };
     };
-
     winapps-unstable = {
       url = "github:winapps-org/winapps";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-
     eden.url = "github:Grantimatter/eden-flake";
     flake-utils.url = "github:numtide/flake-utils";
     quadlet.url = "github:SEIAROTg/quadlet-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
 
-    jovian = {
-      follows = "chaotic/jovian";
-    };
+    jovian.follows = "chaotic/jovian";
 
     kwin-effects-forceblur = {
       url = "github:taj-ny/kwin-effects-forceblur";
@@ -49,8 +44,8 @@
     ...
   }: let
     packageOverlay = final: prev: {
-      kwin-effects-forceblur = inputs.kwin-effects-forceblur.packages."${final.system}".default;
-      inherit (inputs.winapps-unstable.packages."${final.system}") winapps winapps-launcher;
+      kwin-effects-forceblur = inputs.kwin-effects-forceblur.packages."${final.stdenv.hostPlatform.system}".default;
+      inherit (inputs.winapps-unstable.packages."${final.stdenv.hostPlatform.system}") winapps winapps-launcher;
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       inherit (nixpkgs.lib) getName;

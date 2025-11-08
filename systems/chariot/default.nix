@@ -1,22 +1,13 @@
 {pkgs, ...}: {
   imports = [
-    ../_modules/base.nix
-    ../_modules/desktop-base.nix
-    ../_modules/desktop-plasma.nix
+    ../_modules/default.nix
 
-    ../_modules/apps-flatpak.nix
-    ../_modules/apps.nix
     ../_modules/browsers.nix
     ../_modules/containers.nix
-    ../_modules/emulators.nix
-    ../_modules/games.nix
     ../_modules/libvirt.nix
     ../_modules/mounts.nix
-    ../_modules/kernel.nix
-    ../_modules/wine.nix
 
     ../_modules/user-aurelia.nix
-    ../_modules/amdgpu.nix
 
     ./hardware.nix
   ];
@@ -41,8 +32,11 @@
   boot.plymouth.enable = true;
   boot.zfs.devNodes = "/dev/disk/by-id/";
 
-  universe.cachyos-kernel.enable = true;
-  universe.desktop-plasma.enable = true;
+  universe = {
+    cachyos-kernel.enable = true;
+    desktop-plasma.enable = true;
+    amdgpu.enable = true;
+  };
 
   # Network
   networking = {

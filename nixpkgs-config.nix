@@ -15,15 +15,16 @@
         "idea-ultimate-with-plugins"
         "insync"
         "libvgm"
+        "lmstudio"
         "obsidian"
         "rose-pine-kvantum"
         "steam"
         "steam-jupiter-unwrapped"
         "steam-unwrapped"
         "steamdeck-hw-theme"
+        "unrar"
         "via"
         "vscode"
-        "unrar"
       ];
     allowInsecurePredicate = pkg:
       builtins.elem (getName pkg) [

@@ -1,31 +1,22 @@
 {pkgs, ...}: {
   imports = [
-    ../_modules/base.nix
-    ../_modules/desktop-base.nix
-    ../_modules/desktop-plasma.nix
+    ../_modules/default.nix
 
-    ../_modules/apps-flatpak.nix
-    ../_modules/apps.nix
     ../_modules/browsers.nix
     ../_modules/containers.nix
-    ../_modules/emulators.nix
-    ../_modules/games.nix
-    ../_modules/libvirt.nix
     ../_modules/mounts.nix
-    ../_modules/sunshine
-    ../_modules/wine.nix
 
-    ../_modules/kernel.nix
+    ../_modules/zed-quicksand.nix
 
     ../_modules/user-aurelia.nix
-    ../_modules/amdgpu.nix
 
-    #../_modules/work.nix
+    #../_modules/zen4builds.nix
 
     ./gpu-tweaks.nix
     ./hardware.nix
     ./vfio.nix
     ./smb.nix
+    ./stablediffusion.nix
   ];
 
   # BOOT
@@ -57,8 +48,8 @@
   # This prevents OOM kills when running VMs + K8s + desktop
   # Using kernelParams instead of extraModprobeConfig to ensure params are set during initrd
   boot.kernelParams = [
-    "zfs.zfs_arc_max=17179869184"  # 16 GiB
-    "zfs.zfs_arc_min=4294967296"   # 4 GiB
+    "zfs.zfs_arc_max=17179869184" # 16 GiB
+    "zfs.zfs_arc_min=4294967296" # 4 GiB
   ];
 
   boot.kernelModules = [
@@ -66,8 +57,16 @@
     "nct6775"
   ];
 
-  universe.cachyos-kernel.enable = true;
-  universe.desktop-plasma.enable = true;
+  universe = {
+    cachyos-kernel.enable = true;
+    desktop-plasma.enable = true;
+    zed-quicksand.enable = true;
+    amdgpu.enable = true;
+    libvirt = {
+      enable = true;
+      winapps.enable = true;
+    };
+  };
 
   # Network
   networking = {
