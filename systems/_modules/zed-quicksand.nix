@@ -11,11 +11,22 @@
     ZED_BIN="${pkgs.zed-editor}/bin/zeditor"
 
     # Get the user's home directory
-    HOME_DIR="''${HOME:-/home/$USER}"
-    PROJECTS_DIR="''${HOME_DIR}/Projects"
+    REAL_HOME="''${HOME:-/home/$USER}"
+
+    # Sandbox home directory - isolated from real home (XDG compliant)
+    XDG_STATE_HOME="''${XDG_STATE_HOME:-''${REAL_HOME}/.local/state}"
+    SANDBOX_HOME="''${XDG_STATE_HOME}/zed-quicksand/home"
+    mkdir -p "''${SANDBOX_HOME}"
+
+    # Projects directory that will be accessible (same path inside and outside)
+    SANDBOXED_PROJECTS="''${REAL_HOME}/Projects/sandboxed"
+    mkdir -p "''${SANDBOXED_PROJECTS}"
 
     # Create a temporary directory for the sandbox
     TMPDIR="''${TMPDIR:-/tmp}"
+
+    # Fixed home directory path inside the sandbox
+    SANDBOXED_HOME="/home/aurelia"
 
     # Zed needs more access than just claude (GPU, X11/Wayland, etc.)
     exec ${pkgs.bubblewrap}/bin/bwrap \
@@ -29,12 +40,10 @@
       --dev-bind /dev /dev \
       --tmpfs /tmp \
       --bind "''${TMPDIR}" /tmp \
-      --bind "''${HOME_DIR}/.config" "''${HOME_DIR}/.config" \
-      --bind "''${HOME_DIR}/.local" "''${HOME_DIR}/.local" \
-      --bind "''${HOME_DIR}/.cache" "''${HOME_DIR}/.cache" \
-      --bind "''${PROJECTS_DIR}" "''${PROJECTS_DIR}" \
+      --bind "''${SANDBOX_HOME}" "''${SANDBOXED_HOME}" \
+      --bind "''${SANDBOXED_PROJECTS}" "''${SANDBOXED_PROJECTS}" \
       --ro-bind "''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}" "''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}" \
-      --setenv HOME "''${HOME_DIR}" \
+      --setenv HOME "''${SANDBOXED_HOME}" \
       --setenv USER "''${USER}" \
       --setenv DISPLAY "''${DISPLAY}" \
       --setenv WAYLAND_DISPLAY "''${WAYLAND_DISPLAY}" \
@@ -61,5 +70,20 @@ in {
     environment.systemPackages = [
       zed-quicksand
     ];
+
+    # Create desktop entry for zed-quicksand
+    environment.etc."xdg/applications/zed-quicksand.desktop".text = ''
+      [Desktop Entry]
+      Name=Zed (Sandboxed)
+      Comment=High-performance, multiplayer code editor (Sandboxed with bubblewrap)
+      Exec=${zed-quicksand}/bin/zed-quicksand %F
+      Icon=zed
+      Terminal=false
+      Type=Application
+      Categories=Development;TextEditor;
+      MimeType=text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+      StartupNotify=true
+      StartupWMClass=dev.zed.Zed
+    '';
   };
 }

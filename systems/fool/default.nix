@@ -79,6 +79,12 @@
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
   universe.sunshine.enable = true;
 
+  # Disable USB autosuspend for SteelSeries Arctis Nova Pro Wireless
+  # This prevents the device from suspending and requiring re-plugging
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="1038", ATTR{idProduct}=="12e0", ATTR{power/control}="on"
+  '';
+
   vfio.enable = false;
 
   virtualisation.waydroid.enable = true;

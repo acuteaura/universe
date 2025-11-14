@@ -88,9 +88,9 @@
       # Force game audio to use the Game Audio sink
       # PULSE_SINK is used by Wine/Proton via PipeWire's PulseAudio compatibility layer
       # PIPEWIRE_NODE is used by native PipeWire/ALSA clients
-      export PULSE_SINK="GameAudioSink"
-      export PIPEWIRE_NODE="GameAudioSink"
-      export PIPEWIRE_LATENCY="512/48000"
+      #export PULSE_SINK="GameAudioSink"
+      #export PIPEWIRE_NODE="GameAudioSink"
+      #export PIPEWIRE_LATENCY="512/48000"
 
       # Run the command - this is the critical part that must execute
       "$@"

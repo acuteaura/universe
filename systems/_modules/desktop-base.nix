@@ -106,6 +106,9 @@
       mission-center
       seafile-shared
       junction
+      python3
+      python3Packages.pip
+      python3Packages.virtualenv
     ];
 
     fonts.packages = with pkgs; [
