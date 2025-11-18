@@ -61,11 +61,14 @@
     cachyos-kernel.enable = true;
     desktop-plasma.enable = true;
     zed-quicksand.enable = true;
-    amdgpu.enable = true;
+    amdgpu = {
+      enable = true;
+    };
     libvirt = {
       enable = true;
       winapps.enable = true;
     };
+    games.fuckUpMyKernelForSteamVR = true;
   };
 
   # Network

@@ -1,6 +1,6 @@
 _: {
   imports = [
-    ./amdgpu.nix
+    ./amdgpu
     ./base.nix
     ./desktop-base.nix
     ./desktop-plasma.nix
@@ -9,7 +9,6 @@ _: {
 
     ./sunshine
 
-    ./amdgpu.nix
     ./apps-flatpak.nix
     ./apps.nix
     ./emulators.nix

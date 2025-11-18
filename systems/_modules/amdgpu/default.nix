@@ -1,8 +1,18 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.universe.amdgpu;
 in {
-  options.universe.amdgpu.enable = lib.mkEnableOption "Enable AMD GPU support";
+  options.universe.amdgpu = {
+    enable = lib.mkEnableOption "Enable AMD GPU support";
+    patches = lib.mkOption {
+      type = with lib.types; listOf path;
+      default = [];
+    };
+  };
 
   config = lib.mkIf cfg.enable {
     services.xserver.videoDrivers = ["amdgpu"];
@@ -26,5 +36,12 @@ in {
 
     systemd.packages = with pkgs; [lact];
     systemd.services.lactd.wantedBy = ["multi-user.target"];
+
+    boot.extraModulePackages = [
+      (pkgs.callPackage ./../../../packages/amdgpu.nix {
+        inherit (config.boot.kernelPackages) kernel;
+        inherit (cfg) patches;
+      })
+    ];
   };
 }

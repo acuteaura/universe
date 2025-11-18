@@ -11,6 +11,7 @@
   config = lib.mkIf config.universe.apps.enable {
     environment.systemPackages = with pkgs; [
       ardour
+      audacity
       blender
       easyeffects
       foliate
