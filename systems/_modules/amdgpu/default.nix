@@ -37,7 +37,7 @@ in {
     systemd.packages = with pkgs; [lact];
     systemd.services.lactd.wantedBy = ["multi-user.target"];
 
-    boot.extraModulePackages = [
+    boot.extraModulePackages = lib.mkIf (cfg.patches != []) [
       (pkgs.callPackage ./../../../packages/amdgpu.nix {
         inherit (config.boot.kernelPackages) kernel;
         inherit (cfg) patches;

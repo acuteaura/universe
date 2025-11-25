@@ -58,7 +58,7 @@
   ];
 
   universe = {
-    cachyos-kernel.enable = true;
+    cachyos-kernel.enable = false;
     desktop-plasma.enable = true;
     zed-quicksand.enable = true;
     amdgpu = {
@@ -68,7 +68,7 @@
       enable = true;
       winapps.enable = true;
     };
-    games.fuckUpMyKernelForSteamVR = true;
+    games.fuckUpMyKernelForSteamVR = false;
   };
 
   # Network

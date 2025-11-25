@@ -9,7 +9,6 @@ _: {
 
     ./sunshine
 
-    ./apps-flatpak.nix
     ./apps.nix
     ./emulators.nix
     ./games.nix

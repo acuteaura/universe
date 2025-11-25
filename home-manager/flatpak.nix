@@ -6,7 +6,7 @@ _: let
 in {
   services.flatpak = {
     update.onActivation = true;
-    enable = false;
+    enable = true;
     remotes = [
       {
         name = "flathub";
@@ -14,35 +14,20 @@ in {
       }
     ];
     packages = [
-      (flathubApp "app.zen_browser.zen")
-      (flathubApp "com.discordapp.Discord")
-      (flathubApp "com.github.johnfactotum.Foliate")
-      (flathubApp "com.github.marhkb.Pods")
       (flathubApp "com.github.mtkennerly.ludusavi")
-      (flathubApp "com.github.wwmm.easyeffects")
-      (flathubApp "com.moonlight_stream.Moonlight")
+      (flathubApp "com.rafaelmardojai.Blanket")
+      (flathubApp "com.usebottles.bottles")
+      (flathubApp "dev.vencord.Vesktop")
       (flathubApp "fr.handbrake.ghb")
       (flathubApp "im.riot.Riot")
-      (flathubApp "io.github.martchus.syncthingtray")
       (flathubApp "io.kinvolk.Headlamp")
-      (flathubApp "io.lmms.LMMS")
       (flathubApp "io.podman_desktop.PodmanDesktop")
-      (flathubApp "it.mijorus.gearlever")
       (flathubApp "md.obsidian.Obsidian")
-      (flathubApp "net.retrodeck.retrodeck")
-      (flathubApp "org.ardour.Ardour")
-      (flathubApp "org.blender.Blender")
       (flathubApp "org.fooyin.fooyin")
-      (flathubApp "org.inkscape.Inkscape")
-      (flathubApp "org.kde.haruna")
-      (flathubApp "org.kde.kasts")
-      (flathubApp "org.kde.kdenlive")
-      (flathubApp "org.kde.krita")
       (flathubApp "org.pgadmin.pgadmin4")
       (flathubApp "org.raspberrypi.rpi-imager")
       (flathubApp "org.signal.Signal")
       (flathubApp "org.sqlitebrowser.sqlitebrowser")
-      (flathubApp "org.videolan.VLC")
       (flathubApp "rest.insomnia.Insomnia")
     ];
 

@@ -17,7 +17,6 @@
 
     # Enable default apps and features by default
     universe.apps.enable = lib.mkDefault true;
-    universe.flatpak-apps.enable = lib.mkDefault true;
     universe.games.enable = lib.mkDefault true;
     universe.emulators.enable = lib.mkDefault true;
     universe.wine.enable = lib.mkDefault true;

@@ -78,6 +78,7 @@
           home-manager-imports = [
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
+            inputs.nix-flatpak.homeManagerModules.nix-flatpak
           ];
         };
         chariot = baseSystem {
@@ -92,6 +93,7 @@
           home-manager-imports = [
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
+            inputs.nix-flatpak.homeManagerModules.nix-flatpak
           ];
         };
         fool = baseSystem {
@@ -106,6 +108,7 @@
           home-manager-imports = [
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
+            inputs.nix-flatpak.homeManagerModules.nix-flatpak
           ];
         };
         bootstrap = baseSystem {
