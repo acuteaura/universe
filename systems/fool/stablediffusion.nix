@@ -14,7 +14,7 @@
     backend = "podman";
     containers.comfyui = {
       autoStart = false;
-      image = "yanwk/comfyui-boot:rocm"; # or another ROCm SD image
+      image = "yanwk/comfyui-boot:rocm";
       volumes = [
         "/home/aurelia/.local/share/comfyui/storage:/root"
         "/home/aurelia/.local/share/comfyui/models:/root/ComfyUI/models"
