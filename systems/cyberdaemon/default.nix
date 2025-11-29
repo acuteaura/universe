@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ../_modules/default.nix
 
@@ -15,7 +16,7 @@
   ];
 
   universe = {
-    cachyos-kernel.enable = true;
+    cachyos-kernel.enable = false;
     secureboot.enable = true;
     desktop-plasma.enable = true;
     amdgpu.enable = true;
