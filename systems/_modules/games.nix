@@ -52,6 +52,13 @@
           "-e" # Enable steam integration
         ];
       };
+      package = pkgs.steam.override {
+        extraPkgs = pkgs':
+          with pkgs'; [
+            freetype
+            fontconfig
+          ];
+      };
     };
   };
 }
