@@ -17,24 +17,13 @@
     ./vfio.nix
     ./smb.nix
     ./stablediffusion.nix
+
+    ../_modules/aisupport.nix
   ];
 
   # BOOT
   #########################################
-  boot.loader = {
-    systemd-boot = {
-      enable = false;
-      configurationLimit = 10;
-      consoleMode = "max";
-      rebootForBitlocker = true;
-      memtest86.enable = true;
-    };
-    efi.canTouchEfiVariables = true;
-  };
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/var/lib/sbctl";
-  };
+  universe.secureboot.enable = true;
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 

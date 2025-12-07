@@ -26,6 +26,11 @@ writeShellScriptBin "claude-sandboxed" ''
     SANDBOX_HOME="$XDG_STATE_HOME/claude-sandboxed/homes/$PROJECT_HASH"
     mkdir -p "$SANDBOX_HOME"
 
+    # Create runtime directory for zellij sockets
+    SANDBOX_RUNTIME="$XDG_STATE_HOME/claude-sandboxed/runtime/$PROJECT_HASH"
+    mkdir -p "$SANDBOX_RUNTIME"
+    chmod 0700 "$SANDBOX_RUNTIME"
+
     # Create zellij config and layouts directory
     ZELLIJ_CONFIG_DIR="$SANDBOX_HOME/.config/zellij"
     ZELLIJ_LAYOUTS_DIR="$ZELLIJ_CONFIG_DIR/layouts"
@@ -52,7 +57,6 @@ writeShellScriptBin "claude-sandboxed" ''
       TOKEN_OUTPUT=$(${bubblewrap}/bin/bwrap \
         --ro-bind /nix /nix \
         --ro-bind /etc /etc \
-        --ro-bind /run /run \
         --ro-bind /sys /sys \
         --symlink /run/current-system/sw/bin /bin \
         --symlink /run/current-system/sw/bin /usr/bin \

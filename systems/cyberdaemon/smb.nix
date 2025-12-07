@@ -2,7 +2,7 @@ _: let
   const = import ../../constants.nix;
 in {
   fileSystems."/media/fool/aurelia" = {
-    device = "//${const.tailscaleIP.fool}/aurelia";
+    device = "//${const.tailscale.ip.fool}/aurelia";
     fsType = "cifs";
     options = let
       # this line prevents hanging on network split
