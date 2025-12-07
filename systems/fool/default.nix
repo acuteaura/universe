@@ -55,7 +55,6 @@
     };
     libvirt = {
       enable = true;
-      winapps.enable = true;
     };
     games.fuckUpMyKernelForSteamVR = false;
   };

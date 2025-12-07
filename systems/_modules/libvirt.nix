@@ -1,15 +1,13 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.universe.libvirt;
 in {
   options.universe.libvirt = {
     enable = lib.mkEnableOption "Libvirt virtualization support";
-
-    winapps.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable winapps for Windows application integration";
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -38,10 +36,6 @@ in {
     environment.systemPackages = with pkgs; [
       virt-manager
       virtiofsd
-    ] ++ lib.optionals cfg.winapps.enable [
-      winapps
-      winapps-launcher
-      freerdp
     ];
 
     environment.sessionVariables.LIBVIRT_DEFAULT_URI = "qemu:///system";

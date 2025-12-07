@@ -7,12 +7,27 @@
   gnugrep,
   nix,
   bash,
+  strace,
 }:
 writeShellScriptBin "claude-sandboxed" ''
     set -euo pipefail
 
     # Parse arguments
-    PORT=''${1:-8080}
+    USE_STRACE=0
+    PORT=8080
+
+    while [[ $# -gt 0 ]]; do
+      case $1 in
+        --strace)
+          USE_STRACE=1
+          shift
+          ;;
+        *)
+          PORT="$1"
+          shift
+          ;;
+      esac
+    done
 
     # Get current working directory
     PROJECT_DIR="$(pwd)"
@@ -48,31 +63,34 @@ writeShellScriptBin "claude-sandboxed" ''
   }
   EOF
 
+    # Common bubblewrap flags
+    BWRAP_FLAGS=(
+      --ro-bind /nix /nix
+      --ro-bind /etc /etc
+      --ro-bind /sys /sys
+      --symlink /run/current-system/sw/bin /bin
+      --symlink /run/current-system/sw/bin /usr/bin
+      --proc /proc
+      --dev-bind /dev /dev
+      --tmpfs /tmp
+      --tmpfs /run
+      --bind "$SANDBOX_HOME" "$HOME"
+      --bind "$PROJECT_DIR" "$PROJECT_DIR"
+      --chdir "$PROJECT_DIR"
+      --setenv HOME "$HOME"
+      --setenv ZELLIJ_CONFIG_DIR "$HOME/.config/zellij"
+      --unshare-all
+      --share-net
+      --die-with-parent
+    )
+
     # Create a web token if it doesn't exist
     TOKEN_FILE="$SANDBOX_HOME/.zellij-token.txt"
     if [ ! -f "$TOKEN_FILE" ]; then
       echo "Creating web authentication token..."
       mkdir -p "$SANDBOX_HOME/.local/share/zellij"
       # Run zellij web --create-token in the sandbox to create a token
-      TOKEN_OUTPUT=$(${bubblewrap}/bin/bwrap \
-        --ro-bind /nix /nix \
-        --ro-bind /etc /etc \
-        --ro-bind /sys /sys \
-        --symlink /run/current-system/sw/bin /bin \
-        --symlink /run/current-system/sw/bin /usr/bin \
-        --proc /proc \
-        --dev-bind /dev /dev \
-        --tmpfs /tmp \
-        --tmpfs /run \
-        --bind "$SANDBOX_HOME" "$HOME" \
-        --bind "$PROJECT_DIR" "$PROJECT_DIR" \
-        --chdir "$PROJECT_DIR" \
-        --setenv HOME "$HOME" \
-        --setenv ZELLIJ_CONFIG_DIR "$HOME/.config/zellij" \
-        --unshare-all \
-        --share-net \
-        --die-with-parent \
-        ${zellij}/bin/zellij web --create-token 2>&1)
+      TOKEN_OUTPUT=$(${bubblewrap}/bin/bwrap "''${BWRAP_FLAGS[@]}" ${zellij}/bin/zellij web --create-token 2>&1)
 
       # Extract just the token line (format: "token_X: uuid")
       TOKEN_LINE=$(echo "$TOKEN_OUTPUT" | ${gnugrep}/bin/grep -E '^token_[0-9]+:')
@@ -93,24 +111,15 @@ writeShellScriptBin "claude-sandboxed" ''
       echo ""
     fi
 
+    # Build the command to run
+    if [ "$USE_STRACE" -eq 1 ]; then
+      echo "strace enabled, output to stderr"
+      echo ""
+      ZELLIJ_CMD="${strace}/bin/strace -f -e trace=openat,open,write,read,mkdir,access,stat,lstat ${zellij}/bin/zellij"
+    else
+      ZELLIJ_CMD="${zellij}/bin/zellij"
+    fi
+
     # Build bubblewrap command
-    exec ${bubblewrap}/bin/bwrap \
-      --ro-bind /nix /nix \
-      --ro-bind /etc /etc \
-      --ro-bind /run /run \
-      --ro-bind /sys /sys \
-      --symlink /run/current-system/sw/bin /bin \
-      --symlink /run/current-system/sw/bin /usr/bin \
-      --proc /proc \
-      --dev-bind /dev /dev \
-      --tmpfs /tmp \
-      --bind "$SANDBOX_HOME" "$HOME" \
-      --bind "$PROJECT_DIR" "$PROJECT_DIR" \
-      --chdir "$PROJECT_DIR" \
-      --setenv HOME "$HOME" \
-      --setenv ZELLIJ_CONFIG_DIR "$HOME/.config/zellij" \
-      --unshare-all \
-      --share-net \
-      --die-with-parent \
-      ${zellij}/bin/zellij web --port "$PORT"
+    exec ${bubblewrap}/bin/bwrap "''${BWRAP_FLAGS[@]}" $ZELLIJ_CMD
 ''
