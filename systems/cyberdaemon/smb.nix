@@ -1,8 +1,6 @@
-_: let
-  const = import ../../constants.nix;
-in {
+{constants, ...}: {
   fileSystems."/media/fool/aurelia" = {
-    device = "//${const.tailscale.ip.fool}/aurelia";
+    device = "//${constants.tailscale.ip.fool}/aurelia";
     fsType = "cifs";
     options = let
       # this line prevents hanging on network split

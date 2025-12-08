@@ -2,6 +2,7 @@
   nixpkgs,
   nixpkgsConfig,
   constants,
+  universe,
   home-manager,
   extraSpecialArgs ? {},
   system ? "x86_64-linux",
@@ -25,6 +26,7 @@ in
       modules =
         [
           nixpkgsConfig
+          universe
           home-manager.nixosModules.home-manager
           (import ./basehm.nix {
             inherit

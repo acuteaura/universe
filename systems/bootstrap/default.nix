@@ -6,8 +6,6 @@
   imports = [
     ./containers/keycloak.nix
 
-    ../_modules/base.nix
-
     ./nginx.nix
     ./hardware-config.nix
   ];

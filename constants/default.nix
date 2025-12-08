@@ -6,4 +6,5 @@
     sunhome = "100.84.223.80";
     fool = "100.119.163.58";
   };
+  browserPolicy = import ./browserpolicy.nix;
 }

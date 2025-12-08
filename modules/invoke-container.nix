@@ -14,26 +14,11 @@
   };
 in {
   options.universe.invokeai-container = {
-    # TODO: allow setting USER_ID
-    # https://github.com/invoke-ai/InvokeAI/blob/main/docker/docker-entrypoint.sh
     enable = lib.mkEnableOption "Enable Invoke AI container";
 
     dataDir = lib.mkOption {
       type = lib.types.str;
-      default = "/home/aurelia/.local/share/invoke";
       description = "Base directory for Invoke AI data storage";
-    };
-
-    user = lib.mkOption {
-      type = lib.types.str;
-      default = "aurelia";
-      description = "User that owns the Invoke AI data directory";
-    };
-
-    group = lib.mkOption {
-      type = lib.types.str;
-      default = "users";
-      description = "Group that owns the Invoke AI data directory";
     };
 
     rdnaGeneration = lib.mkOption {
@@ -54,16 +39,11 @@ in {
       description = "Automatically start the Invoke AI container on boot";
     };
 
-    listenAddress = lib.mkOption {
-      type = lib.types.str;
-      default = "127.0.0.1";
-      description = "IP address to bind the Invoke AI container to";
-    };
-
-    listenPort = lib.mkOption {
-      type = lib.types.port;
-      default = 9090;
-      description = "Port to expose ComfyUI on the host";
+    portMappings = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "Port mappings for the container (e.g., [\"127.0.0.1:9090:9090\"]). Empty when using Tailscale.";
+      example = ["127.0.0.1:9090:9090"];
     };
 
     image = lib.mkOption {
@@ -78,13 +58,15 @@ in {
       description = "Additional volume mappings for the Invoke AI container (e.g., [\"/host/path:/container/path\"])";
       example = ["/mnt/models:/models" "/mnt/output:/output"];
     };
+
+    useTailscaleSidecar = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Use Tailscale sidecar for networking (network_mode: container:tailscale-sidecar)";
+    };
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0755 ${cfg.user} ${cfg.group} -"
-    ];
-
     virtualisation.oci-containers = {
       backend = "podman";
       containers.invokeai = {
@@ -105,15 +87,25 @@ in {
             "${cfg.dataDir}:/invokeai"
           ]
           ++ cfg.extraVolumes;
-        ports = ["${cfg.listenAddress}:${toString cfg.listenPort}:9090"];
-        extraOptions = [
-          "--device=/dev/kfd"
-          "--device=/dev/dri"
-          "--ipc=host"
-          "--cap-add=SYS_PTRACE"
-          "--security-opt=seccomp=unconfined"
-        ];
+        ports = cfg.portMappings;
+        extraOptions =
+          [
+            "--device=/dev/kfd"
+            "--device=/dev/dri"
+            "--ipc=host"
+            "--cap-add=SYS_PTRACE"
+            "--security-opt=seccomp=unconfined"
+          ]
+          ++ lib.optionals cfg.useTailscaleSidecar [
+            "--network=container:tailscale-sidecar"
+          ];
       };
+    };
+
+    # Ensure Tailscale sidecar is running before this container starts
+    systemd.services.podman-invokeai = lib.mkIf cfg.useTailscaleSidecar {
+      requires = ["podman-tailscale-sidecar.service"];
+      after = ["podman-tailscale-sidecar.service"];
     };
   };
 }

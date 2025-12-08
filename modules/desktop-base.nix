@@ -31,7 +31,6 @@
     services.xserver.desktopManager.xterm.enable = false;
 
     services.flatpak.enable = true;
-    services.flatpak.remotes = []; # just use the user one
 
     services.displayManager = {
       defaultSession = lib.mkDefault "plasma";

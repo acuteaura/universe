@@ -1,22 +1,22 @@
 {pkgs, ...}: {
   imports = [
-    ../_modules/default.nix
+    ../_mixins/browsers.nix
+    ../_mixins/containers.nix
+    ../_mixins/hhd.nix
+    ../_mixins/mounts.nix
 
-    ../_modules/browsers.nix
-    ../_modules/containers.nix
-    ../_modules/hhd.nix
-    ../_modules/libvirt.nix
-    ../_modules/mounts.nix
-
-    ../_modules/user-aurelia.nix
+    ../_mixins/user-aurelia.nix
 
     ./hardware.nix
     ./smb.nix
   ];
 
   universe = {
-    cachyos-kernel.enable = false;
-    secureboot.enable = true;
+    kernel.enable = true;
+    boot = {
+      enable = true;
+      secureboot.enable = true;
+    };
     desktop-plasma.enable = true;
     amdgpu.enable = true;
   };

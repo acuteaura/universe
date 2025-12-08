@@ -1,41 +1,32 @@
 {pkgs, ...}: {
   imports = [
-    ../_modules/default.nix
+    ../_mixins/browsers.nix
+    ../_mixins/containers.nix
+    ../_mixins/mounts.nix
 
-    ../_modules/browsers.nix
-    ../_modules/containers.nix
-    ../_modules/libvirt.nix
-    ../_modules/mounts.nix
-
-    ../_modules/user-aurelia.nix
+    ../_mixins/user-aurelia.nix
 
     ./hardware.nix
   ];
 
   # BOOT
   #########################################
-  boot.loader = {
-    systemd-boot = {
-      enable = false;
-      configurationLimit = 10;
-      consoleMode = "max";
-      rebootForBitlocker = true;
-      memtest86.enable = true;
-    };
-    efi.canTouchEfiVariables = true;
-  };
-  boot.lanzaboote = {
+  universe.boot = {
     enable = true;
-    pkiBundle = "/var/lib/sbctl";
+    secureboot.enable = true;
   };
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
   boot.zfs.devNodes = "/dev/disk/by-id/";
 
   universe = {
-    cachyos-kernel.enable = true;
+    kernel = {
+      enable = true;
+      cachyos = true;
+    };
     desktop-plasma.enable = true;
     amdgpu.enable = true;
+    libvirt.enable = true;
   };
 
   # Network

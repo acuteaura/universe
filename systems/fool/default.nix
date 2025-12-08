@@ -1,16 +1,10 @@
 {pkgs, ...}: {
   imports = [
-    ../_modules/default.nix
+    ../_mixins/browsers.nix
+    ../_mixins/containers.nix
+    ../_mixins/mounts.nix
 
-    ../_modules/browsers.nix
-    ../_modules/containers.nix
-    ../_modules/mounts.nix
-
-    ../_modules/zed-quicksand.nix
-
-    ../_modules/user-aurelia.nix
-
-    #../_modules/zen4builds.nix
+    ../_mixins/user-aurelia.nix
 
     ./gpu-tweaks.nix
     ./hardware.nix
@@ -18,12 +12,15 @@
     ./smb.nix
     ./stablediffusion.nix
 
-    ../_modules/aisupport.nix
+    ../_mixins/mlsupport.nix
   ];
 
   # BOOT
   #########################################
-  universe.secureboot.enable = true;
+  universe.boot = {
+    enable = true;
+    secureboot.enable = true;
+  };
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 
@@ -47,7 +44,7 @@
   ];
 
   universe = {
-    cachyos-kernel.enable = false;
+    kernel.enable = true;
     desktop-plasma.enable = true;
     zed-quicksand.enable = true;
     amdgpu = {

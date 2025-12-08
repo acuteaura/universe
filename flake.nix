@@ -18,10 +18,6 @@
         rust-overlay.follows = "rust-overlay";
       };
     };
-    winapps-unstable = {
-      url = "github:winapps-org/winapps";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     eden.url = "github:Grantimatter/eden-flake";
     flake-utils.url = "github:numtide/flake-utils";
@@ -45,7 +41,6 @@
   }: let
     packageOverlay = final: prev: {
       kwin-effects-forceblur = inputs.kwin-effects-forceblur.packages."${final.stdenv.hostPlatform.system}".default;
-      inherit (inputs.winapps-unstable.packages."${final.stdenv.hostPlatform.system}") winapps winapps-launcher;
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       inherit (nixpkgs.lib) getName;
@@ -60,7 +55,7 @@
         home-manager
         nixpkgsConfig
         ;
-      inherit (self.nixosModules) constants;
+      inherit (self.nixosModules) constants universe;
     };
   in
     {
@@ -170,7 +165,10 @@
           ];
         };
       };
-      nixosModules.constants = import ./constants.nix;
+      nixosModules = {
+        constants = import ./constants;
+        universe = import ./modules;
+      };
     }
     // inputs.flake-utils.lib.eachDefaultSystem (
       system: let
