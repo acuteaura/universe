@@ -10,7 +10,7 @@
     ./hardware.nix
     ./vfio.nix
     ./smb.nix
-    ./stablediffusion.nix
+    ./genai-trashpit.nix
 
     ../_mixins/mlsupport.nix
   ];
