@@ -41,9 +41,10 @@
       MESA_SHADER_CACHE_MAX_SIZE = "10G";
     };
 
+    # let distrobox handle steam
     programs.steam = {
-      enable = lib.mkDefault true;
-      protontricks.enable = lib.mkDefault true;
+      enable = lib.mkDefault false;
+      protontricks.enable = lib.mkDefault false;
       localNetworkGameTransfers.openFirewall = lib.mkDefault true;
       gamescopeSession = {
         enable = lib.mkDefault true;

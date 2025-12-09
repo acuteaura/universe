@@ -156,6 +156,19 @@
     "gccarch-znver4"
   ];
 
+  services.zfs = {
+    autoScrub = {
+      enable = false;
+      interval = "monthly";
+    };
+    autoSnapshot = {
+      enable = true;
+      weekly = 0;
+      monthly = 0;
+      daily = 7;
+    };
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It's perfectly fine and recommended to leave
