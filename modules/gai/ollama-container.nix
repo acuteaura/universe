@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.universe.ollama-container;
+  cfg = config.universe.gai.ollama;
 in {
-  options.universe.ollama-container = {
+  options.universe.gai.ollama = {
     enable = lib.mkEnableOption "Enable Ollama container";
 
     dataDir = lib.mkOption {
@@ -29,26 +29,8 @@ in {
 
     image = lib.mkOption {
       type = lib.types.str;
-      default = "docker.io/ollama/ollama:latest";
+      default = "docker.io/ollama/ollama:rocm";
       description = "Docker image to use for Ollama";
-    };
-
-    useRocm = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Use ROCm (AMD GPU) version of Ollama";
-    };
-
-    rocmDevices = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = ["/dev/kfd" "/dev/dri"];
-      description = "Devices to pass through for ROCm support";
-    };
-
-    rdnaGeneration = lib.mkOption {
-      type = lib.types.nullOr (lib.types.enum ["rdna2" "rdna3"]);
-      default = null;
-      description = "RDNA generation for ROCm override (rdna2 or rdna3)";
     };
 
     useTailscaleSidecar = lib.mkOption {
@@ -81,20 +63,18 @@ in {
           {
             OLLAMA_HOST = "0.0.0.0:11434";
           }
-          // (lib.optionalAttrs (cfg.useRocm && cfg.rdnaGeneration != null) {
-            HSA_OVERRIDE_GFX_VERSION =
-              if cfg.rdnaGeneration == "rdna2"
-              then "10.3.0"
-              else if cfg.rdnaGeneration == "rdna3"
-              then "11.0.0"
-              else "";
-          })
           // cfg.extraEnvironment;
 
         extraOptions =
-          (lib.optionals cfg.useRocm (
-            map (device: "--device=${device}") cfg.rocmDevices
-          ))
+          [
+            "--device=/dev/kfd"
+            "--device=/dev/dri"
+            "--group-add=video"
+            "--ipc=host"
+            "--cap-add=SYS_PTRACE"
+            "--cap-add=SYS_ADMIN"
+            "--security-opt=seccomp=unconfined"
+          ]
           ++ (lib.optionals cfg.useTailscaleSidecar [
             "--network=container:tailscale-sidecar"
           ]);
@@ -102,9 +82,13 @@ in {
     };
 
     # Ensure Tailscale sidecar is running before this container starts
-    systemd.services.podman-ollama = lib.mkIf cfg.useTailscaleSidecar {
-      requires = ["podman-tailscale-sidecar.service"];
-      after = ["podman-tailscale-sidecar.service"];
-    };
+    systemd.services.podman-ollama =
+      {
+        wantedBy = lib.mkIf config.universe.gai.enableSystemdTarget ["gai.target"];
+      }
+      // lib.optionalAttrs cfg.useTailscaleSidecar {
+        requires = ["podman-tailscale-sidecar.service"];
+        after = ["podman-tailscale-sidecar.service"];
+      };
   };
 }

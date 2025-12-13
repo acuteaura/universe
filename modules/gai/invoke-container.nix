@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  cfg = config.universe.invokeai-container;
+  cfg = config.universe.gai.invokeai;
 
   # RDNA generation to HSA GFX version mapping
   rdnaGfxVersions = {
@@ -13,7 +13,7 @@
     rdna3 = "11.0.0";
   };
 in {
-  options.universe.invokeai-container = {
+  options.universe.gai.invokeai = {
     enable = lib.mkEnableOption "Enable Invoke AI container";
 
     dataDir = lib.mkOption {
@@ -103,9 +103,13 @@ in {
     };
 
     # Ensure Tailscale sidecar is running before this container starts
-    systemd.services.podman-invokeai = lib.mkIf cfg.useTailscaleSidecar {
-      requires = ["podman-tailscale-sidecar.service"];
-      after = ["podman-tailscale-sidecar.service"];
-    };
+    systemd.services.podman-invokeai =
+      {
+        wantedBy = lib.mkIf config.universe.gai.enableSystemdTarget ["gai.target"];
+      }
+      // lib.optionalAttrs cfg.useTailscaleSidecar {
+        requires = ["podman-tailscale-sidecar.service"];
+        after = ["podman-tailscale-sidecar.service"];
+      };
   };
 }

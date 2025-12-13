@@ -43,8 +43,8 @@
 
     # let distrobox handle steam
     programs.steam = {
-      enable = lib.mkDefault false;
-      protontricks.enable = lib.mkDefault false;
+      enable = lib.mkDefault true;
+      protontricks.enable = lib.mkDefault true;
       localNetworkGameTransfers.openFirewall = lib.mkDefault true;
       gamescopeSession = {
         enable = lib.mkDefault true;

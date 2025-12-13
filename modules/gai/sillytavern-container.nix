@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.universe.sillytavern-container;
+  cfg = config.universe.gai.sillytavern;
 in {
-  options.universe.sillytavern-container = {
+  options.universe.gai.sillytavern = {
     enable = lib.mkEnableOption "Enable SillyTavern container";
 
     dataDir = lib.mkOption {
@@ -81,49 +81,14 @@ in {
     ];
 
     systemd.services = {
-      sillytavern-tailscale-cert = lib.mkIf cfg.ssl.enable {
-        description = "Fetch Tailscale certificate for SillyTavern";
-        after = ["network-online.target" "tailscaled.service"];
-        wants = ["network-online.target"];
-        wantedBy = ["multi-user.target"];
-        serviceConfig = {
-          Type = "oneshot";
-          User = "root";
-          ExecStart = "${pkgs.writeShellScript "fetch-tailscale-cert" ''
-            set -euo pipefail
-
-            # Create certs directory
-            mkdir -p ${cfg.dataDir}/certs
-
-            # Fetch certificate from Tailscale
-            ${pkgs.tailscale}/bin/tailscale cert \
-              --cert-file ${cfg.dataDir}/certs/${cfg.ssl.hostname}.crt \
-              --key-file ${cfg.dataDir}/certs/${cfg.ssl.hostname}.key \
-              ${cfg.ssl.hostname}
-
-            # Set permissions
-            chmod 644 ${cfg.dataDir}/certs/${cfg.ssl.hostname}.crt
-            chmod 600 ${cfg.dataDir}/certs/${cfg.ssl.hostname}.key
-          ''}";
+      podman-sillytavern =
+        {
+          wantedBy = lib.mkIf config.universe.gai.enableSystemdTarget ["gai.target"];
+        }
+        // lib.optionalAttrs cfg.useTailscaleSidecar {
+          requires = ["podman-tailscale-sidecar.service"];
+          after = ["podman-tailscale-sidecar.service"];
         };
-      };
-
-      podman-sillytavern = lib.mkIf cfg.useTailscaleSidecar {
-        requires = ["podman-tailscale-sidecar.service"];
-        after = ["podman-tailscale-sidecar.service"];
-      };
-    };
-
-    systemd.timers = lib.mkIf cfg.ssl.enable {
-      sillytavern-tailscale-cert = {
-        description = "Renew Tailscale certificate for SillyTavern";
-        wantedBy = ["timers.target"];
-        timerConfig = {
-          OnBootSec = "5m";
-          OnUnitActiveSec = "24h";
-          Persistent = true;
-        };
-      };
     };
 
     virtualisation.oci-containers = {

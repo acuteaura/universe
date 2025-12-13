@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  cfg = config.universe.comfyui-container;
+  cfg = config.universe.gai.comfyui;
 
   # RDNA generation to HSA GFX version mapping
   rdnaGfxVersions = {
@@ -12,8 +12,11 @@
     rdna2 = "10.3.0";
     rdna3 = "11.0.0";
   };
+
+  # Get video group GID from system config
+  videoGid = toString config.users.groups.video.gid;
 in {
-  options.universe.comfyui-container = {
+  options.universe.gai.comfyui = {
     enable = lib.mkEnableOption "Enable ComfyUI container";
 
     dataDir = lib.mkOption {
@@ -48,7 +51,7 @@ in {
 
     image = lib.mkOption {
       type = lib.types.str;
-      default = "yanwk/comfyui-boot:rocm";
+      default = "ghcr.io/acuteaura/comfyui-docker-rocm";
       description = "Docker image to use for ComfyUI";
     };
 
@@ -60,16 +63,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir}/storage 0755 root root -"
-      "d ${cfg.dataDir}/models 0755 root root -"
-      "d ${cfg.dataDir}/hf-hub 0755 root root -"
-      "d ${cfg.dataDir}/torch-hub 0755 root root -"
-      "d ${cfg.dataDir}/input 0755 root root -"
-      "d ${cfg.dataDir}/output 0755 root root -"
-      "d ${cfg.dataDir}/workflows 0755 root root -"
-    ];
-
     virtualisation.oci-containers = {
       backend = "podman";
       containers.comfyui = {
@@ -85,13 +78,7 @@ in {
             else {}
           );
         volumes = [
-          "${cfg.dataDir}/storage:/root"
-          "${cfg.dataDir}/models:/root/ComfyUI/models"
-          "${cfg.dataDir}/hf-hub:/root/.cache/huggingface/hub"
-          "${cfg.dataDir}/torch-hub:/root/.cache/torch/hub"
-          "${cfg.dataDir}/input:/root/ComfyUI/input"
-          "${cfg.dataDir}/output:/root/ComfyUI/output"
-          "${cfg.dataDir}/workflows:/root/ComfyUI/user/default/workflows"
+          "${cfg.dataDir}:/home/ubuntu"
         ];
         ports = cfg.portMappings;
         extraOptions =
@@ -101,6 +88,7 @@ in {
             "--group-add=video"
             "--ipc=host"
             "--cap-add=SYS_PTRACE"
+            "--cap-add=SYS_ADMIN"
             "--security-opt=seccomp=unconfined"
           ]
           ++ lib.optionals cfg.useTailscaleSidecar [
@@ -110,9 +98,13 @@ in {
     };
 
     # Ensure Tailscale sidecar is running before this container starts
-    systemd.services.podman-comfyui = lib.mkIf cfg.useTailscaleSidecar {
-      requires = ["podman-tailscale-sidecar.service"];
-      after = ["podman-tailscale-sidecar.service"];
-    };
+    systemd.services.podman-comfyui =
+      {
+        wantedBy = lib.mkIf config.universe.gai.enableSystemdTarget ["gai.target"];
+      }
+      // lib.optionalAttrs cfg.useTailscaleSidecar {
+        requires = ["podman-tailscale-sidecar.service"];
+        after = ["podman-tailscale-sidecar.service"];
+      };
   };
 }

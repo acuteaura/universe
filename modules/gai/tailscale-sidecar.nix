@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.universe.tailscale-sidecar;
+  cfg = config.universe.gai.tailscale-sidecar;
 in {
-  options.universe.tailscale-sidecar = {
+  options.universe.gai.tailscale-sidecar = {
     enable = lib.mkEnableOption "Enable Tailscale sidecar container";
 
     authKeyFile = lib.mkOption {
@@ -82,6 +82,10 @@ in {
           "--device=/dev/net/tun"
         ];
       };
+    };
+
+    systemd.services.podman-tailscale-sidecar = {
+      wantedBy = lib.mkIf config.universe.gai.enableSystemdTarget ["gai.target"];
     };
   };
 }

@@ -8,51 +8,52 @@
   ];
 
   environment.sessionVariables.OLLAMA_HOST = "fool-gai.atlas-ide.ts.net:11434";
-  universe.comfyui-container = {
-    enable = true;
-    rdnaGeneration = "rdna3";
-    useAPU = false;
-    dataDir = "/media/comfyui";
-    useTailscaleSidecar = true;
-    portMappings = [];
-  };
 
-  universe.invokeai-container = {
-    enable = true;
-    rdnaGeneration = "rdna3";
-    useAPU = false;
-    dataDir = "/media/invoke";
-    useTailscaleSidecar = true;
-    portMappings = [];
-    extraVolumes = ["/media/tensors:/media/tensors"];
-  };
-
-  universe.sillytavern-container = {
-    enable = true;
-    dataDir = "/media/sillytavern";
-    useTailscaleSidecar = true;
-    portMappings = [];
-    enablePlugins = true;
-    enableExtensions = true;
-    image = "ghcr.io/sillytavern/sillytavern:1.13.5";
-    ssl = {
+  universe.gai = {
+    comfyui = {
       enable = true;
-      hostname = "fool.atlas-ide.ts.net";
+      rdnaGeneration = "rdna3";
+      useAPU = false;
+      dataDir = "/media/gai/comfyui";
+      useTailscaleSidecar = true;
+      portMappings = [];
     };
-  };
 
-  universe.ollama-container = {
-    enable = true;
-    dataDir = "/media/ollama";
-    useTailscaleSidecar = true;
-    portMappings = [];
-    useRocm = true;
-    rdnaGeneration = "rdna3";
-  };
+    invokeai = {
+      enable = true;
+      rdnaGeneration = "rdna3";
+      useAPU = false;
+      dataDir = "/media/gai/invoke";
+      useTailscaleSidecar = true;
+      portMappings = [];
+      extraVolumes = ["/media/tensors:/media/tensors"];
+    };
 
-  universe.tailscale-sidecar = {
-    enable = true;
-    authKeyFile = "/etc/tailscale-keys/fool-gai";
-    hostname = "fool-gai";
+    sillytavern = {
+      enable = true;
+      dataDir = "/media/gai/sillytavern";
+      useTailscaleSidecar = true;
+      portMappings = [];
+      enablePlugins = true;
+      enableExtensions = true;
+      image = "ghcr.io/sillytavern/sillytavern:1.13.5";
+      ssl = {
+        enable = true;
+        hostname = "fool.atlas-ide.ts.net";
+      };
+    };
+
+    ollama = {
+      enable = true;
+      dataDir = "/media/gai/ollama";
+      useTailscaleSidecar = true;
+      portMappings = [];
+    };
+
+    tailscale-sidecar = {
+      enable = true;
+      authKeyFile = "/etc/tailscale-keys/fool-gai";
+      hostname = "fool-gai";
+    };
   };
 }
