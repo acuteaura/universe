@@ -1,13 +1,9 @@
-<<<<<<< Updated upstream
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./flatpak.nix
   ];
 
-=======
-{ pkgs, ... }:
-{
->>>>>>> Stashed changes
   home.packages = with pkgs; [
     typst
     lmms
