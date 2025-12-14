@@ -1,10 +1,12 @@
 {
   getName,
-  extraOverlays ? [],
-}: {
+  extraOverlays ? [ ],
+}:
+{
   nixpkgs.config = {
     allowUnfree = false;
-    allowUnfreePredicate = pkg:
+    allowUnfreePredicate =
+      pkg:
       builtins.elem (getName pkg) [
         "1password"
         "1password-cli"
@@ -24,21 +26,22 @@
         "steamdeck-hw-theme"
         "unrar"
         "via"
+        "vital"
         "vscode"
       ];
-    allowInsecurePredicate = pkg:
+    allowInsecurePredicate =
+      pkg:
       builtins.elem (getName pkg) [
         "django"
         "qtwebengine"
       ];
   };
-  nixpkgs.overlays =
-    [
-      (import ./overlays/brave.nix)
-      (import ./overlays/claude-sandboxed.nix)
-      (import ./overlays/fix-python3.nix)
-      (import ./overlays/pin-versions.nix)
-      (import ./overlays/hhd.nix)
-    ]
-    ++ extraOverlays;
+  nixpkgs.overlays = [
+    (import ./overlays/brave.nix)
+    (import ./overlays/claude-sandboxed.nix)
+    (import ./overlays/fix-python3.nix)
+    (import ./overlays/pin-versions.nix)
+    (import ./overlays/hhd.nix)
+  ]
+  ++ extraOverlays;
 }
