@@ -46,6 +46,7 @@
   universe = {
     kernel.enable = true;
     desktop-plasma.enable = true;
+    desktop-niri.enable = true;
     zed-quicksand.enable = true;
     amdgpu = {
       enable = true;

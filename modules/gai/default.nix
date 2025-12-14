@@ -8,6 +8,7 @@ in {
   imports = [
     ./comfyui-container.nix
     ./invoke-container.nix
+    ./koboldcpp-container.nix
     ./ollama-container.nix
     ./sillytavern-container.nix
     ./tailscale-sidecar.nix
