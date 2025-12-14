@@ -1,5 +1,7 @@
-{pkgs, ...}: {
-  home.packages = with pkgs;
+{ pkgs, ... }:
+{
+  home.packages =
+    with pkgs;
     [
       age-plugin-yubikey
       atuin
@@ -35,7 +37,7 @@
 
       # devops shit
       act
-      (azure-cli.withExtensions [])
+      (azure-cli.withExtensions [ ])
       fly
       gh
       opentofu
@@ -56,6 +58,7 @@
       nushell
       clang
       rustup
+      gopls
 
       # k8s stuff
       cilium-cli
