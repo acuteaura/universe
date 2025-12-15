@@ -78,6 +78,7 @@
 
       # the "thanks i hate it" tools
       claude-code
+      mistral-vibe
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       bash

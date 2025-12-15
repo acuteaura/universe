@@ -23,7 +23,12 @@
     flake-utils.url = "github:numtide/flake-utils";
     quadlet.url = "github:SEIAROTg/quadlet-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
-
+    mistral-vibe = {
+      url = "github:mistralai/mistral-vibe";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     jovian.follows = "chaotic/jovian";
 
     kwin-effects-forceblur = {
@@ -41,6 +46,7 @@
   }: let
     packageOverlay = final: prev: {
       kwin-effects-forceblur = inputs.kwin-effects-forceblur.packages."${final.stdenv.hostPlatform.system}".default;
+      mistral-vibe = inputs.mistral-vibe.packages."${final.stdenv.hostPlatform.system}".default;
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       inherit (nixpkgs.lib) getName;
