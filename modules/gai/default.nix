@@ -11,7 +11,6 @@ in {
     ./koboldcpp-container.nix
     ./ollama-container.nix
     ./sillytavern-container.nix
-    ./tailscale-sidecar.nix
   ];
 
   options.universe.gai = {

@@ -16,7 +16,8 @@
     environment.systemPackages = with pkgs; [
       fuzzel
       waybar
-      mako
+      # TODO: fix this, embeds itself into kde too somehow
+      #mako
       xwayland-satellite
     ];
   };

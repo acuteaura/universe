@@ -1,0 +1,18 @@
+diff --git a/uv.lock b/uv.lock
+index 1234567..abcdefg 100644
+--- a/uv.lock
++++ b/uv.lock
+@@ -42,11 +42,8 @@
+     "python_full_version < '3.11' and platform_machine == 'aarch64' and sys_platform == 'linux' and extra != 'extra-8-invokeai-cpu' and extra != 'extra-8-invokeai-cuda' and extra != 'extra-8-invokeai-rocm'",
+     "(python_full_version < '3.11' and platform_machine != 'aarch64' and sys_platform == 'linux' and extra != 'extra-8-invokeai-cpu' and extra != 'extra-8-invokeai-cuda' and extra != 'extra-8-invokeai-rocm') or (python_full_version < '3.11' and sys_platform != 'darwin' and sys_platform != 'linux' and extra != 'extra-8-invokeai-cpu' and extra != 'extra-8-invokeai-cuda' and extra != 'extra-8-invokeai-rocm')",
+ ]
+-conflicts = [[
+-    { package = "invokeai", extra = "cpu" },
+-    { package = "invokeai", extra = "cuda" },
+-    { package = "invokeai", extra = "rocm" },
+-]]
++# Conflicts removed to allow uv2nix to process the lock file
++# We use workspace.deps.rocm to explicitly select ROCm dependencies
+ 
+ [manifest]
+ overrides = [{ name = "opencv-python", marker = "sys_platform == 'never'" }]
