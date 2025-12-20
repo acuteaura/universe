@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.universe.gai.ollama;
+  cfg = config.universe.serviceContainers.ollama;
 in {
-  options.universe.gai.ollama = {
+  options.universe.serviceContainers.ollama = {
     enable = lib.mkEnableOption "Enable Ollama container";
 
     dataDir = lib.mkOption {
@@ -37,6 +37,7 @@ in {
     virtualisation.oci-containers = {
       backend = "podman";
       containers.ollama = {
+        serviceName = "ollama";
         autoStart = cfg.autoStart;
         image = "${cfg.image}";
 
@@ -61,10 +62,6 @@ in {
           "--network=host"
         ];
       };
-    };
-
-    systemd.services.podman-ollama = {
-      wantedBy = lib.mkIf config.universe.gai.enableSystemdTarget ["gai.target"];
     };
   };
 }

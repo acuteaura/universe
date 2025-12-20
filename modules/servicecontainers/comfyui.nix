@@ -1,22 +1,13 @@
 {
   pkgs,
+  constants,
   lib,
   config,
   ...
 }: let
-  cfg = config.universe.gai.comfyui;
-
-  # RDNA generation to HSA GFX version mapping
-  rdnaGfxVersions = {
-    rdna1 = "10.1.0";
-    rdna2 = "10.3.0";
-    rdna3 = "11.0.0";
-  };
-
-  # Get video group GID from system config
-  videoGid = toString config.users.groups.video.gid;
+  cfg = config.universe.serviceContainers.comfyui;
 in {
-  options.universe.gai.comfyui = {
+  options.universe.serviceContainers.comfyui = {
     enable = lib.mkEnableOption "Enable ComfyUI container";
 
     dataDir = lib.mkOption {
@@ -47,13 +38,16 @@ in {
     virtualisation.oci-containers = {
       backend = "podman";
       containers.comfyui = {
+        serviceName = "comfyui";
         autoStart = cfg.autoStart;
         image = cfg.image;
         environment = cfg.extraEnvironment;
         volumes = [
           "${cfg.dataDir}:/home/ubuntu"
         ];
-        ports = cfg.portMappings;
+        ports = [
+          "${constants.tailscale.ip.fool}:8188:8188"
+        ];
         extraOptions = [
           "--device=/dev/kfd"
           "--device=/dev/dri"
@@ -65,10 +59,6 @@ in {
           "--network=host"
         ];
       };
-    };
-
-    systemd.services.podman-comfyui = {
-      wantedBy = lib.mkIf config.universe.gai.enableSystemdTarget ["gai.target"];
     };
   };
 }

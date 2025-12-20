@@ -2,18 +2,12 @@
   pkgs,
   lib,
   config,
+  constants,
   ...
 }: let
-  cfg = config.universe.gai.invokeai;
-
-  # RDNA generation to HSA GFX version mapping
-  rdnaGfxVersions = {
-    rdna1 = "10.1.0";
-    rdna2 = "10.3.0";
-    rdna3 = "11.0.0";
-  };
+  cfg = config.universe.serviceContainers.invokeai;
 in {
-  options.universe.gai.invokeai = {
+  options.universe.serviceContainers.invokeai = {
     enable = lib.mkEnableOption "Enable Invoke AI container";
 
     dataDir = lib.mkOption {
@@ -29,7 +23,6 @@ in {
 
     image = lib.mkOption {
       type = lib.types.str;
-      default = "ghcr.io/invoke-ai/invokeai:main-rocm";
       description = "Docker image to use for ComfyUI";
     };
 
@@ -51,8 +44,10 @@ in {
     virtualisation.oci-containers = {
       backend = "podman";
       containers.invokeai = {
+        serviceName = "invoke";
         autoStart = cfg.autoStart;
         image = cfg.image;
+        ports = ["${constants.tailscale.ip.fool}:14002:9090"];
         environment =
           {
             INVOKEAI_ROOT = "/invokeai";
@@ -69,13 +64,8 @@ in {
           "--ipc=host"
           "--cap-add=SYS_PTRACE"
           "--security-opt=seccomp=unconfined"
-          "--network=host"
         ];
       };
-    };
-
-    systemd.services.podman-invokeai = {
-      wantedBy = lib.mkIf config.universe.gai.enableSystemdTarget ["gai.target"];
     };
   };
 }

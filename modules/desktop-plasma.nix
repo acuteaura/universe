@@ -39,7 +39,6 @@
       kio-fuse
 
       kdePackages.qtstyleplugin-kvantum
-      kwin-effects-forceblur
 
       # required for system info
       clinfo

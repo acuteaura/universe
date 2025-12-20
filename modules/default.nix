@@ -16,6 +16,6 @@
     ./wine.nix
     ./zed-quicksand.nix
 
-    ./gai
+    ./servicecontainers
   ];
 }

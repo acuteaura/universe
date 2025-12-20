@@ -102,12 +102,6 @@
       libsecret
       nwg-look
       mission-center
-      seafile-shared
-      seafile-client
-      junction
-      python3
-      python3Packages.pip
-      python3Packages.virtualenv
     ];
 
     fonts.packages = with pkgs; [

@@ -12,11 +12,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
+      url = "github:nix-community/lanzaboote/v1.0.0";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         rust-overlay.follows = "rust-overlay";
       };
+    };
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     eden.url = "github:Grantimatter/eden-flake";
@@ -30,11 +34,6 @@
       };
     };
     jovian.follows = "chaotic/jovian";
-
-    kwin-effects-forceblur = {
-      url = "github:taj-ny/kwin-effects-forceblur";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs @ {
@@ -45,8 +44,8 @@
     ...
   }: let
     packageOverlay = final: prev: {
-      kwin-effects-forceblur = inputs.kwin-effects-forceblur.packages."${final.stdenv.hostPlatform.system}".default;
-      mistral-vibe = inputs.mistral-vibe.packages."${final.stdenv.hostPlatform.system}".default;
+      mistral-vibe = inputs.mistral-vibe.packages.${final.stdenv.hostPlatform.system}.default;
+      zen = inputs.zen-browser.packages.${final.stdenv.hostPlatform.system}.default;
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       inherit (nixpkgs.lib) getName;

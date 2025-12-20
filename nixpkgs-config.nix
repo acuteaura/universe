@@ -43,6 +43,7 @@
       (import ./overlays/fix-python3.nix)
       (import ./overlays/pin-versions.nix)
       (import ./overlays/hhd.nix)
+      (import ./overlays/mistral-vibe-wrapper.nix)
     ]
     ++ extraOverlays;
 }

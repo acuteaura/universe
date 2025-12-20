@@ -10,35 +10,6 @@
 
   config = lib.mkIf config.universe.apps.enable {
     environment.systemPackages = with pkgs; [
-      ardour
-      audacity
-      blender
-      easyeffects
-      foliate
-      ghostty
-      gparted
-      handbrake
-      haruna
-      inkscape
-      kdePackages.kdenlive
-      krita
-      lmstudio
-      moonlight-qt
-      ocs-url
-      scrcpy
-      via
-      vlc
-      vscode
-      zed-editor
-
-      (wrapOBS {
-        plugins = with pkgs.obs-studio-plugins; [
-          obs-vaapi
-          obs-vkcapture
-          obs-gstreamer
-          obs-pipewire-audio-capture
-        ];
-      })
     ];
 
     programs.localsend = {

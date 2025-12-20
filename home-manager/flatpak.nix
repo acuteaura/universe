@@ -1,11 +1,9 @@
-_:
-let
+_: let
   flathubApp = appId: {
     inherit appId;
     origin = "flathub";
   };
-in
-{
+in {
   services.flatpak = {
     update.onActivation = true;
     enable = true;
@@ -19,7 +17,6 @@ in
       (flathubApp "com.github.mtkennerly.ludusavi")
       (flathubApp "com.rafaelmardojai.Blanket")
       (flathubApp "com.usebottles.bottles")
-      (flathubApp "dev.vencord.Vesktop")
       (flathubApp "fr.handbrake.ghb")
       (flathubApp "im.riot.Riot")
       (flathubApp "io.kinvolk.Headlamp")

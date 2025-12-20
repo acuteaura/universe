@@ -8,6 +8,7 @@
     firefox
     librewolf
     chromium
+    zen
   ];
 
   environment.etc."brave/policies/managed/brave.json".text =
@@ -21,8 +22,7 @@
 
   environment.etc."1password/custom_allowed_browsers" = {
     text = ''
-      librewolf
-      vivaldi-bin
+      zen
     '';
     mode = "0755";
   };

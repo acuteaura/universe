@@ -1,7 +1,5 @@
-{ pkgs, ... }:
-{
-  home.packages =
-    with pkgs;
+{pkgs, ...}: {
+  home.packages = with pkgs;
     [
       age-plugin-yubikey
       atuin
@@ -9,6 +7,7 @@
       devbox
       direnv
       git-annex
+      ffmpeg
       hyfetch
       iperf
       jq
@@ -16,14 +15,12 @@
       micro
       ncdu
       neovim
-
       p7zip
       pgo-client
       rclone
       restic
       socat
       sqlite
-
       starship
       syncthing
       tmux
@@ -37,7 +34,7 @@
 
       # devops shit
       act
-      (azure-cli.withExtensions [ ])
+      (azure-cli.withExtensions [])
       fly
       gh
       opentofu
@@ -76,9 +73,8 @@
 
       lima
 
-      # the "thanks i hate it" tools
       claude-code
-      mistral-vibe
+      mistral-vibe-wrapped
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       bash

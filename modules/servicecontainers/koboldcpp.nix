@@ -2,11 +2,12 @@
   pkgs,
   lib,
   config,
+  constants,
   ...
 }: let
-  cfg = config.universe.gai.koboldcpp;
+  cfg = config.universe.serviceContainers.koboldcpp;
 in {
-  options.universe.gai.koboldcpp = {
+  options.universe.serviceContainers.koboldcpp = {
     enable = lib.mkEnableOption "Enable KoboldCpp container";
 
     dataDir = lib.mkOption {
@@ -22,15 +23,18 @@ in {
 
     image = lib.mkOption {
       type = lib.types.str;
-      default = "docker.io/koboldai/koboldcpp:latest";
       description = "Docker image to use for KoboldCpp";
     };
 
     extraArgs = lib.mkOption {
-      type = lib.types.str;
-      default = "";
+      type = lib.types.attrsOf lib.types.str;
+      default = {};
       description = "Extra arguments to pass to KoboldCpp via KCPP_ARGS environment variable";
-      example = "--usevulkan --threads 6";
+      example = {
+        usevulkan = "";
+        threads = "6";
+        host = "0.0.0.0";
+      };
     };
 
     extraEnvironment = lib.mkOption {
@@ -38,22 +42,42 @@ in {
       default = {};
       description = "Additional environment variables for the KoboldCpp container";
     };
+
+    extraVolumes = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "Additional volume mounts for the KoboldCpp container";
+      example = ["/path/on/host:/path/in/container:ro"];
+    };
   };
 
   config = lib.mkIf cfg.enable {
     virtualisation.oci-containers = {
       backend = "podman";
       containers.koboldcpp = {
+        serviceName = "koboldcpp";
         autoStart = cfg.autoStart;
         image = "${cfg.image}";
 
-        volumes = [
-          "${cfg.dataDir}:/workspace"
+        volumes =
+          [
+            "${cfg.dataDir}:/workspace"
+          ]
+          ++ cfg.extraVolumes;
+
+        ports = [
+          "${constants.tailscale.ip.fool}:14001:5001"
         ];
 
         environment =
           {
-            KCPP_ARGS = cfg.extraArgs;
+            KCPP_ARGS = lib.concatStringsSep " " (
+              lib.mapAttrsToList (key: value:
+                if value == ""
+                then "--${key}"
+                else "--${key} ${value}")
+              cfg.extraArgs
+            );
             KCPP_DONT_TUNNEL = "true";
             KCPP_DONT_UPDATE = "true";
           }
@@ -66,13 +90,9 @@ in {
           "--ipc=host"
           "--cap-add=SYS_PTRACE"
           "--security-opt=seccomp=unconfined"
-          "--network=host"
+          "--user=1000:1000"
         ];
       };
-    };
-
-    systemd.services.podman-koboldcpp = {
-      wantedBy = lib.mkIf config.universe.gai.enableSystemdTarget ["gai.target"];
     };
   };
 }

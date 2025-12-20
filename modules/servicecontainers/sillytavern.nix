@@ -2,11 +2,12 @@
   pkgs,
   lib,
   config,
+  constants,
   ...
 }: let
-  cfg = config.universe.gai.sillytavern;
+  cfg = config.universe.serviceContainers.sillytavern;
 in {
-  options.universe.gai.sillytavern = {
+  options.universe.serviceContainers.sillytavern = {
     enable = lib.mkEnableOption "Enable SillyTavern container";
 
     dataDir = lib.mkOption {
@@ -40,17 +41,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.services = {
-      podman-sillytavern = {
-        wantedBy = lib.mkIf config.universe.gai.enableSystemdTarget ["gai.target"];
-      };
-    };
-
     virtualisation.oci-containers = {
       backend = "podman";
       containers.sillytavern = {
+        serviceName = "sillytavern";
         autoStart = cfg.autoStart;
         image = "${cfg.image}";
+        ports = ["${constants.tailscale.ip.fool}:14000:8000"];
         volumes =
           [
             "${cfg.dataDir}/config:/home/node/app/config"
@@ -61,9 +58,7 @@ in {
           ++ cfg.extraVolumes;
         environment = cfg.extraEnvironment;
 
-        extraOptions = [
-          "--network=host"
-        ];
+        extraOptions = [];
       };
     };
   };
