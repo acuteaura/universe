@@ -19,6 +19,7 @@
       "scanner"
       "lp"
       "kvm"
+      "input"
     ];
     openssh.authorizedKeys.keys = constants.sshKeys.aurelia;
     shell = pkgs.fish;
