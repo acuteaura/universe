@@ -8,6 +8,7 @@
 in {
   environment.systemPackages = with pkgs; [
     ollama
+    koboldcppConfigs.configsDir
   ];
 
   environment.sessionVariables.OLLAMA_HOST = "fool-gai.atlas-ide.ts.net:11434";
@@ -39,12 +40,12 @@ in {
         host = "0.0.0.0";
         port = "5001";
 
-        config = "/configs/Snowpiercer-15B-v4-Q6_K_L.kcpps"; # Directory for other config files
+        nomodel = "";
       };
 
-      # Mount the configs directory into the container as read-only
+      # Mount the configs directory from current-system as read-only
       extraVolumes = [
-        "${koboldcppConfigs.configsDir}:/configs:ro"
+        "/run/current-system/sw/share/koboldcpp/configs:/configs:ro"
       ];
     };
 

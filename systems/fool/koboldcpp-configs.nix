@@ -1,94 +1,64 @@
 {pkgs}: let
   # KoboldCpp .kcpps config files for admin mode model switching
-  # These configs can be loaded dynamically via the admin interface
+  # Imports generated model maps from koboldcpp-models.nix
   # Helper function to generate .kcpps config files
-  # .kcpps files are JSON configs that koboldcpp can load
   makeKcppsConfig = name: args:
     pkgs.writeTextFile {
-      name = "koboldcpp-${name}.kcpps";
+      name = "${name}.kcpps";
       text = builtins.toJSON args;
     };
 
   baseSettings = {
     # GPU configuration
-    gpulayers = 60;
+    gpulayers = 999; # inject that shit straight into my VRAM
     usevulkan = null;
-
     flashattention = null;
 
     # Context and performance
     contextsize = 8192;
   };
 
+  # Import the generated model maps
+  models = import ./koboldcpp-models.nix;
+
   commonModels = {
-    embeddingsmodel = "/workspace/bge-m3-q8_0.gguf";
-    ttsmodel = "/workspace/Kokoro_no_espeak_Q4.gguf";
-    whispermodel = "/workspace/whisper-base.en-q5_1.bin";
+    embeddingsmodel = "/workspace/embeddings/${models.embeddings.bge_m3_q8_0}";
+    ttsmodel = "/workspace/tts/${models.tts.Kokoro_no_espeak_Q4}";
+    whispermodel = "/workspace/whisper/${models.whisper.whisper_base_en_q5_1}";
   };
 
-  # Default configuration matching current setup
-  defaultConfig = valkyrie2Config;
+  zImageSettings = {
+    sdmodel = "/workspace/image/${models.image.z_image_turbo_Q4_0}";
+    sdclip1 = "/workspace/clip/${models.clip.Qwen3_4B_Instruct_2507_Q4_K_S}";
+    sdvae = "/workspace/image/${models.image.ae}";
+  };
 
-  magidoniaConfig = makeKcppsConfig "default" (baseSettings
-    // commonModels
-    // {
-      model = "/workspace/TheDrummer_Magidonia-24B-v4.3-Q6_K_L.gguf";
-    });
+  # Generate a config for each main model
+  # Convert attribute set to list of {name, filename} pairs
+  mainModelsList = builtins.map (name: {
+    inherit name;
+    filename = models.main.${name};
+  }) (builtins.attrNames models.main);
 
-  snowpiercer4Config = makeKcppsConfig "snowpiercer" (baseSettings
-    // commonModels
-    // {
-      # Model paths (relative to workspace/dataDir)
-      model = "/workspace/TheDrummer_Snowpiercer-15B-v4-Q6_K_L.gguf";
-    });
+  allConfigs =
+    map (
+      model:
+        makeKcppsConfig model.name (baseSettings
+          // commonModels
+          // zImageSettings
+          // {
+            model = "/workspace/main/${model.filename}";
+          })
+    )
+    mainModelsList;
 
-  gptOssConfig = makeKcppsConfig "gpt-oss" (baseSettings
-    // commonModels
-    // {
-      model = "/workspace/gpt-oss-20b-Derestricted.Q4_K_S.gguf";
-    });
-
-  cydoniaConfig = makeKcppsConfig "cydonia" (baseSettings
-    // commonModels
-    // {
-      model = "/workspace/Cydonia-24B-v4zk-Q4_K_M.gguf";
-    });
-
-  gemma3Config = makeKcppsConfig "gemma3" (baseSettings
-    // commonModels
-    // {
-      model = "/workspace/gemma-3-27b-it-abliterated.q3_k_m.gguf";
-    });
-
-  valkyrie1Config = makeKcppsConfig "valkyrie" (baseSettings
-    // commonModels
-    // {
-      model = "/workspace/TheDrummer_Valkyrie-49B-v1-IQ4_XS.gguf";
-    });
-
-  valkyrie2Config = makeKcppsConfig "valkyrie2" (baseSettings
-    // commonModels
-    // {
-      model = "/workspace/TheDrummer_Valkyrie-49B-v1-IQ3_M.gguf";
-    });
-
-  # Create a directory with all configs
+  # Create a single directory with all config files
+  # This will be installed to /run/current-system and can be referenced statically
   configsDir = pkgs.runCommand "koboldcpp-configs" {} ''
-    mkdir -p $out
-    cp ${defaultConfig} $out/default.kcpps
-    cp ${magidoniaConfig} $out/Magidonia-24B-v4.3-Q6_K_L.kcpps
-    cp ${snowpiercer4Config} $out/Snowpiercer-15B-v4-Q6_K_L.kcpps
-    cp ${gptOssConfig} $out/gpt-oss-20b-Derestricted.Q4_K_S.kcpps
-    cp ${cydoniaConfig} $out/Cydonia-24B-v4zk-Q4_K_M.kcpps
-    cp ${gemma3Config} $out/gemma-3-27b-it-abliterated.q3_k_m.kcpps
-    cp ${valkyrie1Config} $out/TheDrummer_Valkyrie-49B-v1-IQ4_XSL.kcpps
-    cp ${valkyrie2Config} $out/TheDrummer_Valkyrie-49B-v1-IQ3_M.kcpps
+    mkdir -p $out/share/koboldcpp/configs
+    ${builtins.concatStringsSep "\n" (map (cfg: "cp ${cfg} $out/share/koboldcpp/configs/${cfg.name}") allConfigs)}
   '';
 in {
-  inherit defaultConfig configsDir;
-
-  # Export for use in container configuration
-  configs = {
-    default = defaultConfig;
-  };
+  # Export the configs directory for use in system configuration
+  inherit configsDir;
 }
