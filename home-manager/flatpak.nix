@@ -15,6 +15,7 @@ in {
     ];
     packages = [
       (flathubApp "com.github.mtkennerly.ludusavi")
+      (flathubApp "com.github.tchx84.Flatseal")
       (flathubApp "com.rafaelmardojai.Blanket")
       (flathubApp "com.usebottles.bottles")
       (flathubApp "fr.handbrake.ghb")
@@ -48,6 +49,11 @@ in {
       ];
       "Session Bus Policy" = {
         "org.freedesktop.Flatpak" = "talk";
+      };
+    };
+    overrides."org.signal.Signal" = {
+      Environment = {
+        SIGNAL_PASSWORD_STORE = "gnome-libsecret";
       };
     };
   };
