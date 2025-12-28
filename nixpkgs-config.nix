@@ -40,7 +40,6 @@
       (import ./overlays/claude-sandboxed.nix)
       (import ./overlays/fix-python3.nix)
       (import ./overlays/pin-versions.nix)
-      (import ./overlays/mistral-vibe-wrapper.nix)
     ]
     ++ extraOverlays;
 }

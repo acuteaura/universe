@@ -75,7 +75,7 @@
 
       claude-code-wrapped-claude
       claude-code-wrapped-zai
-      mistral-vibe-wrapped
+      mistral-vibe
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       bash

@@ -46,6 +46,7 @@
         patches = [];
         postPatch = "";
       }))
+    ytmdesktop
 
     zed-editor
 
