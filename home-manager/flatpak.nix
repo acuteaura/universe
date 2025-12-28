@@ -23,7 +23,6 @@ in {
       (flathubApp "io.kinvolk.Headlamp")
       (flathubApp "io.podman_desktop.PodmanDesktop")
       (flathubApp "md.obsidian.Obsidian")
-      (flathubApp "org.fooyin.fooyin")
       (flathubApp "org.pgadmin.pgadmin4")
       (flathubApp "org.raspberrypi.rpi-imager")
       (flathubApp "org.signal.Signal")

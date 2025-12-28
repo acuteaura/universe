@@ -26,10 +26,7 @@
         "via"
         "vital"
         "vscode"
-      ]
-      ||
-      # Allow CUDA packages for InvokeAI (needed for evaluation, stubbed out in overlay)
-      (builtins.match "cuda.*" (getName pkg) != null);
+      ];
     allowInsecurePredicate = pkg:
       builtins.elem (getName pkg) [
         "django"
@@ -38,11 +35,11 @@
   };
   nixpkgs.overlays =
     [
+      (import ./overlays/appwrap.nix)
       (import ./overlays/brave.nix)
       (import ./overlays/claude-sandboxed.nix)
       (import ./overlays/fix-python3.nix)
       (import ./overlays/pin-versions.nix)
-      (import ./overlays/hhd.nix)
       (import ./overlays/mistral-vibe-wrapper.nix)
     ]
     ++ extraOverlays;
