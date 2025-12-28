@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ../_mixins/browsers.nix
     ../_mixins/containers.nix
