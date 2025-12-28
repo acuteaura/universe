@@ -43,6 +43,8 @@
           rev = "3791e370230281df069c23fd3b3cfafd6d5f1a8b";
           sha256 = "sha256-+1Ao45BM9cIOhoGQthkHj/CfcGjKGcqNqLSWIBjMmTQ=";
         };
+        patches = [];
+        postPatch = "";
       }))
 
     zed-editor
