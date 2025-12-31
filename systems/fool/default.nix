@@ -3,8 +3,13 @@
     ../_mixins/browsers.nix
     ../_mixins/containers.nix
     ../_mixins/mounts.nix
+    ../_mixins/obs-virt.nix
 
     ../_mixins/user-aurelia.nix
+    (builtins.fetchurl {
+      url = "https://git.sapphiccode.net/SapphicCode/universe/raw/branch/main/nixos/module/user/sapphiccode.nix";
+      sha256 = "sha256-cvIpRrD8HV3XO1FIvU2wTvw9c7iLdJ53XDlnetkuJLM=";
+    })
 
     ./gpu-tweaks.nix
     ./hardware.nix
@@ -14,6 +19,9 @@
 
     ../_mixins/mlsupport.nix
   ];
+
+  users.users.sapphiccode.extraGroups = ["users"];
+  users.users.aurelia.extraGroups = ["users"];
 
   # BOOT
   #########################################
