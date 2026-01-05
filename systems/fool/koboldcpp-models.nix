@@ -5,6 +5,9 @@
 {
   main = {
     "Buddy_2B_v1_Q6k" = "Buddy-2B-v1_Q6k.gguf";
+    "Cydonia_24B_v4_3_heretic" = "Cydonia-24B-v4.3-heretic.gguf";
+    "Cydonia_24B_v4_3_heretic_Q4_K_M" = "Cydonia-24B-v4.3-heretic_Q4_K_M.gguf";
+    "Cydonia_24B_v4_3_heretic_Q8_0" = "Cydonia-24B-v4.3-heretic_Q8_0.gguf";
     "Cydonia_24B_v4zk_Q4_K_M" = "Cydonia-24B-v4zk-Q4_K_M.gguf";
     "gemma_3_27b_it_abliterated_q3_k_m" = "gemma-3-27b-it-abliterated.q3_k_m.gguf";
     "gpt_oss_20b_Derestricted_Q4_K_S" = "gpt-oss-20b-Derestricted.Q4_K_S.gguf";

@@ -27,6 +27,7 @@
       mangohud
       heroic
       steamtinkerlaunch
+      xivlauncher
       lsfg-vk
       lsfg-vk-ui
     ];
@@ -41,7 +42,6 @@
       MESA_SHADER_CACHE_MAX_SIZE = "10G";
     };
 
-    # let distrobox handle steam
     programs.steam = {
       enable = lib.mkDefault true;
       protontricks.enable = lib.mkDefault true;

@@ -24,27 +24,29 @@
       plasma-browser-integration
     ];
 
-    environment.systemPackages = with pkgs; [
-      qt6.qtimageformats
+    environment.systemPackages = with pkgs;
+      [
+        qt6.qtimageformats
 
-      kdePackages.filelight
-      kdePackages.kdeconnect-kde
-      kdePackages.kio
-      kdePackages.krfb
-      kdePackages.partitionmanager
-      kdePackages.plasma-thunderbolt
-      kdePackages.plasma-vault
-      kdePackages.powerdevil
-      kdePackages.krecorder
-      kio-fuse
+        kdePackages.filelight
+        kdePackages.kdeconnect-kde
+        kdePackages.kio
+        kdePackages.krfb
+        kdePackages.partitionmanager
+        kdePackages.plasma-thunderbolt
+        kdePackages.plasma-vault
+        kdePackages.powerdevil
+        kdePackages.krecorder
+        kio-fuse
 
-      kdePackages.qtstyleplugin-kvantum
+        kdePackages.qtstyleplugin-kvantum
 
-      # required for system info
-      clinfo
-      mesa-demos
-      vulkan-tools
-    ];
+        # required for system info
+        clinfo
+        mesa-demos
+        vulkan-tools
+      ]
+      ++ lib.optional (lib.hasAttr "kwin-effects-better-blur-dx-wayland" pkgs) pkgs.kwin-effects-better-blur-dx-wayland;
 
     programs.kdeconnect.enable = true;
     networking.firewall = rec {

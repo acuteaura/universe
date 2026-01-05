@@ -56,6 +56,7 @@
       clang
       rustup
       gopls
+      deno
 
       # k8s stuff
       cilium-cli

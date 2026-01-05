@@ -33,6 +33,10 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    kwin-effects-better-blur-dx = {
+      url = "github:xarblu/kwin-effects-better-blur-dx";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     jovian.follows = "chaotic/jovian";
   };
 
@@ -46,6 +50,7 @@
     packageOverlay = final: prev: {
       mistral-vibe = inputs.mistral-vibe.packages.${final.stdenv.hostPlatform.system}.default;
       zen = inputs.zen-browser.packages.${final.stdenv.hostPlatform.system}.default;
+      kwin-effects-better-blur-dx-wayland = inputs.kwin-effects-better-blur-dx.packages.${final.stdenv.hostPlatform.system}.default;
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       inherit (nixpkgs.lib) getName;
