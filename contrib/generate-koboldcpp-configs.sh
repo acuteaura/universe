@@ -10,7 +10,6 @@ OUTPUT_FILE="/home/aurelia/Projects/universe/systems/fool/koboldcpp-models.nix"
 # Check if directories exist
 if [[ ! -d "$KOBOLDCPP_DIR/main" ]]; then
     echo "Error: $KOBOLDCPP_DIR/main does not exist"
-    echo "Run migrate-koboldcpp-models.sh first to organize your models"
     exit 1
 fi
 

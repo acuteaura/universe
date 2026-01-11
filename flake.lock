@@ -44,15 +44,15 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1761573825,
-        "narHash": "sha256-qEa+gv3qanwTxI7wyeNEz0KZk+cz527iJG+V89bZIXY=",
-        "owner": "Grantimatter",
+        "lastModified": 1767793988,
+        "narHash": "sha256-gykP4svAeBRor1gX0zosYfJnzxnbmus/6O1UkaMqrYQ=",
+        "owner": "acuteaura-forks",
         "repo": "eden-flake",
-        "rev": "f33193d175cb59a48a0b06dfe2a5f39838218be2",
+        "rev": "40f3138cf55e6f756e6d76896f40003bc6969a12",
         "type": "github"
       },
       "original": {
-        "owner": "Grantimatter",
+        "owner": "acuteaura-forks",
         "repo": "eden-flake",
         "type": "github"
       }

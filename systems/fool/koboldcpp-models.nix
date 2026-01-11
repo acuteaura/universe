@@ -10,18 +10,14 @@
     "Cydonia_24B_v4_3_heretic_Q8_0" = "Cydonia-24B-v4.3-heretic_Q8_0.gguf";
     "Cydonia_24B_v4zk_Q4_K_M" = "Cydonia-24B-v4zk-Q4_K_M.gguf";
     "gemma_3_27b_it_abliterated_q3_k_m" = "gemma-3-27b-it-abliterated.q3_k_m.gguf";
-    "gpt_oss_20b_Derestricted_Q4_K_S" = "gpt-oss-20b-Derestricted.Q4_K_S.gguf";
+    "Magidonia_24B_v4_3_Q4_K_M" = "Magidonia-24B-v4.3-Q4_K_M.gguf";
+    "Magidonia_24B_v4_3_Q6_K_L" = "Magidonia-24B-v4.3-Q6_K_L.gguf";
     "Skyfall_31B_v4r_Q4_K_M" = "Skyfall-31B-v4r-Q4_K_M.gguf";
     "Skyfall_31B_v4r_Q8_0" = "Skyfall-31B-v4r-Q8_0.gguf";
     "Skyfall_31B_v4w_Q4_K_M" = "Skyfall-31B-v4w-Q4_K_M.gguf";
-    "Snowpiercer_15B_v3c_Q6_K" = "Snowpiercer-15B-v3c-Q6_K.gguf";
-    "Snowpiercer_15B_v3c_Q8_0" = "Snowpiercer-15B-v3c-Q8_0.gguf";
-    "Magidonia_24B_v4_3_Q4_K_M" = "TheDrummer_Magidonia-24B-v4.3-Q4_K_M.gguf";
-    "Magidonia_24B_v4_3_Q6_K_L" = "TheDrummer_Magidonia-24B-v4.3-Q6_K_L.gguf";
-    "Snowpiercer_15B_v4_Q6_K_L" = "TheDrummer_Snowpiercer-15B-v4-Q6_K_L.gguf";
-    "Valkyrie_49B_v1_IQ3_M" = "TheDrummer_Valkyrie-49B-v1-IQ3_M.gguf";
-    "Valkyrie_49B_v1_IQ4_XS" = "TheDrummer_Valkyrie-49B-v1-IQ4_XS.gguf";
-    "Valkyrie_49B_v1_Q3_K_XL" = "TheDrummer_Valkyrie-49B-v1-Q3_K_XL.gguf";
+    "Snowpiercer_15B_v4_Q6_K_L" = "Snowpiercer-15B-v4-Q6_K_L.gguf";
+    "Valkyrie_49B_v1_IQ3_M" = "Valkyrie-49B-v1-IQ3_M.gguf";
+    "Valkyrie_49B_v1_IQ4_XS" = "Valkyrie-49B-v1-IQ4_XS.gguf";
   };
 
   embeddings = {

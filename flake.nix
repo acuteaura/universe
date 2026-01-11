@@ -23,7 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    eden.url = "github:Grantimatter/eden-flake";
+    eden.url = "github:acuteaura-forks/eden-flake";
     flake-utils.url = "github:numtide/flake-utils";
     quadlet.url = "github:SEIAROTg/quadlet-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
@@ -47,10 +47,12 @@
     nix-flatpak,
     ...
   }: let
-    packageOverlay = final: prev: {
-      mistral-vibe = inputs.mistral-vibe.packages.${final.stdenv.hostPlatform.system}.default;
-      zen = inputs.zen-browser.packages.${final.stdenv.hostPlatform.system}.default;
-      kwin-effects-better-blur-dx-wayland = inputs.kwin-effects-better-blur-dx.packages.${final.stdenv.hostPlatform.system}.default;
+    packageOverlay = final: prev: let
+      system = final.stdenv.hostPlatform.system;
+    in {
+      mistral-vibe = inputs.mistral-vibe.packages.${system}.default;
+      zen = inputs.zen-browser.packages.${system}.default;
+      kwin-effects-better-blur-dx-wayland = inputs.kwin-effects-better-blur-dx.packages.${system}.default;
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       inherit (nixpkgs.lib) getName;
