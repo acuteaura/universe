@@ -2,15 +2,15 @@
   description = "aurelia's universe flake";
 
   inputs = {
+    # base imports
     nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # platform
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    jovian.follows = "chaotic/jovian";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs = {
@@ -18,15 +18,22 @@
         rust-overlay.follows = "rust-overlay";
       };
     };
+    # utils
+    flake-utils.url = "github:numtide/flake-utils";
+    quadlet.url = "github:SEIAROTg/quadlet-nix";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.7.0";
+    # tools and apps
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
     eden.url = "github:acuteaura-forks/eden-flake";
-    flake-utils.url = "github:numtide/flake-utils";
-    quadlet.url = "github:SEIAROTg/quadlet-nix";
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
+
     mistral-vibe = {
       url = "github:mistralai/mistral-vibe";
       inputs = {
@@ -37,7 +44,6 @@
       url = "github:xarblu/kwin-effects-better-blur-dx";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    jovian.follows = "chaotic/jovian";
   };
 
   outputs = inputs @ {
@@ -53,6 +59,7 @@
       mistral-vibe = inputs.mistral-vibe.packages.${system}.default;
       zen = inputs.zen-browser.packages.${system}.default;
       kwin-effects-better-blur-dx-wayland = inputs.kwin-effects-better-blur-dx.packages.${system}.default;
+      affinity = inputs.affinity-nix.packages.${system};
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       inherit (nixpkgs.lib) getName;
@@ -107,7 +114,6 @@
           nixos-imports = [
             ./systems/fool
             inputs.nix-flatpak.nixosModules.nix-flatpak
-            inputs.chaotic.nixosModules.default
             inputs.lanzaboote.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
             inputs.eden.nixosModules.default

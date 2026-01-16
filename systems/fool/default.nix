@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ../_mixins/browsers.nix
     ../_mixins/containers.nix
@@ -19,6 +23,11 @@
 
     ../_mixins/mlsupport.nix
   ];
+
+  programs.alvr = {
+    enable = true;
+    openFirewall = true;
+  };
 
   users.users.sapphiccode.extraGroups = ["users"];
   users.users.aurelia.extraGroups = ["users"];
@@ -88,8 +97,10 @@
 
   vfio.enable = false;
 
-  virtualisation.waydroid.enable = true;
-  programs.adb.enable = true;
+  virtualisation.waydroid = {
+    enable = true;
+    package = pkgs.waydroid-nftables;
+  };
 
   networking.networkmanager.enable = false;
   networking.networkmanager.unmanaged = [

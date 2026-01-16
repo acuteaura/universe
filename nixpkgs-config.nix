@@ -1,12 +1,10 @@
 {
   getName,
-  extraOverlays ? [ ],
-}:
-{
+  extraOverlays ? [],
+}: {
   nixpkgs.config = {
     allowUnfree = false;
-    allowUnfreePredicate =
-      pkg:
+    allowUnfreePredicate = pkg:
       builtins.elem (getName pkg) [
         "1password"
         "1password-cli"
@@ -28,18 +26,19 @@
         "via"
         "vital"
         "vscode"
+        "reaper"
       ];
-    allowInsecurePredicate =
-      pkg:
+    allowInsecurePredicate = pkg:
       builtins.elem (getName pkg) [
       ];
   };
-  nixpkgs.overlays = [
-    (import ./overlays/appwrap.nix)
-    (import ./overlays/brave.nix)
-    (import ./overlays/claude-sandboxed.nix)
-    (import ./overlays/fix-python3.nix)
-    (import ./overlays/pin-versions.nix)
-  ]
-  ++ extraOverlays;
+  nixpkgs.overlays =
+    [
+      (import ./overlays/appwrap.nix)
+      (import ./overlays/brave.nix)
+      (import ./overlays/claude-sandboxed.nix)
+      (import ./overlays/fix-python3.nix)
+      (import ./overlays/pin-versions.nix)
+    ]
+    ++ extraOverlays;
 }

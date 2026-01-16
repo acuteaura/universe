@@ -1,38 +1,54 @@
 {pkgs, ...}: {
   imports = [
+    ./creative.nix
     ./flatpak.nix
   ];
 
   home.packages = with pkgs; [
-    lmms
-    typst
-    vital
     (discord.override {
       withOpenASAR = true;
       withVencord = true;
     })
-    junction
-    seafile-client
 
-    ardour
-    audacity
-    blender
+    btop
+    cryptsetup
+    curl
+    dig
     easyeffects
+    ffmpeg
+    file
+    fish
     foliate
     ghostty
+    git
+    gnugrep
+    gnumake
+    gnupg
+    gnused
     gparted
     handbrake
     haruna
-    inkscape
+    htop
+    junction
     kdePackages.kdenlive
-    krita
+    llvm
     lmstudio
     moonlight-qt
     ocs-url
+    openssl
+    python3
+    python3Packages.pip
+    python3Packages.virtualenv
     scrcpy
+    seafile-client
+    sshfs
+    usbutils
     via
     vlc
     vscode
+    wget
+    ytmdesktop
+    zed-editor
 
     (fooyin.overrideAttrs
       (old: {
@@ -46,9 +62,6 @@
         patches = [];
         postPatch = "";
       }))
-    ytmdesktop
-
-    zed-editor
 
     (wrapOBS {
       plugins = with pkgs.obs-studio-plugins; [
@@ -60,9 +73,6 @@
     })
 
     # tools that are usually available on system when using HM standlone
-    python3
-    python3Packages.pip
-    python3Packages.virtualenv
   ];
 
   home.file.".config/kwalletrc".text = ''

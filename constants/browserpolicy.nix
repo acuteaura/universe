@@ -60,12 +60,6 @@ in {
   brave =
     chromeExtensions
     // {
-      # Content Settings
-      DefaultGeolocationSetting = 2;
-      DefaultNotificationsSetting = 2;
-      DefaultLocalFontsSetting = 2;
-      DefaultSensorsSetting = 2;
-      DefaultSerialGuardSetting = 2;
       # Cloud Reporting
       CloudReportingEnabled = false;
       # Password

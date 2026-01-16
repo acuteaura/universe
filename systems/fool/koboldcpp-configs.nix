@@ -27,12 +27,6 @@
     whispermodel = "/workspace/whisper/${models.whisper.whisper_base_en_q5_1}";
   };
 
-  zImageSettings = {
-    sdmodel = "/workspace/image/${models.image.z_image_turbo_Q4_0}";
-    sdclip1 = "/workspace/clip/${models.clip.Qwen3_4B_Instruct_2507_Q4_K_S}";
-    sdvae = "/workspace/image/${models.image.ae}";
-  };
-
   # Generate a config for each main model
   # Convert attribute set to list of {name, filename} pairs
   mainModelsList = builtins.map (name: {
@@ -45,7 +39,6 @@
       model:
         makeKcppsConfig model.name (baseSettings
           // commonModels
-          // zImageSettings
           // {
             model = "/workspace/main/${model.filename}";
           })

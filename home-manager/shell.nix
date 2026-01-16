@@ -1,67 +1,35 @@
 {pkgs, ...}: {
   home.packages = with pkgs;
     [
+      (azure-cli.withExtensions [])
+      act
       age-plugin-yubikey
+      android-tools
       atuin
+      bandwhich
+      bun
       chezmoi
+      cilium-cli
+      clang
+      claude-code-acp
+      claude-code-wrapped-claude
+      claude-code-wrapped-zai
+      clusterctl
+      deno
       devbox
       direnv
-      git-annex
       ffmpeg
+      fly
+      gh
+      git-annex
+      go
+      gopls
+      hcloud
+      helm-docs
       hyfetch
       iperf
       jq
-      lzip
-      micro
-      ncdu
-      neovim
-      p7zip
-      pgo-client
-      rclone
-      restic
-      socat
-      sqlite
-      starship
-      syncthing
-      tmux
-      uutils-coreutils
-      yq-go
-      yt-dlp
-      zellij
-      zstd
-      whois
-      zellij
-
-      # devops shit
-      act
-      (azure-cli.withExtensions [])
-      fly
-      gh
-      opentofu
       just
-      hcloud
-
-      # sec
-      nmap
-      semgrep
-      tcpdump
-      tshark
-      bandwhich
-
-      # languages and compilers
-      bun
-      go
-      nodejs_22
-      nushell
-      clang
-      rustup
-      gopls
-      deno
-
-      # k8s stuff
-      cilium-cli
-      clusterctl
-      helm-docs
       k9s
       kind
       kubectl
@@ -69,14 +37,38 @@
       kubelogin
       kubernetes-helm
       kustomize
-      minikube
-      talosctl
-
       lima
-
-      claude-code-wrapped-claude
-      claude-code-wrapped-zai
+      lzip
+      micro
+      minikube
       mistral-vibe
+      ncdu
+      neovim
+      nmap
+      nodejs_22
+      nushell
+      opentofu
+      p7zip
+      pgo-client
+      rclone
+      restic
+      rustup
+      semgrep
+      socat
+      sqlite
+      starship
+      syncthing
+      talosctl
+      tcpdump
+      tmux
+      tshark
+      typst
+      uutils-coreutils
+      whois
+      yq-go
+      yt-dlp
+      zellij
+      zstd
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       bash
