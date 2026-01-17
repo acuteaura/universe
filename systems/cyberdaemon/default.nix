@@ -13,7 +13,10 @@
   ];
 
   universe = {
-    kernel.enable = true;
+    kernel = {
+      enable = true;
+      cachyos = false;
+    };
     boot = {
       enable = true;
       secureboot.enable = true;
@@ -21,6 +24,7 @@
     desktop-plasma.enable = true;
     amdgpu.enable = true;
   };
+  services.power-profiles-daemon.enable = false;
 
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
@@ -46,25 +50,8 @@
     hostName = "cyberdaemon";
   };
 
-  jovian = {
-    steam = {
-      enable = true;
-      autoStart = false;
-      updater.splash = "jovian";
-      user = "aurelia";
-    };
-    decky-loader.enable = true;
-    devices = {
-      steamdeck.enable = false;
-    };
-    hardware.has.amd.gpu = false;
-    steamos = {
-      enableAutoMountUdevRules = false;
-    };
-  };
-  programs.steam.gamescopeSession.enable = false;
-
-  virtualisation.waydroid.enable = true;
+  # super broken :(
+  virtualisation.waydroid.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
