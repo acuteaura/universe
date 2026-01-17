@@ -26,7 +26,6 @@
   };
   services.power-profiles-daemon.enable = false;
 
-  boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
   boot.plymouth.extraConfig = ''
     [Daemon]

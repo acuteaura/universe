@@ -38,7 +38,6 @@
     enable = true;
     secureboot.enable = true;
   };
-  boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
 
   boot.zfs.devNodes = "/dev/disk/by-id/";
