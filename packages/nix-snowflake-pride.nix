@@ -2,6 +2,7 @@
   lib,
   stdenvNoCC,
   fetchurl,
+  librsvg,
 }:
 stdenvNoCC.mkDerivation {
   pname = "nix-snowflake-pride";
@@ -12,12 +13,19 @@ stdenvNoCC.mkDerivation {
     hash = "sha256-gMeJgiSSA5hFwtW3njZQAd4OHji6kbRCJKVoN6zsRbY=";
   };
 
+  nativeBuildInputs = [librsvg];
+
   dontUnpack = true;
 
   installPhase = ''
     runHook preInstall
 
-    install -D -m444 $src $out/share/icons/hicolor/scalable/apps/nix-snowflake-rainbow.svg
+    for size in 16 22 24 32 48 64 128 256; do
+      mkdir -p $out/share/icons/hicolor/''${size}x''${size}/apps/
+      rsvg-convert $src -w $size -h $size -o $out/share/icons/hicolor/''${size}x''${size}/apps/fucking-plasma-nix-snowflake-rainbow.png
+    done
+
+    install -D -m444 $src $out/share/icons/hicolor/scalable/apps/fucking-plasma-nix-snowflake-rainbow.svg
 
     runHook postInstall
   '';
