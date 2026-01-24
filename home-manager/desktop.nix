@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./creative.nix
     ./flatpak.nix
@@ -42,13 +41,14 @@
     python3Packages.virtualenv
     scrcpy
     seafile-client
+    seadrive-gui
     sshfs
     usbutils
     via
     vlc
     vscode
     wget
-    (ytmdesktop.override { commandLineArgs = "--password-store=gnome-libsecret"; })
+    (ytmdesktop.override {commandLineArgs = "--password-store=gnome-libsecret";})
     zed-editor
 
     (fooyin.overrideAttrs (old: {
@@ -59,7 +59,7 @@
         rev = "3791e370230281df069c23fd3b3cfafd6d5f1a8b";
         sha256 = "sha256-+1Ao45BM9cIOhoGQthkHj/CfcGjKGcqNqLSWIBjMmTQ=";
       };
-      patches = [ ];
+      patches = [];
       postPatch = "";
     }))
 

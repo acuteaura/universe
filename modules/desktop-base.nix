@@ -102,14 +102,7 @@
       libsecret
       nwg-look
       mission-center
-    ];
-
-    fonts.packages = with pkgs; [
-      # fonts
-      ibm-plex
-      inter
-      victor-mono
-      vegur
+      piper-tts
     ];
 
     hardware.sane.enable = true;
@@ -158,5 +151,8 @@
 
     services.hardware.bolt.enable = lib.mkDefault true;
     networking.firewall.trustedInterfaces = ["thunderbolt*"];
+
+    # If you want speechd integration system-wide
+    services.speechd.enable = true;
   };
 }

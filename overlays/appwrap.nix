@@ -1,20 +1,71 @@
-final: prev: {
-  claude-code-wrapped-claude = final.writeShellApplication {
-    name = "ccode-claude";
-    runtimeInputs = [final.claude-code];
-    text = ''
-      # Set up Claude environment variables
-      export CLAUDE_CONFIG_DIR="$HOME/.config/claude-code"
+final: prev: let
+  # Generic wrapper for claude-code with different configurations
+  mkClaudeWrapper = {
+    name,
+    configDir,
+    env ? {},
+    preScript ? "",
+    runtimeInputs ? [],
+    hardened ? true,
+  }:
+    final.writeShellApplication {
+      inherit name;
+      runtimeInputs =
+        [final.claude-code]
+        ++ runtimeInputs
+        ++ final.lib.optionals hardened [final.bubblewrap final.coreutils];
+      text = ''
+        ${preScript}
+        ${builtins.concatStringsSep "\n" (
+          builtins.attrValues (builtins.mapAttrs (k: v: ''export ${k}="${v}"'') env)
+        )}
+        export CLAUDE_CONFIG_DIR="${configDir}"
 
-      # Launch claude-code with the retrieved API key
-      exec claude "$@"
-    '';
+        ${
+          if hardened
+          then ''
+            # Ensure config dir exists
+            mkdir -p "$CLAUDE_CONFIG_DIR"
+
+            exec bwrap \
+              --ro-bind /nix /nix \
+              --ro-bind /etc /etc \
+              --ro-bind /run /run \
+              --ro-bind "$HOME/.config/fish" "$HOME/.config/fish" \
+              --proc /proc \
+              --dev /dev \
+              --bind "$(pwd)" "$(pwd)" \
+              --bind "$CLAUDE_CONFIG_DIR" "$CLAUDE_CONFIG_DIR" \
+              --bind "$HOME/.npm" "$HOME/.npm" \
+              --chdir "$(pwd)" \
+              --setenv HOME "$HOME" \
+              --setenv CLAUDE_CODE_SHELL "$SHELL" \
+              --unshare-pid \
+              --unshare-uts \
+              --unshare-cgroup \
+              --share-net \
+              --new-session \
+              --die-with-parent \
+              claude "$@"
+          ''
+          else ''
+            exec claude "$@"
+          ''
+        }
+      '';
+    };
+in {
+  inherit mkClaudeWrapper;
+
+  claude-code-wrapped-claude = mkClaudeWrapper {
+    name = "ccode-claude";
+    configDir = "$HOME/.config/claude-code";
   };
 
-  claude-code-wrapped-zai = final.writeShellApplication {
+  claude-code-wrapped-zai = mkClaudeWrapper {
     name = "ccode-zai";
-    runtimeInputs = [final.claude-code];
-    text = ''
+    configDir = "$HOME/.config/claude-zai";
+    preScript = ''
       # Check if op (1Password CLI) is available in PATH
       if ! command -v op &> /dev/null; then
           echo "Error: 'op' (1Password CLI) not found in PATH" >&2
@@ -22,21 +73,17 @@ final: prev: {
           exit 1
       fi
 
-      # Source the Z.AI API key from 1Password
-      ZAI_API_KEY=$(op read "op://agoz6xpan4yq6zkpzmfipbvab4/mpfrptyjsujjfw7gxd7z3geehi/password" || {
-          echo "Error: Failed to retrieve Z.AI API key from 1Password" >&2
+      # Retrieve API key from 1Password
+      ANTHROPIC_AUTH_TOKEN=$(op read "op://agoz6xpan4yq6zkpzmfipbvab4/mpfrptyjsujjfw7gxd7z3geehi/password") || {
+          echo "Error: Failed to retrieve API key from 1Password" >&2
           echo "Make sure you're signed in with 'op signin' or 'eval \$(op signin)'" >&2
           exit 1
-      })
-
-      # Set up Z.AI environment variables
-      export ANTHROPIC_AUTH_TOKEN="$ZAI_API_KEY"
-      export ANTHROPIC_BASE_URL="https://api.z.ai/api/anthropic"
-      export API_TIMEOUT_MS="3000000"
-      export CLAUDE_CONFIG_DIR="$HOME/.config/claude-zen"
-
-      # Launch claude-code with Z.AI configuration
-      exec claude "$@"
+      }
+      export ANTHROPIC_AUTH_TOKEN
     '';
+    env = {
+      ANTHROPIC_BASE_URL = "https://api.z.ai/api/anthropic";
+      API_TIMEOUT_MS = "3000000";
+    };
   };
 }

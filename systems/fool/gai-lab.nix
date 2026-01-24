@@ -15,17 +15,17 @@ in {
 
   universe.serviceContainers = {
     comfyui = {
-      enable = true;
-      autoStart = true;
+      enable = false;
+      autoStart = false;
       dataDir = "/media/gai/comfyui";
     };
 
     invokeai = {
-      enable = true;
+      enable = false;
       autoStart = false;
       dataDir = "/media/gai/invoke";
       image = "ghcr.io/invoke-ai/invokeai:main-rocm";
-      extraVolumes = ["/media/tensors:/media/tensors"];
+      extraVolumes = [];
     };
 
     koboldcpp = {
@@ -50,7 +50,7 @@ in {
     };
 
     sillytavern = {
-      enable = true;
+      enable = false;
       autoStart = true;
       dataDir = "/media/gai/sillytavern";
     };

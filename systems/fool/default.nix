@@ -73,10 +73,6 @@
     games.fuckUpMyKernelForSteamVR = false;
   };
 
-  environment.systemPackages = with pkgs; [
-    claude-sandboxed
-  ];
-
   # Network
   networking = {
     hostId = "e4d619e1";

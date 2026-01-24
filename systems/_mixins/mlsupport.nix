@@ -5,6 +5,7 @@
     python3Packages.kokoro
     whisper-cpp
     uv
+    sox
   ];
 
   # Enable nix-ld for running dynamic executables

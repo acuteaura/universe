@@ -60,6 +60,8 @@
       zen = inputs.zen-browser.packages.${system}.default;
       kwin-effects-better-blur-dx-wayland = inputs.kwin-effects-better-blur-dx.packages.${system}.default;
       affinity = inputs.affinity-nix.packages.${system};
+      michroma = prev.callPackage ./packages/michroma.nix {};
+      nix-snowflake-pride = prev.callPackage ./packages/nix-snowflake-pride.nix {};
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       inherit (nixpkgs.lib) getName;

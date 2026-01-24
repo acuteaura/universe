@@ -6,7 +6,6 @@
   environment.systemPackages = with pkgs; [
     brave
     firefox
-    librewolf
     chromium
     zen
   ];

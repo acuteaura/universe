@@ -8,6 +8,20 @@
   system ? "x86_64-linux",
 }: let
   defaultSystem = system;
+  codeNameMap = {
+    "25.11" = "Zacynthus";
+    "26.05" = "Ancyor";
+    "26.11" = "Bucolion";
+    "27.05" = "Ceteus";
+    "27.11" = "Daseatas";
+  };
+  lib = nixpkgs.lib.extend (final: prev: {
+    trivial =
+      prev.trivial
+      // {
+        codeName = codeNameMap.${prev.trivial.release} or prev.trivial.codeName;
+      };
+  });
 in
   {
     nixos-imports ? [],
@@ -17,6 +31,7 @@ in
     system ? defaultSystem,
   }:
     nixpkgs.lib.nixosSystem {
+      inherit lib;
       specialArgs =
         extraSpecialArgs
         // {
@@ -27,6 +42,13 @@ in
         [
           nixpkgsConfig
           universe
+          ({pkgs, ...}: {
+            system.nixos = {
+              distroName = "Nix® for Lesbians";
+              extraOSReleaseArgs.LOGO = "nix-snowflake-rainbow";
+            };
+            environment.systemPackages = [pkgs.nix-snowflake-pride];
+          })
           home-manager.nixosModules.home-manager
           (import ./basehm.nix {
             inherit
