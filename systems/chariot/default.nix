@@ -21,7 +21,7 @@
   universe = {
     kernel = {
       enable = true;
-      cachyos = true;
+      cachyos = false;
     };
     desktop-plasma.enable = true;
     amdgpu.enable = true;

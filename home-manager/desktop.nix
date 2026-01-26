@@ -26,11 +26,11 @@
     gnupg
     gnused
     gparted
-    handbrake
+    #handbrake
     haruna
     htop
     junction
-    kdePackages.kdenlive
+    #kdePackages.kdenlive
     llvm
     lmstudio
     moonlight-qt
