@@ -103,6 +103,16 @@
       nwg-look
       mission-center
       piper-tts
+
+      (bitwarden-desktop.overrideAttrs (old: {
+        nativeBuildInputs = old.nativeBuildInputs or [] ++ [makeWrapper];
+        postFixup =
+          (old.postFixup or "")
+          + ''
+            wrapProgram $out/bin/bitwarden --add-flags "--password-store=gnome-libsecret"
+          '';
+      }))
+      bitwarden-cli
     ];
 
     hardware.sane.enable = true;

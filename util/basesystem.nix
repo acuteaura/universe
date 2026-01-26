@@ -44,7 +44,12 @@ in
           universe
           ({pkgs, ...}: {
             system.nixos = {
-              distroName = "Nix® for Lesbians";
+              # 1password bonked me for this
+              # no fun allowed
+              # queer erasure
+              # etc.
+              #
+              #distroName = "Nix® for Lesbians";
               extraOSReleaseArgs.LOGO = "nix-snowflake-rainbow";
             };
             environment.systemPackages = [pkgs.nix-snowflake-pride];

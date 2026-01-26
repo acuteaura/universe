@@ -74,13 +74,4 @@
 
     # tools that are usually available on system when using HM standlone
   ];
-
-  home.file.".config/kwalletrc".text = ''
-    [Wallet]
-    Enabled=false
-  '';
-
-  home.sessionVariables = {
-    CLAUDE_CODE_EXECUTABLE = "${pkgs.claude-code-wrapped-claude}/bin/claude-code";
-  };
 }
