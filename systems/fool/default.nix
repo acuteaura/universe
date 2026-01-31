@@ -1,8 +1,8 @@
 {
   pkgs,
-  lib,
   ...
-}: {
+}:
+{
   imports = [
     ../_mixins/browsers.nix
     ../_mixins/containers.nix
@@ -19,7 +19,6 @@
     ./hardware.nix
     ./vfio.nix
     ./smb.nix
-    ./gai-lab.nix
 
     ../_mixins/mlsupport.nix
   ];
@@ -29,8 +28,8 @@
     openFirewall = true;
   };
 
-  users.users.sapphiccode.extraGroups = ["users"];
-  users.users.aurelia.extraGroups = ["users"];
+  users.users.sapphiccode.extraGroups = [ "users" ];
+  users.users.aurelia.extraGroups = [ "users" ];
 
   # BOOT
   #########################################
@@ -63,7 +62,6 @@
     kernel.enable = true;
     desktop-plasma.enable = true;
     desktop-niri.enable = true;
-    zed-quicksand.enable = true;
     amdgpu = {
       enable = true;
     };
@@ -110,7 +108,7 @@
   };
   services.resolved = {
     enable = true;
-    fallbackDns = [];
+    settings.Resolve.FallbackDNS = [ ];
   };
   systemd.network = {
     enable = true;
@@ -135,7 +133,7 @@
       };
       "90-br0" = {
         matchConfig.Name = "br0";
-        bridgeConfig = {};
+        bridgeConfig = { };
         networkConfig = {
           DHCP = "yes";
           IgnoreCarrierLoss = "yes";

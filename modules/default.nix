@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./amdgpu.nix
     ./apps.nix
@@ -14,8 +15,5 @@
     ./libvirt.nix
     ./sunshine
     ./wine.nix
-    ./zed-quicksand.nix
-
-    ./servicecontainers
   ];
 }

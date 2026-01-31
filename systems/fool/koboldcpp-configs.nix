@@ -1,8 +1,11 @@
-{pkgs}: let
+# deprecated, for reference only
+{ pkgs }:
+let
   # KoboldCpp .kcpps config files for admin mode model switching
   # Imports generated model maps from koboldcpp-models.nix
   # Helper function to generate .kcpps config files
-  makeKcppsConfig = name: args:
+  makeKcppsConfig =
+    name: args:
     pkgs.writeTextFile {
       name = "${name}.kcpps";
       text = builtins.toJSON args;
@@ -34,24 +37,27 @@
     filename = models.main.${name};
   }) (builtins.attrNames models.main);
 
-  allConfigs =
-    map (
-      model:
-        makeKcppsConfig model.name (baseSettings
-          // commonModels
-          // {
-            model = "/workspace/main/${model.filename}";
-          })
+  allConfigs = map (
+    model:
+    makeKcppsConfig model.name (
+      baseSettings
+      // commonModels
+      // {
+        model = "/workspace/main/${model.filename}";
+      }
     )
-    mainModelsList;
+  ) mainModelsList;
 
   # Create a single directory with all config files
   # This will be installed to /run/current-system and can be referenced statically
-  configsDir = pkgs.runCommand "koboldcpp-configs" {} ''
+  configsDir = pkgs.runCommand "koboldcpp-configs" { } ''
     mkdir -p $out/share/koboldcpp/configs
-    ${builtins.concatStringsSep "\n" (map (cfg: "cp ${cfg} $out/share/koboldcpp/configs/${cfg.name}") allConfigs)}
+    ${builtins.concatStringsSep "\n" (
+      map (cfg: "cp ${cfg} $out/share/koboldcpp/configs/${cfg.name}") allConfigs
+    )}
   '';
-in {
+in
+{
   # Export the configs directory for use in system configuration
   inherit configsDir;
 }
