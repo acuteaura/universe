@@ -2,7 +2,6 @@ let
   chromeExtensions = {
     ExtensionInstallForcelist = [
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin; Chrome Web Store
-      "nngceckbapebfimnlniiiahkandclblb" # bitwarden
       "cdglnehniifkbagbbombnjghhcihifij" # Kagi
     ];
   };

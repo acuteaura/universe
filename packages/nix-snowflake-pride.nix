@@ -5,7 +5,7 @@
   librsvg,
 }:
 stdenvNoCC.mkDerivation {
-  pname = "nix-snowflake-pride";
+  pname = "lesbiannixos-icon";
   version = "0-unstable-2024-02-05";
 
   src = fetchurl {
@@ -22,10 +22,10 @@ stdenvNoCC.mkDerivation {
 
     for size in 16 22 24 32 48 64 128 256; do
       mkdir -p $out/share/icons/hicolor/''${size}x''${size}/apps/
-      rsvg-convert $src -w $size -h $size -o $out/share/icons/hicolor/''${size}x''${size}/apps/fucking-plasma-nix-snowflake-rainbow.png
+      rsvg-convert $src -w $size -h $size -o $out/share/icons/hicolor/''${size}x''${size}/apps/lesbiannixos.png
     done
 
-    install -D -m444 $src $out/share/icons/hicolor/scalable/apps/fucking-plasma-nix-snowflake-rainbow.svg
+    install -D -m444 $src $out/share/icons/hicolor/scalable/apps/lesbiannixos.svg
 
     runHook postInstall
   '';

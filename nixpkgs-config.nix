@@ -21,6 +21,7 @@
         "lmstudio"
         "obsidian"
         "rose-pine-kvantum"
+        "spotify"
         "steam"
         "steam-jupiter-unwrapped"
         "steam-unwrapped"
@@ -39,10 +40,9 @@
     [
       (import ./overlays/appwrap.nix)
       (import ./overlays/brave.nix)
-      (import ./overlays/claude-sandboxed.nix)
-      (import ./overlays/fix-python3.nix)
-      (import ./overlays/pin-versions.nix)
-      (import ./overlays/plasma-hackfix.nix)
+      (import ./overlays/fix-plasma-paths.nix)
+      (import ./overlays/fooyin.nix)
+      (import ./overlays/tempfixes.nix)
     ]
     ++ extraOverlays;
 }

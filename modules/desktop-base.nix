@@ -4,11 +4,14 @@
   config,
   ...
 }: {
-  imports = [
-  ];
-
   options.universe.desktop-base = {
     enable = lib.mkEnableOption "Enable desktop base configuration";
+    bluetoothBredr = lib.mkEnableOption "Enable Bluetooth BR/EDR only mode (disables BLE)";
+    printing = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable printing support";
+    };
   };
 
   config = lib.mkIf config.universe.desktop-base.enable {
@@ -21,16 +24,21 @@
     universe.emulators.enable = lib.mkDefault true;
     universe.wine.enable = lib.mkDefault true;
 
+    programs.appimage = {
+      enable = lib.mkDefault true;
+      binfmt = lib.mkDefault false;
+    };
+
     # desktops need to be responsive
-    nix.daemonCPUSchedPolicy = "idle";
-    nix.daemonIOSchedClass = "idle";
+    nix.daemonCPUSchedPolicy = lib.mkDefault "idle";
+    nix.daemonIOSchedClass = lib.mkDefault "idle";
 
     # might be needed for xwayland?
-    services.xserver.enable = true;
-    services.xserver.excludePackages = [pkgs.xterm];
-    services.xserver.desktopManager.xterm.enable = false;
+    services.xserver.enable = lib.mkDefault true;
+    services.xserver.excludePackages = lib.mkDefault [pkgs.xterm];
+    services.xserver.desktopManager.xterm.enable = lib.mkDefault false;
 
-    services.flatpak.enable = true;
+    services.flatpak.enable = lib.mkDefault true;
 
     services.displayManager = {
       defaultSession = lib.mkDefault "plasma";
@@ -51,18 +59,17 @@
       jack.enable = lib.mkDefault false;
     };
     hardware.bluetooth.enable = lib.mkDefault true;
-    # hardware.bluetooth.settings = {
-    #   General = {
-    #     ControllerMode = "bredr";
-    #   };
-    # };
+    hardware.bluetooth.settings.General.ControllerMode =
+      lib.mkIf config.universe.desktop-base.bluetoothBredr "bredr";
 
     # prevents AirPods being stolen back by bluez when requesting connection elsewhere
     hardware.bluetooth.settings.Policy.ReconnectAttempts = 0;
 
-    # Ancillary services
+    # smart card support
     services.pcscd.enable = lib.mkDefault true;
+    # gnome virtual file system
     services.gvfs.enable = lib.mkDefault true;
+    # dbus thumbnailer
     services.tumbler.enable = lib.mkDefault true;
 
     services.avahi = {
@@ -70,13 +77,13 @@
       openFirewall = lib.mkDefault true;
     };
 
-    services.printing.enable = true;
-    services.printing.drivers = with pkgs; [
+    services.printing.enable = config.universe.desktop-base.printing;
+    services.printing.drivers = lib.mkIf config.universe.desktop-base.printing (with pkgs; [
       cups-filters
       cups-browsed
       epson-escpr2
       epson-escpr
-    ];
+    ]);
 
     programs._1password.enable = true;
     programs._1password-gui = {
@@ -103,16 +110,6 @@
       nwg-look
       mission-center
       piper-tts
-
-      (bitwarden-desktop.overrideAttrs (old: {
-        nativeBuildInputs = old.nativeBuildInputs or [] ++ [makeWrapper];
-        postFixup =
-          (old.postFixup or "")
-          + ''
-            wrapProgram $out/bin/bitwarden --add-flags "--password-store=gnome-libsecret"
-          '';
-      }))
-      bitwarden-cli
     ];
 
     hardware.sane.enable = true;
@@ -162,7 +159,6 @@
     services.hardware.bolt.enable = lib.mkDefault true;
     networking.firewall.trustedInterfaces = ["thunderbolt*"];
 
-    # If you want speechd integration system-wide
     services.speechd.enable = true;
   };
 }

@@ -22,11 +22,6 @@
       openFirewall = true;
     };
 
-    programs.appimage = {
-      enable = true;
-      binfmt = false;
-    };
-
     programs.thunar = {
       enable = false;
       plugins = with pkgs.xfce; [
