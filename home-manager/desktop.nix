@@ -2,6 +2,7 @@
   imports = [
     ./creative.nix
     ./flatpak.nix
+    ./zed.nix
   ];
 
   home.packages = with pkgs; [
@@ -50,7 +51,6 @@
     vscode
     wget
     (ytmdesktop.override {commandLineArgs = "--password-store=gnome-libsecret";})
-    zed-editor
 
     fooyin
 

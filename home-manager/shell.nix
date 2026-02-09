@@ -13,6 +13,7 @@
       clang
       claude-code-acp
       claude-code-wrapped-claude
+      claude-code-wrapped-claude-hardened
       claude-code-wrapped-zai
       clusterctl
       deno

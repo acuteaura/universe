@@ -37,12 +37,6 @@
       ];
   };
   nixpkgs.overlays =
-    [
-      (import ./overlays/appwrap.nix)
-      (import ./overlays/brave.nix)
-      (import ./overlays/fix-plasma-paths.nix)
-      (import ./overlays/fooyin.nix)
-      (import ./overlays/tempfixes.nix)
-    ]
+    import ./overlays
     ++ extraOverlays;
 }

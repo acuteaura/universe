@@ -1,8 +1,4 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   imports = [
     ../_mixins/browsers.nix
     ../_mixins/containers.nix
@@ -19,17 +15,13 @@
     ./hardware.nix
     ./vfio.nix
     ./smb.nix
+    ./vr.nix
 
     ../_mixins/mlsupport.nix
   ];
 
-  programs.alvr = {
-    enable = true;
-    openFirewall = true;
-  };
-
-  users.users.sapphiccode.extraGroups = [ "users" ];
-  users.users.aurelia.extraGroups = [ "users" ];
+  users.users.sapphiccode.extraGroups = ["users"];
+  users.users.aurelia.extraGroups = ["users"];
 
   # BOOT
   #########################################
@@ -68,7 +60,7 @@
     libvirt = {
       enable = true;
     };
-    games.fuckUpMyKernelForSteamVR = false;
+    games.fuckUpMyKernelForSteamVR = true;
   };
 
   # Network
@@ -108,7 +100,7 @@
   };
   services.resolved = {
     enable = true;
-    settings.Resolve.FallbackDNS = [ ];
+    settings.Resolve.FallbackDNS = [];
   };
   systemd.network = {
     enable = true;
@@ -133,7 +125,7 @@
       };
       "90-br0" = {
         matchConfig.Name = "br0";
-        bridgeConfig = { };
+        bridgeConfig = {};
         networkConfig = {
           DHCP = "yes";
           IgnoreCarrierLoss = "yes";

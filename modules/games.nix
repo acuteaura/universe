@@ -42,7 +42,15 @@
       MESA_SHADER_CACHE_MAX_SIZE = "10G";
     };
 
-    programs.steam = {
+    programs.steam = let
+      patchedBwrap = pkgs.bubblewrap.overrideAttrs (o: {
+        patches =
+          (o.patches or [])
+          ++ [
+            ./bwrap.patch
+          ];
+      });
+    in {
       enable = lib.mkDefault true;
       protontricks.enable = lib.mkDefault true;
       localNetworkGameTransfers.openFirewall = lib.mkDefault true;

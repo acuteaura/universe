@@ -6,7 +6,7 @@ final: prev: let
     env ? {},
     preScript ? "",
     runtimeInputs ? [],
-    hardened ? true,
+    hardened ? false,
   }:
     final.writeShellApplication {
       inherit name;
@@ -59,6 +59,11 @@ in {
 
   claude-code-wrapped-claude = mkClaudeWrapper {
     name = "ccode-claude";
+    configDir = "$HOME/.config/claude-code";
+  };
+
+  claude-code-wrapped-claude-hardened = mkClaudeWrapper {
+    name = "ccode-claude-hardened";
     configDir = "$HOME/.config/claude-code";
   };
 
