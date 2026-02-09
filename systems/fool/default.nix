@@ -60,7 +60,7 @@
     libvirt = {
       enable = true;
     };
-    games.fuckUpMyKernelForSteamVR = true;
+    games.fuckUpMyKernelForSteamVR = false;
   };
 
   # Network
