@@ -71,6 +71,9 @@
       yt-dlp
       zellij
       zstd
+
+      macchina
+      fastfetch
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       bash
@@ -95,4 +98,10 @@
       usbutils
       hdparm
     ];
+
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+    enableZshIntegration = true;
+  };
 }

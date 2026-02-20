@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   home.packages = with pkgs; [
     b612
     dm-mono
@@ -6,8 +6,8 @@
     inter
     michroma
     vegur
+    nerd-fonts.iosevka
     victor-mono
   ];
   fonts.fontconfig.enable = true;
-  xdg.configFile."fontconfig/conf.d/10-hm-fonts.conf".force = true;
 }

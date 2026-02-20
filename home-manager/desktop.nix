@@ -63,6 +63,7 @@
       ];
     })
 
-    # tools that are usually available on system when using HM standlone
+    playwright-mcp
+    mcp-nixos
   ];
 }

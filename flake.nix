@@ -168,6 +168,7 @@
                 ./home-manager/shell.nix
                 ./home-manager/fonts.nix
                 ./home-manager/desktop.nix
+                ./home-manager/zed.nix
               ];
               home-manager-username = "aurelia";
               home-manager-homedir = "/home/aurelia";
@@ -181,6 +182,8 @@
               home-manager-imports = [
                 nixpkgsConfig
                 ./home-manager/shell.nix
+                ./home-manager/fonts.nix
+                ./home-manager/zed.nix
               ];
               home-manager-username = "aurelia";
               home-manager-homedir = "/Users/aurelia";

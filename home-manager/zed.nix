@@ -67,6 +67,11 @@
       ui_font_size = 16;
       buffer_font_size = 15;
 
+      terminal = {
+        font_family = "Iosevka Nerd Font Mono";
+        font_size = 15;
+      };
+
       # TODO: ensure this is somehow packaged in chezmoi or home-manager
       buffer_font_family = "TX-02";
 
