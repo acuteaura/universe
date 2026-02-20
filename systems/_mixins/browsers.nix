@@ -8,6 +8,7 @@
     firefox
     chromium
     zen
+    helium
   ];
 
   environment.etc."brave/policies/managed/brave.json".text =
@@ -22,6 +23,7 @@
   environment.etc."1password/custom_allowed_browsers" = {
     text = ''
       zen
+      helium
     '';
     mode = "0755";
   };

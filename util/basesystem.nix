@@ -9,11 +9,7 @@
 }: let
   defaultSystem = system;
   codeNameMap = {
-    "25.11" = "Zacynthus";
     "26.05" = "Ancyor";
-    "26.11" = "Bucolion";
-    "27.05" = "Ceteus";
-    "27.11" = "Daseatas";
   };
   lib = nixpkgs.lib.extend (final: prev: {
     trivial =
@@ -49,8 +45,11 @@ in
               # queer erasure
               # etc.
               #
-              #distroName = "Nix® for Lesbians";
-              extraOSReleaseArgs.LOGO = "nix-snowflake-rainbow";
+              distroName = "Nix for Lesbians";
+              extraOSReleaseArgs = {
+                LOGO = "lesbiannixos";
+                PRETTY_NAME = "Nix® for Lesbians";
+              };
             };
             environment.systemPackages = [pkgs.nix-snowflake-pride];
           })

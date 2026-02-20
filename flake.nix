@@ -31,14 +31,17 @@
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    affinity-nix.url = "github:mrshmllow/affinity-nix";
-    eden.url = "github:acuteaura-forks/eden-flake";
-
-    mistral-vibe = {
-      url = "github:mistralai/mistral-vibe";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+    affinity-nix = {
+      url = "github:mrshmllow/affinity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    eden = {
+      url = "github:acuteaura-forks/eden-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    helium = {
+      url = "github:AlvaroParker/helium-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     kwin-effects-better-blur-dx = {
       url = "github:xarblu/kwin-effects-better-blur-dx";
@@ -46,44 +49,39 @@
     };
   };
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      nix-flatpak,
-      ...
-    }:
-    let
-      packageOverlay =
-        final: prev:
-        let
-          inherit (final.stdenv.hostPlatform) system;
-        in
-        {
-          mistral-vibe = inputs.mistral-vibe.packages.${system}.default;
-          zen = inputs.zen-browser.packages.${system}.default;
-          kwin-effects-better-blur-dx-wayland = inputs.kwin-effects-better-blur-dx.packages.${system}.default;
-          affinity = inputs.affinity-nix.packages.${system};
-          michroma = prev.callPackage ./packages/michroma.nix { };
-          nix-snowflake-pride = prev.callPackage ./packages/nix-snowflake-pride.nix { };
-        };
-      nixpkgsConfig = import ./nixpkgs-config.nix {
-        inherit (nixpkgs.lib) getName;
-        extraOverlays = [
-          packageOverlay
-        ];
-      };
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    nix-flatpak,
+    ...
+  }: let
+    packageOverlay = final: prev: let
+      inherit (final.stdenv.hostPlatform) system;
+    in {
+      zen = inputs.zen-browser.packages.${system}.default;
+      kwin-effects-better-blur-dx-wayland = inputs.kwin-effects-better-blur-dx.packages.${system}.default;
+      affinity = inputs.affinity-nix.packages.${system};
+      michroma = prev.callPackage ./packages/michroma.nix {};
+      nix-snowflake-pride = prev.callPackage ./packages/nix-snowflake-pride.nix {};
+      helium = inputs.helium.packages.${system}.default;
+    };
+    nixpkgsConfig = import ./nixpkgs-config.nix {
+      inherit (nixpkgs.lib) getName;
+      extraOverlays = [
+        packageOverlay
+      ];
+    };
 
-      baseSystem = import ./util/basesystem.nix {
-        inherit
-          nixpkgs
-          home-manager
-          nixpkgsConfig
-          ;
-        inherit (self.nixosModules) constants universe;
-      };
-    in
+    baseSystem = import ./util/basesystem.nix {
+      inherit
+        nixpkgs
+        home-manager
+        nixpkgsConfig
+        ;
+      inherit (self.nixosModules) constants universe;
+    };
+  in
     {
       nixosConfigurations = {
         cyberdaemon = baseSystem {
@@ -143,69 +141,65 @@
           ];
         };
       };
-      homeConfigurations =
-        let
-          nix-flatpak-module = nix-flatpak.homeManagerModules.nix-flatpak;
-        in
-        {
-          shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            modules = [
-              (import ./util/basehmuser.nix {
-                home-manager-imports = [
-                  nixpkgsConfig
-                  nix-flatpak-module
-                  ./home-manager/shell.nix
-                ];
-                home-manager-username = "aurelia";
-                home-manager-homedir = "/home/aurelia";
-              })
-            ];
-          };
-          desktop-x86_64-linux = home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages.x86_64-linux;
-            modules = [
-              (import ./util/basehmuser.nix {
-                home-manager-imports = [
-                  nixpkgsConfig
-                  nix-flatpak-module
-                  ./home-manager/shell.nix
-                  ./home-manager/fonts.nix
-                  ./home-manager/desktop.nix
-                ];
-                home-manager-username = "aurelia";
-                home-manager-homedir = "/home/aurelia";
-              })
-            ];
-          };
-          shell-aarch64-darwin = home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-            modules = [
-              (import ./util/basehmuser.nix {
-                home-manager-imports = [
-                  nixpkgsConfig
-                  ./home-manager/shell.nix
-                ];
-                home-manager-username = "aurelia";
-                home-manager-homedir = "/Users/aurelia";
-              })
-            ];
-          };
+      homeConfigurations = let
+        nix-flatpak-module = nix-flatpak.homeManagerModules.nix-flatpak;
+      in {
+        shell-x86_64-linux = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          modules = [
+            (import ./util/basehmuser.nix {
+              home-manager-imports = [
+                nixpkgsConfig
+                nix-flatpak-module
+                ./home-manager/shell.nix
+              ];
+              home-manager-username = "aurelia";
+              home-manager-homedir = "/home/aurelia";
+            })
+          ];
         };
+        desktop-x86_64-linux = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          modules = [
+            (import ./util/basehmuser.nix {
+              home-manager-imports = [
+                nixpkgsConfig
+                nix-flatpak-module
+                ./home-manager/shell.nix
+                ./home-manager/fonts.nix
+                ./home-manager/desktop.nix
+              ];
+              home-manager-username = "aurelia";
+              home-manager-homedir = "/home/aurelia";
+            })
+          ];
+        };
+        shell-aarch64-darwin = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          modules = [
+            (import ./util/basehmuser.nix {
+              home-manager-imports = [
+                nixpkgsConfig
+                ./home-manager/shell.nix
+              ];
+              home-manager-username = "aurelia";
+              home-manager-homedir = "/Users/aurelia";
+            })
+          ];
+        };
+      };
       nixosModules = {
         constants = import ./constants;
         universe = import ./modules;
       };
     }
     // inputs.flake-utils.lib.eachDefaultSystem (
-      system:
-      let
+      system: let
         pkgs = import nixpkgs {
           inherit system;
           inherit (nixpkgsConfig.nixpkgs) config overlays;
         };
-      in
-      {
+      in {
         formatter = pkgs.alejandra;
 
         apps.lint = {

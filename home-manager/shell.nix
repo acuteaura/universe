@@ -3,6 +3,7 @@
     [
       (azure-cli.withExtensions [])
       act
+      age
       age-plugin-yubikey
       android-tools
       atuin
@@ -42,7 +43,7 @@
       lzip
       micro
       minikube
-      mistral-vibe
+      minisign
       ncdu
       neovim
       nmap
@@ -84,7 +85,6 @@
       binwalk
 
       distrobox
-      docker-machine-kvm2
 
       # hardware tools
       dmidecode
