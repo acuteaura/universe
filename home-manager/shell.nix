@@ -8,6 +8,8 @@
       android-tools
       atuin
       bandwhich
+      bat
+      binwalk
       bun
       chezmoi
       cilium-cli
@@ -20,8 +22,13 @@
       deno
       devbox
       direnv
+      dust
+      eza
+      fastfetch
+      fd
       ffmpeg
       fly
+      fzf
       gh
       git-annex
       go
@@ -41,11 +48,13 @@
       kustomize
       lima
       lzip
+      macchina
       micro
       minikube
       minisign
       ncdu
       neovim
+      nix-output-monitor
       nmap
       nodejs_22
       nushell
@@ -54,7 +63,9 @@
       pgo-client
       rclone
       restic
+      ripgrep
       rustup
+      sd
       semgrep
       socat
       sqlite
@@ -71,13 +82,11 @@
       yt-dlp
       zellij
       zstd
-
-      macchina
-      fastfetch
     ]
     ++ lib.optionals pkgs.stdenv.isDarwin [
       bash
       qemu
+      fish
 
       colima
       docker-client
@@ -85,7 +94,6 @@
       docker-credential-helpers
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
-      binwalk
 
       distrobox
 

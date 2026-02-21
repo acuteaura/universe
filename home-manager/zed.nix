@@ -22,11 +22,9 @@
 
     userSettings = {
       # we don't want predictions, and if we want them we want them subtle
-      features = {
-        edit_prediction_provider = "copilot";
-      };
       edit_predictions = {
-        mode = "eager";
+        "provider" = "copilot";
+        "mode" = "subtle";
       };
 
       # configure LLMs
@@ -68,8 +66,8 @@
       buffer_font_size = 15;
 
       terminal = {
-        font_family = "Iosevka Nerd Font Mono";
-        font_size = 15;
+        font_family = "TX02 Nerd Font";
+        font_size = 13;
       };
 
       # TODO: ensure this is somehow packaged in chezmoi or home-manager
