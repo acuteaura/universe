@@ -140,6 +140,15 @@
             ./home-manager/shell.nix
           ];
         };
+        meowbaseone = baseSystem {
+          system = "aarch64-linux";
+          nixos-imports = [
+            ./systems/meowbaseone
+          ];
+          home-manager-imports = [
+            ./home-manager/shell.nix
+          ];
+        };
       };
       homeConfigurations = let
         nix-flatpak-module = nix-flatpak.homeManagerModules.nix-flatpak;

@@ -6,6 +6,7 @@
       age
       age-plugin-yubikey
       android-tools
+      attic-client
       atuin
       bandwhich
       bat
