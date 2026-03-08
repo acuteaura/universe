@@ -24,6 +24,7 @@
       devbox
       direnv
       dust
+      exiftool
       eza
       fastfetch
       fd
@@ -37,6 +38,7 @@
       hcloud
       helm-docs
       hyfetch
+      imagemagick
       iperf
       jq
       just
@@ -95,7 +97,6 @@
       docker-credential-helpers
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
-
       distrobox
 
       # hardware tools
