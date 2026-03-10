@@ -14,7 +14,7 @@
     ./orbstack.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.kernelPackages = pkgs.linuxPackages_6_19;
 
   users.users.aurelia = {
     uid = 501;

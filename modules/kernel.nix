@@ -17,7 +17,7 @@
     boot.kernelPackages =
       if config.universe.kernel.cachyos
       then pkgs.linuxPackages_cachyos
-      else pkgs.linuxPackages_6_18;
+      else pkgs.linuxPackages_6_19;
     boot.zfs.package =
       if config.universe.kernel.cachyos
       then pkgs.zfs_cachyos
