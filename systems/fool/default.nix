@@ -111,6 +111,19 @@
           Name = "br0";
         };
       };
+      "20-br20" = {
+        netdevConfig = {
+          Kind = "bridge";
+          Name = "br20";
+        };
+      };
+      "20-vlan20" = {
+        netdevConfig = {
+          Kind = "vlan";
+          Name = "vlan20";
+        };
+        vlanConfig.Id = 20;
+      };
     };
     networks = {
       "50-eno1" = {
@@ -126,6 +139,7 @@
       "90-br0" = {
         matchConfig.Name = "br0";
         bridgeConfig = {};
+        vlan = ["vlan20"];
         networkConfig = {
           DHCP = "yes";
           IgnoreCarrierLoss = "yes";
@@ -137,6 +151,16 @@
           MACAddress = "08:bf:b8:19:16:f5";
           RequiredForOnline = "carrier";
         };
+      };
+      "91-vlan20" = {
+        matchConfig.Name = "vlan20";
+        networkConfig.Bridge = "br20";
+        linkConfig.RequiredForOnline = "no";
+      };
+      "92-br20" = {
+        matchConfig.Name = "br20";
+        bridgeConfig = {};
+        linkConfig.RequiredForOnline = "no";
       };
     };
   };

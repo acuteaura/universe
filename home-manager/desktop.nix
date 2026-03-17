@@ -16,6 +16,7 @@
     curl
     dig
     easyeffects
+    fedistar
     ffmpeg
     file
     fish
