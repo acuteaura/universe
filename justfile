@@ -34,6 +34,16 @@ switch *FLAGS:
 boot *FLAGS:
     @just rebuild boot {{ FLAGS }}
 
+update:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if ! git diff --quiet || ! git diff --cached --quiet; then
+        echo "Git working tree is not clean, aborting." >&2
+        exit 1
+    fi
+    nix flake update
+    just push
+
 update-dependencies:
     nix flake update nixpkgs home-manager chaotic
     nix flake archive
