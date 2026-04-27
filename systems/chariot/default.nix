@@ -3,6 +3,7 @@
     ../_mixins/browsers.nix
     ../_mixins/containers.nix
     ../_mixins/mounts.nix
+    ../_mixins/xrdp.nix
 
     ../_mixins/user-aurelia.nix
 
@@ -26,6 +27,9 @@
     desktop-plasma.enable = true;
     amdgpu.enable = true;
     libvirt.enable = true;
+
+    emulators.enable = false;
+    games.enable = false;
   };
 
   # Network

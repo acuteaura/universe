@@ -9,10 +9,8 @@
       "just"
       "log"
       "make"
-      "mcp-server-github"
       "nix"
       "nu"
-      "postgres-context-server"
       "rose-pine-theme"
       "terraform"
       "toml"
@@ -25,19 +23,6 @@
       edit_predictions = {
         "provider" = "copilot";
         "mode" = "subtle";
-      };
-
-      # configure LLMs
-      # we want some degree of control here, but claude still beats them benchmarks
-      agent = {
-        inline_assistant_model = {
-          provider = "copilot_chat";
-          model = "claude-opus-4.5";
-        };
-        default_model = {
-          provider = "copilot_chat";
-          model = "claude-opus-4.5";
-        };
       };
 
       # we can just use tailscale hostnames here
@@ -55,6 +40,24 @@
           projects = [];
         }
       ];
+
+      agent_servers = {
+        Claude = {
+          type = "custom";
+          command = "/etc/profiles/per-user/aurelia/bin/claude-agent-acp";
+        };
+      };
+
+      agent = {
+        default_model = {
+          model = "claude-opus-4.5";
+          provider = "copilot_chat";
+        };
+        inline_assistant_model = {
+          model = "claude-opus-4.5";
+          provider = "copilot_chat";
+        };
+      };
 
       # shush
       telemetry = {

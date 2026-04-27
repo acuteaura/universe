@@ -27,20 +27,8 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    affinity-nix = {
-      url = "github:mrshmllow/affinity-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     eden = {
       url = "github:acuteaura-forks/eden-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    helium = {
-      url = "github:AlvaroParker/helium-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     kwin-effects-better-blur-dx = {
@@ -61,7 +49,6 @@
     in {
       zen = inputs.zen-browser.packages.${system}.default;
       kwin-effects-better-blur-dx-wayland = inputs.kwin-effects-better-blur-dx.packages.${system}.default;
-      affinity = inputs.affinity-nix.packages.${system};
       michroma = prev.callPackage ./packages/michroma.nix {};
       nix-snowflake-pride = prev.callPackage ./packages/nix-snowflake-pride.nix {};
       helium = inputs.helium.packages.${system}.default;

@@ -11,7 +11,6 @@
       withVencord = true;
     })
 
-    btop
     cryptsetup
     curl
     dig
@@ -28,13 +27,8 @@
     gnupg
     gnused
     gparted
-    #handbrake
-    haruna
     htop
-    junction
-    #kdePackages.kdenlive
     llvm
-    lmstudio
     moonlight-qt
     ocs-url
     openssl
@@ -51,20 +45,17 @@
     vlc
     vscode
     wget
-    (ytmdesktop.override {commandLineArgs = "--password-store=gnome-libsecret";})
+    #(ytmdesktop.override {commandLineArgs = "--password-store=gnome-libsecret";})
 
     fooyin
 
-    (wrapOBS {
-      plugins = with pkgs.obs-studio-plugins; [
-        obs-vaapi
-        obs-vkcapture
-        obs-gstreamer
-        obs-pipewire-audio-capture
-      ];
-    })
-
-    playwright-mcp
-    mcp-nixos
+    # (wrapOBS {
+    #   plugins = with pkgs.obs-studio-plugins; [
+    #     obs-vaapi
+    #     obs-vkcapture
+    #     obs-gstreamer
+    #     obs-pipewire-audio-capture
+    #   ];
+    # })
   ];
 }

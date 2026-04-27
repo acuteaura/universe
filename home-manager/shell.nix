@@ -12,13 +12,13 @@
       bat
       binwalk
       bun
+      btop
       chezmoi
       cilium-cli
       clang
-      claude-code-acp
+      claude-agent-acp
       claude-code-wrapped-claude
       claude-code-wrapped-claude-hardened
-      claude-code-wrapped-zai
       clusterctl
       deno
       devbox

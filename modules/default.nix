@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./amdgpu.nix
     ./apps.nix
