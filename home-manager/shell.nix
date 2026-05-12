@@ -17,8 +17,7 @@
       cilium-cli
       clang
       claude-agent-acp
-      claude-code-wrapped-claude
-      claude-code-wrapped-claude-hardened
+      claude-code
       clusterctl
       deno
       devbox
@@ -59,7 +58,7 @@
       neovim
       nix-output-monitor
       nmap
-      nodejs_22
+      nodejs_24
       nushell
       opentofu
       p7zip

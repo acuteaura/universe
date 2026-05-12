@@ -18,6 +18,7 @@
     ./vr.nix
 
     ../_mixins/mlsupport.nix
+    ../_mixins/ld.nix
   ];
 
   users.users.sapphiccode.extraGroups = ["users"];

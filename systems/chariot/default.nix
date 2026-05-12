@@ -3,7 +3,9 @@
     ../_mixins/browsers.nix
     ../_mixins/containers.nix
     ../_mixins/mounts.nix
+    ../_mixins/headless.nix
     ../_mixins/xrdp.nix
+    ../_mixins/ld.nix
 
     ../_mixins/user-aurelia.nix
 
