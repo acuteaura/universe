@@ -8,14 +8,20 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2404
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install Lix
-        uses: canidae-solutions/lix-quick-install-action@v3
+        uses: canidae-solutions/lix-quick-install-action@v4
+
+      - name: Setup Attic cache
+        uses: ./.github/actions/setup-attic
+        with:
+          endpoint: ${{ vars.ATTIC_ENDPOINT }}
+          token: ${{ secrets.ATTIC_TOKEN }}
 
       - name: Run linters
         run: nix run .#lint -- .

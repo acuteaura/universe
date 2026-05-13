@@ -1,0 +1,27 @@
+name: Setup Attic
+description: Login to Attic and configure the cache as a Nix substituter
+
+inputs:
+  endpoint:
+    description: Attic server endpoint URL
+    required: true
+  token:
+    description: Attic authentication token
+    required: true
+  cache:
+    description: Cache name
+    required: false
+    default: aurelia
+
+runs:
+  using: composite
+  steps:
+    - name: Configure Attic cache
+      shell: bash
+      env:
+        ATTIC_ENDPOINT: ${{ inputs.endpoint }}
+        ATTIC_TOKEN: ${{ inputs.token }}
+        ATTIC_CACHE: ${{ inputs.cache }}
+      run: |
+        nix run nixpkgs#attic-client -- login default "$ATTIC_ENDPOINT" --token "$ATTIC_TOKEN"
+        nix run nixpkgs#attic-client -- use "default:$ATTIC_CACHE"
