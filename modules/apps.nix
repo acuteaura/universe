@@ -16,19 +16,5 @@
       enable = true;
       openFirewall = true;
     };
-
-    programs.ausweisapp = {
-      enable = true;
-      openFirewall = true;
-    };
-
-    programs.thunar = {
-      enable = false;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-dropbox-plugin
-        thunar-volman
-      ];
-    };
   };
 }

@@ -23,6 +23,7 @@
   };
   boot.plymouth.enable = true;
   boot.zfs.devNodes = "/dev/disk/by-id/";
+  boot.zfs.forceImportRoot = false;
 
   universe = {
     kernel = {

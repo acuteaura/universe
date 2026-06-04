@@ -1,5 +1,6 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    (jetbrains.plugins.addPlugins jetbrains.idea-ultimate ["github-copilot" "go" "rust"])
-  ];
+  # lol broken
+  #environment.systemPackages = with pkgs; [
+  #  (jetbrains.plugins.addPlugins jetbrains.idea ["github-copilot" "go" "rust"])
+  #];
 }

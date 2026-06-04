@@ -3,7 +3,7 @@
 
   inputs = {
     # base imports
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-26.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -45,6 +45,7 @@
     in {
       michroma = prev.callPackage ./packages/michroma.nix {};
       nix-snowflake-pride = prev.callPackage ./packages/nix-snowflake-pride.nix {};
+      lix-snowflake = prev.callPackage ./packages/lix-snowflake.nix {};
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       inherit (nixpkgs.lib) getName;
@@ -71,7 +72,6 @@
             inputs.chaotic.nixosModules.default
             inputs.lanzaboote.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
-            inputs.eden.nixosModules.default
           ];
           home-manager-imports = [
             ./home-manager/shell.nix

@@ -39,7 +39,6 @@
     seafile-client
     seadrive-gui
     sshfs
-    spotify
     usbutils
     via
     vlc

@@ -45,13 +45,13 @@ in
               # queer erasure
               # etc.
               #
-              distroName = "Nix for Lesbians";
+              distroName = "NixOS for Lesbians";
               extraOSReleaseArgs = {
-                LOGO = "lesbiannixos";
-                PRETTY_NAME = "Nix® for Lesbians";
+                LOGO = "lix-snowflake";
+                PRETTY_NAME = "NixOS® for Lesbians";
               };
             };
-            environment.systemPackages = [pkgs.nix-snowflake-pride];
+            environment.systemPackages = [pkgs.nix-snowflake-pride pkgs.lix-snowflake];
           })
           home-manager.nixosModules.home-manager
           (import ./basehm.nix {

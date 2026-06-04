@@ -4,7 +4,6 @@
     audacity
     blender
     cardinal
-    graphite
     godot-mono
     inkscape
     krita

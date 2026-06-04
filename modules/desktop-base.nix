@@ -41,7 +41,7 @@
     services.flatpak.enable = lib.mkDefault true;
 
     services.displayManager = {
-      defaultSession = lib.mkDefault "plasma";
+      defaultSession = lib.mkDefault "gnome";
       sddm = {
         enable = lib.mkDefault true;
         wayland.enable = lib.mkDefault true;
