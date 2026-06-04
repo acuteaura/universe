@@ -27,10 +27,6 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    eden = {
-      url = "github:acuteaura-forks/eden-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     kwin-effects-better-blur-dx = {
       url = "github:xarblu/kwin-effects-better-blur-dx";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -47,11 +43,8 @@
     packageOverlay = final: prev: let
       inherit (final.stdenv.hostPlatform) system;
     in {
-      zen = inputs.zen-browser.packages.${system}.default;
-      kwin-effects-better-blur-dx-wayland = inputs.kwin-effects-better-blur-dx.packages.${system}.default;
       michroma = prev.callPackage ./packages/michroma.nix {};
       nix-snowflake-pride = prev.callPackage ./packages/nix-snowflake-pride.nix {};
-      helium = inputs.helium.packages.${system}.default;
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {
       inherit (nixpkgs.lib) getName;
@@ -71,22 +64,6 @@
   in
     {
       nixosConfigurations = {
-        cyberdaemon = baseSystem {
-          nixos-imports = [
-            ./systems/cyberdaemon
-            inputs.nix-flatpak.nixosModules.nix-flatpak
-            inputs.chaotic.nixosModules.default
-            inputs.jovian.nixosModules.jovian
-            inputs.lanzaboote.nixosModules.lanzaboote
-            inputs.quadlet.nixosModules.quadlet
-            inputs.eden.nixosModules.default
-          ];
-          home-manager-imports = [
-            ./home-manager/shell.nix
-            ./home-manager/desktop.nix
-            inputs.nix-flatpak.homeManagerModules.nix-flatpak
-          ];
-        };
         chariot = baseSystem {
           nixos-imports = [
             ./systems/chariot
@@ -100,40 +77,6 @@
             ./home-manager/shell.nix
             ./home-manager/desktop.nix
             inputs.nix-flatpak.homeManagerModules.nix-flatpak
-          ];
-        };
-        fool = baseSystem {
-          nixos-imports = [
-            ./systems/fool
-            inputs.nix-flatpak.nixosModules.nix-flatpak
-            inputs.lanzaboote.nixosModules.lanzaboote
-            inputs.quadlet.nixosModules.quadlet
-            inputs.eden.nixosModules.default
-          ];
-          home-manager-imports = [
-            ./home-manager/shell.nix
-            ./home-manager/desktop.nix
-            inputs.nix-flatpak.homeManagerModules.nix-flatpak
-          ];
-        };
-        bootstrap = baseSystem {
-          system = "aarch64-linux";
-          nixos-imports = [
-            ./systems/bootstrap
-            inputs.chaotic.nixosModules.default
-            inputs.quadlet.nixosModules.quadlet
-          ];
-          home-manager-imports = [
-            ./home-manager/shell.nix
-          ];
-        };
-        meowbaseone = baseSystem {
-          system = "aarch64-linux";
-          nixos-imports = [
-            ./systems/meowbaseone
-          ];
-          home-manager-imports = [
-            ./home-manager/shell.nix
           ];
         };
       };

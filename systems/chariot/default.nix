@@ -2,10 +2,13 @@
   imports = [
     ../_mixins/browsers.nix
     ../_mixins/containers.nix
-    ../_mixins/mounts.nix
     ../_mixins/headless.nix
-    ../_mixins/xrdp.nix
+    ../_mixins/jetbrains.nix
     ../_mixins/ld.nix
+    ../_mixins/python.nix
+    ../_mixins/mounts.nix
+    ../_mixins/work.nix
+    ../_mixins/xrdp.nix
 
     ../_mixins/user-aurelia.nix
 
@@ -26,7 +29,7 @@
       enable = true;
       cachyos = false;
     };
-    desktop-plasma.enable = true;
+    desktop-gnome.enable = true;
     amdgpu.enable = true;
     libvirt.enable = true;
 
