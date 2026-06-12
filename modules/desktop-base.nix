@@ -43,9 +43,10 @@
     services.displayManager = {
       defaultSession = lib.mkDefault "gnome";
       sddm = {
-        enable = lib.mkDefault true;
-        wayland.enable = lib.mkDefault true;
+        enable = lib.mkDefault false;
+        wayland.enable = lib.mkDefault false;
       };
+      gdm.enable = lib.mkDefault true;
     };
 
     # Enable desktop hardware features
