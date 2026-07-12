@@ -36,4 +36,16 @@ _: {
   hardware.enableRedistributableFirmware = true;
   hardware.cpu.amd.updateMicrocode = true;
   services.fwupd.enable = true;
+
+  # Disable WiFi power management (mt7921e / MediaTek)
+  # Also suppress aggressive BSS roaming via NM config — the driver initiates BSS
+  # transitions every ~5 min to a second BSSID, the AP rejects re-association
+  # temporarily, and the 3-retry limit causes a full dropout.
+  networking.networkmanager.wifi.powersave = false;
+  networking.networkmanager.wifi.backend = "iwd";
+  networking.networkmanager.settings.connection."wifi.cloned-mac-address" = "stable";
+  networking.networkmanager.settings.device."wifi.scan-rand-mac-address" = "no";
+  boot.extraModprobeConfig = ''
+    options mt7921e disable_aspm=1
+  '';
 }

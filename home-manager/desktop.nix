@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./creative.nix
+    #./creative.nix
     ./flatpak.nix
     ./zed.nix
   ];
@@ -39,6 +39,7 @@
     seafile-client
     seadrive-gui
     sshfs
+    teams-for-linux
     usbutils
     via
     vlc

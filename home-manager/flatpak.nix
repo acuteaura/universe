@@ -14,12 +14,11 @@ in {
       }
     ];
     packages = [
-      (flathubApp "com.github.mtkennerly.ludusavi")
+      #(flathubApp "com.github.mtkennerly.ludusavi")
       (flathubApp "com.github.tchx84.Flatseal")
       (flathubApp "com.rafaelmardojai.Blanket")
       (flathubApp "com.usebottles.bottles")
       (flathubApp "fr.handbrake.ghb")
-      (flathubApp "im.riot.Riot")
       (flathubApp "io.kinvolk.Headlamp")
       (flathubApp "io.podman_desktop.PodmanDesktop")
       (flathubApp "md.obsidian.Obsidian")

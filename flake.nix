@@ -9,8 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # platform
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    jovian.follows = "chaotic/jovian";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs = {
@@ -25,10 +23,6 @@
     # tools and apps
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    kwin-effects-better-blur-dx = {
-      url = "github:xarblu/kwin-effects-better-blur-dx";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -69,7 +63,6 @@
           nixos-imports = [
             ./systems/chariot
             inputs.nix-flatpak.nixosModules.nix-flatpak
-            inputs.chaotic.nixosModules.default
             inputs.lanzaboote.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
           ];
