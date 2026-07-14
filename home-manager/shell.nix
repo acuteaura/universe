@@ -15,7 +15,6 @@
       btop
       chezmoi
       cilium-cli
-      clang
       claude-agent-acp
       claude-code
       clusterctl
