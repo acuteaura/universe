@@ -31,6 +31,7 @@
       fzf
       gh
       git-annex
+      github-copilot-cli
       go
       gopls
       hcloud
@@ -55,9 +56,10 @@
       minisign
       ncdu
       neovim
+      nil
       nix-output-monitor
       nmap
-      nodejs_24
+      nodejs_26
       nushell
       opentofu
       p7zip

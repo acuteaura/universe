@@ -9,8 +9,10 @@
       "just"
       "log"
       "make"
+      "mcp-server-github"
       "nix"
       "nu"
+      "postgres-context-server"
       "rose-pine-theme"
       "terraform"
       "toml"
@@ -19,6 +21,29 @@
     ];
 
     userSettings = {
+      search = {
+        button = false;
+      };
+
+      cli_default_open_behavior = "new_window";
+
+      project_panel = {
+        dock = "left";
+      };
+
+      outline_panel = {
+        dock = "left";
+      };
+
+      collaboration_panel = {
+        button = false;
+        dock = "left";
+      };
+
+      git_panel = {
+        dock = "left";
+      };
+
       # we don't want predictions, and if we want them we want them subtle
       edit_predictions = {
         "provider" = "copilot";
@@ -42,13 +67,18 @@
       ];
 
       agent_servers = {
-        Claude = {
-          type = "custom";
-          command = "/etc/profiles/per-user/aurelia/bin/claude-agent-acp";
+        claude-acp = {
+          type = "registry";
+          default_config_options = {
+            fast = "on";
+            mode = "default";
+            model = "default";
+          };
         };
       };
 
       agent = {
+        dock = "right";
         default_model = {
           model = "claude-opus-4.5";
           provider = "copilot_chat";
@@ -69,6 +99,9 @@
       buffer_font_size = 15;
 
       terminal = {
+        shell = {
+          program = "fish";
+        };
         font_family = "TX02 Nerd Font";
         font_size = 13;
       };
@@ -117,11 +150,15 @@
         };
       };
 
+      language_models = {};
+
       # revise if needed
       # had to set to get prettier and zed to stop fighting in a nuxt project
       jsx_tag_auto_close = {
         enabled = false;
       };
+
+      tab_size = 2;
     };
   };
 }

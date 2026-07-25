@@ -10,6 +10,7 @@
         "1password-cli"
         "claude-code"
         "discord"
+        "github-copilot-cli"
         "libvgm"
         "obsidian"
         "rose-pine-kvantum"
