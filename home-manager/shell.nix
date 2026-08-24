@@ -71,6 +71,7 @@
       sd
       semgrep
       socat
+      sops
       sqlite
       starship
       syncthing
