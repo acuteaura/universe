@@ -12,8 +12,6 @@
     group = "aurelia";
     extraGroups = [
       "wheel"
-      "docker"
-      "podman"
       "systemd-journal"
       "libvirtd"
       "scanner"

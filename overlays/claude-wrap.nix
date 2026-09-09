@@ -30,23 +30,22 @@ final: prev: let
             exec bwrap \
               --ro-bind /nix /nix \
               --ro-bind /etc /etc \
-              --ro-bind /run /run \
-              --ro-bind "$HOME/.config/fish" "$HOME/.config/fish" \
+              --ro-bind /run/current-system /run/current-system \
+              --ro-bind /run/systemd /run/systemd \
+              --ro-bind /bin /bin \
               --proc /proc \
               --dev /dev \
-              --bind "$(pwd)" "$(pwd)" \
-              --bind "$CLAUDE_CONFIG_DIR" "$CLAUDE_CONFIG_DIR" \
-              --bind "$HOME/.npm" "$HOME/.npm" \
-              --chdir "$(pwd)" \
-              --setenv HOME "$HOME" \
-              --setenv CLAUDE_CODE_SHELL "$SHELL" \
-              --unshare-pid \
-              --unshare-uts \
-              --unshare-cgroup \
+              --bind $HOME/.local/share/bwrap/claude $HOME \
+              --unshare-all \
               --share-net \
+              --clearenv \
+              --setenv TERM $TERM \
+              --setenv PATH /run/current-system/sw/bin:/etc/profiles/per-user/$HOME/bin/ \
+              --setenv HOME $HOME --setenv USER $USER \
               --new-session \
               --die-with-parent \
-              claude "$@"
+              (realpath (which claude))
+
           ''
           else ''
             exec claude "$@"
@@ -65,6 +64,7 @@ in {
   claude-code-wrapped-claude-hardened = mkClaudeWrapper {
     name = "ccode-claude-hardened";
     configDir = "$HOME/.config/claude-code";
+    hardened = true;
   };
 
   claude-code-wrapped-zai = mkClaudeWrapper {

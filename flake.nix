@@ -38,7 +38,7 @@
       inherit (final.stdenv.hostPlatform) system;
     in {
       michroma = prev.callPackage ./packages/michroma.nix {};
-      nix-snowflake-pride = prev.callPackage ./packages/nix-snowflake-pride.nix {};
+      nix-snowflake-rainbow = prev.callPackage ./packages/nix-snowflake-rainbow.nix {};
       lix-snowflake = prev.callPackage ./packages/lix-snowflake.nix {};
     };
     nixpkgsConfig = import ./nixpkgs-config.nix {

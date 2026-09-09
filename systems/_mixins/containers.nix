@@ -1,11 +1,12 @@
 {pkgs, ...}: {
   virtualisation = {
     containers.enable = true;
-    docker.enable = false;
+    docker.rootless = {
+      enable = false;
+      setSocketVariable = true;
+    };
     podman = {
       enable = true;
-      dockerSocket.enable = true;
-      dockerCompat = true;
     };
   };
 

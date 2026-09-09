@@ -11,6 +11,7 @@
       withVencord = true;
     })
 
+    bitwarden-desktop
     cryptsetup
     curl
     dig
@@ -40,6 +41,7 @@
     seadrive-gui
     sshfs
     teams-for-linux
+    tuba
     usbutils
     via
     vlc

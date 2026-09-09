@@ -11,6 +11,7 @@
       bandwhich
       bat
       binwalk
+      bitwarden-cli
       bun
       btop
       chezmoi
