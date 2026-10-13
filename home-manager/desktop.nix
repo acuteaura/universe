@@ -29,6 +29,7 @@
     gnused
     gparted
     htop
+    keepassxc
     llvm
     moonlight-qt
     ocs-url
@@ -44,12 +45,13 @@
     tuba
     usbutils
     via
+    vivaldi
     vlc
     vscode
     wget
     #(ytmdesktop.override {commandLineArgs = "--password-store=gnome-libsecret";})
 
-    fooyin
+    #fooyin
 
     # (wrapOBS {
     #   plugins = with pkgs.obs-studio-plugins; [

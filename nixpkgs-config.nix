@@ -25,6 +25,7 @@
         "reaper"
         "idea"
         "idea-with-plugins"
+        "vivaldi"
       ];
     allowInsecurePredicate = pkg:
       builtins.elem (getName pkg) [

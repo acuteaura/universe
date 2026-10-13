@@ -9,7 +9,7 @@
 }: let
   defaultSystem = system;
   codeNameMap = {
-    "26.05" = "Ancyor";
+    #"26.05" = "Ancyor";
   };
   lib = nixpkgs.lib.extend (final: prev: {
     trivial =
@@ -45,13 +45,13 @@ in
               # queer erasure
               # etc.
               #
-              distroName = "NixOS for Lesbians";
+              #distroName = "NixOS for Lesbians";
               extraOSReleaseArgs = {
                 LOGO = "lix-snowflake";
                 PRETTY_NAME = "NixOS® for Lesbians";
               };
             };
-            environment.systemPackages = [pkgs.nix-snowflake-pride pkgs.lix-snowflake];
+            environment.systemPackages = [pkgs.nix-snowflake-rainbow pkgs.lix-snowflake];
           })
           home-manager.nixosModules.home-manager
           (import ./basehm.nix {
