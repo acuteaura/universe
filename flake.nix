@@ -25,6 +25,8 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # everything runs on cyberacme
+    cyacrt.url = "github:containmentzone/cyacrt";
   };
 
   outputs = inputs @ {
@@ -65,6 +67,7 @@
             inputs.nix-flatpak.nixosModules.nix-flatpak
             inputs.lanzaboote.nixosModules.lanzaboote
             inputs.quadlet.nixosModules.quadlet
+            inputs.cyacrt.nixosModules.default
           ];
           home-manager-imports = [
             ./home-manager/shell.nix

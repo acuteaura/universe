@@ -13,6 +13,7 @@
     ../_mixins/user-aurelia.nix
 
     ./hardware.nix
+    ./cyac.nix
   ];
 
   # BOOT
